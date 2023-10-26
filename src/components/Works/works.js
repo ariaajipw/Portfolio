@@ -20,7 +20,9 @@ const Works = () => {
         <img src={Portfolio1} alt="" className="worksImg" />
         <img src={Portfolio4} alt="" className="worksImg" />
       </div>
-      <button className="worksBtn">See More</button>
+      <a href="https://github.com/ariaajipw" target="_blank" rel="noreferrer">
+        <button className="worksBtn">See More</button>
+      </a>
     </section>
   );
 };

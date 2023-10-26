@@ -18,8 +18,19 @@ const Intro = () => {
           visually appealing.
         </p>
         <Link>
-          <button className="btn">
-            <img src={btnImg} alt="" className="btnImg" /> Contact Me
+          <button
+            className="btn"
+            smooth={true}
+            offset={-50}
+            duration={600}
+            onClick={() => {
+              document
+                .getElementById("contact")
+                .scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <img src={btnImg} alt="" className="btnImg" />
+            Contact Me
           </button>
         </Link>
       </div>
