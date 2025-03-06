@@ -10,7 +10,7 @@ export default function Home() {
       <div className="hero-section container flex mx-auto h-screen">
         <div className="relative h-500px content-center place-self-center">
              <TextPressure
-          text=" _Combine_Ideas,_"
+          text="_Combine_Ideas,_"
           flex={true}
           alpha={false}
           stroke={false}
@@ -19,7 +19,7 @@ export default function Home() {
           italic={false}
           textColor="#ffffff"
           strokeColor="#ff0000"
-          minFontSize={350}
+          minFontSize={400}
         />
          <TextPressure
           text="_Craft_&_Innovate._"
@@ -31,7 +31,7 @@ export default function Home() {
           italic={false}
           textColor="#ffffff"
           strokeColor="#ff0000"
-          minFontSize={350}
+          minFontSize={400}
         />
         </div>
       </div>

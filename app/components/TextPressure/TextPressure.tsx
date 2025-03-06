@@ -136,8 +136,8 @@ const TextPressure: React.FC<TextPressureProps> = ({
                     const d = dist(mouseRef.current, charCenter);
 
                     const getAttr = (distance: number, minVal: number, maxVal: number) => {
-                        const val = maxVal - Math.abs((maxVal * distance) / maxDist);
-                        return Math.max(minVal, val + minVal);
+                        const val = maxVal - Math.abs((maxVal * distance) / (maxDist * 0.5));
+                        return Math.max(minVal, val + minVal / 2);
                     };
 
                     const wdth = width ? Math.floor(getAttr(d, 5, 200)) : 100;
