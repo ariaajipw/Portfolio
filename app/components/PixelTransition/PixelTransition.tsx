@@ -122,12 +122,13 @@ const PixelTransition: React.FC<PixelTransitionProps> = ({
       ref={containerRef}
       className={`
         ${className}
-        bg-[#222]
+        bg-[#0a0a0a]
         text-white
-        rounded-[15px]
-        border-2
-        border-white
-        w-[500px]
+        rounded-[360px]
+        border-1
+        border-black
+        w-[300px]
+        lg:w-[500px]
         max-w-full
         relative
         overflow-hidden

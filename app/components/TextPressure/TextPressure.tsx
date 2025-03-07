@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -17,7 +17,7 @@ interface TextPressureProps {
     strokeColor?: string;
     strokeWidth?: number;
     className?: string;
-    minFontSize?: number;
+    minFontSize?: number; // Prop minFontSize tetap ada, tetapi akan di-override secara dinamis
 }
 
 const TextPressure: React.FC<TextPressureProps> = ({
@@ -35,7 +35,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
     strokeColor = '#FF0000',
     strokeWidth = 2,
     className = '',
-    minFontSize = 24,
+    minFontSize = 400, // Nilai default, akan di-override
 }) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLHeadingElement | null>(null);
@@ -48,6 +48,9 @@ const TextPressure: React.FC<TextPressureProps> = ({
     const [scaleY, setScaleY] = useState(1);
     const [lineHeight, setLineHeight] = useState(1);
 
+    // State untuk minFontSize yang responsif
+    const [responsiveMinFontSize, setResponsiveMinFontSize] = useState(minFontSize);
+
     const chars = text.split('');
 
     const dist = (a: { x: number; y: number }, b: { x: number; y: number }) => {
@@ -55,6 +58,36 @@ const TextPressure: React.FC<TextPressureProps> = ({
         const dy = b.y - a.y;
         return Math.sqrt(dx * dx + dy * dy);
     };
+
+    // Fungsi untuk mengupdate minFontSize berdasarkan ukuran layar
+    const updateResponsiveMinFontSize = () => {
+        const width = window.innerWidth;
+
+        if (width >= 1536) {
+            setResponsiveMinFontSize(400); // 2xl breakpoint
+        } else if (width >= 1280) {
+            setResponsiveMinFontSize(350); // xl breakpoint
+        } else if (width >= 1024) {
+            setResponsiveMinFontSize(280); // lg breakpoint
+        } else if (width >= 768) {
+            setResponsiveMinFontSize(250); // md breakpoint
+        } else if (width >= 640) {
+            setResponsiveMinFontSize(150); // sm breakpoint
+        } else {
+            setResponsiveMinFontSize(89); // Default untuk mobile
+        }
+    };
+
+    useEffect(() => {
+        // Panggil fungsi updateResponsiveMinFontSize saat komponen dimount
+        updateResponsiveMinFontSize();
+
+        // Tambahkan event listener untuk resize
+        window.addEventListener('resize', updateResponsiveMinFontSize);
+
+        // Bersihkan event listener saat komponen unmount
+        return () => window.removeEventListener('resize', updateResponsiveMinFontSize);
+    }, []);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -89,8 +122,8 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
         const { width: containerW, height: containerH } = containerRef.current.getBoundingClientRect();
 
-        let newFontSize = containerW / (chars.length / 2);
-        newFontSize = Math.max(newFontSize, minFontSize);
+        let newFontSize = containerW / (chars.length / 1.5);
+        newFontSize = Math.max(newFontSize, responsiveMinFontSize); // Gunakan responsiveMinFontSize
 
         setFontSize(newFontSize);
         setScaleY(1);
@@ -112,7 +145,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
         setSize();
         window.addEventListener('resize', setSize);
         return () => window.removeEventListener('resize', setSize);
-    }, [scale, text]);
+    }, [scale, text, responsiveMinFontSize]); // Tambahkan responsiveMinFontSize ke dependency array
 
     useEffect(() => {
         let rafId: number;
