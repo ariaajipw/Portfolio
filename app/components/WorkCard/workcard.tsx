@@ -18,8 +18,8 @@ const works = [
   {
     id: 3,
     thumbnail: "https://via.placeholder.com/400x300",
-    title: "Project Ketiga",
-    subtitle: "Ini adalah deskripsi singkat dari project ketiga.",
+    title: "Lorem, ipsum.",
+    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
   },
   // {
   //   id: 4,
