@@ -1,8 +1,7 @@
 "use client"
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, ReactNode } from 'react';
 import { useSprings, animated, SpringValue } from '@react-spring/web';
-
 
 interface BlurTextProps {
   text?: string;
@@ -16,6 +15,7 @@ interface BlurTextProps {
   animationTo?: Record<string, any>[];
   easing?: (t: number) => number | string;
   onAnimationComplete?: () => void;
+  children?: ReactNode; // TAMBAHAN
 }
 
 const BlurText: React.FC<BlurTextProps> = ({
@@ -30,8 +30,10 @@ const BlurText: React.FC<BlurTextProps> = ({
   animationTo,
   easing = 'easeOutCubic',
   onAnimationComplete,
+  children,
 }) => {
-  const elements = animateBy === 'words' ? text.split(' ') : text.split('');
+  const content = text || (typeof children === 'string' ? children : '');
+  const elements = animateBy === 'words' ? content.split(' ') : content.split('');
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
   const animatedCount = useRef(0);
