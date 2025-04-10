@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState, ReactNode } from 'react';
 import { useSprings, animated, SpringValue } from '@react-spring/web';
+import type { AnimatedComponent } from '@react-spring/web';
 
 interface BlurTextProps {
   text?: string;
@@ -52,6 +53,8 @@ const BlurText: React.FC<BlurTextProps> = ({
     { filter: 'blur(0px)', opacity: 1, transform: 'translate3d(0,0,0)' },
   ];
 
+  const AnimatedSpan = animated('span') as AnimatedComponent<'span'>;
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -95,14 +98,14 @@ const BlurText: React.FC<BlurTextProps> = ({
   return (
     <p ref={ref} className={`blur-text ${className} flex flex-wrap`}>
       {springs.map((props, index) => (
-        <animated.span
+        <AnimatedSpan
           key={index}
           style={props}
           className="inline-block transition-transform will-change-[transform,filter,opacity]"
         >
           {elements[index] === ' ' ? '\u00A0' : elements[index]}
           {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
-        </animated.span>
+        </AnimatedSpan>
       ))}
     </p>
   );
