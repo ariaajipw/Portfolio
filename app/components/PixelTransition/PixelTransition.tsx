@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useRef, useEffect, useState, CSSProperties } from "react";
 import { gsap } from "gsap";
@@ -30,11 +30,19 @@ const PixelTransition: React.FC<PixelTransitionProps> = ({
   const delayedCallRef = useRef<gsap.core.Tween | null>(null);
 
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [isTouchDevice, setIsTouchDevice] = useState<boolean>(false);
 
-  const isTouchDevice =
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0 ||
-    window.matchMedia("(pointer: coarse)").matches;
+  // Check for touch device on the client side
+  useEffect(() => {
+    const checkTouchDevice = () => {
+      return (
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia("(pointer: coarse)").matches
+      );
+    };
+    setIsTouchDevice(checkTouchDevice());
+  }, []);
 
   useEffect(() => {
     const pixelGridEl = pixelGridRef.current;
