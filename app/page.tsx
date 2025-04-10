@@ -48,8 +48,8 @@ export default function Home() {
              className="text-4xl lg:text-[100px] font-bold leading-none place-self-center"
           />
             <h2 className="text-2xl lg:text-5xl py-10 place-self-center">Website Developer</h2>
-            <p className="text-small lg:text-large content-center place-self-center px-auto mx-auto mb-9">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat incidunt accusamus voluptatem ullam qui ducimus officia perspiciatis, rem repellat aperiam?</p>
-            <button className="button border-black dark:border-black p-2 rounded-full content-center place-self-center text-center bg-[#FA6B48] hover:bg-white text-black hover:text-[#FA6B48]" type="button" >Contact Me</button>
+            <p className="text-small lg:text-large content-center place-self-center px-auto mx-[20px] mb-9">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat incidunt accusamus voluptatem ullam qui ducimus officia perspiciatis, rem repellat aperiam?</p>
+            <button className="button border-black dark:border-black p-2 rounded-full content-center place-self-center text-center bg-[#FA6B48] hover:bg-white text-black hover:text-[#FA6B48] mx-[120px] 2xl:mx-[300px]" type="button" >Contact Me</button>
           </div>
           <div className="lg:col-span-6 content-center place-self-center order-first lg:order-last">
             <PixelTransition 
