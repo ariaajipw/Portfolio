@@ -43,11 +43,11 @@ const WorkCards: React.FC = () => {
         {works.map((work) => (
           <div
             key={work.id}
-            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 grid grid-cols-2"
+            className="bg-black dark:bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 grid grid-cols-2"
           >
             <div className="p-4 grid-cols-2">
-              <h2 className="text-gray-900 text-xl font-semibold mb-2">{work.title}</h2>
-              <p className="text-gray-700">{work.subtitle}</p>
+              <h2 className="text-white dark:text-gray-900 text-xl font-semibold mb-2">{work.title}</h2>
+              <p className="text-white dark:text-gray-900">{work.subtitle}</p>
             </div>
             
             <img

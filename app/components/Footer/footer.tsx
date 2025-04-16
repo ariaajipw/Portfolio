@@ -20,7 +20,7 @@ const Footer = () => {
             {/* <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
               Tautan Cepat
             </h3> */}
-            <ul className="mt-4 space-y-2 px-[125px]">
+            <ul className="mt-4 space-y-2 flex gap-9">
               <li>
                 <a
                   href="#"

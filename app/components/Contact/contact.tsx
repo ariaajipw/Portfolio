@@ -101,7 +101,7 @@ const WorkCards: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
           {/* Alamat */}
-          <div className="p-6 rounded-lg shadow-md text-center bg-white dark:bg-black dark:text-white text-grey-950">
+          <div className="p-6 rounded-lg shadow-md text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-[#FA6B48]">
             <div className="flex justify-center items-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -125,13 +125,13 @@ const WorkCards: React.FC = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2">Address</h3>
-            <p>
+            <p className="text-sm">
               Jl. Griya Raya 1 no.6 Bandung, Indonesia
             </p>
           </div>
 
           {/* Nomor Telepon */}
-          <div className="p-6 rounded-lg shadow-md text-center bg-white dark:bg-black dark:text-white text-grey-950">
+          <div className="p-6 rounded-lg shadow-md text-center bg-black dark:bg-white text-white dark:text-gray-950">
             <div className="flex justify-center items-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +161,7 @@ const WorkCards: React.FC = () => {
           </div>
 
           {/* Email */}
-          <div className="p-6 rounded-lg shadow-md text-center bg-white dark:bg-black dark:text-white text-grey-950">
+          <div className="p-6 rounded-lg shadow-md text-center bg-black dark:bg-white text-white dark:text-gray-950">
             <div className="flex justify-center items-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
