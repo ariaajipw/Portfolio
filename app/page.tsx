@@ -49,7 +49,7 @@ export default function Home() {
           />
             <h2 className="text-2xl lg:text-5xl py-10 place-self-center">Website Developer</h2>
             <p className="text-small lg:text-large content-center place-self-center px-auto mx-[20px] mb-9">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat incidunt accusamus voluptatem ullam qui ducimus officia perspiciatis, rem repellat aperiam?</p>
-            <button className="button border-black dark:border-black p-2 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[120px] sm:mx-[245px] md:mx-[300px] 2xl:mx-[300px]" type="button" >Contact Me</button>
+            <a href="/contact" className="button border-black dark:border-black p-2 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[120px] sm:mx-[245px] md:mx-[300px] 2xl:mx-[300px]" type="button" >Contact Me</a>
           </div>
           <div className="lg:col-span-6 content-center place-self-center order-first lg:order-last">
             <PixelTransition 
