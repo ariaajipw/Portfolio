@@ -2,12 +2,11 @@ import PixelTransition from "./components/PixelTransition/PixelTransition";
 import BlurText from "./components/BlurText/BlurText";
 import TextPressure from './components/TextPressure/TextPressure';
 import WorkCards from "./components/WorkCard/workcard";
-import ContactSection from "./components/Contact/contact";
 
 export default function Home() {
   
   return (
-    <main className="min-h-screen overflow-x-hidden">
+    <main className="min-h-screen overflow-hidden">
       <div className="hero-section container flex mx-auto h-screen w-fit content-center place-self-center">
         <div className="relative h-500px content-center place-self-center w-fit">
              <TextPressure
@@ -18,7 +17,7 @@ export default function Home() {
           width={true}
           weight={true}
           italic={false}
-          textColor="#7e7e7es"
+          textColor="#00000"
           strokeColor="#ff0000"
           // minFontSize={400}
           className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
@@ -31,7 +30,7 @@ export default function Home() {
           width={true}
           weight={true}
           italic={false}
-          textColor="7e7e7e"
+          textColor="000000"
           strokeColor="#ff0000"
           // minFontSize={400}
         />
@@ -49,7 +48,7 @@ export default function Home() {
           />
             <h2 className="text-2xl lg:text-5xl py-10 place-self-center">Website Developer</h2>
             <p className="text-small lg:text-large content-center place-self-center px-auto mx-[20px] mb-9">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat incidunt accusamus voluptatem ullam qui ducimus officia perspiciatis, rem repellat aperiam?</p>
-            <a href="/contact" className="button border-black dark:border-black p-2 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[120px] sm:mx-[245px] md:mx-[300px] 2xl:mx-[300px]" type="button" >Contact Me</a>
+            <a href="/contact" className="button border-black dark:border-black p-2 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[120px] sm:mx-[245px] md:mx-[300px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[300px]" type="button" >Contact Me</a>
           </div>
           <div className="lg:col-span-6 content-center place-self-center order-first lg:order-last">
             <PixelTransition 
@@ -84,9 +83,9 @@ export default function Home() {
       <div className="third-section container flex mx-auto h-screen w-fit content-center place-self-center">
        < WorkCards />
       </div>
-      <div className="fourth-section container flex mx-auto h-screen w-fit content-center place-self-center">
+      {/* <div className="fourth-section container flex mx-auto h-screen w-fit content-center place-self-center">
        < ContactSection />
-      </div>
+      </div> */}
     </main>
   );
 }

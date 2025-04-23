@@ -33,13 +33,13 @@ const Contact: React.FC = () => {
   };
   
   return (
-    <div className="container mx-auto px-4 py-75 w-full">
-      <h1 className="text-3xl lg:text-5xl font-bold text-center mt-10 mb-18">Contact</h1>
+    <div className="container mx-auto px-4 py-8 w-full">
+      {/* <h1 className="text-3xl lg:text-5xl font-bold text-center mt-10 mb-18">Contact</h1> */}
       <div className="grid grid-cols-1 gap-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
           {/* Alamat */}
-          <div onClick={openGoogleMaps} className="p-6 rounded-lg shadow-md text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
+          <div onClick={openGoogleMaps} className="p-6 rounded-lg text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
             <div className="flex justify-center items-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Nomor Telepon */}
-          <div onClick={openWhatsApp} className="p-6 rounded-lg shadow-md text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
+          <div onClick={openWhatsApp} className="p-6 rounded-lg text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
             <div className="flex justify-center items-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +100,7 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Email */}
-          <div onClick={openEmail} className="p-6 rounded-lg shadow-md text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
+          <div onClick={openEmail} className="p-6 rounded-lg text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
             <div className="flex justify-center items-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

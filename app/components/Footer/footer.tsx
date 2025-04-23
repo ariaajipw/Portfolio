@@ -2,7 +2,7 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-[#0a0a0a] shadow-md mt-auto">
+    <footer className="bg-white dark:bg-[#0a0a0a] mt-auto">
       <div className="container mx-auto py-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-[20px]">
           {/* Bagian 1: Tentang Kami */}
@@ -26,14 +26,6 @@ const Footer = () => {
                   href="#"
                   className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
                 >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
-                >
                   About
                 </a>
               </li>
@@ -51,6 +43,14 @@ const Footer = () => {
                   className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
                 >
                   Contact
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
+                >
+                  Blog
                 </a>
               </li>
             </ul>

@@ -20,17 +20,15 @@ export default function About() {
         <div>Hero Image</div>
       </div>
 
+      <div className="flex col-span-1 h-full lg:px-10 justify-center align-middle">
+        <div className="font-bold text-9xl">About</div>
+      </div>
+
       <div className="flex col-span-1 h-full items-center">
         <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-4xl lg:text-5xl xl:max-w-[971px] 2xl:max-w-[1290px]">
           Lorem, ipsum dolor. <span className="font-bold">Lorem ipsum dolor sit amet.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum..</span>
         </p>
       </div>
-
-      <div className="flex col-span-1 h-full lg:px-10 justify-center">
-        <div>About</div>
-      </div>
-      
-      
 
     </main>
   )
