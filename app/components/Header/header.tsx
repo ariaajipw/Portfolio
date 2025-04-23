@@ -168,13 +168,30 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-4 md:hidden">
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
-            aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {isDarkMode ? '🌞' : '🌙'}
-          </button>
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition hover:bg-[#FA6B48] border rounded-xl"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDarkMode ? (
+                <Image 
+                  src="/assets/img/night-and-day.png" 
+                  alt="Light Mode" 
+                  width={24} 
+                  height={24} 
+                  className="w-6 h-6"
+                  priority
+                />
+              ) : (
+                <Image 
+                  src="/assets/img/day-and-night.png" 
+                  alt="Dark Mode" 
+                  width={24} 
+                  height={24} 
+                  className="w-6 h-6"
+                  priority
+              />)}
+            </button>
           
           <button 
             onClick={toggleMobileMenu}
