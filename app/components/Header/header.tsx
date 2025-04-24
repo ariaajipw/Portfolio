@@ -225,15 +225,6 @@ const Header = () => {
         aria-hidden={!isMobileMenuOpen}
       >
         <Link 
-          href="/" 
-          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
-            isActive('/') ? 'text-[#FA6B48] font-medium' : ''
-          }`}
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          Home
-        </Link>
-        <Link 
           href="/about" 
           className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
             isActive('/about') ? 'text-[#FA6B48] font-medium underline underline-offset-1' : ''
@@ -259,6 +250,15 @@ const Header = () => {
           onClick={() => setIsMobileMenuOpen(false)}
         >
           Contact
+        </Link>
+        <Link 
+          href="/" 
+          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+            isActive('') ? 'text-[#FA6B48] font-medium' : ''
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          Blog
         </Link>
       </div>
     </header>
