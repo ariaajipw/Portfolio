@@ -18,7 +18,7 @@ export default function About() {
   // </main> 
     <main >
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] h-screen">
 
       <div className="col-span-1 sm:col-span-2  mt-[30px] flex w-full flex-col space-y-2.5 leading-[130%] font-normal">
         <div>Hero Image</div>
@@ -31,7 +31,7 @@ export default function About() {
       </div>
 
        <div className="flex col-span-1 h-full lg:px-10 justify-center align-middle">
-        <div className="font-bold text-9xl">About</div>
+        <div className="font-bold text-9xl">Contact</div>
       </div>
       </div>
 

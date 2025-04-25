@@ -129,9 +129,9 @@ const Header = () => {
             Contact
           </Link>
           <Link 
-            href="/" 
+            href="/blog" 
             className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
-              pathname === '' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
+              pathname === '/blog' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
             }`}
           >
             Blog
@@ -252,9 +252,9 @@ const Header = () => {
           Contact
         </Link>
         <Link 
-          href="/" 
+          href="/blog" 
           className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
-            isActive('') ? 'text-[#FA6B48] font-medium' : ''
+            isActive('/blog') ? 'text-[#FA6B48] font-medium' : ''
           }`}
           onClick={() => setIsMobileMenuOpen(false)}
         >

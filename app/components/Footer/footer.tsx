@@ -23,7 +23,7 @@ const Footer = () => {
             <ul className="mt-4 space-y-2 flex gap-9">
               <li>
                 <a
-                  href="#"
+                  href="/about"
                   className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
                 >
                   About
@@ -31,7 +31,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/services"
                   className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
                 >
                   Service
@@ -39,7 +39,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/contact"
                   className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
                 >
                   Contact
@@ -47,7 +47,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/blog"
                   className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
                 >
                   Blog

@@ -15,12 +15,12 @@ const works = [
     title: "Sajua Brewery",
     subtitle: "Build e-commerce website.",
   },
-  {
-    id: 3,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-  },
+  // {
+  //   id: 3,
+  //   thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+  //   title: "Lorem, ipsum.",
+  //   subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+  // },
 ];
 
 const WorkCards: React.FC = () => {
