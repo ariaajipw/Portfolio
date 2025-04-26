@@ -93,7 +93,7 @@ const Header = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
         <div className="text-2xl font-bold text-gray-800 dark:text-white align-middle justify-items-center group relative">
-          <a href="/" className='flex'><img src="/assets/img/peacock-black.png" alt="" className='w-[40px] dark:hidden'/><img src="/assets/img/peacock-white.png" alt="" className='w-[40px] hidden dark:block'/><span className='hidden group-hover:block'>Aria Aji</span></a>
+          <a href="/" className='flex'><img src="/assets/img/peacock-black.png" alt="" className='w-[40px] dark:hidden'/><img src="/assets/img/peacock-white.png" alt="" className='w-[40px] hidden dark:block'/><span className='hidden group-hover:block hover:text-[#FA6B48]'>Aria Aji</span></a>
         </div>
 
         {/* Desktop Navigation Menu */}
