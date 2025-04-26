@@ -11,10 +11,9 @@ export async function generateStaticParams() {
 }
 
 // Type yang lebih spesifik
-interface PostParams {
-  params: {
-    slug: string;
-  };
+type PostParams = {
+  params: { slug: string }
+  searchParams?: Record<string, string | string[] | undefined>
 }
 
 export default function PostPage({ params }: PostParams) {
