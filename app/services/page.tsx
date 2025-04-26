@@ -13,7 +13,7 @@ export default function About() {
       </div>
 
       <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
-        <div className="font-bold text-7xl lg:text-8xl xl:text-[160px] content-center">Services</div>
+        <div className="font-bold text-7xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] content-center">Services</div>
       </div>
       
       

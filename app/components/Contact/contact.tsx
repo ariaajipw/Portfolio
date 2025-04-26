@@ -4,7 +4,7 @@ import React from "react";
 
 const Contact: React.FC = () => {
   const contacts = {
-    address: "Jl. Griya Raya 1 no.6 Bandung, Indonesia",
+    address: "Jl. Terusan Prof. DR. Sutami No.23, Sarijadi, Kec. Sukasari, Bandung, Jawa Barat 40151 Indonesia",
     phone: "+6282120623351",
     email: "ariaajipw@gmail.com"
   };
@@ -63,8 +63,8 @@ const Contact: React.FC = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2">Address</h3>
-            <p className="text-sm">
-              Jl. Griya Raya 1 no.6 Bandung, Indonesia
+            <p className="text-xs">
+              Jl. Terusan Prof. DR. Sutami No.23, <br></br>Sarijadi, Kec. Sukasari, 40151, <br></br>Bandung, West Java, Indonesia
             </p>
           </div>
 
@@ -94,7 +94,7 @@ const Contact: React.FC = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2">Phone Number</h3>
-            <p>
+            <p className="text-xs">
             +62 8212 062 3351
             </p>
           </div>
@@ -118,7 +118,7 @@ const Contact: React.FC = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2">Email</h3>
-            <p>ariaajipw@gmail.com</p>
+            <p className="text-xs">ariaajipw@gmail.com</p>
           </div>
         </div>
       </div>

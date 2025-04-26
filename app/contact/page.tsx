@@ -11,19 +11,19 @@ export default function About() {
       </div> */}
 
       <div className="flex col-span-1 h-full items-start sm:items-center">
-      <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-4xl lg:text-5xl xl:max-w-[971px] 2xl:max-w-[1290px]">
-          Lorem, ipsum dolor. <span className="font-bold">Lorem ipsum dolor sit amet.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum..</span>
+        <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-4xl lg:text-5xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+            Lorem, ipsum dolor. <span className="font-bold">Lorem ipsum dolor sit amet.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum..</span>
         </p>
       </div>
 
-       <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
-        <div className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[160px] content-center">Contact</div>
+      <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
+        <div className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] content-center">Contact</div>
       </div>
       </div>
 
 
       <div className="container flex mx-auto my-20 w-fit content-center place-self-center">
-       < ContactSection />
+        < ContactSection />
       </div>
     </main>
 

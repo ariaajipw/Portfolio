@@ -7,7 +7,7 @@ export default function About() {
       </div> */}
 
       <div className="flex col-span-1 h-full lg:px-10 justify-center">
-        <div className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[160px] content-center">About</div>
+        <div className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] content-center">About</div>
       </div>
 
       <div className="flex col-span-1 h-full items-start sm:items-center">

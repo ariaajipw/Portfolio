@@ -5,7 +5,7 @@ import Link from "next/link";
 const socials = [
   { id: 1, name: "GitHub", url: "https://github.com/ariaajipw" },
   { id: 2, name: "LinkedIn", url: "https://linkedin.com/in/aria-aji" },
-  { id: 3, name: "Twitter", url: "https://x.com/ariaajipw" },
+  { id: 3, name: "X", url: "https://x.com/ariaajipw" },
   { id: 4, name: "Instagram", url: "https://instagram.com/ariaaji" }
 ];
 
@@ -16,11 +16,16 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-[20px]">
           {/* Bagian 1: Tentang Kami */}
           <div>
-            <h3 className="text-[16px] sm:text-lg font-semibold text-gray-800 dark:text-white">
+
+          <div className="group">
+            {/* <h3 className="text-[16px] sm:text-lg font-semibold text-gray-800 dark:text-white underline underline-offset-2">
               Lorem, ipsum dolor.
             </h3>
-            <p className="text-sm sm:text-[16px] mt-4 text-gray-600 dark:text-gray-300">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati explicabo quod nam! Dolores dicta ut quam sed enim soluta maxime!
+            <img src="/assets/img/peacock-black.png" alt="" className="w-[40px]"/> */}
+            <a href="/" className='flex'><span className='hover:text-[#FA6B48] underline underline-offset-5 text-3xl font-bold'>Perkasa Wibowo</span><img src="/assets/img/peacock-black.png" alt="" className='w-[60px] hidden group-hover:block dark:hidden dark:group-hover:hidden'/><img src="/assets/img/peacock-white.png" alt="" className='w-[60px] hidden group-hover:block dark:hidden'/></a>
+          </div>
+            <p className="text-sm mt-4 text-gray-600 dark:text-gray-300">
+            Bandung,<br></br>Jl. Terusan Prof. DR. Sutami No. 23, <br></br>Sarijadi, Kec. Sukasari,<br></br>Jawa Barat 40151<br></br>Indonesia.
             </p>
           </div>
 
