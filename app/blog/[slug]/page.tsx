@@ -3,25 +3,24 @@ import { posts } from '../../posts/data';
 import MarkdownContent from '@/app/components/MarkdownContent/MarkdownContent';
 import Link from 'next/link';
 
-// Generate static paths untuk SSG
 export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.id,
   }));
 }
 
-// Type yang lebih spesifik
-type PostParams = {
+// Solusi: Gunakan type langsung tanpa interface
+export default function Page({
+  params
+}: {
   params: { slug: string }
-  searchParams?: Record<string, string | string[] | undefined>
-}
-
-export default function PostPage({ params }: PostParams) {
+}) {
   const post = posts.find((post) => post.id === params.slug);
 
   if (!post) {
     notFound();
   }
+
 
   return (
     <article className="max-w-4xl mx-auto p-4 mt-[30px] h-screen">
