@@ -13,6 +13,12 @@ interface Post {
   content: string;
 }
 
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
+
 // Generate static paths
 export async function generateStaticParams() {
   return posts.map((post: Post) => ({
@@ -21,28 +27,19 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const post = posts.find((post) => post.id === params.slug);
   return {
     title: post?.title || 'Post Not Found',
   };
 }
 
-// Komponen utama
-export default function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post = posts.find((post: Post) => post.id === params.slug);
+export default function BlogPostPage({ params }: PageProps) {
+  const post = posts.find((post) => post.id === params.slug);
 
   if (!post) {
     notFound();
-    return null; // <- ini penting untuk menghindari akses ke post yang undefined
+    return null;
   }
 
   return (
