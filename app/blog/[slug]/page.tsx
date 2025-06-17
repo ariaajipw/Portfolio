@@ -2,7 +2,9 @@ import { notFound } from 'next/navigation';
 import { posts } from '../../posts/data';
 import MarkdownContent from '@/app/components/MarkdownContent/MarkdownContent';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 
+// Definisikan tipe untuk Post
 interface Post {
   id: string;
   title: string;
@@ -11,29 +13,36 @@ interface Post {
   content: string;
 }
 
+// Generate static paths
 export async function generateStaticParams() {
-  return posts.map((post) => ({
+  return posts.map((post: Post) => ({
     slug: post.id,
   }));
 }
 
-// Definisikan type untuk PageProps
-type PageProps = {
-  params: {
-    slug: string;
+// Generate metadata (opsional)
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const post = posts.find((post) => post.id === params.slug);
+  return {
+    title: post?.title || 'Post Not Found',
   };
-};
+}
 
-// Solusi: Gunakan type langsung tanpa interface
-export default function Page({
-  params
-}: PageProps) {
+// Komponen utama dengan tipe yang benar
+export default function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = posts.find((post: Post) => post.id === params.slug);
 
   if (!post) {
     notFound();
   }
-
 
   return (
     <article className="max-w-4xl mx-auto p-4 mt-[30px] h-screen">
