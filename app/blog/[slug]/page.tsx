@@ -4,7 +4,7 @@ import MarkdownContent from '@/app/components/MarkdownContent/MarkdownContent';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
-// Definisikan tipe untuk Post
+// Tipe Post
 interface Post {
   id: string;
   title: string;
@@ -20,7 +20,7 @@ export async function generateStaticParams() {
   }));
 }
 
-// Generate metadata (opsional)
+// Generate metadata
 export async function generateMetadata({
   params,
 }: {
@@ -32,7 +32,7 @@ export async function generateMetadata({
   };
 }
 
-// Komponen utama dengan tipe yang benar
+// Komponen utama
 export default function BlogPostPage({
   params,
 }: {
@@ -42,6 +42,7 @@ export default function BlogPostPage({
 
   if (!post) {
     notFound();
+    return null; // <- ini penting untuk menghindari akses ke post yang undefined
   }
 
   return (
