@@ -3,19 +3,32 @@ import { posts } from '../../posts/data';
 import MarkdownContent from '@/app/components/MarkdownContent/MarkdownContent';
 import Link from 'next/link';
 
+interface Post {
+  id: string;
+  title: string;
+  author: string;
+  date: string;
+  content: string;
+}
+
 export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.id,
   }));
 }
 
+// Definisikan type untuk PageProps
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
+
 // Solusi: Gunakan type langsung tanpa interface
 export default function Page({
   params
-}: {
-  params: { slug: string }
-}) {
-  const post = posts.find((post) => post.id === params.slug);
+}: PageProps) {
+  const post = posts.find((post: Post) => post.id === params.slug);
 
   if (!post) {
     notFound();
