@@ -4,7 +4,6 @@ import MarkdownContent from '@/app/components/MarkdownContent/MarkdownContent';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
-// Tipe Post
 interface Post {
   id: string;
   title: string;
@@ -13,29 +12,21 @@ interface Post {
   content: string;
 }
 
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
-
-// Generate static paths
 export async function generateStaticParams() {
   return posts.map((post: Post) => ({
     slug: post.id,
   }));
 }
 
-// Generate metadata
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const post = posts.find((post) => post.id === params.slug);
   return {
     title: post?.title || 'Post Not Found',
   };
 }
 
-export default function BlogPostPage({ params }: PageProps) {
-  const post = posts.find((post) => post.id === params.slug);
+export default function BlogPostPage({ params }: any) {
+  const post = posts.find((post: Post) => post.id === params.slug);
 
   if (!post) {
     notFound();
