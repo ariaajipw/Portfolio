@@ -7,7 +7,7 @@ export default function Home() {
   
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="hero-section container flex mx-auto h-screen w-fit content-center place-self-center">
+      <div className="hero-section container flex mx-auto h-screen w-fit content-center place-self-center landscape:mt-15">
         {/* <div className="lg:hidden">animasi di mobile</div> */}
         <div className="relative h-500px content-center place-self-center w-fit">
              <TextPressure
@@ -38,18 +38,18 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="second-section container mx-auto h-screen">
+      <div className="second-section container mx-auto h-screen landscape:mt-20">
         <div className="grid lg:grid-cols-12 h-screen">
-          <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
+          <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center landscape:mt-20">
           <p className="text-sm lg:text-lg content-center place-self-center px-auto mx-[20px] mb-5">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>
             < BlurText 
              text="Aria Aji"
              delay={70}
              animateBy="letters"
              direction="bottom"
-             className="text-3xl lg:text-[100px] font-bold leading-none place-self-center"
+             className="text-3xl lg:text-[100px] font-bold leading-none place-self-center text-[#CA6B48]"
           />
-            <h2 className="text-xl lg:text-5xl py-8 place-self-center">Website Developer</h2>
+            <h2 className="text-xl lg:text-5xl py-8 place-self-center text-[#EA6B48]">Website Developer</h2>
             <p className="text-sm lg:text-lg content-center place-self-center px-auto mx-[20px] mb-5 lg:mb-12">Enhance skills through hands-on projects & professional experiences. Combining creativity to build engaging experiences.</p>
             <a href="/contact" className="button border-black dark:border-black p-2 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[90px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]" type="button" >Let's Collaborate</a>
           </div>
@@ -86,7 +86,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="third-section container flex mx-auto h-screen w-fit content-center place-self-center">
+      <div className="third-section container flex mx-auto h-screen w-fit content-center place-self-center landscape:mt-80 landscape:mb-120">
        < WorkCards />
       </div>
       {/* <div className="fourth-section container flex mx-auto h-screen w-fit content-center place-self-center">

@@ -7,7 +7,7 @@ const works = [
     id: 1,
     thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
     title: "Hubton",
-    subtitle: "Internship as web developer at Hubton Indonesia, i'm focusing on front-end side as a developer, done some task for website front page",
+    subtitle: "Internship as web developer at Hubton Indonesia, i'm focusing on front-end side as a developer, done some tasks for websites front page",
   },
   {
     id: 2,
@@ -106,7 +106,7 @@ const WorkCards: React.FC = () => {
         <div className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
           {works.map((work) => (
-            <div key={work.id} className="min-w-full px-4 mt-[100px]">
+            <div key={work.id} className="min-w-full px-4 mt-[100px] landscape:mt-7">
               <div className="rounded-lg overflow-hidden bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all">
                 <div className="grid grid-cols-1">
                  <div className="w-full overflow-hidden">
@@ -116,9 +116,9 @@ const WorkCards: React.FC = () => {
                     className="w-full h-full object-cover"
                   />
                   </div>
-                  <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black relative -translate-y-[32px]">
+                  <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black relative -translate-y-[32px] landscape:-translate-y-[80px]">
                     <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
-                    <p className="text-white dark:text-gray-900 text-sm">{work.subtitle}</p>
+                    <p className="text-white dark:text-gray-900 text-sm lg:text-base">{work.subtitle}</p>
                   </div>
                 </div>
               </div>
