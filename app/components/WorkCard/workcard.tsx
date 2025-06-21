@@ -70,7 +70,7 @@ const WorkCards: React.FC = () => {
 
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000); // Change slide every 5 seconds
+    }, 10000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
   }, [isMobile, currentIndex]);
@@ -84,37 +84,41 @@ const WorkCards: React.FC = () => {
         {works.map((work) => (
           <div
             key={work.id}
-            className="rounded-lg overflow-hidden duration-300 grid-cols-1 lg:grid lg:grid-cols-2 mx-[15px] sm:mx-[100px] md:mx-[150px] lg:mx-[0px] bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all hover:scale-[1.02]"
+            className="rounded-lg overflow-hidden duration-300 grid-cols-1 h-[200px] md:h-[170px] lg:grid lg:grid-cols-2 mx-[15px] sm:mx-[100px] md:mx-[150px] lg:mx-[0px] bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all hover:scale-[1.02]"
           >
-            <img
-              src={work.thumbnail}
-              alt={work.title}
-              className="w-full h-60 object-cover"
-            />
+             <div className="relative w-full h-full">
+              <img
+                src={work.thumbnail}
+                alt={work.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
             <div className="p-4 grid-cols-2 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black">
               <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
-              <p className="text-white dark:text-gray-900">{work.subtitle}</p>
+              <p className="text-white dark:text-gray-900 text-[10px] md:text-[12px] ">{work.subtitle}</p>
             </div>
           </div>
         ))}
       </div>
 
       {/* Mobile/Tablet View - Carousel */}
-      <div className="lg:hidden relative overflow-hidden">
+      <div className="lg:hidden relative overflow-hidden ">
         <div className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
           {works.map((work) => (
             <div key={work.id} className="min-w-full px-4 mt-[100px]">
               <div className="rounded-lg overflow-hidden bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all">
                 <div className="grid grid-cols-1">
+                 <div className="w-full overflow-hidden">
                   <img
                     src={work.thumbnail}
                     alt={work.title}
-                    className="w-full h-60 object-cover"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black">
+                  </div>
+                  <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black relative -translate-y-[32px]">
                     <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
-                    <p className="text-white dark:text-gray-900">{work.subtitle}</p>
+                    <p className="text-white dark:text-gray-900 text-sm">{work.subtitle}</p>
                   </div>
                 </div>
               </div>

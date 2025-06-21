@@ -41,7 +41,7 @@ export default function Home() {
       <div className="second-section container mx-auto h-screen">
         <div className="grid lg:grid-cols-12 h-screen">
           <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
-          <p className="text-base lg:text-lg content-center place-self-center px-auto mx-[20px] mb-5">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>
+          <p className="text-sm lg:text-lg content-center place-self-center px-auto mx-[20px] mb-5">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>
             < BlurText 
              text="Aria Aji"
              delay={70}
@@ -50,8 +50,8 @@ export default function Home() {
              className="text-3xl lg:text-[100px] font-bold leading-none place-self-center"
           />
             <h2 className="text-xl lg:text-5xl py-8 place-self-center">Website Developer</h2>
-            <p className="text-base lg:text-lg content-center place-self-center px-auto mx-[20px] mb-5 lg:mb-12">Enhance skills through hands-on projects & professional experiences. Combining creativity to build engaging experiences.</p>
-            <a href="/contact" className="button border-black dark:border-black p-2 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[152px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]" type="button" >Let's Collaborate</a>
+            <p className="text-sm lg:text-lg content-center place-self-center px-auto mx-[20px] mb-5 lg:mb-12">Enhance skills through hands-on projects & professional experiences. Combining creativity to build engaging experiences.</p>
+            <a href="/contact" className="button border-black dark:border-black p-2 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[90px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]" type="button" >Let's Collaborate</a>
           </div>
           <div className="lg:col-span-6 content-center place-self-center order-first lg:order-last pl-0 lg:pl-[100px]">
             <PixelTransition 
