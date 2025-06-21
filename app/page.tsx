@@ -7,7 +7,7 @@ export default function Home() {
   
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="hero-section container flex mx-auto h-screen w-fit content-center place-self-center sm:landscape:mt-15">
+      <div className="hero-section container flex mx-auto h-screen w-fit content-center place-self-center sm:landscape:mt-10">
         {/* mobile for vertical */}
         <div className="relative h-500px content-center place-self-center w-fit sm:hidden">
              <TextPressure
@@ -21,7 +21,7 @@ export default function Home() {
           textColor="#00000"
           strokeColor="#ff0000"
           // minFontSize={400}
-          className='sm:minFontSize-400 md:minFontSize-400 lg:minFontSize-500 text-#000000'
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
         />
          <TextPressure
           text="_Ideas,_"
@@ -34,7 +34,7 @@ export default function Home() {
           textColor="000000"
           strokeColor="#ff0000"
           // minFontSize={400}
-          className='sm:minFontSize-400 md:minFontSize-400 lg:minFontSize-500 text-#000000'
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
         />
            <TextPressure
           text="_Craft_"
@@ -47,20 +47,20 @@ export default function Home() {
           textColor="#00000"
           strokeColor="#ff0000"
           // minFontSize={400}
-          className='sm:minFontSize-400 md:minFontSize-400 lg:minFontSize-400 text-#000000'
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
         />
          <TextPressure
-          text="_&_"
+          text="___&___"
           flex={true}
           alpha={false}
           stroke={false}
-          width={true}
+          width={false}
           weight={true}
           italic={false}
           textColor="#00000"
           strokeColor="#ff0000"
           // minFontSize={400}
-          className='sm:minFontSize-300 md:minFontSize-300 lg:minFontSize-300 text-#000000'
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
         />
          <TextPressure
           text="_Innovate._"
@@ -73,7 +73,7 @@ export default function Home() {
           textColor="000000"
           strokeColor="#ff0000"
           // minFontSize={400}
-          className='sm:minFontSize-400 md:minFontSize-400 lg:minFontSize-400 text-#000000'
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
         />
         </div>
         
@@ -158,7 +158,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="third-section container flex mx-auto h-screen w-fit content-center place-self-center landscape:mt-80 landscape:mb-120">
+      <div className="third-section container flex mx-auto h-screen w-fit content-center place-self-center landscape:mt-80 landscape:mb-120 sm:landscape:my-0">
        < WorkCards />
       </div>
       {/* <div className="fourth-section container flex mx-auto h-screen w-fit content-center place-self-center">
