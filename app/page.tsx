@@ -7,9 +7,78 @@ export default function Home() {
   
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="hero-section container flex mx-auto h-screen w-fit content-center place-self-center landscape:mt-15">
-        {/* <div className="lg:hidden">animasi di mobile</div> */}
-        <div className="relative h-500px content-center place-self-center w-fit">
+      <div className="hero-section container flex mx-auto h-screen w-fit content-center place-self-center sm:landscape:mt-15">
+        {/* mobile for vertical */}
+        <div className="relative h-500px content-center place-self-center w-fit sm:hidden">
+             <TextPressure
+          text="_Combine_"
+          flex={true}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="#00000"
+          strokeColor="#ff0000"
+          // minFontSize={400}
+          className='sm:minFontSize-400 md:minFontSize-400 lg:minFontSize-500 text-#000000'
+        />
+         <TextPressure
+          text="_Ideas,_"
+          flex={true}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="000000"
+          strokeColor="#ff0000"
+          // minFontSize={400}
+          className='sm:minFontSize-400 md:minFontSize-400 lg:minFontSize-500 text-#000000'
+        />
+           <TextPressure
+          text="_Craft_"
+          flex={true}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="#00000"
+          strokeColor="#ff0000"
+          // minFontSize={400}
+          className='sm:minFontSize-400 md:minFontSize-400 lg:minFontSize-400 text-#000000'
+        />
+         <TextPressure
+          text="_&_"
+          flex={true}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="#00000"
+          strokeColor="#ff0000"
+          // minFontSize={400}
+          className='sm:minFontSize-300 md:minFontSize-300 lg:minFontSize-300 text-#000000'
+        />
+         <TextPressure
+          text="_Innovate._"
+          flex={true}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="000000"
+          strokeColor="#ff0000"
+          // minFontSize={400}
+          className='sm:minFontSize-400 md:minFontSize-400 lg:minFontSize-400 text-#000000'
+        />
+        </div>
+        
+        {/* Desktop */}
+        <div className="relative h-500px content-center place-self-center w-fit hidden sm:block">
              <TextPressure
           text="_Combine_Ideas,_"
           flex={true}
@@ -36,6 +105,9 @@ export default function Home() {
           // minFontSize={400}
         />
         </div>
+        
+    
+
       </div>
 
       <div className="second-section container mx-auto h-screen landscape:mt-20">
