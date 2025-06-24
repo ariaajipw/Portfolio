@@ -40,7 +40,7 @@ export default function Home() {
           className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
         />
            <TextPressure
-          text="Craft"
+          text="Craft,"
           flex={false}
           scale={false}
           alpha={false}
@@ -119,15 +119,15 @@ export default function Home() {
       <div className="second-section container mx-auto h-screen landscape:mt-20">
         <div className="grid lg:grid-cols-12 h-screen">
           <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center landscape:mt-20">
-          <p className="text-sm lg:text-lg content-center place-self-center px-auto ml-[30px] mr-[20px] mb-5">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>
+          <p className="text-sm lg:text-lg content-center place-self-center px-auto ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>
             < BlurText 
              text="Aria Aji"
              delay={300}
              animateBy="letters"
              direction="top"
-             className="text-3xl lg:text-[100px] font-bold leading-none place-self-center text-[#CA6B48]"
+             className="text-[clamp(30px,7vw,100px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5"
           />
-          <div className="text-center mt-4 mb-8 text-[#EA6B48] h-30">
+          <div className="text-center mt-4 mb-5 text-[#EA6B48] h-30">
             <FallingText
               text={`Website Developer`}
               highlightWords={[]}
@@ -136,7 +136,7 @@ export default function Home() {
               backgroundColor="transparent"
               wireframes={false}
               gravity={0.1}
-              fontSize="2rem"
+              fontSize="clamp(20px,4vw,32px)"
               mouseConstraintStiffness={0.9}
             />           
           </div>

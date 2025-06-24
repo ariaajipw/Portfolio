@@ -44,8 +44,7 @@ export default function RootLayout({
         className={`${montserrat_alternates.className} antialiased`}
       > */}
       <body className={`${jetbrains_mono.className} bg-white dark:bg-zinc-950 text-gray-900 dark:text-white`}
-        data-new-gr-c-s-check-loaded="14.1240.0"
-        data-gr-ext-installed="">
+        suppressHydrationWarning>
         <Header />
         {children}
         <Footer/>
