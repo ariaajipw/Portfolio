@@ -10,12 +10,13 @@
     "debug": "NODE_OPTIONS='--inspect' next dev"
   },
   "dependencies": {
-    "@next/font": "^14.2.15",
     "@react-spring/web": "^9.7.5",
     "@types/dompurify": "^3.0.5",
+    "@types/matter-js": "^0.19.8",
     "dompurify": "^3.2.5",
     "gsap": "^3.12.7",
     "marked": "^15.0.11",
+    "matter-js": "^0.20.0",
     "next": "^15.3.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

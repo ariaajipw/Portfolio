@@ -135,7 +135,7 @@ const PixelTransition: React.FC<PixelTransitionProps> = ({
         rounded-[360px]
         border-1
         border-black
-        w-[300px]
+        w-[200px]
         md:w-[400px]
         xl:w-[500px]
         max-w-full

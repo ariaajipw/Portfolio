@@ -7,7 +7,7 @@ const works = [
     id: 1,
     thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
     title: "Hubton",
-    subtitle: "Internship as web developer at Hubton Indonesia, i'm focusing on front-end side as a developer, done some tasks for websites front page",
+    subtitle: "Internship as web developer at Hubton Indonesia, i'm focused on front-end side as a developer.",
   },
   {
     id: 2,
@@ -95,7 +95,7 @@ const WorkCards: React.FC = () => {
             </div>
             <div className="p-4 grid-cols-2 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black">
               <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
-              <p className="text-white dark:text-gray-900 text-[10px] md:text-[12px] ">{work.subtitle}</p>
+              <p className="text-white dark:text-gray-900 text-xs sm:text-sm xl:text-base ">{work.subtitle}</p>
             </div>
           </div>
         ))}
@@ -118,7 +118,7 @@ const WorkCards: React.FC = () => {
                   </div>
                   <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black relative -translate-y-[32px] landscape:-translate-y-[80px]">
                     <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
-                    <p className="text-white dark:text-gray-900 text-sm lg:text-base">{work.subtitle}</p>
+                    <p className="text-white dark:text-gray-900 text-xs sm:text-sm xl:text-base">{work.subtitle}</p>
                   </div>
                 </div>
               </div>

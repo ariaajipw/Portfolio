@@ -79,7 +79,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
         } else if (width >= 640) {
             setResponsiveMinFontSize(150);
         } else {
-            setResponsiveMinFontSize(89);
+            setResponsiveMinFontSize(125);
         }
     };
 
