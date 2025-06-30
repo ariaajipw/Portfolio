@@ -32,21 +32,44 @@ const works = [
 const WorkCards: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [touchPosition, setTouchPosition] = useState<number | null>(null); // State untuk posisi touch
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024); // lg breakpoint in Tailwind
+      setIsMobile(window.innerWidth < 1024);
     };
 
-    // Set initial value
     handleResize();
-
-    // Add event listener
     window.addEventListener('resize', handleResize);
 
-    // Clean up
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Fungsi untuk swipe gesture
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touchDown = e.touches[0].clientX;
+    setTouchPosition(touchDown);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const touchDown = touchPosition;
+
+    if (touchDown === null) {
+      return;
+    }
+
+    const currentTouch = e.touches[0].clientX;
+    const diff = touchDown - currentTouch;
+
+    // Threshold untuk menentukan swipe
+    if (diff < -5) {
+      nextSlide();
+    } else if (diff > 5) {
+      prevSlide();
+    }
+
+    setTouchPosition(null);
+  };
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => 
@@ -64,13 +87,12 @@ const WorkCards: React.FC = () => {
     setCurrentIndex(index);
   };
 
-  // Auto-rotate slides for mobile view
   useEffect(() => {
     if (!isMobile) return;
 
     const interval = setInterval(() => {
       nextSlide();
-    }, 10000); // Change slide every 5 seconds
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [isMobile, currentIndex]);
@@ -79,7 +101,7 @@ const WorkCards: React.FC = () => {
     <div className="container mx-auto px-4 py-8 w-auto min-h-screen">
       <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mt-1 mb-8 lg:mb-30">Projects and Works</h1>
       
-      {/* Desktop View (lg) - Grid Layout */}
+      {/* Desktop View */}
       <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-6 w-fit lg:w-full">
         {works.map((work) => (
           <div
@@ -102,9 +124,13 @@ const WorkCards: React.FC = () => {
       </div>
 
       {/* Mobile/Tablet View - Carousel */}
-      <div className="lg:hidden relative overflow-hidden ">
-        <div className="flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+      <div className="lg:hidden relative overflow-hidden">
+        <div 
+          className="flex transition-transform duration-500 ease-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+        >
           {works.map((work) => (
             <div key={work.id} className="min-w-full px-4 mt-[100px] landscape:mt-7">
               <div className="rounded-lg overflow-hidden bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all">
