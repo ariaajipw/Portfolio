@@ -62,9 +62,9 @@ const WorkCards: React.FC = () => {
     const diff = touchDown - currentTouch;
 
     // Threshold untuk menentukan swipe
-    if (diff < -5) {
+    if (diff > 15) {
       nextSlide();
-    } else if (diff > 5) {
+    } else if (diff < -15) {
       prevSlide();
     }
 
