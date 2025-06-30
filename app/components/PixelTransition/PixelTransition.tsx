@@ -136,8 +136,8 @@ const PixelTransition: React.FC<PixelTransitionProps> = ({
         border-1
         border-black
         w-[200px]
-        md:w-[400px]
-        xl:w-[500px]
+        md:w-[300px]
+        xl:w-[400px]
         max-w-full
         relative
         overflow-hidden

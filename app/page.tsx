@@ -8,9 +8,9 @@ export default function Home() {
   
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="hero-section container flex mx-auto h-screen w-fit content-center place-self-center sm:landscape:mt-10">
+      <div className="hero-section container flex mx-auto min-h-dvh w-fit content-center place-self-center ">
         {/* mobile for vertical */}
-        <div className="relative h-500px content-center place-self-center w-fit sm:hidden">
+        <div className="relative h-fit content-center place-self-center w-fit sm:hidden">
              <TextPressure
           text="Combine"
           flex={false}
@@ -84,7 +84,7 @@ export default function Home() {
         </div>
         
         {/* Desktop */}
-        <div className="relative h-500px content-center place-self-center w-fit hidden sm:block">
+        <div className="relative h-fit content-center place-self-center w-fit hidden sm:block">
              <TextPressure
           text="_Combine_Ideas,_"
           flex={true}
@@ -96,8 +96,9 @@ export default function Home() {
           textColor="#00000"
           strokeColor="#ff0000"
           // minFontSize={400}
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000 underline-offset-auto'
         />
+        <div className="h-1 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div>
          <TextPressure
           text="_Craft_&_Innovate._"
           flex={true}
@@ -110,16 +111,14 @@ export default function Home() {
           strokeColor="#ff0000"
           // minFontSize={400}
         />
+        <div className="h-1 w-full animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48]"></div>
         </div>
-        
-    
-
       </div>
 
-      <div className="second-section container mx-auto h-screen landscape:mt-20">
-        <div className="grid lg:grid-cols-12 h-screen">
-          <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center landscape:mt-20">
-          <p className="text-sm lg:text-lg content-center place-self-center px-auto ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>
+      <div className="second-section container mx-auto min-h-dvh mt-60">
+        <div className="grid lg:grid-cols-12 h-fit">
+          <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
+          <p className="text-sm lg:text-lg content-center place-self-center px-auto mt-10 ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>
             < BlurText 
              text="Aria Aji"
              delay={300}
@@ -127,7 +126,7 @@ export default function Home() {
              direction="top"
              className="text-[clamp(30px,7vw,100px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5"
           />
-          <div className="text-center mt-4 mb-5 text-[#EA6B48] h-30">
+          <div className="text-center mt-4 mb-5 text-[#EA6B48] h-20">
             <FallingText
               text={`Website Developer`}
               highlightWords={[]}
@@ -157,7 +156,7 @@ export default function Home() {
                   }}
                 >
                   <p style={{ fontWeight: 900, fontSize: "1rem", color: "#ffffff" }}>
-                    <img src="assets/img/peacock.png" alt="peacock" className="size-40 lg:size-90"/>
+                    <img src="assets/img/peacock.png" alt="peacock" className="size-30 md:size-40 lg:size-60"/>
                   </p>
                 </div>
               }
@@ -177,7 +176,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="third-section container flex mx-auto h-screen w-fit content-center place-self-center landscape:mt-80 landscape:mb-120 sm:landscape:my-0">
+      <div className="third-section container flex mx-auto h-fit w-fit content-center place-self-center landscape:mt-80 landscape:mb-120 sm:landscape:my-0">
        < WorkCards />
       </div>
       {/* <div className="fourth-section container flex mx-auto h-screen w-fit content-center place-self-center">

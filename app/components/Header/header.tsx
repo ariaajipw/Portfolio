@@ -141,12 +141,12 @@ const Header = () => {
           <div className="relative group">
             <button
               onClick={toggleDarkMode}
-              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition hover:bg-[#FA6B48] border border-[#FA6B48] rounded-xl"
+              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-gray-800 dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] to-yellow-400 border border-[#FA6B48] rounded-xl"
               aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDarkMode ? (
                 <Image 
-                  src="/assets/img/night-and-day.png" 
+                  src= "/assets/img/day-and-night.png"
                   alt="Light Mode" 
                   width={24} 
                   height={24} 
@@ -155,7 +155,7 @@ const Header = () => {
                 />
               ) : (
                 <Image 
-                  src="/assets/img/day-and-night.png" 
+                  src= "/assets/img/night-and-day.png" 
                   alt="Dark Mode" 
                   width={24} 
                   height={24} 
@@ -170,12 +170,12 @@ const Header = () => {
         <div className="flex items-center gap-4 md:hidden">
             <button
               onClick={toggleDarkMode}
-              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition hover:bg-[#FA6B48] border border-[#FA6B48] rounded-xl"
+              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-gray-800 dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] to-yellow-400 border border-[#FA6B48] rounded-xl"
               aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDarkMode ? (
                 <Image 
-                  src="/assets/img/night-and-day.png" 
+                  src="/assets/img/day-and-night.png"
                   alt="Light Mode" 
                   width={24} 
                   height={24} 
@@ -184,7 +184,7 @@ const Header = () => {
                 />
               ) : (
                 <Image 
-                  src="/assets/img/day-and-night.png" 
+                  src="/assets/img/night-and-day.png" 
                   alt="Dark Mode" 
                   width={24} 
                   height={24} 

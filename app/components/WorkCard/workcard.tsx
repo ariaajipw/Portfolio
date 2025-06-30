@@ -77,16 +77,16 @@ const WorkCards: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 w-auto min-h-screen">
-      <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mt-10 mb-8 lg:mb-12">Projects and Works</h1>
+      <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mt-1 mb-8 lg:mb-30">Projects and Works</h1>
       
       {/* Desktop View (lg) - Grid Layout */}
       <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-6 w-fit lg:w-full">
         {works.map((work) => (
           <div
             key={work.id}
-            className="rounded-lg overflow-hidden duration-300 grid-cols-1 h-[200px] md:h-[170px] lg:grid lg:grid-cols-2 mx-[15px] sm:mx-[100px] md:mx-[150px] lg:mx-[0px] bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all hover:scale-[1.02]"
+            className="rounded-sm overflow-hidden duration-300 grid-cols-1 lg:grid lg:grid-cols-2 mx-[15px] sm:mx-[100px] md:mx-[150px] lg:mx-[0px] bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all hover:scale-[1.02]"
           >
-             <div className="relative w-full h-full">
+             <div className="relative w-full h-full aspect-video overflow-hidden">
               <img
                 src={work.thumbnail}
                 alt={work.title}
@@ -108,15 +108,16 @@ const WorkCards: React.FC = () => {
           {works.map((work) => (
             <div key={work.id} className="min-w-full px-4 mt-[100px] landscape:mt-7">
               <div className="rounded-lg overflow-hidden bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all">
-                <div className="grid grid-cols-1">
-                 <div className="w-full overflow-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-2 relative">
+                 <div className="w-full aspect-video overflow-hidden ">
                   <img
                     src={work.thumbnail}
                     alt={work.title}
-                    className="w-full h-full object-cover"
+                    className="w-full object-cover"
                   />
                   </div>
-                  <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black relative -translate-y-[32px] landscape:-translate-y-[80px]">
+                  {/* -translate-y-[32px] landscape:-translate-y-[80px] */}
+                  <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black relative">
                     <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
                     <p className="text-white dark:text-gray-900 text-xs sm:text-sm xl:text-base">{work.subtitle}</p>
                   </div>
