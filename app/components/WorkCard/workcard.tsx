@@ -153,7 +153,7 @@ const WorkCards: React.FC = () => {
   }, [isMobile, currentIndex]);
 
   return (
-    <div className="container mx-auto px-4 pt-8 w-auto min-h-screen">
+    <div className="container mx-auto px-4 pt-15 md:pt-6 w-auto min-h-screen">
       <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mt-1 mb-8 lg:mb-20">Projects & Works</h1>
       
       {/* Desktop View */}
@@ -180,18 +180,6 @@ const WorkCards: React.FC = () => {
       </div>
       ))}
     </div>
-
-     {/* Tombol See All jika ada lebih dari 4 works */}
-        {works.length > 4 && (
-          <div className="text-center mt-10">
-            <Link 
-              href="/services"
-              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[95px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
-            >
-              See All Projects
-            </Link>
-          </div>
-        )}
 
       {/* Mobile/Tablet View - Carousel */}
       <div className="lg:hidden relative overflow-hidden"> 
@@ -256,6 +244,17 @@ const WorkCards: React.FC = () => {
           ))}
         </div>
       </div>
+      {/* Tombol See All jika ada lebih dari 4 works */}
+        {works.length > 4 && (
+          <div className="text-center mt-10">
+            <Link 
+              href="/services"
+              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[80px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
+            >
+              See All Projects
+            </Link>
+          </div>
+        )}
     </div>
   );
 };

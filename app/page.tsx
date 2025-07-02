@@ -26,6 +26,7 @@ export default function Home() {
           // minFontSize={400}
           className='sm:minFontSize-300 md:minFontSize-400 lg:minFontSize-500 text-#000000'
         />
+        <div className="h-0.5 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div>
          <TextPressure
           text="Ideas,"
           flex={false}
@@ -40,6 +41,7 @@ export default function Home() {
           // minFontSize={400}
           className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
         />
+        <div className="h-0.5 w-[150px] animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48] ml-[40px]"></div>
            <TextPressure
           text="Craft,"
           flex={false}
@@ -54,6 +56,7 @@ export default function Home() {
           // minFontSize={400}
           className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
         />
+        <div className="h-0.5 w-[130px] animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400 ml-[45px]"></div>
          <TextPressure
           text="__&__"
           flex={false}
@@ -68,6 +71,7 @@ export default function Home() {
           // minFontSize={400}
           className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
         />
+        <div className="h-0.5 w-[80px] animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48] ml-[70px]"></div>
          <TextPressure
           text="Innovate."
           flex={false}
@@ -82,6 +86,7 @@ export default function Home() {
           // minFontSize={400}
           className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
         />
+           <div className="h-0.5 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div>
         </div>
         
         {/* Desktop */}
@@ -144,7 +149,7 @@ export default function Home() {
             <p className="text-sm lg:text-lg content-center place-self-center px-auto ml-[30px] mr-[20px] mb-12">Enhance skills through hands-on projects & professional experiences. Combining creativity to build engaging experiences.</p>
             <Link 
               href="/contact"
-              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[95px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
+              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[90px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
             >
               Let's Collaborate
             </Link>
