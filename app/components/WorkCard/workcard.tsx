@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const works = [
   {
@@ -32,7 +32,11 @@ const works = [
 const WorkCards: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [touchPosition, setTouchPosition] = useState<number | null>(null); // State untuk posisi touch
+  const containerRef = useRef<HTMLDivElement>(null);
+  const startXRef = useRef(0);
+  const isSwipingRef = useRef(false);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
+  const slideCount = works.length;
 
   useEffect(() => {
     const handleResize = () => {
@@ -45,46 +49,84 @@ const WorkCards: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Fungsi untuk swipe gesture
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const touchDown = e.touches[0].clientX;
-    setTouchPosition(touchDown);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const touchDown = touchPosition;
-
-    if (touchDown === null) {
-      return;
+  // Fungsi untuk menangani perpindahan slide dengan infinite yang smooth
+  const goToSlide = (index: number, withAnimation = true) => {
+    if (!withAnimation) {
+      setTransitionEnabled(false);
+      setCurrentIndex(index);
+      
+      // Re-enable transition after a short delay
+      setTimeout(() => {
+        setTransitionEnabled(true);
+      }, 50);
+    } else {
+      setCurrentIndex(index);
     }
-
-    const currentTouch = e.touches[0].clientX;
-    const diff = touchDown - currentTouch;
-
-    // Threshold untuk menentukan swipe
-    if (diff > 15) {
-      nextSlide();
-    } else if (diff < -15) {
-      prevSlide();
-    }
-
-    setTouchPosition(null);
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === works.length - 1 ? 0 : prevIndex + 1
-    );
+    if (currentIndex === slideCount - 1) {
+      // Pindah ke slide pertama tanpa animasi
+      goToSlide(0, false);
+    } else {
+      goToSlide(currentIndex + 1);
+    }
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? works.length - 1 : prevIndex - 1
-    );
+    if (currentIndex === 0) {
+      // Pindah ke slide terakhir tanpa animasi
+      goToSlide(slideCount - 1, false);
+    } else {
+      goToSlide(currentIndex - 1);
+    }
   };
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
+  // Swipe gesture yang lebih smooth
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startXRef.current = e.touches[0].clientX;
+    isSwipingRef.current = true;
+    
+    // Nonaktifkan transisi selama swipe
+    setTransitionEnabled(false);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isSwipingRef.current) return;
+    
+    const touchX = e.touches[0].clientX;
+    const diff = touchX - startXRef.current;
+    
+    // Update posisi slide secara real-time
+    if (containerRef.current) {
+      containerRef.current.style.transform = `translateX(calc(-${currentIndex * 100}% + ${diff}px)`;
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!isSwipingRef.current) return;
+    isSwipingRef.current = false;
+    
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startXRef.current;
+    const absDiff = Math.abs(diff);
+    
+    // Threshold 20% lebar layar
+    const swipeThreshold = window.innerWidth * 0.2;
+    
+    // Aktifkan kembali transisi
+    setTransitionEnabled(true);
+    
+    if (absDiff > swipeThreshold) {
+      if (diff > 0) {
+        prevSlide();
+      } else {
+        nextSlide();
+      }
+    } else {
+      // Kembali ke posisi semula jika tidak mencapai threshold
+      setCurrentIndex(currentIndex);
+    }
   };
 
   useEffect(() => {
@@ -108,7 +150,7 @@ const WorkCards: React.FC = () => {
             key={work.id}
             className="rounded-sm overflow-hidden duration-300 grid-cols-1 lg:grid lg:grid-cols-2 mx-[15px] sm:mx-[100px] md:mx-[150px] lg:mx-[0px] bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all hover:scale-[1.02]"
           >
-             <div className="relative w-full h-full aspect-video overflow-hidden">
+            <div className="relative w-full h-full aspect-video overflow-hidden">
               <img
                 src={work.thumbnail}
                 alt={work.title}
@@ -124,25 +166,30 @@ const WorkCards: React.FC = () => {
       </div>
 
       {/* Mobile/Tablet View - Carousel */}
-      <div className="lg:hidden relative overflow-hidden">
+      <div className="lg:hidden relative overflow-hidden"> 
         <div 
-          className="flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          ref={containerRef}
+          className="flex transition-transform duration-300 ease-out touch-pan-y"
+          style={{ 
+            transform: `translateX(-${currentIndex * 100}%)`,
+            transition: transitionEnabled ? 'transform 0.3s ease-out' : 'none'
+          }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
         >
           {works.map((work) => (
             <div key={work.id} className="min-w-full px-4 mt-[100px] landscape:mt-7">
               <div className="rounded-lg overflow-hidden bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all">
                 <div className="grid grid-cols-1 md:grid-cols-2 relative">
-                 <div className="w-full aspect-video overflow-hidden ">
-                  <img
-                    src={work.thumbnail}
-                    alt={work.title}
-                    className="w-full object-cover"
-                  />
+                  <div className="w-full aspect-video overflow-hidden ">
+                    <img
+                      src={work.thumbnail}
+                      alt={work.title}
+                      className="w-full object-cover"
+                    />
                   </div>
-                  {/* -translate-y-[32px] landscape:-translate-y-[80px] */}
                   <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black relative">
                     <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
                     <p className="text-white dark:text-gray-900 text-xs sm:text-sm xl:text-base">{work.subtitle}</p>
@@ -156,14 +203,14 @@ const WorkCards: React.FC = () => {
         {/* Navigation Arrows */}
         <button 
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all"
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10"
           aria-label="Previous slide"
         >
           &lt;
         </button>
         <button 
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all"
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10"
           aria-label="Next slide"
         >
           &gt;
