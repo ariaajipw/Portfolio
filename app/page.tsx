@@ -9,7 +9,7 @@ export default function Home() {
   
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="hero-section container flex mx-auto min-h-dvh w-fit content-center place-self-center ">
+      <div className="hero-section container flex mx-auto min-h-dvh w-fit content-center place-self-center pt-2">
         {/* mobile for vertical */}
         <div className="relative h-fit content-center place-self-center w-fit sm:hidden">
              <TextPressure
