@@ -1,13 +1,14 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 const works = [
   {
     id: 1,
     thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
     title: "Hubton",
-    subtitle: "Internship as web developer at Hubton Indonesia, i'm focused on front-end side as a developer.",
+    subtitle: "Intern as web developer at Hubton Indonesia, focused on front-end side.",
   },
   {
     id: 2,
@@ -23,6 +24,18 @@ const works = [
   },
   {
     id: 4,
+    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    title: "Lorem, ipsum.",
+    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+  },
+   {
+    id: 5,
+    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    title: "Lorem, ipsum.",
+    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+  },
+  {
+    id: 6,
     thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
     title: "Lorem, ipsum.",
     subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
@@ -140,30 +153,45 @@ const WorkCards: React.FC = () => {
   }, [isMobile, currentIndex]);
 
   return (
-    <div className="container mx-auto px-4 py-8 w-auto min-h-screen">
-      <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mt-1 mb-8 lg:mb-30">Projects and Works</h1>
+    <div className="container mx-auto px-4 pt-8 w-auto min-h-screen">
+      <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mt-1 mb-8 lg:mb-20">Projects & Works</h1>
       
       {/* Desktop View */}
-      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-6 w-fit lg:w-full">
-        {works.map((work) => (
-          <div
-            key={work.id}
-            className="rounded-sm overflow-hidden duration-300 grid-cols-1 lg:grid lg:grid-cols-2 mx-[15px] sm:mx-[100px] md:mx-[150px] lg:mx-[0px] bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all hover:scale-[1.02]"
-          >
-            <div className="relative w-full h-full aspect-video overflow-hidden">
-              <img
-                src={work.thumbnail}
-                alt={work.title}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </div>
-            <div className="p-4 grid-cols-2 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black">
-              <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
-              <p className="text-white dark:text-gray-900 text-xs sm:text-sm xl:text-base ">{work.subtitle}</p>
-            </div>
-          </div>
-        ))}
+     <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-4 w-fit lg:w-fit">
+      {works.slice(0, 4).map((work) => (
+      <div
+        key={work.id}
+        className="rounded-sm overflow-hidden duration-300 grid grid-cols-1 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] mx-[15px] sm:mx-[100px] md:mx-[150px] lg:mx-[0px] bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all hover:scale-[1.02]"
+      > 
+        {/* Bagian Gambar */}
+        <div className="relative w-full aspect-video overflow-hidden"> {/* Tambahkan aspect-video */}
+          <img
+            src={work.thumbnail}
+            alt={work.title}
+            className="w-full h-fit object-cover"
+          />
+        </div>
+        
+        {/* Bagian Teks */}
+        <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black max-w-[280px]">
+          <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
+          <p className="text-white dark:text-gray-900 text-xs sm:text-sm xl:text-base">{work.subtitle}</p>
+        </div>
       </div>
+      ))}
+    </div>
+
+     {/* Tombol See All jika ada lebih dari 4 works */}
+        {works.length > 4 && (
+          <div className="text-center mt-10">
+            <Link 
+              href="/services"
+              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[95px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
+            >
+              See All Projects
+            </Link>
+          </div>
+        )}
 
       {/* Mobile/Tablet View - Carousel */}
       <div className="lg:hidden relative overflow-hidden"> 
@@ -182,7 +210,7 @@ const WorkCards: React.FC = () => {
           {works.map((work) => (
             <div key={work.id} className="min-w-full px-4 mt-[100px] landscape:mt-7">
               <div className="rounded-lg overflow-hidden bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all">
-                <div className="grid grid-cols-1 md:grid-cols-2 relative">
+                <div className="grid grid-cols-1 sm:grid-cols-2 relative">
                   <div className="w-full aspect-video overflow-hidden ">
                     <img
                       src={work.thumbnail}
@@ -192,7 +220,7 @@ const WorkCards: React.FC = () => {
                   </div>
                   <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black relative">
                     <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
-                    <p className="text-white dark:text-gray-900 text-xs sm:text-sm xl:text-base">{work.subtitle}</p>
+                    <p className="text-white dark:text-gray-900 text-xs sm:text-sm lg:text-base">{work.subtitle}</p>
                   </div>
                 </div>
               </div>

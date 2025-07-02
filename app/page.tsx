@@ -3,6 +3,7 @@ import BlurText from "./components/BlurText/BlurText";
 import TextPressure from './components/TextPressure/TextPressure';
 import WorkCards from "./components/WorkCard/workcard";
 import FallingText from './components/FallingText/FallingText';
+import Link from "next/link";
 
 export default function Home() {
   
@@ -115,7 +116,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="second-section container mx-auto min-h-dvh mt-60">
+      <div className="second-section container mx-auto h-fit mb-30 lg:my-50">
         <div className="grid lg:grid-cols-12 h-fit">
           <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
           <p className="text-sm lg:text-lg content-center place-self-center px-auto mt-10 ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>
@@ -141,7 +142,12 @@ export default function Home() {
           </div>
             {/* <h2 className="text-xl lg:text-5xl py-8 place-self-center text-[#EA6B48]">Website Developer</h2> */}
             <p className="text-sm lg:text-lg content-center place-self-center px-auto ml-[30px] mr-[20px] mb-12">Enhance skills through hands-on projects & professional experiences. Combining creativity to build engaging experiences.</p>
-            <a href="/contact" className="button border-black dark:border-black p-2 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[90px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]" type="button" >Let's Collaborate</a>
+            <Link 
+              href="/contact"
+              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[95px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
+            >
+              Let's Collaborate
+            </Link>
           </div>
           <div className="lg:col-span-6 content-center place-self-center order-first lg:order-last pl-0 lg:pl-[100px]">
             <PixelTransition 
