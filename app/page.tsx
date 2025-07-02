@@ -121,7 +121,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="second-section container mx-auto h-fit mb-30 lg:my-50">
+      <div className="second-section container mx-auto h-fit my-20 lg:my-50">
         <div className="grid lg:grid-cols-12 h-fit">
           <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
           <p className="text-sm lg:text-lg content-center place-self-center px-auto mt-10 ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>

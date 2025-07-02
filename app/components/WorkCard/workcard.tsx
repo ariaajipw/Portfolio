@@ -154,7 +154,7 @@ const WorkCards: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 pt-15 md:pt-6 w-auto min-h-screen">
-      <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mt-1 mb-8 lg:mb-20">Projects & Works</h1>
+      <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center my-0 lg:mb-20">Projects & Works</h1>
       
       {/* Desktop View */}
      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-4 w-fit lg:w-fit">
