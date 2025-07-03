@@ -22,6 +22,8 @@ interface TextPressureProps {
     darkTextColor?: string;
     darkStrokeColor?: string;
     darkBackground?: string;
+    colorCycle?: string[];
+    colorCycleDuration?: number; 
 }
 
 const TextPressure: React.FC<TextPressureProps> = ({
@@ -44,6 +46,8 @@ const TextPressure: React.FC<TextPressureProps> = ({
     darkTextColor = '#FFFFFF',
     darkStrokeColor = '#00FFFF',
     darkBackground = 'transparent',
+    colorCycle = [], // Default: array kosong (tidak ada animasi)
+    colorCycleDuration = 2000, // Default: 2 detik
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
@@ -75,9 +79,9 @@ const TextPressure: React.FC<TextPressureProps> = ({
         } else if (width >= 1024) {
             setResponsiveMinFontSize(280);
         } else if (width >= 768) {
-            setResponsiveMinFontSize(150);
+            setResponsiveMinFontSize(200);
         } else if (width >= 640) {
-            setResponsiveMinFontSize(130);
+            setResponsiveMinFontSize(150);
         } else {
             setResponsiveMinFontSize(130);
         }
@@ -189,10 +193,27 @@ const TextPressure: React.FC<TextPressureProps> = ({
         return () => cancelAnimationFrame(rafId);
     }, [width, weight, italic, alpha, chars.length]);
 
+        const [currentColorIndex, setCurrentColorIndex] = useState(0);
+
+    useEffect(() => {
+        if (!Array.isArray(colorCycle) || colorCycle.length <= 1) return; // Tidak perlu animasi jika hanya 1 warna
+        
+        const interval = setInterval(() => {
+            setCurrentColorIndex(prev => (prev + 1) % colorCycle.length);
+        }, colorCycleDuration);
+        
+        return () => clearInterval(interval);
+    }, [colorCycle, colorCycleDuration]);
+
     // Determine colors based on dark mode
     const currentTextColor = darkMode ? darkTextColor : textColor;
     const currentStrokeColor = darkMode ? darkStrokeColor : strokeColor;
     const currentBackground = darkMode ? darkBackground : 'transparent';
+    const baseTextColor = darkMode ? darkTextColor : textColor;
+    const dynamicTextColor = colorCycle.length > 0 
+        ? colorCycle[currentColorIndex]
+        : baseTextColor;
+    const transitionDuration = colorCycleDuration / 1000 * 0.1;
 
     return (
         <div
@@ -206,10 +227,13 @@ const TextPressure: React.FC<TextPressureProps> = ({
                     src: url('${fontUrl}');
                     font-style: normal;
                 }
+
+                 .text-pressure-title span {
+                transition: color ${transitionDuration}s ease-in-out !important;
+                }
                 .stroke span {
                     position: relative;
-                    color: ${currentTextColor};
-                    transition: color 0.3s ease;
+                    color: ${dynamicTextColor};
                 }
                 .stroke span::after {
                     content: attr(data-char);
@@ -236,7 +260,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
                     transformOrigin: 'center top',
                     margin: 0,
                     fontWeight: 100,
-                    color: stroke ? undefined : currentTextColor,
+                    color: stroke ? undefined : dynamicTextColor,
                     gap: '5px',
                     transition: 'color 0.3s ease',
                 }}
@@ -255,6 +279,10 @@ const TextPressure: React.FC<TextPressureProps> = ({
                     }}
                     data-char={char}
                     className="inline-block"
+                    style={{
+                            color: dynamicTextColor, // Tambahkan juga di sini untuk jaga-jaga
+                            transition: `color ${transitionDuration}s ease-in-out`
+                        }}
                 >
                     {char}
                 </span>
