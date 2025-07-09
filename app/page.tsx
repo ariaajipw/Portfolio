@@ -27,7 +27,7 @@ export default function Home() {
           strokeColor="#ff0000"
           className='sm:minFontSize-300 md:minFontSize-400 lg:minFontSize-500 text-#000000'
           colorCycle={colorCycle}
-          colorCycleDuration={1900} // Ubah durasi sesuai kebutuhan
+          colorCycleDuration={2000} // Ubah durasi sesuai kebutuhan
         />
         {/* <div className="h-0.5 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
          <TextPressure
@@ -43,7 +43,7 @@ export default function Home() {
           strokeColor="#ff0000"
           className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
           colorCycle={colorCycle}
-          colorCycleDuration={1970}
+          colorCycleDuration={2100}
         />
         {/* <div className="h-0.5 w-[150px] animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48] ml-[40px]"></div> */}
            <TextPressure
@@ -59,7 +59,7 @@ export default function Home() {
           strokeColor="#ff0000"
           className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
           colorCycle={colorCycle}
-          colorCycleDuration={2040}
+          colorCycleDuration={2200}
         />
         {/* <div className="h-0.5 w-[130px] animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400 ml-[45px]"></div> */}
          <TextPressure
@@ -75,7 +75,7 @@ export default function Home() {
           strokeColor="#ff0000"
           className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
           colorCycle={colorCycle}
-          colorCycleDuration={2110}
+          colorCycleDuration={2300}
         />
         {/* <div className="h-0.5 w-[80px] animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48] ml-[70px]"></div> */}
          <TextPressure
@@ -91,7 +91,7 @@ export default function Home() {
           strokeColor="#ff0000"
           className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
           colorCycle={colorCycle}
-          colorCycleDuration={2180}
+          colorCycleDuration={2400}
         />
            {/* <div className="h-0.5 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
         </div>
@@ -124,13 +124,13 @@ export default function Home() {
           textColor="000000"
           strokeColor="#ff0000"
           colorCycle={colorCycle}
-          colorCycleDuration={2500}
+          colorCycleDuration={2800}
         />
         {/* <div className="h-1 w-full animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48]"></div> */}
         </div>
       </div>
 
-      <div className="second-section container mx-auto h-fit my-20 md:mt-0 lg:my-50">
+      <div className="second-section container mx-auto h-fit my-25 md:mt-0 lg:mt-50 lg:mb-70">
         <div className="grid lg:grid-cols-12 h-fit">
           <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
           <p className="text-sm lg:text-lg content-center place-self-center px-auto mt-10 ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>
@@ -196,12 +196,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="third-section container flex mx-auto h-fit w-fit content-center place-self-center md:mt-60 landscape:mt-80 landscape:mb-120 sm:landscape:my-0">
+      <div className="third-section container flex mx-auto h-fit w-fit content-center place-self-center landscape:mt-80 landscape:mb-120 sm:landscape:my-0 lg:mt-60">
        < WorkCards />
       </div>
-      {/* <div className="fourth-section container flex mx-auto h-screen w-fit content-center place-self-center">
-       < ContactSection />
-      </div> */}
     </main>
   );
 }
