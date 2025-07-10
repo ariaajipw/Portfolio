@@ -249,6 +249,8 @@ const WorkCards: React.FC = () => {
           <div className="text-center mt-10">
             <Link 
               href="https://github.com/ariaajipw"
+              target="_blank"
+              rel="noopener noreferrer"
               className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[80px] sm:mx-[205px] md:mx-[278px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
             >
               See All Projects

@@ -25,7 +25,7 @@ export default function BlogPage() {
     <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] lg:gap-x-[30px] h-screen">
 
       <div className="flex col-span-1 h-full lg:px-10 justify-center">
-        <div className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] mb-8 content-center items-center">Blog</div>
+        <div className="font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl leading-[150%] mb-8 content-center items-center">This is a platform for living story of ideas and experiences, & space for thoughtful reflection.</div>
       </div>
 
       <div className="col-span-1 h-full content-center overflow-hidden">

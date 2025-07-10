@@ -34,7 +34,7 @@ export default function BlogPostPage({ params }: any) {
   }
 
   return (
-    <article className="max-w-4xl mx-auto p-4 mt-[30px] h-screen">
+    <article className="max-w-4xl mx-auto p-4 my-[50px] max-screen">
       <header className="mb-8">
         <h1 className="text-4xl font-bold mb-2 dark:text-white">{post.title}</h1>
         <p className="text-gray-700 mb-2 dark:text-gray-300">

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 // Definisikan tipe untuk panel contents
 type PanelContent = {
@@ -23,33 +24,35 @@ export default function About() {
     0: (
       <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
         <h3 className="font-bold mb-2"></h3>
-        <span className="">
+        <span className="font-bold">
               {" "}
               A front-end developer obsessed with creating digital experiences
               that truly 'click'.
-            </span>{" "}
-            <span className="font-bold">
-              Currently geeking out over React, Next.js, Tailwind CSS, and
-              Shopify – learning hands-on through daily projects.
             </span>{" "}
             <span className="">
               My experience is still growing, but my mission is clear: turn code
               into solutions.
             </span>{" "}
-            Give me creative challenges, and I'll pour my energy into building
-            genuinely useful and enjoyable things.{" "}
             <span className="font-bold">
+              Currently geeking out in React, Next.js, Tailwind CSS, & Shopify – learning hands-on through daily projects. 
+            </span>{" "}   
+            <span className="">
               I'm here to grow, make an impact, and create work that resonates.
-            </span>
+            </span>       
+            <span className="font-bold"> Give me creative challenges, and I'll pour my energy into building
+            genuinely useful and enjoyable things.</span>{" "}
+            
       </div>
     ),
     1: (
       <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
         <h3 className="font-bold mb-2">Career Experience</h3>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Frontend Developer at Company A (2020-2022)</li>
-          <li>Web Developer Intern at Company B (2019-2020)</li>
-          <li>Freelance Web Projects (2018-present)</li>
+          <li>Frontend Developer Intern <br /> <span className="opacity opacity-50">at Hubton Indonesia </span><br />  <span className="opacity opacity-50">(2024-2025)</span></li>
+          <li>Freelance Web Projects <br /> <span className="opacity opacity-50">(2023-present)</span></li>
+          <br />
+          <br />
+          <br />
         </ul>
       </div>
     ),
@@ -57,9 +60,13 @@ export default function About() {
       <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
         <h3 className="font-bold mb-2">Education</h3>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Bachelor of Computer Science - University X (2016-2020)</li>
-          <li>Web Development Bootcamp - Coding Academy</li>
-          <li>Advanced React Certification</li>
+          <li>Web Development Bootcamp <br /> <span className="opacity opacity-50">Udemy</span></li>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </ul>
       </div>
     ),
@@ -67,23 +74,36 @@ export default function About() {
       <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
         <h3 className="font-bold mb-2">Open Source Contributions</h3>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Contributed to React Community Projects</li>
-          <li>Created Tailwind CSS plugins</li>
-          <li>Maintainer of Shopify starter kit</li>
+          <li><Link 
+              href="https://github.com/ariaajipw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70"
+            >
+              https://github.com/ariaajipw
+            </Link></li>
+            <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </ul>
       </div>
     ),
   };
 
   return (
-            <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start px-[20px] md:pt[49px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] min-h-dvh mb-18">
+            <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start px-[20px] md:pt[49px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:px-[100px] 2xl:px-[220px] lg:gap-x-[30px] min-h-dvh mb-18">
       <div className="flex col-span-1 h-full justify-center">
-        <div className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] content-center">
+        <div className="content-center">
           <img
             src="assets/img/ariaaji.jpg"
             alt="ariaaji"
             className="w-full h-full object-cover"
-            style={{ width: "200%", height: "50%" }}
+            style={{ width: "200%", height: "50%", objectPosition: '50% 30%', transform: 'scale(1)',
+      transformOrigin: 'center',}}
           />
         </div>
       </div>

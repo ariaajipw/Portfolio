@@ -133,7 +133,7 @@ export default function Home() {
       <div className="second-section container mx-auto h-fit my-25 md:mt-0 lg:mt-50 lg:mb-70">
         <div className="grid lg:grid-cols-12 h-fit">
           <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
-          <p className="text-sm lg:text-lg content-center place-self-center px-auto mt-10 ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, specializing in React, Next.js, Tailwind CSS, & Shopify.</p>
+          <p className="text-sm lg:text-lg content-center place-self-center px-auto mt-10 ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, geeking out over current best practices and technologies for developing websites.</p>
             < BlurText 
              text="Aria Aji"
              delay={300}
