@@ -22,6 +22,7 @@ export default function BlogPage() {
     //   </div>
     // </div>
     // </main>
+    // test
     <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] lg:gap-x-[30px] h-screen">
 
       <div className="flex col-span-1 h-full lg:px-10 justify-center">

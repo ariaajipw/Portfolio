@@ -112,14 +112,14 @@ const Header = () => {
           >
             About
           </Link>
-          <Link 
+          {/* <Link 
             href="/services" 
             className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
               pathname === '/services' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
             }`}
           >
             Services
-          </Link>
+          </Link> */}
           <Link 
             href="/contact" 
             className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
