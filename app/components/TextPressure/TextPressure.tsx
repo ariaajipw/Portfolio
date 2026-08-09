@@ -41,7 +41,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
     strokeColor = '#FF0000',
     strokeWidth = 2,
     className = '',
-    minFontSize = 300,
+    minFontSize = 24,
     darkMode = false,
     darkTextColor = '#FFFFFF',
     darkStrokeColor = '#00FFFF',
@@ -70,21 +70,10 @@ const TextPressure: React.FC<TextPressureProps> = ({
     };
 
     const updateResponsiveMinFontSize = () => {
-        const width = window.innerWidth;
+        const el = containerRef.current;
+        const width = el ? el.offsetWidth : window.innerWidth;
 
-        if (width >= 1536) {
-            setResponsiveMinFontSize(400);
-        } else if (width >= 1280) {
-            setResponsiveMinFontSize(350);
-        } else if (width >= 1024) {
-            setResponsiveMinFontSize(280);
-        } else if (width >= 768) {
-            setResponsiveMinFontSize(200);
-        } else if (width >= 640) {
-            setResponsiveMinFontSize(150);
-        } else {
-            setResponsiveMinFontSize(130);
-        }
+        setResponsiveMinFontSize(Math.max(16, Math.round(width * 0.075)));
     };
 
     useEffect(() => {
