@@ -1,31 +1,41 @@
-import ContactSection from "../components/Contact/contact"
+import ContactSection from "../components/Contact/contact";
 
-export default function About() {
+export default function ContactPage() {
   return (
-    <main>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] h-screen">
-
-      {/* <div className="col-span-1 sm:col-span-2  mt-[30px] flex w-full flex-col space-y-2.5 leading-[130%] font-normal">
-        <div>Hero Image</div>
-      </div> */}
-
-      <div className="flex col-span-1 h-full items-start sm:items-center">
-        <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-4xl lg:text-5xl xl:max-w-[971px] 2xl:max-w-[1290px]">
-            Lorem, ipsum dolor. <span className="font-bold">Lorem ipsum dolor sit amet.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum..</span>
+    <main className="overflow-x-hidden">
+      <header className="px-6 pt-28 sm:pt-36">
+        <p className="text-xs uppercase tracking-[0.35em] text-[#FA6B48] text-center mb-6">
+          Get in touch
         </p>
-      </div>
+        <h1 className="text-center font-bold uppercase leading-none tracking-tight text-[clamp(3.5rem,11vw,11rem)] whitespace-nowrap">
+          Contact
+        </h1>
+        <div className="mx-auto mt-8 h-px w-full max-w-[min(60rem,80vw)] bg-gray-300 dark:bg-gray-700" />
+      </header>
 
-      <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
-        <div className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] content-center">Contact</div>
-      </div>
-      </div>
+      <section className="mx-auto max-w-2xl px-6 py-14 text-center">
+        <p className="text-lg sm:text-xl leading-relaxed text-gray-700 dark:text-gray-300">
+          Have a project in mind — or just want to say hi?{" "}
+          <span className="font-bold text-[#FA6B48]">
+            Let&apos;s build something useful together.
+          </span>
+        </p>
 
+        <a
+          href="mailto:ariaajipw@gmail.com"
+          className="mt-9 inline-block border-2 border-gray-900 dark:border-gray-100 px-8 py-3 font-bold uppercase tracking-[0.2em] text-sm transition-colors hover:bg-[#FA6B48] hover:border-[#FA6B48] hover:text-black"
+        >
+          ariaajipw@gmail.com
+        </a>
 
-      <div className="container flex mx-auto my-20 w-fit content-center place-self-center">
-        < ContactSection />
-      </div>
+        <p className="mt-5 text-xs text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em]">
+          Replies within a day — usually faster
+        </p>
+      </section>
+
+      <section className="mx-auto max-w-4xl px-6 pb-24">
+        <ContactSection />
+      </section>
     </main>
-
-  )
+  );
 }
