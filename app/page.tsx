@@ -11,7 +11,7 @@ export default function Home() {
   
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="hero-section container flex mx-auto min-h-dvh w-fit content-center place-self-center pt-2">
+      <div className="hero-section container flex mx-auto min-h-dvh w-full content-center place-self-center pt-2">
         {/* mobile for vertical */}
         <div className="relative h-fit content-center place-self-center w-fit sm:hidden">
              <TextPressure
@@ -97,7 +97,7 @@ export default function Home() {
         </div>
         
         {/* Desktop */}
-        <div className="relative h-fit content-center place-self-center w-fit hidden sm:block">
+        <div className="relative h-fit content-center place-self-center w-full max-w-[90vw] mx-auto px-6 hidden sm:block">
              <TextPressure
           text="_Combine_Ideas,_"
           flex={true}
@@ -108,7 +108,6 @@ export default function Home() {
           italic={false}
           textColor="#00000"
           strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000 underline-offset-auto'
           colorCycle={colorCycle}
           colorCycleDuration={2000}
         />
