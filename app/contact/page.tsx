@@ -12,12 +12,20 @@ export default function About() {
 
       <div className="flex col-span-1 h-full items-start sm:items-center">
         <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-4xl lg:text-5xl xl:max-w-[971px] 2xl:max-w-[1290px]">
-            Lorem, ipsum dolor. <span className="font-bold">Lorem ipsum dolor sit amet.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum..</span>
+          Have a project in mind, or just want to say hi? <span className="font-bold">Let&apos;s build something useful together.</span> Send me a message — I usually reply within a day.
         </p>
       </div>
 
       <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
         <div className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] content-center">Contact</div>
+      </div>
+      <div className="col-span-1 sm:col-span-2 text-center mt-4">
+        <a
+          href="mailto:ariaajipw@gmail.com"
+          className="inline-block border border-black dark:border-white p-3 rounded-full bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] dark:hover:text-black transition-colors"
+        >
+          ariaajipw@gmail.com
+        </a>
       </div>
       </div>
 
