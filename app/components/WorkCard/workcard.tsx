@@ -1,44 +1,31 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 
 const works = [
   {
     id: 1,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    thumbnail: "/api/screenshot?url=https%3A%2F%2Fdev.hubton.com%2F&width=1600&height=900",
     title: "Hubton",
-    subtitle: "Intern as web developer at Hubton Indonesia, focused on front-end side.",
+    subtitle: "Frontend Developer Intern — build & maintain features for the Hubton platform.",
   },
   {
     id: 2,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Sajua Brewery",
-    subtitle: "Build e-commerce website.",
+    thumbnail: "/api/screenshot?url=https%3A%2F%2Fariaaji.netlify.app%2F&width=1600&height=900",
+    title: "Portfolio",
+    subtitle: "Design-focused portfolio built with Next.js, Tailwind CSS & custom motion components.",
   },
   {
     id: 3,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    thumbnail: "/api/screenshot?url=https%3A%2F%2Fariaaji.netlify.app%2Fblog&width=1600&height=900",
+    title: "Blog",
+    subtitle: "MDX-powered blog sharing write-ups, experiments & lessons learned.",
   },
   {
     id: 4,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-  },
-   {
-    id: 5,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-  },
-  {
-    id: 6,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    thumbnail: "/api/screenshot?url=https%3A%2F%2Fgithub.com%2Fariaajipw&width=1600&height=900",
+    title: "Open Source",
+    subtitle: "Freelance builds & coding experiments, released publicly when possible.",
   },
 ];
 
@@ -244,19 +231,6 @@ const WorkCards: React.FC = () => {
           ))}
         </div>
       </div>
-      {/* Tombol See All jika ada lebih dari 4 works */}
-        {works.length > 4 && (
-          <div className="text-center mt-10">
-            <Link 
-              href="https://github.com/ariaajipw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[80px] sm:mx-[205px] md:mx-[278px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
-            >
-              See All Projects
-            </Link>
-          </div>
-        )}
     </div>
   );
 };
