@@ -1,0 +1,2734 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+app/
+  about/
+    team/
+      page.tsx
+    page.tsx
+  blog/
+    [slug]/
+      page.tsx
+    layout.tsx
+    page.tsx
+  components/
+    BlurText/
+      BlurText.tsx
+    Contact/
+      contact.tsx
+    FallingText/
+      FallingText.tsx
+    Footer/
+      footer.tsx
+    Header/
+      header.tsx
+    MarkdownContent/
+      MarkdownContent.tsx
+    PixelTransition/
+      PixelTransition.tsx
+    TextPressure/
+      TextPressure.tsx
+    WorkCard/
+      workcard.tsx
+  contact/
+    page.tsx
+  fonts/
+    GeistMonoVF.woff
+    GeistVF.woff
+  posts/
+    data.ts
+  services/
+    page.tsx
+  favicon.ico
+  globals.css
+  layout.tsx
+  page.tsx
+public/
+  assets/
+    img/
+      ariaaji.jpg
+      day-and-night.png
+      dev.hubton.png
+      IMG-20220112-WA0009 (1).jpg:Zone.Identifier
+      name.png
+      name.png:Zone.Identifier
+      night-and-day.png
+      peacock-black.png
+      peacock-logo.png
+      peacock-white.png
+      peacock.png
+      sun.png
+.gitignore
+next.config.mjs
+package.json
+postcss.config.mjs
+README.md
+tailwind.config.js
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="app/about/team/page.tsx">
+export default function About() {
+  return (<main className="min-h-screen overflow-x-hidden">
+    <div className="hero-section container flex mx-auto h-screen w-fit content-center place-self-center">
+    </div>
+    <div className="second-section container mx-auto h-screen">
+      <div className="grid lg:grid-cols-12 h-screen">
+      </div>
+    </div>
+  </main>)
+}
+</file>
+
+<file path="app/blog/layout.tsx">
+import React from "react";
+
+export default function AdminLayout ({ children,}:{
+  children: React.ReactNode;
+}) {
+  return (
+    <main>
+      <header>
+        Admin Layout
+      </header>
+      {children}
+    </main>
+  )
+}
+</file>
+
+<file path="app/components/MarkdownContent/MarkdownContent.tsx">
+'use client';
+import { marked } from 'marked';
+import { useEffect, useState } from 'react';
+
+export default function MarkdownContent({ content }: { content: string }) {
+  const [html, setHtml] = useState('');
+
+  useEffect(() => {
+    // Versi paling kompatibel
+    const parseMarkdown = async () => {
+      const parsed = await marked.parse(content);
+      setHtml(parsed);
+    };
+    
+    parseMarkdown();
+  }, [content]);
+
+  return (
+    <div 
+      className="prose max-w-none" 
+      dangerouslySetInnerHTML={{ __html: html }} 
+    />
+  );
+}
+</file>
+
+<file path="public/assets/img/IMG-20220112-WA0009 (1).jpg:Zone.Identifier">
+[ZoneTransfer]
+ZoneId=3
+HostUrl=https://drive.usercontent.google.com/download?id=1HoVPJRkBMbNK0QC15OZPePD9S4Pdr3dA&export=download&authuser=0&confirm=t&uuid=b32443b8-e476-4e0b-b87a-53ff726dd662&at=APvzH3rBbj9JlmBzCUNNtdiZQide:1733626517405
+</file>
+
+<file path="public/assets/img/name.png:Zone.Identifier">
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://www.flaticon.com/search?word=internship&shape=fill
+HostUrl=about:internet
+</file>
+
+<file path=".gitignore">
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+</file>
+
+<file path="README.md">
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+</file>
+
+<file path="app/components/FallingText/FallingText.tsx">
+'use client'
+
+import { useRef, useState, useEffect } from "react";
+import Matter from "matter-js";
+
+interface FallingTextProps {
+  text?: string;
+  highlightWords?: string[];
+  trigger?: "auto" | "scroll" | "click" | "hover";
+  backgroundColor?: string;
+  wireframes?: boolean;
+  gravity?: number;
+  mouseConstraintStiffness?: number;
+  fontSize?: string;
+}
+
+const FallingText: React.FC<FallingTextProps> = ({
+  text = "",
+  highlightWords = [],
+  trigger = "auto",
+  backgroundColor = "transparent",
+  wireframes = false,
+  gravity = 1,
+  mouseConstraintStiffness = 0.2,
+  fontSize = "1rem",
+}) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const textRef = useRef<HTMLDivElement | null>(null);
+  const canvasContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const [effectStarted, setEffectStarted] = useState(false);
+
+  useEffect(() => {
+    if (!textRef.current) return;
+    const words = text.split(" ");
+
+    const newHTML = words
+      .map((word) => {
+        const isHighlighted = highlightWords.some((hw) => word.startsWith(hw));
+        return `<span
+          class="inline-block mx-[2px] select-none ${
+            isHighlighted ? "text-cyan-500 font-bold" : ""
+          }"
+        >
+          ${word}
+        </span>`;
+      })
+      .join(" ");
+
+    textRef.current.innerHTML = newHTML;
+  }, [text, highlightWords]);
+
+  useEffect(() => {
+    if (trigger === "auto") {
+      setEffectStarted(true);
+      return;
+    }
+    if (trigger === "scroll" && containerRef.current) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setEffectStarted(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.1 },
+      );
+      observer.observe(containerRef.current);
+      return () => observer.disconnect();
+    }
+  }, [trigger]);
+
+  useEffect(() => {
+    if (!effectStarted) return;
+
+    const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } =
+      Matter;
+
+    if (!containerRef.current || !canvasContainerRef.current) return;
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const width = containerRect.width;
+    const height = containerRect.height;
+
+    if (width <= 0 || height <= 0) return;
+
+    const engine = Engine.create();
+    engine.world.gravity.y = gravity;
+
+    const render = Render.create({
+      element: canvasContainerRef.current,
+      engine,
+      options: {
+        width,
+        height,
+        background: backgroundColor,
+        wireframes,
+      },
+    });
+
+    const boundaryOptions = {
+      isStatic: true,
+      render: { fillStyle: "transparent" },
+    };
+    const floor = Bodies.rectangle(
+      width / 2,
+      height + 25,
+      width,
+      50,
+      boundaryOptions,
+    );
+    const leftWall = Bodies.rectangle(
+      -25,
+      height / 2,
+      50,
+      height,
+      boundaryOptions,
+    );
+    const rightWall = Bodies.rectangle(
+      width + 25,
+      height / 2,
+      50,
+      height,
+      boundaryOptions,
+    );
+    const ceiling = Bodies.rectangle(
+      width / 2,
+      -25,
+      width,
+      50,
+      boundaryOptions,
+    );
+
+    if (!textRef.current) return;
+    const wordSpans = textRef.current.querySelectorAll("span");
+    const wordBodies = [...wordSpans].map((elem) => {
+      const rect = elem.getBoundingClientRect();
+
+      const x = rect.left - containerRect.left + rect.width / 2;
+      const y = rect.top - containerRect.top + rect.height / 2;
+
+      const body = Bodies.rectangle(x, y, rect.width, rect.height, {
+        render: { fillStyle: "transparent" },
+        restitution: 0.8,
+        frictionAir: 0.01,
+        friction: 0.2,
+      });
+      Matter.Body.setVelocity(body, {
+        x: (Math.random() - 0.5) * 5,
+        y: 0,
+      });
+      Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.05);
+
+      return { elem, body };
+    });
+
+    wordBodies.forEach(({ elem, body }) => {
+      elem.style.position = "absolute";
+      elem.style.left = `${
+        body.position.x - body.bounds.max.x + body.bounds.min.x / 2
+      }px`;
+      elem.style.top = `${
+        body.position.y - body.bounds.max.y + body.bounds.min.y / 2
+      }px`;
+      elem.style.transform = "none";
+    });
+
+    const mouse = Mouse.create(containerRef.current);
+    const mouseConstraint = MouseConstraint.create(engine, {
+      mouse,
+      constraint: {
+        stiffness: mouseConstraintStiffness,
+        render: { visible: false },
+      },
+    });
+    render.mouse = mouse;
+
+    World.add(engine.world, [
+      floor,
+      leftWall,
+      rightWall,
+      ceiling,
+      mouseConstraint,
+      ...wordBodies.map((wb) => wb.body),
+    ]);
+
+    const runner = Runner.create();
+    Runner.run(runner, engine);
+    Render.run(render);
+
+    const updateLoop = () => {
+      wordBodies.forEach(({ body, elem }) => {
+        const { x, y } = body.position;
+        elem.style.left = `${x}px`;
+        elem.style.top = `${y}px`;
+        elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
+      });
+      Matter.Engine.update(engine);
+      requestAnimationFrame(updateLoop);
+    };
+    updateLoop();
+
+    return () => {
+      Render.stop(render);
+      Runner.stop(runner);
+      if (render.canvas && canvasContainerRef.current) {
+        canvasContainerRef.current.removeChild(render.canvas);
+      }
+      World.clear(engine.world, false);
+      Engine.clear(engine);
+    };
+  }, [
+    effectStarted,
+    gravity,
+    wireframes,
+    backgroundColor,
+    mouseConstraintStiffness,
+  ]);
+
+  const handleTrigger = () => {
+    if (!effectStarted && (trigger === "click" || trigger === "hover")) {
+      setEffectStarted(true);
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative z-[1] w-full h-full cursor-pointer text-center pt-5 overflow-hidden"
+      onClick={trigger === "click" ? handleTrigger : undefined}
+      onMouseEnter={trigger === "hover" ? handleTrigger : undefined}
+    >
+      <div
+        ref={textRef}
+        className="inline-block"
+        style={{
+          fontSize,
+          lineHeight: 1.4,
+        }}
+      />
+
+      <div className="absolute top-0 left-0 z-0" ref={canvasContainerRef} />
+    </div>
+  );
+};
+
+export default FallingText;
+</file>
+
+<file path="next.config.mjs">
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+};
+
+export default nextConfig;
+</file>
+
+<file path="postcss.config.mjs">
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+};
+
+export default config;
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "target": "ES2017"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+</file>
+
+<file path="app/components/BlurText/BlurText.tsx">
+"use client"
+
+import { useRef, useEffect, useState, ReactNode } from 'react';
+import { useSprings, animated, SpringValue } from '@react-spring/web';
+import type { AnimatedComponent } from '@react-spring/web';
+
+interface BlurTextProps {
+  text?: string;
+  delay?: number;
+  className?: string;
+  animateBy?: 'words' | 'letters';
+  direction?: 'top' | 'bottom';
+  threshold?: number;
+  rootMargin?: string;
+  animationFrom?: Record<string, any>;
+  animationTo?: Record<string, any>[];
+  easing?: (t: number) => number | string;
+  onAnimationComplete?: () => void;
+  children?: ReactNode; // TAMBAHAN
+}
+
+const BlurText: React.FC<BlurTextProps> = ({
+  text = '',
+  delay = 200,
+  className = '',
+  animateBy = 'words',
+  direction = 'top',
+  threshold = 0.1,
+  rootMargin = '0px',
+  animationFrom,
+  animationTo,
+  easing = 'easeOutCubic',
+  onAnimationComplete,
+  children,
+}) => {
+  const content = text || (typeof children === 'string' ? children : '');
+  const elements = animateBy === 'words' ? content.split(' ') : content.split('');
+  const [inView, setInView] = useState(false);
+  const ref = useRef<HTMLParagraphElement>(null);
+  const animatedCount = useRef(0);
+
+  // Default animations based on direction
+  const defaultFrom: Record<string, any> = direction === 'top'
+    ? { filter: 'blur(10px)', opacity: 0, transform: 'translate3d(0,-50px,0)' }
+    : { filter: 'blur(10px)', opacity: 0, transform: 'translate3d(0,50px,0)' };
+  
+  const defaultTo: Record<string, any>[] = [
+    {
+      filter: 'blur(5px)',
+      opacity: 0.5,
+      transform: direction === 'top' ? 'translate3d(0,5px,0)' : 'translate3d(0,-5px,0)',
+    },
+    { filter: 'blur(0px)', opacity: 1, transform: 'translate3d(0,0,0)' },
+  ];
+
+  const AnimatedSpan = animated('span') as AnimatedComponent<'span'>;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          if (ref.current) {
+            observer.unobserve(ref.current);
+          }
+        }
+      },
+      { threshold, rootMargin }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [threshold, rootMargin]);
+
+  const springs = useSprings(
+    elements.length,
+    elements.map((_, i) => ({
+      from: animationFrom || defaultFrom,
+      to: inView
+        ? async (next: (arg: Record<string, SpringValue<any>>) => Promise<void>) => {
+          for (const step of animationTo || defaultTo) {
+            await next(step);
+          }
+          animatedCount.current += 1;
+          if (animatedCount.current === elements.length && onAnimationComplete) {
+            onAnimationComplete();
+          }
+        }
+        : animationFrom || defaultFrom,
+      delay: i * delay,
+      config: { easing: easing as any },
+    }))
+  );
+
+  return (
+    <p ref={ref} className={`blur-text ${className} flex flex-wrap`}>
+      {springs.map((props, index) => (
+        <AnimatedSpan
+          key={index}
+          style={props}
+          className="inline-block transition-transform will-change-[transform,filter,opacity]"
+        >
+          {elements[index] === ' ' ? '\u00A0' : elements[index]}
+          {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
+        </AnimatedSpan>
+      ))}
+    </p>
+  );
+};
+
+export default BlurText;
+</file>
+
+<file path="tailwind.config.js">
+module.exports = {
+  darkMode: 'class',
+  purge: [],
+  theme: {
+    screens: {
+      xs: "375px",
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1440px",
+      "2xl": "1920px",
+    },
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
+}
+</file>
+
+<file path="app/posts/data.ts">
+export interface Post {
+  id: string;
+  title: string;
+  author: string;
+  date: string;
+  content: string;
+}
+
+export const posts: Post[] = [
+  {
+    id: "1",
+    title: "Getting Started Crafting a Website",
+    author: "Aria Aji",
+    date: "2025-07-10",
+    content: "# Embrace the Journey \n\n The path to becoming a web developer is equal parts exciting and overwhelming, especially at the beginning. You’ll face moments of frustration, but every challenge is a chance to grow your problem-solving muscles. Start by acknowledging that confusion is normal—even seasoned developers Google daily questions! What matters most is your curiosity and willingness to experiment. Welcome to a field where lifelong learning isn’t optional; it’s the core of the craft. \n\n Build Your Foundation \n\n Begin with the absolute basics: HTML for structure, CSS for styling, and JavaScript for interactivity. Free resources like freeCodeCamp, MDN Web Docs, or Codecademy offer structured, hands-on tutorials to solidify these skills. Don’t rush—master positioning elements with CSS before jumping into frameworks like React. Use tools like VS Code and Chrome DevTools early; they’ll become your daily companions. Consistency beats intensity: code for 30 minutes daily rather than 8 hours once a week. \n\n Create, Don’t Just Consume \n\n Tutorials are helpful, but real growth happens when you build projects you design. Start tiny: a personal bio page, a recipe card, or a calculator. When stuck, break problems into micro-tasks (e.g., “How do I center this button?” instead of “How do I build a full app?”). Share your work on GitHub—it’s your developer resume. Embrace ugly first drafts; refactoring is where magic happens.\n\n Join the Community \n\n Web development thrives on collaboration, so engage with others from day one. Ask questions on Stack Overflow, join Discord groups like The Odin Project, or follow devs on Twitter/X. Attend local meetups or online events; hearing others’ struggles normalizes your own. Remember, every developer’s journey looks different—avoid comparing your Chapter 1 to someone’s Chapter 20. Your unique voice and perspective belong here."
+  },
+  {
+    id: "2",
+    title: "TypeScript Best Practices",
+    author: "John Smith",
+    date: "2023-06-20",
+    content: "# TypeScript Tips\n\nHere are some useful TypeScript patterns..."
+  }
+];
+</file>
+
+<file path="app/blog/page.tsx">
+import Link from 'next/link';
+import { posts } from '../posts/data';
+
+export default function BlogPage() {
+  return (
+    // <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] h-screen">
+    // <div className="max-w-3xl mx-auto p-4">
+    //   <h1 className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[180px] mb-8">Blog</h1>
+      
+    //   <div className="space-y-9 mt-[100px]">
+    //     {posts.map((post) => (
+    //       <Link 
+    //       key={post.id} 
+    //       href={`/blog/${post.id}`}
+    //       className="block p-2 border-4 border-gray-400 rounded-lg hover:bg-orange-800 transition">
+    //         <div className="p-4 border-2 border-gray-600 rounded-lg hover:bg-[#FA6B48]">
+    //           <h2 className="text-xl font-semibold">{post.title}</h2>
+    //           <p className="text-gray-500 text-sm">{post.date}</p>
+    //         </div>
+    //       </Link>
+    //     ))}
+    //   </div>
+    // </div>
+    // </main>
+    // test
+    <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] lg:gap-x-[30px] h-screen">
+
+      <div className="flex col-span-1 h-full lg:px-10 justify-center">
+        <div className="font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl leading-[150%] mb-8 content-center items-center">This is a platform for living story of ideas and experiences, & space for thoughtful reflection.</div>
+      </div>
+
+      <div className="col-span-1 h-full content-center overflow-hidden">
+        <div className="h-full overflow-y-auto space-y-8 pr-2 scroll-custom content-start sm:content-center">
+            {posts.map((post) => (
+              <Link 
+              key={post.id} 
+              href={`/blog/${post.id}`}
+              className="block p-2 border-4 border-gray-600 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition">
+                <div className="p-4 border-2 border-gray-400 rounded-lg hover:bg-[#FA6B48]">
+                  <h2 className=" text-xl font-semibold">{post.title}</h2>
+                  <p className="text-gray-500 text-sm">{post.date}</p>
+                </div>
+              </Link>
+            ))}
+        </div>
+      </div>
+
+    </main> 
+  );
+}
+
+{/* <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] h-screen">
+
+<div className="flex col-span-1 h-full lg:px-10 justify-center align-middle">
+  <h1 className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[180px] mb-8">Blog</h1>
+</div>
+
+<div className="flex col-span-1 h-full items-center">
+  <<div className="space-y-9 mt-[100px]">
+        {posts.map((post) => (
+          <Link 
+          key={post.id} 
+          href={`/blog/${post.id}`}
+          className="block p-2 border-4 border-gray-400 rounded-lg hover:bg-orange-800 transition">
+            <div className="p-4 border-2 border-gray-600 rounded-lg hover:bg-[#FA6B48]">
+              <h2 className="text-xl font-semibold">{post.title}</h2>
+              <p className="text-gray-500 text-sm">{post.date}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+</div>
+
+</main>  */}
+</file>
+
+<file path="app/components/Contact/contact.tsx">
+'use client'
+
+import React from "react";
+
+const Contact: React.FC = () => {
+  const contacts = {
+    address: "Jl. Terusan Prof. DR. Sutami No.23, Sarijadi, Kec. Sukasari, Bandung, Jawa Barat 40151 Indonesia",
+    phone: "+6282120623351",
+    email: "ariaajipw@gmail.com"
+  };
+
+  // Functions to handle clicks
+  const openGoogleMaps = () => {
+    const encodedAddress = encodeURIComponent(contacts.address);
+    window.open(`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`, '_blank');
+  };
+
+  const openWhatsApp = () => {
+    const cleanPhone = contacts.phone.replace(/\D/g, '');
+    const message = encodeURIComponent("Halo, I would like to ask about...");
+    window.open(`https://wa.me/${cleanPhone}?text=${message}`, '_blank');
+  };
+
+  const openEmail = () => {
+    const subject = encodeURIComponent("Pertanyaan atau Pesan");
+    const body = encodeURIComponent(
+      "Halo,\n\nI would like to ask about...\n\nThank You,\n[Your Name]"
+    );
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=${contacts.email}&su=${subject}&body=${body}`,
+      '_blank'
+    );
+  };
+  
+  return (
+    <div className="container mx-auto px-4 py-8 w-full">
+      {/* <h1 className="text-3xl lg:text-5xl font-bold text-center mt-10 mb-18">Contact</h1> */}
+      <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          {/* Alamat */}
+          <div onClick={openGoogleMaps} className="p-6 rounded-lg text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
+            <div className="flex justify-center items-center mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 text-[#FA6B48]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Address</h3>
+            <p className="text-xs">
+              Jl. Terusan Prof. DR. Sutami No.23, <br></br>Sarijadi, Kec. Sukasari, 40151, <br></br>Bandung, West Java, Indonesia
+            </p>
+          </div>
+
+          {/* Nomor Telepon */}
+          <div onClick={openWhatsApp} className="p-6 rounded-lg text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
+            <div className="flex justify-center items-center mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 text-[#FA6B48]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d=""
+                  // d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Phone Number</h3>
+            <p className="text-xs">
+            +62 8212 062 3351
+            </p>
+          </div>
+
+          {/* Email */}
+          <div onClick={openEmail} className="p-6 rounded-lg text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
+            <div className="flex justify-center items-center mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 text-[#FA6B48]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Email</h3>
+            <p className="text-xs">ariaajipw@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  );
+};
+
+export default Contact;
+</file>
+
+<file path="app/contact/page.tsx">
+import ContactSection from "../components/Contact/contact"
+
+export default function About() {
+  return (
+    <main>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] h-screen">
+
+      {/* <div className="col-span-1 sm:col-span-2  mt-[30px] flex w-full flex-col space-y-2.5 leading-[130%] font-normal">
+        <div>Hero Image</div>
+      </div> */}
+
+      <div className="flex col-span-1 h-full items-start sm:items-center">
+        <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-4xl lg:text-5xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+            Lorem, ipsum dolor. <span className="font-bold">Lorem ipsum dolor sit amet.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum..</span>
+        </p>
+      </div>
+
+      <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
+        <div className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] content-center">Contact</div>
+      </div>
+      </div>
+
+
+      <div className="container flex mx-auto my-20 w-fit content-center place-self-center">
+        < ContactSection />
+      </div>
+    </main>
+
+  )
+}
+</file>
+
+<file path="app/services/page.tsx">
+// export default function About() {
+//   return (
+//     <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] h-screen">
+
+//       {/* <div className="col-span-1 sm:col-span-2  mt-[30px] flex w-full flex-col space-y-2.5 leading-[130%] font-normal">
+//         <div>Hero Image</div>
+//       </div> */}
+
+//       <div className="flex col-span-1 h-full items-start sm:items-center">
+//         <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-4xl lg:text-5xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+//           Lorem, ipsum dolor. <span className="font-bold">Lorem ipsum dolor sit amet.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum..</span>
+//         </p>
+//       </div>
+
+//       <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
+//         <div className="font-bold text-7xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] content-center">Services</div>
+//       </div>
+      
+      
+
+//     </main>
+//   )
+// }
+</file>
+
+<file path="app/globals.css">
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@layer utilities {
+  :root {
+    --background: #ffffff;
+    --foreground: #000000;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #000000;
+      --foreground: #ffffff;
+    }
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    display: block;
+  }
+  .scroll-custom::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .scroll-custom::-webkit-scrollbar-track {
+    @apply bg-gray-200 dark:bg-gray-700;
+  }
+  
+  .scroll-custom::-webkit-scrollbar-thumb {
+    @apply bg-[#FA6B48] rounded-full;
+  }
+  
+  .scroll-custom::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#FA6B48]/90;
+  }
+}
+</file>
+
+<file path="app/components/Footer/footer.tsx">
+'use client'
+
+import Link from "next/link";
+
+const socials = [
+  { id: 1, name: "GitHub", url: "https://github.com/ariaajipw" },
+  { id: 2, name: "LinkedIn", url: "https://linkedin.com/in/aria-aji" },
+  { id: 3, name: "X", url: "https://x.com/ariaajipw" },
+  { id: 4, name: "Instagram", url: "https://instagram.com/ariaaji" }
+];
+
+const Footer = () => {
+  return (
+    <footer className="bg-white dark:bg-[#0a0a0a] mt-auto">
+      <div className="container mx-auto py-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-[20px]">
+          {/* Bagian 1: Tentang Kami */}
+          <div>
+
+          <div className="group">
+            {/* <h3 className="text-[16px] sm:text-lg font-semibold text-gray-800 dark:text-white underline underline-offset-2">
+              Lorem, ipsum dolor.
+            </h3>
+            <img src="/assets/img/peacock-black.png" alt="" className="w-[40px]"/> */}
+            <a href="/" className='flex'><span className='hover:text-[#FA6B48] underline underline-offset-5 text-3xl font-bold'>Perkasa Wibowo</span><img src="/assets/img/peacock-black.png" alt="" className='w-[60px] hidden group-hover:block dark:hidden dark:group-hover:hidden'/><img src="/assets/img/peacock-white.png" alt="" className='w-[60px] hidden group-hover:block dark:hidden'/></a>
+          </div>
+            <p className="text-sm mt-4 text-gray-600 dark:text-gray-300">
+            Bandung,<br></br>Jl. Terusan Prof. DR. Sutami No. 23, <br></br>Sarijadi, Kec. Sukasari,<br></br>Jawa Barat 40151<br></br>Indonesia.
+            </p>
+          </div>
+
+          {/* Bagian 2: Quick Links */}
+          <div>
+            {/* <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+              Tautan Cepat
+            </h3> */}
+            <ul className="mt-4 space-y-2 flex gap-9 text-sm">
+              <li>
+                <Link
+                  href="/about"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  Blog
+                </Link>
+              </li>
+            </ul>
+
+            {/* Bagian 3: Social Media */}
+            <ul className="mt-4 space-y-2 flex gap-9 text-sm">
+              {socials.map((social) => (
+                <Link
+                  key={social.id}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                    >
+                    {social.name}
+                </Link>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Hak Cipta */}
+        <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center">
+          <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-[16px]">
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+</file>
+
+<file path="app/layout.tsx">
+import type { Metadata } from "next";
+// import localFont from "next/font/local";
+import { Montserrat_Alternates } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
+import "./globals.css";
+import Header from "./components/Header/header";
+import Footer from "./components/Footer/footer";
+
+const montserrat_alternates = Montserrat_Alternates({
+  weight: '400',
+  subsets: ['latin'],
+});
+
+const jetbrains_mono = JetBrains_Mono({
+  weight: '400',
+  subsets: ['latin'],
+});
+
+export const metadata: Metadata = {
+  title: "Aria Aji",
+  description: "Portfolio",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            try {
+              const isDark = localStorage.theme === 'dark' || 
+                            (!('theme' in localStorage) && 
+                            window.matchMedia('(prefers-color-scheme: dark)').matches);
+              document.documentElement.classList.toggle('dark', isDark);
+            } catch (e) {}
+          `
+        }} />
+      </head>
+      {/* <body
+        className={`${montserrat_alternates.className} antialiased`}
+      > */}
+      <body className={`${jetbrains_mono.className} bg-white dark:bg-zinc-950 text-gray-900 dark:text-white`}
+        suppressHydrationWarning>
+        <Header />
+        {children}
+        <Footer/>
+      </body>
+    </html>
+  );
+}
+</file>
+
+<file path="app/about/page.tsx">
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
+
+// Definisikan tipe untuk panel contents
+type PanelContent = {
+  [key: number]: React.ReactNode;
+};
+
+export default function About() {
+  const [activePanel, setActivePanel] = useState<number>(0);
+
+  // Data untuk tombol toggle
+  const toggleButtons = [
+    { id: 0, title: "Bio" },
+    { id: 1, title: "Career" },
+    { id: 2, title: "Academy" },
+    { id: 3, title: "Open Source" },
+  ];
+
+  // Konten untuk setiap panel dengan tipe yang didefinisikan
+  const panelContents: PanelContent = {
+    0: (
+      <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+        <h3 className="font-bold mb-2"></h3>
+        <span className="font-bold">
+              {" "}
+              A front-end developer obsessed with creating digital experiences
+              that truly 'click'.
+            </span>{" "}
+            <span className="">
+              My experience is still growing, but my mission is clear: turn code
+              into solutions.
+            </span>{" "}
+            <span className="font-bold">
+              Currently geeking out in React, Next.js, Tailwind CSS, & Shopify – learning hands-on through daily projects. 
+            </span>{" "}   
+            <span className="">
+              I'm here to grow, make an impact, and create work that resonates.
+            </span>       
+            <span className="font-bold"> Give me creative challenges, and I'll pour my energy into building
+            genuinely useful and enjoyable things.</span>{" "}
+            
+      </div>
+    ),
+    1: (
+      <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+        <h3 className="font-bold mb-2">Career Experience</h3>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>Frontend Developer Intern <br /> <span className="opacity opacity-50">at Hubton Indonesia </span><br />  <span className="opacity opacity-50">(2024-2025)</span></li>
+          <li>Freelance Web Projects <br /> <span className="opacity opacity-50">(2023-present)</span></li>
+          <br />
+          <br />
+          <br />
+        </ul>
+      </div>
+    ),
+    2: (
+      <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+        <h3 className="font-bold mb-2">Education</h3>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>Web Development Bootcamp <br /> <span className="opacity opacity-50">Udemy</span></li>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </ul>
+      </div>
+    ),
+    3: (
+      <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+        <h3 className="font-bold mb-2">Open Source Contributions</h3>
+        <ul className="list-disc pl-5 space-y-2">
+          <li><Link 
+              href="https://github.com/ariaajipw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70"
+            >
+              https://github.com/ariaajipw
+            </Link></li>
+            <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </ul>
+      </div>
+    ),
+  };
+
+  return (
+            <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start px-[20px] md:pt[49px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:px-[100px] 2xl:px-[220px] lg:gap-x-[30px] min-h-dvh mb-18">
+      <div className="flex col-span-1 h-full justify-center">
+        <div className="content-center">
+          <img
+            src="assets/img/ariaaji.jpg"
+            alt="ariaaji"
+            className="w-full h-full object-cover"
+            style={{ width: "200%", height: "50%", objectPosition: '50% 30%', transform: 'scale(1)',
+      transformOrigin: 'center',}}
+          />
+        </div>
+      </div>
+
+      <div className="flex col-span-1 h-full items-start sm:items-center">
+        <div className="w-full">
+          {/* <p className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+            <span className="font-bold">Bio</span> <br />{" "}
+            <span className="">
+              {" "}
+              A front-end developer obsessed with creating digital experiences
+              that truly 'click'.
+            </span>{" "}
+            <span className="font-bold">
+              Currently geeking out over React, Next.js, Tailwind CSS, and
+              Shopify – learning hands-on through daily projects.
+            </span>{" "}
+            <span className="">
+              My experience is still growing, but my mission is clear: turn code
+              into solutions.
+            </span>{" "}
+            Give me creative challenges, and I'll pour my energy into building
+            genuinely useful and enjoyable things.{" "}
+            <span className="font-bold">
+              I'm here to grow, make an impact, and create work that resonates.
+            </span>
+          </p> */}
+
+          {/* Bagian Toggle */}
+          <div className="">
+            <div className="flex space-x-4 mb-4">
+              {toggleButtons.map((button) => (
+                <button
+                  key={button.id}
+                  className={`px-2 py-2 rounded-lg transition-all duration-200 text-md md:text-lg lg:text-2xl ${
+                    activePanel === button.id
+                      ? "text-gray-700 dark:text-white font-bold underline underline-offset-4"
+                      : "text-gray-700 hover:bg-gray-300 dark:text-gray-200 dark:hover:bg-gray-600 opacity-30 hover:opacity-100"
+                  }`}
+                  onClick={() => setActivePanel(button.id)}
+                >
+                  {button.title}
+                </button>
+              ))}
+            </div>
+
+            {/* Konten yang Berubah berdasarkan Toggle */}
+            <div className="toggle-content transition-opacity duration-300">
+              {panelContents[activePanel]}
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+</file>
+
+<file path="app/components/PixelTransition/PixelTransition.tsx">
+"use client";
+
+import React, { useRef, useEffect, useState, CSSProperties } from "react";
+import { gsap } from "gsap";
+
+interface PixelTransitionProps {
+  firstContent: React.ReactNode;
+  secondContent: React.ReactNode;
+  gridSize?: number;
+  pixelColor?: string;
+  animationStepDuration?: number;
+  className?: string;
+  style?: CSSProperties;
+  aspectRatio?: string;
+}
+
+const PixelTransition: React.FC<PixelTransitionProps> = ({
+  firstContent,
+  secondContent,
+  gridSize = 7,
+  pixelColor = "currentColor",
+  animationStepDuration = 0.3,
+  className = "",
+  style = {},
+  aspectRatio = "100%",
+}) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const pixelGridRef = useRef<HTMLDivElement | null>(null);
+  const activeRef = useRef<HTMLDivElement | null>(null);
+  const delayedCallRef = useRef<gsap.core.Tween | null>(null);
+
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isTouchDevice, setIsTouchDevice] = useState<boolean>(false);
+
+  // Check for touch device on the client side
+  useEffect(() => {
+    const checkTouchDevice = () => {
+      return (
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia("(pointer: coarse)").matches
+      );
+    };
+    setIsTouchDevice(checkTouchDevice());
+  }, []);
+
+  useEffect(() => {
+    const pixelGridEl = pixelGridRef.current;
+    if (!pixelGridEl) return;
+
+    pixelGridEl.innerHTML = "";
+
+    for (let row = 0; row < gridSize; row++) {
+      for (let col = 0; col < gridSize; col++) {
+        const pixel = document.createElement("div");
+        pixel.classList.add("pixelated-image-card__pixel");
+        pixel.classList.add("absolute", "hidden");
+        pixel.style.backgroundColor = pixelColor;
+
+        const size = 100 / gridSize;
+        pixel.style.width = `${size}%`;
+        pixel.style.height = `${size}%`;
+        pixel.style.left = `${col * size}%`;
+        pixel.style.top = `${row * size}%`;
+
+        pixelGridEl.appendChild(pixel);
+      }
+    }
+  }, [gridSize, pixelColor]);
+
+  const animatePixels = (activate: boolean): void => {
+    setIsActive(activate);
+
+    const pixelGridEl = pixelGridRef.current;
+    const activeEl = activeRef.current;
+    if (!pixelGridEl || !activeEl) return;
+
+    const pixels = pixelGridEl.querySelectorAll<HTMLDivElement>(
+      ".pixelated-image-card__pixel"
+    );
+    if (!pixels.length) return;
+
+    gsap.killTweensOf(pixels);
+    if (delayedCallRef.current) {
+      delayedCallRef.current.kill();
+    }
+
+    gsap.set(pixels, { display: "none" });
+
+    const totalPixels = pixels.length;
+    const staggerDuration = animationStepDuration / totalPixels;
+
+    gsap.to(pixels, {
+      display: "block",
+      duration: 0,
+      stagger: {
+        each: staggerDuration,
+        from: "random",
+      },
+    });
+
+    delayedCallRef.current = gsap.delayedCall(animationStepDuration, () => {
+      activeEl.style.display = activate ? "block" : "none";
+      activeEl.style.pointerEvents = activate ? "none" : "";
+    });
+
+    gsap.to(pixels, {
+      display: "none",
+      duration: 0,
+      delay: animationStepDuration,
+      stagger: {
+        each: staggerDuration,
+        from: "random",
+      },
+    });
+  };
+
+  const handleMouseEnter = (): void => {
+    if (!isActive) animatePixels(true);
+  };
+  const handleMouseLeave = (): void => {
+    if (isActive) animatePixels(false);
+  };
+  const handleClick = (): void => {
+    animatePixels(!isActive);
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={`
+        ${className}
+        bg-[#0a0a0a]
+        text-white
+        rounded-[360px]
+        border-1
+        border-black
+        w-[200px]
+        md:w-[300px]
+        xl:w-[400px]
+        max-w-full
+        relative
+        overflow-hidden
+      `}
+      style={style}
+      onMouseEnter={!isTouchDevice ? handleMouseEnter : undefined}
+      onMouseLeave={!isTouchDevice ? handleMouseLeave : undefined}
+      onClick={isTouchDevice ? handleClick : undefined}
+    >
+      <div style={{ paddingTop: aspectRatio }} />
+
+      <div className="absolute inset-0 w-full h-full">{firstContent}</div>
+
+      <div
+        ref={activeRef}
+        className="absolute inset-0 w-full h-full z-2"
+        style={{ display: "none" }}
+      >
+        {secondContent}
+      </div>
+
+      <div
+        ref={pixelGridRef}
+        className="absolute inset-0 w-full h-full pointer-events-none z-3"
+      />
+    </div>
+  );
+};
+
+export default PixelTransition;
+</file>
+
+<file path="app/components/TextPressure/TextPressure.tsx">
+"use client";
+
+import { useEffect, useRef, useState } from 'react';
+
+interface TextPressureProps {
+    text?: string;
+    fontFamily?: string;
+    fontUrl?: string;
+    width?: boolean;
+    weight?: boolean;
+    italic?: boolean;
+    alpha?: boolean;
+    flex?: boolean;
+    stroke?: boolean;
+    scale?: boolean;
+    textColor?: string;
+    strokeColor?: string;
+    strokeWidth?: number;
+    className?: string;
+    minFontSize?: number;
+    darkMode?: boolean;
+    darkTextColor?: string;
+    darkStrokeColor?: string;
+    darkBackground?: string;
+    colorCycle?: string[];
+    colorCycleDuration?: number; 
+}
+
+const TextPressure: React.FC<TextPressureProps> = ({
+    text = 'Compressa',
+    fontFamily = 'Compressa VF',
+    fontUrl = 'https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2',
+    width = true,
+    weight = true,
+    italic = true,
+    alpha = false,
+    flex = true,
+    stroke = false,
+    scale = false,
+    textColor = '#000000',
+    strokeColor = '#FF0000',
+    strokeWidth = 2,
+    className = '',
+    minFontSize = 300,
+    darkMode = false,
+    darkTextColor = '#FFFFFF',
+    darkStrokeColor = '#00FFFF',
+    darkBackground = 'transparent',
+    colorCycle = [], // Default: array kosong (tidak ada animasi)
+    colorCycleDuration = 2000, // Default: 2 detik
+}) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const spansRef = useRef<(HTMLSpanElement | null)[]>([]);
+
+    const mouseRef = useRef({ x: 0, y: 0 });
+    const cursorRef = useRef({ x: 0, y: 0 });
+
+    const [fontSize, setFontSize] = useState(minFontSize);
+    const [scaleY, setScaleY] = useState(1);
+    const [lineHeight, setLineHeight] = useState(1);
+    const [responsiveMinFontSize, setResponsiveMinFontSize] = useState(minFontSize);
+
+    const chars = text.split('');
+
+    const dist = (a: { x: number; y: number }, b: { x: number; y: number }) => {
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    };
+
+    const updateResponsiveMinFontSize = () => {
+        const width = window.innerWidth;
+
+        if (width >= 1536) {
+            setResponsiveMinFontSize(400);
+        } else if (width >= 1280) {
+            setResponsiveMinFontSize(350);
+        } else if (width >= 1024) {
+            setResponsiveMinFontSize(280);
+        } else if (width >= 768) {
+            setResponsiveMinFontSize(200);
+        } else if (width >= 640) {
+            setResponsiveMinFontSize(150);
+        } else {
+            setResponsiveMinFontSize(130);
+        }
+    };
+
+    useEffect(() => {
+        updateResponsiveMinFontSize();
+        window.addEventListener('resize', updateResponsiveMinFontSize);
+        return () => window.removeEventListener('resize', updateResponsiveMinFontSize);
+    }, []);
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            cursorRef.current.x = e.clientX;
+            cursorRef.current.y = e.clientY;
+        };
+        const handleTouchMove = (e: TouchEvent) => {
+            const t = e.touches[0];
+            cursorRef.current.x = t.clientX;
+            cursorRef.current.y = t.clientY;
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+        if (containerRef.current) {
+            const rect = containerRef.current.getBoundingClientRect();
+            mouseRef.current.x = rect.left + rect.width / 1;
+            mouseRef.current.y = rect.top + rect.height / 1;
+            cursorRef.current.x = mouseRef.current.x;
+            cursorRef.current.y = mouseRef.current.y;
+        }
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('touchmove', handleTouchMove);
+        };
+    }, []);
+
+    const setSize = () => {
+        if (!containerRef.current || !titleRef.current) return;
+
+        const containerRect = containerRef.current.getBoundingClientRect();
+        let newFontSize = containerRect.width / (chars.length / 1.5);
+        newFontSize = Math.max(newFontSize, responsiveMinFontSize);
+
+        setFontSize(newFontSize);
+        setScaleY(1);
+        setLineHeight(1);
+
+        requestAnimationFrame(() => {
+            if (!titleRef.current) return;
+            const textRect = titleRef.current.getBoundingClientRect();
+
+            if (scale && textRect.height > 0) {
+                const yRatio = containerRect.height / textRect.height;
+                setScaleY(yRatio);
+                setLineHeight(yRatio);
+            }
+        });
+    };
+
+    useEffect(() => {
+        setSize();
+        window.addEventListener('resize', setSize);
+        return () => window.removeEventListener('resize', setSize);
+    }, [scale, text, responsiveMinFontSize]);
+
+    useEffect(() => {
+        let rafId: number;
+        const animate = () => {
+            mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
+            mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
+
+            if (titleRef.current) {
+                const titleRect = titleRef.current.getBoundingClientRect();
+                const maxDist = titleRect.width / 2;
+
+                spansRef.current.forEach((span) => {
+                    if (!span) return;
+
+                    const rect = span.getBoundingClientRect();
+                    const charCenter = {
+                        x: rect.x + rect.width / 2,
+                        y: rect.y + rect.height / 2,
+                    };
+
+                    const d = dist(mouseRef.current, charCenter);
+
+                    const getAttr = (distance: number, minVal: number, maxVal: number) => {
+                        const val = maxVal - Math.abs((maxVal * distance) / (maxDist * 0.5));
+                        return Math.max(minVal, val + minVal / 2);
+                    };
+
+                    const wdth = width ? Math.floor(getAttr(d, 5, 200)) : 100;
+                    const wght = weight ? Math.floor(getAttr(d, 100, 900)) : 400;
+                    const italVal = italic ? getAttr(d, 0, 1).toFixed(2) : '0';
+                    const alphaVal = alpha ? getAttr(d, 0, 1).toFixed(2) : '1';
+
+                    span.style.opacity = alphaVal;
+                    span.style.fontVariationSettings = `'wght' ${wght}, 'wdth' ${wdth}, 'ital' ${italVal}`;
+                });
+            }
+
+            rafId = requestAnimationFrame(animate);
+        };
+
+        animate();
+        return () => cancelAnimationFrame(rafId);
+    }, [width, weight, italic, alpha, chars.length]);
+
+        const [currentColorIndex, setCurrentColorIndex] = useState(0);
+
+    useEffect(() => {
+        if (!Array.isArray(colorCycle) || colorCycle.length <= 1) return; // Tidak perlu animasi jika hanya 1 warna
+        
+        const interval = setInterval(() => {
+            setCurrentColorIndex(prev => (prev + 1) % colorCycle.length);
+        }, colorCycleDuration);
+        
+        return () => clearInterval(interval);
+    }, [colorCycle, colorCycleDuration]);
+
+    // Determine colors based on dark mode
+    const currentTextColor = darkMode ? darkTextColor : textColor;
+    const currentStrokeColor = darkMode ? darkStrokeColor : strokeColor;
+    const currentBackground = darkMode ? darkBackground : 'transparent';
+    const baseTextColor = darkMode ? darkTextColor : textColor;
+    const dynamicTextColor = colorCycle.length > 0 
+        ? colorCycle[currentColorIndex]
+        : baseTextColor;
+    const transitionDuration = colorCycleDuration / 1000 * 0.1;
+
+    return (
+        <div
+            ref={containerRef}
+            className="relative w-full h-full overflow-hidden"
+            style={{ backgroundColor: currentBackground }}
+        >
+            <style>{`
+                @font-face {
+                    font-family: '${fontFamily}';
+                    src: url('${fontUrl}');
+                    font-style: normal;
+                }
+
+                 .text-pressure-title span {
+                transition: color ${transitionDuration}s ease-in-out !important;
+                }
+                .stroke span {
+                    position: relative;
+                    color: ${dynamicTextColor};
+                }
+                .stroke span::after {
+                    content: attr(data-char);
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    color: transparent;
+                    z-index: -99;
+                    -webkit-text-stroke-width: ${strokeWidth}px;
+                    -webkit-text-stroke-color: ${currentStrokeColor};
+                    transition: -webkit-text-stroke-color 0.3s ease;
+                }
+            `}</style>
+            <h1
+                ref={titleRef}
+                className={`text-pressure-title ${className} ${flex ? 'flex justify-between' : ''} ${
+                    stroke ? 'stroke' : ''
+                } text-center`}
+                style={{
+                    fontFamily,
+                    fontSize: `${fontSize}px`,
+                    lineHeight,
+                    transform: `scale(1, ${scaleY})`,
+                    transformOrigin: 'center top',
+                    margin: 0,
+                    fontWeight: 100,
+                    color: stroke ? undefined : dynamicTextColor,
+                    gap: '5px',
+                    transition: 'color 0.3s ease',
+                }}
+            >
+                {chars.map((char, i) => (
+                <span
+                    key={i}
+                    ref={(el) => {
+                    if (el) {
+                        spansRef.current[i] = el;
+                    }
+                    return () => {
+                        // Cleanup function
+                        spansRef.current[i] = null;
+                    };
+                    }}
+                    data-char={char}
+                    className="inline-block"
+                    style={{
+                            color: dynamicTextColor, // Tambahkan juga di sini untuk jaga-jaga
+                            transition: `color ${transitionDuration}s ease-in-out`
+                        }}
+                >
+                    {char}
+                </span>
+                ))}
+            </h1>
+        </div>
+    );
+};
+
+export default TextPressure;
+</file>
+
+<file path="app/blog/[slug]/page.tsx">
+import { notFound } from 'next/navigation';
+import { posts } from '../../posts/data';
+import MarkdownContent from '@/app/components/MarkdownContent/MarkdownContent';
+import Link from 'next/link';
+import type { Metadata } from 'next';
+
+interface Post {
+  id: string;
+  title: string;
+  author: string;
+  date: string;
+  content: string;
+}
+
+export async function generateStaticParams() {
+  return posts.map((post: Post) => ({
+    slug: post.id,
+  }));
+}
+
+export async function generateMetadata({ params }: any): Promise<Metadata> {
+  const post = posts.find((post) => post.id === params.slug);
+  return {
+    title: post?.title || 'Post Not Found',
+  };
+}
+
+export default function BlogPostPage({ params }: any) {
+  const post = posts.find((post: Post) => post.id === params.slug);
+
+  if (!post) {
+    notFound();
+    return null;
+  }
+
+  return (
+    <article className="max-w-4xl mx-auto p-4 my-[50px] max-screen">
+      <header className="mb-8">
+        <h1 className="text-4xl font-bold mb-2 dark:text-white">{post.title}</h1>
+        <p className="text-gray-700 mb-2 dark:text-gray-300">
+          by{' '}
+          <Link 
+            href="/" 
+            className="hover:underline hover:font-bold hover:text-[#FA6B48] transition-colors"
+          >
+            {post.author}
+          </Link>
+        </p>
+        <time dateTime={post.date} className="text-gray-500 dark:text-gray-400">
+          {post.date}
+        </time>
+      </header>
+
+      <section className="prose dark:prose-invert max-w-none">
+        <MarkdownContent content={post.content} />
+      </section>
+
+      <footer className="mt-12">
+        <Link 
+          href="/blog" 
+          className="inline-flex items-center text-[#FA6B48] hover:underline gap-1 transition-colors"
+        >
+          <span>←</span> Back to Blog
+        </Link>
+      </footer>
+    </article>
+  );
+}
+</file>
+
+<file path="app/components/Header/header.tsx">
+'use client'
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+
+const Header = () => {
+  const pathname = usePathname();
+  console.log('Current path:', pathname);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
+  const [lastScrollY, setLastScrollY] = useState<number>(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+
+  // Initialize dark mode from localStorage or system preference
+  useEffect(() => {
+    const isDark = localStorage.theme === 'dark' || 
+                  (!('theme' in localStorage) && 
+                   window.matchMedia('(prefers-color-scheme: dark)').matches);
+    
+    setIsDarkMode(isDark);
+    document.documentElement.classList.toggle('dark', isDark);
+  }, []);
+
+  const toggleDarkMode = (): void => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    
+    if (newMode) {
+      localStorage.theme = 'dark';
+    } else {
+      localStorage.theme = 'light';
+    }   
+      document.documentElement.classList.toggle('dark', newMode);
+  };
+
+  const resetToSystemPreference = (): void => {
+    localStorage.removeItem('theme');
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setIsDarkMode(isDark);
+    document.documentElement.classList.toggle('dark', isDark);
+  };
+
+  // Scroll behavior
+  useEffect(() => {
+    const handleScroll = (): void => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsHeaderVisible(false);
+      } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
+        setIsHeaderVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    let timeoutId: NodeJS.Timeout | null = null;
+    const throttledHandleScroll = (): void => {
+      if (!timeoutId) {
+        timeoutId = setTimeout(() => {
+          handleScroll();
+          timeoutId = null;
+        }, 100);
+      }
+    };
+
+    window.addEventListener('scroll', throttledHandleScroll);
+    return () => {
+      window.removeEventListener('scroll', throttledHandleScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [lastScrollY]);
+
+  const toggleMobileMenu = (): void => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  // Function to check if link is active
+  const isActive = (href: string) => {
+    return pathname === href || 
+           pathname.startsWith(href + '/') || 
+           (href !== '/' && pathname.startsWith(href));
+  };
+
+  return (
+    <header
+      className={`bg-white dark:bg-zinc-950 fixed top-0 right-0 left-0 z-50 py-2 transition-transform duration-300 ${
+        isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        {/* Logo */}
+        <div className="text-2xl font-bold text-gray-800 dark:text-white align-middle justify-items-center group relative">
+          <a href="/" className='flex'><img src="/assets/img/peacock-black.png" alt="" className='w-[45px] h-[30px] dark:hidden'/><img src="/assets/img/peacock-white.png" alt="" className='w-[45px] h-[30px] hidden dark:block'/><span className='hidden group-hover:block hover:text-[#FA6B48]'>Aria Aji</span></a>
+        </div>
+
+        {/* Desktop Navigation Menu */}
+        <nav className="hidden md:flex space-x-12 items-center">
+          {/* <Link 
+            href="/" 
+            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1`}
+          >
+            Home
+          </Link> */}
+          <Link 
+            href="/about" 
+            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+              pathname === '/about' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
+            }`}
+          >
+            About
+          </Link>
+          {/* <Link 
+            href="/services" 
+            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+              pathname === '/services' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
+            }`}
+          >
+            Services
+          </Link> */}
+          <Link 
+            href="/contact" 
+            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+              pathname === '/contact' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
+            }`}
+          >
+            Contact
+          </Link>
+          <Link 
+            href="/blog" 
+            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+              pathname === '/blog' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
+            }`}
+          >
+            Blog
+          </Link>
+
+          {/* Dark Mode Toggle */}
+          <div className="relative group">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-gray-800 dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] to-yellow-400 border border-[#FA6B48] rounded-xl"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDarkMode ? (
+                <Image 
+                  src= "/assets/img/day-and-night.png"
+                  alt="Light Mode" 
+                  width={20} 
+                  height={20} 
+                  className="w-5 h-5"
+                  priority
+                />
+              ) : (
+                <Image 
+                  src= "/assets/img/night-and-day.png" 
+                  alt="Dark Mode" 
+                  width={20} 
+                  height={20} 
+                  className="w-5 h-5"
+                  priority
+              />)}
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <div className="flex items-center gap-4 md:hidden">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-gray-800 dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400 border border-[#FA6B48] rounded-xl"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDarkMode ? (
+                <Image 
+                  src="/assets/img/day-and-night.png"
+                  alt="Light Mode" 
+                  width={24} 
+                  height={24} 
+                  className="w-6 h-6"
+                  priority
+                />
+              ) : (
+                <Image 
+                  src="/assets/img/night-and-day.png" 
+                  alt="Dark Mode" 
+                  width={24} 
+                  height={24} 
+                  className="w-6 h-6"
+                  priority
+              />)}
+            </button>
+          
+          <button 
+            onClick={toggleMobileMenu}
+            className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Menu */}
+      <div 
+        className={`md:hidden bg-white dark:bg-zinc-950 overflow-hidden transition-all duration-300 ${
+          isMobileMenuOpen ? 'max-h-96' : 'max-h-0'
+        }`}
+        aria-hidden={!isMobileMenuOpen}
+      >
+        <Link 
+          href="/about" 
+          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+            isActive('/about') ? 'text-[#FA6B48] font-medium underline underline-offset-1' : ''
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          About
+        </Link>
+        <Link 
+          href="/services" 
+          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+            isActive('/services') ? 'text-[#FA6B48] font-medium underline underline-offset-1' : ''
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          Services
+        </Link>
+        <Link 
+          href="/contact" 
+          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+            isActive('/contact') ? 'text-[#FA6B48] font-medium underline underline-offset-1' : ''
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          Contact
+        </Link>
+        <Link 
+          href="/blog" 
+          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+            isActive('/blog') ? 'text-[#FA6B48] font-medium' : ''
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          Blog
+        </Link>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
+</file>
+
+<file path="package.json">
+{
+  "name": "portofolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "debug": "NODE_OPTIONS='--inspect' next dev"
+  },
+  "dependencies": {
+    "@react-spring/web": "^9.7.5",
+    "@types/dompurify": "^3.0.5",
+    "@types/matter-js": "^0.19.8",
+    "dompurify": "^3.2.5",
+    "gsap": "^3.12.7",
+    "marked": "^15.0.11",
+    "matter-js": "^0.20.0",
+    "next": "^15.3.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwind-scrollbar": "^4.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.12",
+    "@types/node": "^20",
+    "@types/react": "^19.0.11",
+    "@types/react-dom": "^19.0.4",
+    "postcss": "^8",
+    "tailwindcss": "^4.0.12",
+    "typescript": "^5.8.3"
+  }
+}
+</file>
+
+<file path="app/components/WorkCard/workcard.tsx">
+'use client'
+
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+
+const works = [
+  {
+    id: 1,
+    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    title: "Hubton",
+    subtitle: "Intern as web developer at Hubton Indonesia, focused on front-end side.",
+  },
+  {
+    id: 2,
+    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    title: "Sajua Brewery",
+    subtitle: "Build e-commerce website.",
+  },
+  {
+    id: 3,
+    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    title: "Lorem, ipsum.",
+    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+  },
+  {
+    id: 4,
+    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    title: "Lorem, ipsum.",
+    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+  },
+   {
+    id: 5,
+    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    title: "Lorem, ipsum.",
+    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+  },
+  {
+    id: 6,
+    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    title: "Lorem, ipsum.",
+    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+  },
+];
+
+const WorkCards: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const startXRef = useRef(0);
+  const isSwipingRef = useRef(false);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
+  const slideCount = works.length;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Fungsi untuk menangani perpindahan slide dengan infinite yang smooth
+  const goToSlide = (index: number, withAnimation = true) => {
+    if (!withAnimation) {
+      setTransitionEnabled(false);
+      setCurrentIndex(index);
+      
+      // Re-enable transition after a short delay
+      setTimeout(() => {
+        setTransitionEnabled(true);
+      }, 50);
+    } else {
+      setCurrentIndex(index);
+    }
+  };
+
+  const nextSlide = () => {
+    if (currentIndex === slideCount - 1) {
+      // Pindah ke slide pertama tanpa animasi
+      goToSlide(0, false);
+    } else {
+      goToSlide(currentIndex + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentIndex === 0) {
+      // Pindah ke slide terakhir tanpa animasi
+      goToSlide(slideCount - 1, false);
+    } else {
+      goToSlide(currentIndex - 1);
+    }
+  };
+
+  // Swipe gesture yang lebih smooth
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startXRef.current = e.touches[0].clientX;
+    isSwipingRef.current = true;
+    
+    // Nonaktifkan transisi selama swipe
+    setTransitionEnabled(false);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isSwipingRef.current) return;
+    
+    const touchX = e.touches[0].clientX;
+    const diff = touchX - startXRef.current;
+    
+    // Update posisi slide secara real-time
+    if (containerRef.current) {
+      containerRef.current.style.transform = `translateX(calc(-${currentIndex * 100}% + ${diff}px)`;
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!isSwipingRef.current) return;
+    isSwipingRef.current = false;
+    
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startXRef.current;
+    const absDiff = Math.abs(diff);
+    
+    // Threshold 20% lebar layar
+    const swipeThreshold = window.innerWidth * 0.2;
+    
+    // Aktifkan kembali transisi
+    setTransitionEnabled(true);
+    
+    if (absDiff > swipeThreshold) {
+      if (diff > 0) {
+        prevSlide();
+      } else {
+        nextSlide();
+      }
+    } else {
+      // Kembali ke posisi semula jika tidak mencapai threshold
+      setCurrentIndex(currentIndex);
+    }
+  };
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [isMobile, currentIndex]);
+
+  return (
+    <div className="container mx-auto px-4 pt-15 md:pt-6 w-auto min-h-screen">
+      <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center my-0 lg:mb-20">Projects & Works</h1>
+      
+      {/* Desktop View */}
+     <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-4 w-fit lg:w-fit">
+      {works.slice(0, 4).map((work) => (
+      <div
+        key={work.id}
+        className="rounded-sm overflow-hidden duration-300 grid grid-cols-1 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] mx-[15px] sm:mx-[100px] md:mx-[150px] lg:mx-[0px] bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all hover:scale-[1.02]"
+      > 
+        {/* Bagian Gambar */}
+        <div className="relative w-full aspect-video overflow-hidden"> {/* Tambahkan aspect-video */}
+          <img
+            src={work.thumbnail}
+            alt={work.title}
+            className="w-full h-fit object-cover"
+          />
+        </div>
+        
+        {/* Bagian Teks */}
+        <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black max-w-[280px]">
+          <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
+          <p className="text-white dark:text-gray-900 text-xs sm:text-sm xl:text-base">{work.subtitle}</p>
+        </div>
+      </div>
+      ))}
+    </div>
+
+      {/* Mobile/Tablet View - Carousel */}
+      <div className="lg:hidden relative overflow-hidden"> 
+        <div 
+          ref={containerRef}
+          className="flex transition-transform duration-300 ease-out touch-pan-y"
+          style={{ 
+            transform: `translateX(-${currentIndex * 100}%)`,
+            transition: transitionEnabled ? 'transform 0.3s ease-out' : 'none'
+          }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+        >
+          {works.map((work) => (
+            <div key={work.id} className="min-w-full px-4 mt-[100px] landscape:mt-7">
+              <div className="rounded-lg overflow-hidden bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all">
+                <div className="grid grid-cols-1 sm:grid-cols-2 relative">
+                  <div className="w-full aspect-video overflow-hidden ">
+                    <img
+                      src={work.thumbnail}
+                      alt={work.title}
+                      className="w-full object-cover"
+                    />
+                  </div>
+                  <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black relative">
+                    <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
+                    <p className="text-white dark:text-gray-900 text-xs sm:text-sm lg:text-base">{work.subtitle}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Navigation Arrows */}
+        <button 
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10"
+          aria-label="Previous slide"
+        >
+          &lt;
+        </button>
+        <button 
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10"
+          aria-label="Next slide"
+        >
+          &gt;
+        </button>
+
+        {/* Indicators */}
+        <div className="flex justify-center mt-6 space-x-2">
+          {works.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`h-3 w-3 rounded-full transition-all ${currentIndex === index ? 'bg-[#FA6B48] w-6' : 'bg-gray-400'}`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+      {/* Tombol See All jika ada lebih dari 4 works */}
+        {works.length > 4 && (
+          <div className="text-center mt-10">
+            <Link 
+              href="https://github.com/ariaajipw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[80px] sm:mx-[205px] md:mx-[278px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
+            >
+              See All Projects
+            </Link>
+          </div>
+        )}
+    </div>
+  );
+};
+
+export default WorkCards;
+</file>
+
+<file path="app/page.tsx">
+import PixelTransition from "./components/PixelTransition/PixelTransition";
+import BlurText from "./components/BlurText/BlurText";
+import TextPressure from './components/TextPressure/TextPressure';
+import WorkCards from "./components/WorkCard/workcard";
+import FallingText from './components/FallingText/FallingText';
+import Link from "next/link";
+
+export default function Home() {
+
+   const colorCycle = ["#212121", "#EAE4D5", "#217147", "#212121", "#EAE4D5","#DB7F8E", "#212121", "#EAE4D5","#FA6B48",  ];
+  
+  return (
+    <main className="min-h-screen overflow-hidden">
+      <div className="hero-section container flex mx-auto min-h-dvh w-fit content-center place-self-center pt-2">
+        {/* mobile for vertical */}
+        <div className="relative h-fit content-center place-self-center w-fit sm:hidden">
+             <TextPressure
+          text="Combine"
+          flex={false}
+          scale={false}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="#00000"
+          strokeColor="#ff0000"
+          className='sm:minFontSize-300 md:minFontSize-400 lg:minFontSize-500 text-#000000'
+          colorCycle={colorCycle}
+          colorCycleDuration={2000} // Ubah durasi sesuai kebutuhan
+        />
+        {/* <div className="h-0.5 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
+         <TextPressure
+          text="Ideas,"
+          flex={false}
+          scale={false}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="000000"
+          strokeColor="#ff0000"
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
+          colorCycle={colorCycle}
+          colorCycleDuration={2100}
+        />
+        {/* <div className="h-0.5 w-[150px] animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48] ml-[40px]"></div> */}
+           <TextPressure
+          text="Craft,"
+          flex={false}
+          scale={false}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="#00000"
+          strokeColor="#ff0000"
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
+          colorCycle={colorCycle}
+          colorCycleDuration={2200}
+        />
+        {/* <div className="h-0.5 w-[130px] animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400 ml-[45px]"></div> */}
+         <TextPressure
+          text="__&__"
+          flex={false}
+          scale={false}
+          alpha={false}
+          stroke={false}
+          width={false}
+          weight={true}
+          italic={false}
+          textColor="#00000"
+          strokeColor="#ff0000"
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
+          colorCycle={colorCycle}
+          colorCycleDuration={2300}
+        />
+        {/* <div className="h-0.5 w-[80px] animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48] ml-[70px]"></div> */}
+         <TextPressure
+          text="Innovate."
+          flex={false}
+          scale={false}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="000000"
+          strokeColor="#ff0000"
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
+          colorCycle={colorCycle}
+          colorCycleDuration={2400}
+        />
+           {/* <div className="h-0.5 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
+        </div>
+        
+        {/* Desktop */}
+        <div className="relative h-fit content-center place-self-center w-fit hidden sm:block">
+             <TextPressure
+          text="_Combine_Ideas,_"
+          flex={true}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="#00000"
+          strokeColor="#ff0000"
+          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000 underline-offset-auto'
+          colorCycle={colorCycle}
+          colorCycleDuration={2000}
+        />
+        {/* <div className="h-1 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
+         <TextPressure
+          text="_Craft_&_Innovate._"
+          flex={true}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={false}
+          textColor="000000"
+          strokeColor="#ff0000"
+          colorCycle={colorCycle}
+          colorCycleDuration={2800}
+        />
+        {/* <div className="h-1 w-full animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48]"></div> */}
+        </div>
+      </div>
+
+      <div className="second-section container mx-auto h-fit my-25 md:mt-0 lg:mt-50 lg:mb-70">
+        <div className="grid lg:grid-cols-12 h-fit">
+          <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
+          <p className="text-sm lg:text-lg content-center place-self-center px-auto mt-10 ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, geeking out over current best practices and technologies for developing websites.</p>
+            < BlurText 
+             text="Aria Aji"
+             delay={300}
+             animateBy="letters"
+             direction="top"
+             className="text-[clamp(30px,7vw,100px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5"
+          />
+          <div className="text-center mt-4 mb-5 text-[#EA6B48] h-20">
+            <FallingText
+              text={`Website Developer`}
+              highlightWords={[]}
+              // highlightClass="highlighted"
+              trigger="hover"
+              backgroundColor="transparent"
+              wireframes={false}
+              gravity={0.1}
+              fontSize="clamp(20px,4vw,32px)"
+              mouseConstraintStiffness={0.9}
+            />           
+          </div>
+            {/* <h2 className="text-xl lg:text-5xl py-8 place-self-center text-[#EA6B48]">Website Developer</h2> */}
+            <p className="text-sm lg:text-lg content-center place-self-center px-auto ml-[30px] mr-[20px] mb-12">Enhance skills through hands-on projects & professional experiences. Combining creativity to build engaging experiences.</p>
+            <Link 
+              href="/contact"
+              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[90px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
+            >
+              Let's Collaborate
+            </Link>
+          </div>
+          <div className="lg:col-span-6 content-center place-self-center order-first lg:order-last pl-0 lg:pl-[100px]">
+            <PixelTransition 
+              firstContent={
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "grid",
+                    placeItems: "center",
+                    backgroundColor: "#09090b"
+                  }}
+                >
+                  <p style={{ fontWeight: 900, fontSize: "1rem", color: "#ffffff" }}>
+                    <img src="assets/img/peacock.png" alt="peacock" className="size-30 md:size-40 lg:size-60"/>
+                  </p>
+                </div>
+              }
+              secondContent={
+                 <img
+                  src="assets/img/ariaaji.jpg"
+                  alt="ariaaji"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              }
+              gridSize={27}
+              pixelColor='#d2d2d4'
+              animationStepDuration={0.4}
+              className="custom-pixel-card"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="third-section container flex mx-auto h-fit w-fit content-center place-self-center landscape:mt-80 landscape:mb-120 sm:landscape:my-0 lg:mt-60">
+       < WorkCards />
+      </div>
+    </main>
+  );
+}
+</file>
+
+</files>

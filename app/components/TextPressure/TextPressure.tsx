@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 interface TextPressureProps {
     text?: string;
@@ -23,13 +23,32 @@ interface TextPressureProps {
     darkStrokeColor?: string;
     darkBackground?: string;
     colorCycle?: string[];
-    colorCycleDuration?: number; 
+    colorCycleDuration?: number;
 }
+
+const RESIZE_DEBOUNCE_MS = 120;
+
+const dist = (a: { x: number; y: number }, b: { x: number; y: number }) => {
+    const dx = b.x - a.x;
+    const dy = b.y - a.y;
+    return Math.sqrt(dx * dx + dy * dy);
+};
+
+const getResponsiveMinFontSize = () => {
+    const width = window.innerWidth;
+
+    if (width >= 1536) return 64;
+    if (width >= 1280) return 56;
+    if (width >= 1024) return 48;
+    if (width >= 768) return 40;
+    if (width >= 640) return 36;
+    return 32;
+};
 
 const TextPressure: React.FC<TextPressureProps> = ({
     text = 'Compressa',
-    fontFamily = 'Compressa VF',
-    fontUrl = 'https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2',
+    fontFamily = 'Roboto Flex',
+    fontUrl = 'https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,wdth@8..144,100..1000,25..151&display=swap',
     width = true,
     weight = true,
     italic = true,
@@ -41,7 +60,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
     strokeColor = '#FF0000',
     strokeWidth = 2,
     className = '',
-    minFontSize = 300,
+    minFontSize = 48,
     darkMode = false,
     darkTextColor = '#FFFFFF',
     darkStrokeColor = '#00FFFF',
@@ -56,42 +75,14 @@ const TextPressure: React.FC<TextPressureProps> = ({
     const mouseRef = useRef({ x: 0, y: 0 });
     const cursorRef = useRef({ x: 0, y: 0 });
 
+    // useId output contains ":" which is not a valid CSS identifier character.
+    const scopeClass = `tp-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
+
     const [fontSize, setFontSize] = useState(minFontSize);
     const [scaleY, setScaleY] = useState(1);
     const [lineHeight, setLineHeight] = useState(1);
-    const [responsiveMinFontSize, setResponsiveMinFontSize] = useState(minFontSize);
 
     const chars = text.split('');
-
-    const dist = (a: { x: number; y: number }, b: { x: number; y: number }) => {
-        const dx = b.x - a.x;
-        const dy = b.y - a.y;
-        return Math.sqrt(dx * dx + dy * dy);
-    };
-
-    const updateResponsiveMinFontSize = () => {
-        const width = window.innerWidth;
-
-        if (width >= 1536) {
-            setResponsiveMinFontSize(400);
-        } else if (width >= 1280) {
-            setResponsiveMinFontSize(350);
-        } else if (width >= 1024) {
-            setResponsiveMinFontSize(280);
-        } else if (width >= 768) {
-            setResponsiveMinFontSize(200);
-        } else if (width >= 640) {
-            setResponsiveMinFontSize(150);
-        } else {
-            setResponsiveMinFontSize(130);
-        }
-    };
-
-    useEffect(() => {
-        updateResponsiveMinFontSize();
-        window.addEventListener('resize', updateResponsiveMinFontSize);
-        return () => window.removeEventListener('resize', updateResponsiveMinFontSize);
-    }, []);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -100,17 +91,18 @@ const TextPressure: React.FC<TextPressureProps> = ({
         };
         const handleTouchMove = (e: TouchEvent) => {
             const t = e.touches[0];
+            if (!t) return;
             cursorRef.current.x = t.clientX;
             cursorRef.current.y = t.clientY;
         };
 
         window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+        window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
         if (containerRef.current) {
             const rect = containerRef.current.getBoundingClientRect();
-            mouseRef.current.x = rect.left + rect.width / 1;
-            mouseRef.current.y = rect.top + rect.height / 1;
+            mouseRef.current.x = rect.left + rect.width / 2;
+            mouseRef.current.y = rect.top + rect.height / 2;
             cursorRef.current.x = mouseRef.current.x;
             cursorRef.current.y = mouseRef.current.y;
         }
@@ -121,12 +113,12 @@ const TextPressure: React.FC<TextPressureProps> = ({
         };
     }, []);
 
-    const setSize = () => {
+    const setSize = useCallback(() => {
         if (!containerRef.current || !titleRef.current) return;
 
         const containerRect = containerRef.current.getBoundingClientRect();
         let newFontSize = containerRect.width / (chars.length / 1.5);
-        newFontSize = Math.max(newFontSize, responsiveMinFontSize);
+        newFontSize = Math.max(newFontSize, getResponsiveMinFontSize());
 
         setFontSize(newFontSize);
         setScaleY(1);
@@ -142,13 +134,23 @@ const TextPressure: React.FC<TextPressureProps> = ({
                 setLineHeight(yRatio);
             }
         });
-    };
+    }, [chars.length, scale]);
 
     useEffect(() => {
         setSize();
-        window.addEventListener('resize', setSize);
-        return () => window.removeEventListener('resize', setSize);
-    }, [scale, text, responsiveMinFontSize]);
+
+        let timeoutId: ReturnType<typeof setTimeout>;
+        const handleResize = () => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(setSize, RESIZE_DEBOUNCE_MS);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            clearTimeout(timeoutId);
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [setSize]);
 
     useEffect(() => {
         let rafId: number;
@@ -181,8 +183,13 @@ const TextPressure: React.FC<TextPressureProps> = ({
                     const italVal = italic ? getAttr(d, 0, 1).toFixed(2) : '0';
                     const alphaVal = alpha ? getAttr(d, 0, 1).toFixed(2) : '1';
 
-                    span.style.opacity = alphaVal;
-                    span.style.fontVariationSettings = `'wght' ${wght}, 'wdth' ${wdth}, 'ital' ${italVal}`;
+                    const next = `'wght' ${wght}, 'wdth' ${wdth}, 'ital' ${italVal}`;
+                    if (span.style.fontVariationSettings !== next) {
+                        span.style.fontVariationSettings = next;
+                    }
+                    if (alpha && span.style.opacity !== alphaVal) {
+                        span.style.opacity = alphaVal;
+                    }
                 });
             }
 
@@ -197,20 +204,19 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
     useEffect(() => {
         if (!Array.isArray(colorCycle) || colorCycle.length <= 1) return; // Tidak perlu animasi jika hanya 1 warna
-        
+
         const interval = setInterval(() => {
             setCurrentColorIndex(prev => (prev + 1) % colorCycle.length);
         }, colorCycleDuration);
-        
+
         return () => clearInterval(interval);
     }, [colorCycle, colorCycleDuration]);
 
     // Determine colors based on dark mode
-    const currentTextColor = darkMode ? darkTextColor : textColor;
     const currentStrokeColor = darkMode ? darkStrokeColor : strokeColor;
     const currentBackground = darkMode ? darkBackground : 'transparent';
     const baseTextColor = darkMode ? darkTextColor : textColor;
-    const dynamicTextColor = colorCycle.length > 0 
+    const dynamicTextColor = colorCycle.length > 0
         ? colorCycle[currentColorIndex]
         : baseTextColor;
     const transitionDuration = colorCycleDuration / 1000 * 0.1;
@@ -218,24 +224,20 @@ const TextPressure: React.FC<TextPressureProps> = ({
     return (
         <div
             ref={containerRef}
-            className="relative w-full h-full overflow-hidden"
+            className={`${scopeClass} relative w-full h-full overflow-hidden`}
             style={{ backgroundColor: currentBackground }}
         >
-            <style>{`
-                @font-face {
-                    font-family: '${fontFamily}';
-                    src: url('${fontUrl}');
-                    font-style: normal;
-                }
+            <style id={scopeClass}>{`
+                @import url('${fontUrl}');
 
-                 .text-pressure-title span {
-                transition: color ${transitionDuration}s ease-in-out !important;
+                .${scopeClass} .text-pressure-title span {
+                    transition: color ${transitionDuration}s ease-in-out;
                 }
-                .stroke span {
+                .${scopeClass} .stroke span {
                     position: relative;
                     color: ${dynamicTextColor};
                 }
-                .stroke span::after {
+                .${scopeClass} .stroke span::after {
                     content: attr(data-char);
                     position: absolute;
                     left: 0;
@@ -253,7 +255,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
                     stroke ? 'stroke' : ''
                 } text-center`}
                 style={{
-                    fontFamily,
+                    fontFamily: `${fontFamily}, sans-serif`,
                     fontSize: `${fontSize}px`,
                     lineHeight,
                     transform: `scale(1, ${scaleY})`,

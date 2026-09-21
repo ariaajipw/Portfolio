@@ -7,13 +7,13 @@ import Link from "next/link";
 
 export default function Home() {
 
-   const colorCycle = ["#212121", "#EAE4D5", "#217147", "#212121", "#EAE4D5","#DB7F8E", "#212121", "#EAE4D5","#FA6B48",  ];
+   const colorCycle = ["#212121", "#C9A227", "#217147", "#212121", "#C9A227","#DB7F8E", "#212121", "#C9A227","#FA6B48",  ];
   
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="hero-section container flex mx-auto min-h-dvh w-fit content-center place-self-center pt-2">
+      <div className="hero-section container flex mx-auto min-h-dvh w-full content-center place-self-center pt-2">
         {/* mobile for vertical */}
-        <div className="relative h-fit content-center place-self-center w-fit sm:hidden">
+        <div className="relative h-fit content-center place-self-center w-full sm:hidden">
              <TextPressure
           text="Combine"
           flex={false}
@@ -97,7 +97,7 @@ export default function Home() {
         </div>
         
         {/* Desktop */}
-        <div className="relative h-fit content-center place-self-center w-fit hidden sm:block">
+        <div className="relative h-fit content-center place-self-center w-full hidden sm:block">
              <TextPressure
           text="_Combine_Ideas,_"
           flex={true}
