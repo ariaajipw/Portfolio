@@ -11,7 +11,7 @@ export default function Home() {
   
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="hero-section container flex flex-col mx-auto min-h-dvh w-full content-center place-self-center pt-10">
+      <div className="hero-section container flex flex-col mx-auto min-h-dvh w-full content-center place-self-center pt-15">
         {/* mobile for vertical */}
         <div
              className="sm:block sm:hidden"
@@ -24,7 +24,7 @@ export default function Home() {
              }}
 >           
             <TextPressure
-              text="-Combine-"
+              text="   Combine   "
               flex
               alpha={false}
               stroke={false}
@@ -38,7 +38,7 @@ export default function Home() {
               // colorCycleDuration={2000}
             />
             <TextPressure
-              text="-Ideas-"
+              text="   Ideas   "
               flex
               alpha={false}
               stroke={false}
@@ -52,7 +52,7 @@ export default function Home() {
               // colorCycleDuration={2000}
             />
             <TextPressure
-              text="-Craft-"
+              text="   Craft   "
               flex
               alpha={false}
               stroke={false}
@@ -66,7 +66,7 @@ export default function Home() {
               // colorCycleDuration={2000}
             />
             <TextPressure
-              text="-----&-----"
+              text="   -   &   -   "
               flex
               alpha={false}
               stroke={false}
@@ -80,7 +80,7 @@ export default function Home() {
               // colorCycleDuration={2000}
             />
             <TextPressure
-              text="-Innovate-"
+              text="   Innovate   "
               flex
               alpha={false}
               stroke={false}

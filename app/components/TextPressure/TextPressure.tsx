@@ -190,7 +190,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
      * berdasarkan lebar container.
      */
     let newFontSize =
-      (containerRect.width / chars.length) * 3.8;
+      (containerRect.width / chars.length) * 4.0;
 
     /*
      * Tetap memiliki minimum font size
