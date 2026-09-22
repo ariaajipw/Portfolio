@@ -6,7 +6,7 @@ const socials = [
   { id: 1, name: "GitHub", url: "https://github.com/ariaajipw" },
   { id: 2, name: "LinkedIn", url: "https://linkedin.com/in/aria-aji" },
   { id: 3, name: "X", url: "https://x.com/ariaajipw" },
-  { id: 4, name: "Instagram", url: "https://instagram.com/ariaaji" }
+  // { id: 4, name: "Instagram", url: "https://instagram.com/ariaaji" }
 ];
 
 const Footer = () => {
@@ -43,14 +43,14 @@ const Footer = () => {
                   About
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/services"
                   className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
                 >
                   Services
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   href="/contact"

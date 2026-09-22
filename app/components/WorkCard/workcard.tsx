@@ -18,27 +18,24 @@ const works = [
   },
   {
     id: 3,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=...",
+    title: "Kovsen",
+    subtitle: "Designed and developed an interactive analytics dashboard with Next.js.",
   },
   {
     id: 4,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    title: "Aether Studio",
+    subtitle: "Crafted a high-performance agency site featuring smooth GSAP motion and clean layout.",
   },
-   {
+  {
     id: 5,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    title: "Lumina Goods",
+    subtitle: "Built a minimalist headless e-commerce storefront integrated with Shopify API.",
   },
   {
     id: 6,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    title: "Nexus System",
+    subtitle: "Created a scalable UI component library and design system for web applications.",
   },
 ];
 
