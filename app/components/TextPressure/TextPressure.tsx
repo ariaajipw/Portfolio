@@ -66,7 +66,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
   textColor = "#000000",
   strokeColor = "#FF0000",
-  strokeWidth = 2,
+  strokeWidth = 6,
 
   className = "",
   minFontSize = 48,
@@ -303,11 +303,11 @@ const TextPressure: React.FC<TextPressureProps> = ({
           };
 
           const wdth = width
-            ? Math.floor(getAttr(d, 5, 200))
+            ? Math.floor(getAttr(d, 40, 200))
             : 100;
 
           const wght = weight
-            ? Math.floor(getAttr(d, 100, 900))
+            ? Math.floor(getAttr(d, 200, 900))
             : 400;
 
           const italVal = italic
@@ -478,7 +478,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
           margin: 0,
 
-          fontWeight: 100,
+          fontWeight: 200,
 
           color: stroke
             ? undefined
