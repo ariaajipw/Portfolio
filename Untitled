@@ -1,0 +1,4 @@
+grep -R "@react-spring/web" -n . \
+  --exclude-dir=node_modules \
+  --exclude-dir=.next \
+  --exclude=package-lock.json
