@@ -11,122 +11,129 @@ export default function Home() {
   
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="hero-section container flex mx-auto min-h-dvh w-full content-center place-self-center pt-2">
+      <div className="hero-section container flex flex-col mx-auto min-h-dvh w-full content-center place-self-center pt-10">
         {/* mobile for vertical */}
-        <div className="relative h-fit content-center place-self-center w-full sm:hidden">
-             <TextPressure
-          text="Combine"
-          flex={false}
-          scale={false}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="#00000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-300 md:minFontSize-400 lg:minFontSize-500 text-#000000'
-          colorCycle={colorCycle}
-          colorCycleDuration={2000} // Ubah durasi sesuai kebutuhan
-        />
-        {/* <div className="h-0.5 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
-         <TextPressure
-          text="Ideas,"
-          flex={false}
-          scale={false}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="000000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
-          colorCycle={colorCycle}
-          colorCycleDuration={2100}
-        />
-        {/* <div className="h-0.5 w-[150px] animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48] ml-[40px]"></div> */}
-           <TextPressure
-          text="Craft,"
-          flex={false}
-          scale={false}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="#00000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
-          colorCycle={colorCycle}
-          colorCycleDuration={2200}
-        />
-        {/* <div className="h-0.5 w-[130px] animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400 ml-[45px]"></div> */}
-         <TextPressure
-          text="__&__"
-          flex={false}
-          scale={false}
-          alpha={false}
-          stroke={false}
-          width={false}
-          weight={true}
-          italic={false}
-          textColor="#00000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
-          colorCycle={colorCycle}
-          colorCycleDuration={2300}
-        />
-        {/* <div className="h-0.5 w-[80px] animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48] ml-[70px]"></div> */}
-         <TextPressure
-          text="Innovate."
-          flex={false}
-          scale={false}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="000000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
-          colorCycle={colorCycle}
-          colorCycleDuration={2400}
-        />
-           {/* <div className="h-0.5 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
+        <div
+             className="sm:block sm:hidden"
+             style={{
+               position: 'relative',
+               height: 'fit-content',
+               width: '100%',
+               alignContent: 'center',
+               placeSelf: 'center',
+             }}
+>           
+            <TextPressure
+              text="-Combine-"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="-Ideas-"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="-Craft-"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="-----&-----"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="-Innovate-"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
         </div>
         
         {/* Desktop */}
-        <div className="relative h-fit content-center place-self-center w-full hidden sm:block">
-             <TextPressure
-          text="_Combine_Ideas,_"
-          flex={true}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="#00000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000 underline-offset-auto'
-          colorCycle={colorCycle}
-          colorCycleDuration={2000}
-        />
-        {/* <div className="h-1 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
-         <TextPressure
-          text="_Craft_&_Innovate._"
-          flex={true}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="000000"
-          strokeColor="#ff0000"
-          colorCycle={colorCycle}
-          colorCycleDuration={2800}
-        />
-        {/* <div className="h-1 w-full animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48]"></div> */}
+        <div
+             className="hidden sm:block pt-15"
+             style={{
+               position: 'relative',
+               height: 'fit-content',
+               width: '100%',
+               alignContent: 'center',
+               placeSelf: 'center',
+             }}
+>           
+            <TextPressure
+              text="Combine Ideas,"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="Craft & Innovate"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
         </div>
       </div>
 
