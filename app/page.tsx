@@ -146,11 +146,11 @@ export default function Home() {
              delay={300}
              animateBy="letters"
              direction="top"
-             className="text-[clamp(30px,7vw,100px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5"
+             className="text-[clamp(30px,7vw,100px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5 mx-10 px-16"
           />
           <div className="text-center mt-4 mb-5 text-[#EA6B48] h-20">
             <FallingText
-              text={`Website Developer`}
+              text={`Front-end Developer`}
               highlightWords={[]}
               // highlightClass="highlighted"
               trigger="hover"

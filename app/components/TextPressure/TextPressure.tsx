@@ -86,6 +86,15 @@ const TextPressure: React.FC<TextPressureProps> = ({
   const mouseRef = useRef({ x: 0, y: 0 });
   const cursorRef = useRef({ x: 0, y: 0 });
 
+  /*
+   * SCROLL INTEGRATION — single source of truth untuk siapa yang
+   * "memegang" cursorRef di frame saat ini: 'pointer' (mouse/touch asli)
+   * atau 'scroll' (virtual cursor yang disapu mengikuti progress title
+   * melintasi viewport). Cuma satu writer aktif per frame, jadi nggak
+   * ada rebutan nilai antara hover dan scroll.
+   */
+  const pointerModeRef = useRef<"pointer" | "scroll">("pointer");
+
   const scopeClass = `tp-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
 
   const [fontSize, setFontSize] = useState(minFontSize);
@@ -97,27 +106,19 @@ const TextPressure: React.FC<TextPressureProps> = ({
   const chars = text.split("");
 
   /*
-   * Detect dark mode dari:
-   *
-   * <html class="dark">
-   *
-   * MutationObserver digunakan supaya ketika user
-   * menekan tombol dark/light mode, TextPressure
-   * langsung ikut berubah.
+   * Detect dark mode dari <html class="dark">.
+   * MutationObserver dipakai supaya begitu user toggle
+   * dark/light mode, TextPressure langsung ikut berubah.
    */
   useEffect(() => {
     const checkDarkMode = () => {
       const isDark = document.documentElement.classList.contains("dark");
-
       setSystemDarkMode(isDark);
     };
 
-    // Check saat pertama kali render
     checkDarkMode();
 
-    // Pantau perubahan class pada <html>
     const observer = new MutationObserver(checkDarkMode);
-
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
@@ -128,19 +129,20 @@ const TextPressure: React.FC<TextPressureProps> = ({
     };
   }, []);
 
-  /*
-   * Jika darkMode={true}, paksa dark mode.
-   * Jika darkMode={false}, ikuti class "dark" dari <html>.
-   */
   const isDarkMode = darkMode || systemDarkMode;
 
   /*
-   * Mouse / Touch tracking
+   * Mouse / Touch / Scroll tracking.
+   * mousemove & touchmove tetap seperti semula: langsung isi cursorRef
+   * dan klaim ulang pointerModeRef = 'pointer'.
+   * scroll cuma flip flag — nol kerja layout di sini, semua
+   * getBoundingClientRect() tetap di dalam rAF loop di bawah.
    */
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       cursorRef.current.x = e.clientX;
       cursorRef.current.y = e.clientY;
+      pointerModeRef.current = "pointer";
     };
 
     const handleTouchMove = (e: TouchEvent) => {
@@ -150,11 +152,20 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
       cursorRef.current.x = t.clientX;
       cursorRef.current.y = t.clientY;
+      pointerModeRef.current = "pointer";
+    };
+
+    const handleScroll = () => {
+      pointerModeRef.current = "scroll";
     };
 
     window.addEventListener("mousemove", handleMouseMove);
 
     window.addEventListener("touchmove", handleTouchMove, {
+      passive: true,
+    });
+
+    window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
 
@@ -171,38 +182,24 @@ const TextPressure: React.FC<TextPressureProps> = ({
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   /*
-   * Responsive font size
-   *
-   * Semakin lebar container,
-   * semakin besar font.
+   * Responsive font size — semakin lebar container, semakin besar font,
+   * tetap punya minimum berdasarkan ukuran layar.
    */
   const setSize = useCallback(() => {
     if (!containerRef.current || !titleRef.current) return;
 
     const containerRect = containerRef.current.getBoundingClientRect();
 
-    /*
-     * Ukuran font dibuat besar dan responsive
-     * berdasarkan lebar container.
-     */
-    let newFontSize =
-      (containerRect.width / chars.length) * 4.0;
+    let newFontSize = (containerRect.width / chars.length) * 4.0;
 
-    /*
-     * Tetap memiliki minimum font size
-     * berdasarkan ukuran layar.
-     */
-    newFontSize = Math.max(
-      newFontSize,
-      getResponsiveMinFontSize()
-    );
+    newFontSize = Math.max(newFontSize, getResponsiveMinFontSize());
 
     setFontSize(newFontSize);
-
     setScaleY(1);
     setLineHeight(1);
 
@@ -212,8 +209,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
       const textRect = titleRef.current.getBoundingClientRect();
 
       if (scale && textRect.height > 0) {
-        const yRatio =
-          containerRect.height / textRect.height;
+        const yRatio = containerRect.height / textRect.height;
 
         setScaleY(yRatio);
         setLineHeight(yRatio);
@@ -221,9 +217,6 @@ const TextPressure: React.FC<TextPressureProps> = ({
     });
   }, [chars.length, scale]);
 
-  /*
-   * Recalculate font ketika ukuran browser berubah.
-   */
   useEffect(() => {
     setSize();
 
@@ -231,41 +224,51 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
     const handleResize = () => {
       clearTimeout(timeoutId);
-
-      timeoutId = setTimeout(
-        setSize,
-        RESIZE_DEBOUNCE_MS
-      );
+      timeoutId = setTimeout(setSize, RESIZE_DEBOUNCE_MS);
     };
 
     window.addEventListener("resize", handleResize);
 
     return () => {
       clearTimeout(timeoutId);
-
-      window.removeEventListener(
-        "resize",
-        handleResize
-      );
+      window.removeEventListener("resize", handleResize);
     };
   }, [setSize]);
 
   /*
-   * TextPressure mouse animation
+   * TextPressure animation loop.
    */
   useEffect(() => {
     let rafId: number;
 
     const animate = () => {
-      mouseRef.current.x +=
-        (cursorRef.current.x - mouseRef.current.x) / 15;
-
-      mouseRef.current.y +=
-        (cursorRef.current.y - mouseRef.current.y) / 15;
-
       if (titleRef.current) {
-        const titleRect =
-          titleRef.current.getBoundingClientRect();
+        const titleRect = titleRef.current.getBoundingClientRect();
+
+        /*
+         * Selama scroll yang pegang kendali, sapu virtual cursor
+         * melintasi title mengikuti progress scroll: 0 saat title
+         * masuk dari bawah viewport, 1 saat keluar dari atas.
+         * Begitu mousemove/touchmove asli terjadi, pointerModeRef
+         * langsung balik ke 'pointer' dan blok ini di-skip di frame
+         * berikutnya — hover langsung ambil alih, tanpa rebutan.
+         */
+        if (pointerModeRef.current === "scroll") {
+          const viewportH = window.innerHeight;
+          const progress = Math.min(
+            Math.max(
+              (viewportH - titleRect.top) / (viewportH + titleRect.height),
+              0
+            ),
+            1
+          );
+
+          cursorRef.current.x = titleRect.left + progress * titleRect.width;
+          cursorRef.current.y = titleRect.top + titleRect.height / 2;
+        }
+
+        mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
+        mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
 
         const maxDist = titleRect.width / 2;
 
@@ -279,10 +282,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
             y: rect.y + rect.height / 2,
           };
 
-          const d = dist(
-            mouseRef.current,
-            charCenter
-          );
+          const d = dist(mouseRef.current, charCenter);
 
           const getAttr = (
             distance: number,
@@ -290,49 +290,24 @@ const TextPressure: React.FC<TextPressureProps> = ({
             maxVal: number
           ) => {
             const val =
-              maxVal -
-              Math.abs(
-                (maxVal * distance) /
-                  (maxDist * 0.5)
-              );
+              maxVal - Math.abs((maxVal * distance) / (maxDist * 0.5));
 
-            return Math.max(
-              minVal,
-              val + minVal / 2
-            );
+            return Math.max(minVal, val + minVal / 2);
           };
 
-          const wdth = width
-            ? Math.floor(getAttr(d, 40, 200))
-            : 100;
-
-          const wght = weight
-            ? Math.floor(getAttr(d, 200, 900))
-            : 400;
-
-          const italVal = italic
-            ? getAttr(d, 0, 1).toFixed(2)
-            : "0";
-
-          const alphaVal = alpha
-            ? getAttr(d, 0, 1).toFixed(2)
-            : "1";
+          const wdth = width ? Math.floor(getAttr(d, 40, 200)) : 100;
+          const wght = weight ? Math.floor(getAttr(d, 200, 900)) : 400;
+          const italVal = italic ? getAttr(d, 0, 1).toFixed(2) : "0";
+          const alphaVal = alpha ? getAttr(d, 0, 1).toFixed(2) : "1";
 
           const next =
-            `'wght' ${wght}, ` +
-            `'wdth' ${wdth}, ` +
-            `'ital' ${italVal}`;
+            `'wght' ${wght}, ` + `'wdth' ${wdth}, ` + `'ital' ${italVal}`;
 
-          if (
-            span.style.fontVariationSettings !== next
-          ) {
+          if (span.style.fontVariationSettings !== next) {
             span.style.fontVariationSettings = next;
           }
 
-          if (
-            alpha &&
-            span.style.opacity !== alphaVal
-          ) {
+          if (alpha && span.style.opacity !== alphaVal) {
             span.style.opacity = alphaVal;
           }
         });
@@ -344,74 +319,36 @@ const TextPressure: React.FC<TextPressureProps> = ({
     animate();
 
     return () => cancelAnimationFrame(rafId);
-  }, [
-    width,
-    weight,
-    italic,
-    alpha,
-    chars.length,
-  ]);
+  }, [width, weight, italic, alpha, chars.length]);
 
   /*
    * Color cycle
    */
-  const [
-    currentColorIndex,
-    setCurrentColorIndex,
-  ] = useState(0);
+  const [currentColorIndex, setCurrentColorIndex] = useState(0);
 
   useEffect(() => {
-    if (
-      !Array.isArray(colorCycle) ||
-      colorCycle.length <= 1
-    ) {
+    if (!Array.isArray(colorCycle) || colorCycle.length <= 1) {
       return;
     }
 
     const interval = setInterval(() => {
-      setCurrentColorIndex(
-        (prev) =>
-          (prev + 1) % colorCycle.length
-      );
+      setCurrentColorIndex((prev) => (prev + 1) % colorCycle.length);
     }, colorCycleDuration);
 
     return () => clearInterval(interval);
-  }, [
-    colorCycle,
-    colorCycleDuration,
-  ]);
+  }, [colorCycle, colorCycleDuration]);
 
   /*
    * Dark / Light colors
    */
-  const currentStrokeColor = isDarkMode
-    ? darkStrokeColor
-    : strokeColor;
+  const currentStrokeColor = isDarkMode ? darkStrokeColor : strokeColor;
+  const currentBackground = isDarkMode ? darkBackground : "transparent";
+  const baseTextColor = isDarkMode ? darkTextColor : textColor;
 
-  const currentBackground = isDarkMode
-    ? darkBackground
-    : "transparent";
-
-  const baseTextColor = isDarkMode
-    ? darkTextColor
-    : textColor;
-
-  /*
-   * Jika colorCycle kosong:
-   *
-   * Light → #000000
-   * Dark  → #FFFFFF
-   *
-   * Jika colorCycle digunakan:
-   * warna mengikuti colorCycle.
-   */
   const dynamicTextColor =
-    colorCycle.length > 0
-      ? colorCycle[currentColorIndex]
-      : baseTextColor;
+    colorCycle.length > 0 ? colorCycle[currentColorIndex] : baseTextColor;
 
-  const transitionDuration =
-    (colorCycleDuration / 1000) * 0.1;
+  const transitionDuration = (colorCycleDuration / 1000) * 0.1;
 
   return (
     <div
@@ -480,14 +417,11 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
           fontWeight: 200,
 
-          color: stroke
-            ? undefined
-            : dynamicTextColor,
+          color: stroke ? undefined : dynamicTextColor,
 
           gap: "5px",
 
-          transition:
-            "color 0.3s ease",
+          transition: "color 0.3s ease",
         }}
       >
         {chars.map((char, i) => (
@@ -507,8 +441,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
             style={{
               color: dynamicTextColor,
 
-              transition:
-                `color ${transitionDuration}s ease-in-out`,
+              transition: `color ${transitionDuration}s ease-in-out`,
             }}
           >
             {char}
