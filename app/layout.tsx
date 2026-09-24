@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 // import localFont from "next/font/local";
-import { Montserrat_Alternates } from "next/font/google";
-import { JetBrains_Mono } from "next/font/google";
+import { Montserrat_Alternates, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header/header";
 import Footer from "./components/Footer/footer";
+
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
 const montserrat_alternates = Montserrat_Alternates({
   weight: '400',
@@ -27,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={jetbrainsMono.variable}>
       <head>
         <script dangerouslySetInnerHTML={{
           __html: `
@@ -43,7 +44,7 @@ export default function RootLayout({
       {/* <body
         className={`${montserrat_alternates.className} antialiased`}
       > */}
-      <body className={`${jetbrains_mono.className} bg-white dark:bg-zinc-950 text-gray-900 dark:text-white`}
+      <body className={`${jetbrains_mono.className} bg-[#EDDBB5] text-[#488067] dark:bg-[#1B3E5C] dark:text-[#F2B138]`}
         suppressHydrationWarning>
         <Header />
         {children}

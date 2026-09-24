@@ -11,6 +11,7 @@ const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -47,13 +48,17 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = (): void => {
       const currentScrollY = window.scrollY;
-
+    
+      // Background navbar
+      setIsScrolled(currentScrollY > 0);
+    
+      // Show / hide navbar
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsHeaderVisible(false);
       } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
         setIsHeaderVisible(true);
       }
-
+    
       setLastScrollY(currentScrollY);
     };
 
@@ -105,12 +110,16 @@ const Header = () => {
   };
 
   return (
-    <header
-      ref={headerRef}
-      className={`bg-white dark:bg-zinc-950 fixed top-0 right-0 left-0 z-50 py-2 transition-transform duration-300 ${
-        isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
-      }`}
-    >
+      <header
+        ref={headerRef}
+        className={`fixed top-0 right-0 left-0 z-50 py-2 transition-all duration-300 ${
+          pathname === '/' && !isScrolled
+            ? 'bg-transparent'
+            : 'bg-white dark:bg-zinc-950'
+        } ${
+          isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
         <div className="text-2xl font-bold text-gray-800 dark:text-white align-middle justify-items-center group relative">

@@ -64,7 +64,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
   stroke = false,
   scale = false,
 
-  textColor = "#000000",
+  textColor = "#488067",
   strokeColor = "#FF0000",
   strokeWidth = 6,
 
@@ -72,7 +72,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
   minFontSize = 48,
 
   darkMode = false,
-  darkTextColor = "#FFFFFF",
+  darkTextColor = "#F2B138",
   darkStrokeColor = "#00FFFF",
   darkBackground = "transparent",
 

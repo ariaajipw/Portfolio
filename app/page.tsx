@@ -114,8 +114,8 @@ export default function Home() {
               width
               weight
               italic
-              textColor="#000000"
-              strokeColor="#5227FF"
+              textColor=""
+              strokeColor=""
               minFontSize={36}
               // colorCycle={colorCycle}
               // colorCycleDuration={2000}
@@ -128,14 +128,18 @@ export default function Home() {
               width
               weight
               italic
-              textColor="#000000"
-              strokeColor="#5227FF"
+              textColor=""
+              strokeColor=""
               minFontSize={36}
               // colorCycle={colorCycle}
               // colorCycleDuration={2000}
             />
         </div>
       </div>
+
+      {/* <div className="img-section flex flex-col w-full my-60">
+      <img src="assets/img/BKAIG.jpg" alt="gp" className="size-full"/>
+      </div> */}
 
       <div className="second-section container mx-auto h-fit my-25 md:mt-0 lg:mt-50 lg:mb-70">
         <div className="grid lg:grid-cols-12 h-fit">
