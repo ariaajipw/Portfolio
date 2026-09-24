@@ -6,35 +6,38 @@ import Link from "next/link";
 const works = [
   {
     id: 1,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    thumbnail: "",
     title: "Hubton",
-    subtitle: "Intern as web developer at Hubton Indonesia, focused on front-end side.",
+    subtitle: "Intern as front-end developer at Hubton Indonesia, focused on learning front-end side.",
   },
   {
     id: 2,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    thumbnail: "",
     title: "Sajua Brewery",
-    subtitle: "Build e-commerce website.",
+    subtitle: "Build e-commerce website with Shopify.",
   },
   {
     id: 3,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=...",
+    thumbnail: "",
     title: "Kovsen",
-    subtitle: "Designed and developed an interactive analytics dashboard with Next.js.",
+    subtitle: "Designed and developed an interactive analytics dashboard with Shopify.",
   },
   {
     id: 4,
-    title: "Aether Studio",
+    thumbnail: "",
+    title: "Titis",
     subtitle: "Crafted a high-performance agency site featuring smooth GSAP motion and clean layout.",
   },
   {
     id: 5,
+    thumbnail: "",
     title: "Lumina Goods",
     subtitle: "Built a minimalist headless e-commerce storefront integrated with Shopify API.",
   },
   {
     id: 6,
-    title: "Nexus System",
+    thumbnail: "",
+    title: "Rajipo System",
     subtitle: "Created a scalable UI component library and design system for web applications.",
   },
 ];

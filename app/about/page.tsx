@@ -48,8 +48,8 @@ export default function About() {
       <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
         <h3 className="font-bold mb-2">Career Experience</h3>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Frontend Developer Intern <br /> <span className="opacity opacity-50">at Hubton Indonesia </span><br />  <span className="opacity opacity-50">(2024-2025)</span></li>
-          <li>Freelance Web Projects <br /> <span className="opacity opacity-50">(2023-present)</span></li>
+          <li>Front-end Developer Intern <br /> <span className="opacity opacity-50">at Hubton Indonesia </span><br />  <span className="opacity opacity-50">(2024-2025)</span></li>
+          <li>Freelance Website Projects <br /> <span className="opacity opacity-50">(2023-2024)</span></li>
           <br />
           <br />
           <br />
@@ -60,7 +60,7 @@ export default function About() {
       <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
         <h3 className="font-bold mb-2">Education</h3>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Web Development Bootcamp <br /> <span className="opacity opacity-50">Udemy</span></li>
+          <li>Website Development Bootcamp <br /> <span className="opacity opacity-50">Udemy</span></li>
           <br />
           <br />
           <br />

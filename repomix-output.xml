@@ -40,6 +40,11 @@ The content is organized as follows:
 </file_summary>
 
 <directory_structure>
+.claude/
+  skills/
+    frontend-design/
+      LICENSE.txt
+      SKILL.md
 app/
   about/
     team/
@@ -98,16 +103,275 @@ public/
       peacock.png
       sun.png
 .gitignore
+AGENTS.md
+ARCHITECTURE.md
+DESIGN.md
+global.d.ts
 next.config.mjs
 package.json
 postcss.config.mjs
+PRD.md
 README.md
+skills-lock.json
 tailwind.config.js
 tsconfig.json
 </directory_structure>
 
 <files>
 This section contains the contents of the repository's files.
+
+<file path=".claude/skills/frontend-design/LICENSE.txt">
+Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+</file>
+
+<file path=".claude/skills/frontend-design/SKILL.md">
+---
+name: frontend-design
+description: Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.
+license: Complete terms in LICENSE.txt
+---
+
+# Frontend Design
+
+Approach this as the design lead at a design studio known for giving every client a distinct visual identity that is not mistaken for anyone else's. This client has already rejected proposals that felt cliché or templated, and is paying for a distinctive point of view: make deliberate, opinionated choices about palette, typography, and layout that are specific to this brief, and take aesthetic risk if justified.
+
+## Ground your designs in the subject matter
+
+If the brief does not identify what the product or subject matter is, identify it yourself before designing, and confirm with the client. You can come up with one concrete subject, the design's audience, and the design's primary job, as a proposal. If there's any information in your memory about the client's preferences or context about what they're building, use that as a hint. The subject's industry, subject matter, materials, and vernacular are where distinctive visual choices come from — a design for a toy for girls aged 8–11 will be very aesthetically different from a dashboard for financial analysts. Build with the brief's real content and subject matter throughout.
+
+## Design principles
+
+For web designs, the hero is the first thing viewers will see. Open with the most characteristic thing in the subject's world, in the form that is most appropriate: a headline, an image, an animation, a live demo, an interactive moment, or other treatments. Be deliberate with your choice: a big number with a small label, supporting stats, and a gradient accent is the default treatment, so only use it if that's truly the best option.
+
+Typography carries the personality of the page. You don't need a different typeface for display or headline text and body content: use one family or two, and if two, make them clearly distinct.
+
+Choose your typefaces deliberately, not the default families you would reach for on any other project, and set a clear type scale following the default guidance of The Elements of Typographic Style with intentional weights, widths, and spacing. When type is used as a headline or visual element, use the type treatment itself as an active part of the design, not a neutral delivery vehicle for the content.
+
+Default to line lengths of less than 80 characters. Serif typefaces can have slightly longer line lengths; give serif body text slightly more line-height than a sans-serif.
+
+Avoid these default typographic treatments; they are the commonest tells of a generated page:
+- Accenting just a single word or phrase in a headline, like putting one word in italic/bold or a different color.
+- Using all caps for labels.
+- Adding unnecessary typographic labels above content.
+
+Visual structure is information. Structural devices like outlines, borders, numbering, eyebrows, dividers, labels, etc., encode useful information about the content rather than decorate it. Many generic designs use numbered markers (01 / 02 / 03), but that's only appropriate if the content actually is a sequence — like a stepped process or a timeline. Before adding numbered markers, check the content really is a sequence.
+
+Use non-user-triggered motion sparingly and deliberately, only to draw attention. A single orchestrated moment — one page-load sequence or one reveal — lands better than scattered effects; fade-and-slide-up entrances on each section and hover transitions on every card are the generic default and read as AI-generated. Motion that answers a person's action (opening, expanding, confirming) is welcome when it shows what changed.
+
+Consider written content carefully. Often a design brief may not contain real content, and it's up to you to come up with copy and placeholder content. Copy can make a design feel as templated as the design itself. See the below section on writing for more guidance.
+
+## Process: plan, review against the brief, build, critique
+
+For calibration, AI-generated design right now clusters around some traits:
+1. a warm cream background (near #F4F1EA) with a high-contrast serif display and a terracotta or warm-clay accent (often near #D97757 — Anthropic's own Claude-interaction accent, so on a user's brief it reads as a tell);
+2. a near-black background with a single bright acid-green or vermilion accent;
+3. a broadsheet-style layout with hairline rules, zero border-radius, and dense newspaper-like columns;
+4. the SaaS-card kit: content chopped into identical rounded cards, one border-radius on everything regardless of hierarchy, the same soft grey shadow (rgba(0,0,0,.1)) under each, and gradient washes as decoration;
+5. template chrome that appears whatever the subject: a tracked-out ALL-CAPS eyebrow label above every heading; meta strings joined with middle dots ('A · B · C'); labels built as 'WORD — fragment' with a spaced em dash; tinted near-black (#0B0B0B, #111) standing in for black; a monospace face for small data labels; a '→' appended to link and button text.
+
+All traits are legitimate for some briefs, but they are defaults rather than choices, and they appear regardless of subject. Where the brief pins down a visual direction, follow it exactly — the brief's own words always win, including when it asks for one of these looks. Where it leaves an axis free, don't spend that freedom on one of these defaults. As with a hired human designer, there's often a careful balance between doing what you're good at and taking each project as a chance to experiment and learn.
+
+Work in two passes. First, brainstorm a short design plan based on the client's design brief: create a compact token system with color, type, layout, and principles.
+- Color: describe the core base palette as 4–6 named hex values.
+- Type: the typefaces and their roles.
+- Layout: a layout concept, using one-sentence prose descriptions and ASCII wireframes to ideate and compare. Include alignment guidance; should the content be left aligned, center aligned, justified?
+- Principles: the high-level guidance for what makes this page unique.
+
+Then review that plan against the brief before building: if any part of it reads like the generic default you would produce for any similar page (work through a similar prompt to see if you arrive somewhere similar) rather than a choice made for this specific brief — revise that part, say what you changed and why. Only after you've confirmed the relative uniqueness of your design plan should you start to write the code, following the revised plan.
+
+When writing the code, be careful of structuring your CSS selector specificities. It's easy to generate CSS classes that cancel each other out (especially with a type-based selector like .section and an element-based selector like .cta). This can happen often with padding/margin between sections.
+
+## Restraint and self-critique
+
+Spend your boldness in one place. Let one element be the memorable thing, keep everything around it quiet and disciplined, and cut any decoration that does not serve the brief. Build to a quality floor without announcing it: responsive down to mobile, visible keyboard focus, reduced motion respected, visually accessible, harmonious color palettes. Critique your own work as you build, taking screenshots to review if your environment supports it — a picture is worth 1000 tokens. Consider Chanel's advice: before leaving the house, take a look in the mirror and remove one accessory. Human creatives have memory and always try to do something new, so if you have a space to quickly jot down notes about what you've tried, it can help you in future passes.
+
+## More on writing in design
+
+Words appear in a design for one reason: to make it easier to understand and use. They are design content, not decoration. Bring the same intentionality and minimalism to copywriting that you would bring to spacing and color. Before writing anything, ask what the design needs to say, and how it can best be said to help the person navigate the experience.
+
+Write from the end user's perspective. Name things by what users will understand in simple language, not by how the system is built. A user manages notifications, not webhook config. Describe what something is or does in plain terms rather than selling it. Being specific and legible to new users is always better than being clever.
+
+Use active voice as default. A CTA says exactly what happens when it is used: "Save changes," not "Submit." An action keeps the same name through the whole flow, so the button that says "Publish" produces a toast that says "Published." The vocabulary of an interface is the signposting for someone navigating the product. Cohesion and consistency are how people learn their way around.
+
+Treat failure and emptiness as moments for direction, not mood. Explain what went wrong and how to fix it, in the interface's voice rather than a person's. Errors don't apologize, and they are never vague about what happened. An empty screen is an invitation to act.
+
+Keep the tone conversational: plain verbs, sentence case, no filler, with tone matched to the brand and the audience. Let each written element do exactly one job.
+</file>
 
 <file path="app/about/team/page.tsx">
 export default function About() {
@@ -218,6 +482,1444 @@ yarn-error.log*
 next-env.d.ts
 </file>
 
+<file path="AGENTS.md">
+# AGENTS.md — Claude Code Operating Manual
+
+## 0. Mission
+
+You are the coding agent for this portfolio repository.
+
+Your job is to make **small, safe, visually accurate improvements** while preserving existing behavior.
+
+You are not authorized to redesign or rewrite unrelated parts of the project.
+
+---
+
+# 1. GOLDEN RULE
+
+> **Caveman first. Specialist only when necessary. Minimal change always.**
+
+For non-trivial tasks, start with the Caveman skill/workflow.
+
+Caveman is the reconnaissance layer:
+- inspect;
+- locate;
+- understand;
+- plan;
+- identify risks.
+
+Do not immediately perform a broad codebase analysis.
+
+---
+
+# 2. COST / TOKEN CONTROL
+
+The user explicitly wants an efficient Claude Code workflow.
+
+## Default skill routing
+
+```text
+Task
+ ↓
+Caveman
+ ↓
+Is a specialist actually needed?
+ ├─ No → implement
+ └─ Yes
+     ↓
+  ONE targeted specialist
+     ↓
+  implement
+     ↓
+  Browser/QA if UI changed
+```
+
+## Never do this by default
+
+```text
+Caveman
++ ECC
++ UI/UX Pro Max
++ Frontend Design
++ GSAP
++ Responsive
++ Browser
+```
+
+Do not activate every skill for every task.
+
+## Specialist selection
+
+### `/caveman`
+
+Use first for:
+- repo exploration;
+- finding files;
+- dependency discovery;
+- tracing component usage;
+- understanding existing behavior;
+- small implementation planning.
+
+### `/ecc`
+
+Use for:
+- debugging;
+- code quality;
+- refactoring;
+- TypeScript issues;
+- architecture problems;
+- regression-sensitive changes.
+
+Do not use ECC as a generic prerequisite for every edit.
+
+### `/ui-ux-pro-max`
+
+Use when the request concerns:
+- layout;
+- visual hierarchy;
+- typography;
+- spacing;
+- component UX;
+- interaction patterns;
+- accessibility-oriented UI decisions.
+
+### `/frontend-design`
+
+Use when the request asks for:
+- new visual direction;
+- substantial page composition;
+- new section design;
+- a high-level visual redesign.
+
+Do not invoke it for a one-line spacing fix.
+
+### `/gsap` / animation skill
+
+Use when:
+- adding GSAP;
+- debugging GSAP;
+- building timelines;
+- scroll-triggered animation;
+- staggered animation;
+- animation lifecycle/performance;
+- responsive animation behavior.
+
+If the existing component already uses React Spring or Matter.js and the request does not require GSAP, do not migrate it.
+
+### Browser / QA
+
+Use when:
+- UI behavior changed;
+- animation changed;
+- responsive layout changed;
+- navigation changed;
+- a bug is visual or interaction-based;
+- the user explicitly asks for browser testing.
+
+Prefer targeted checks over broad exploratory testing.
+
+### Responsive Design
+
+Use when:
+- mobile/tablet/desktop layout is the actual problem;
+- breakpoint behavior changes;
+- overflow/cropping/viewport issues are involved.
+
+Do not use it merely because the component has Tailwind classes.
+
+---
+
+# 3. BEFORE EDITING
+
+For a non-trivial task:
+
+1. Run/activate Caveman.
+2. Identify the exact relevant files.
+3. Read only the necessary surrounding code.
+4. Determine current behavior.
+5. Decide whether one specialist is needed.
+6. Make a small plan.
+7. Implement the smallest change.
+
+Before editing, report internally or briefly:
+
+```text
+Relevant files:
+- ...
+
+Existing behavior:
+- ...
+
+Requested change:
+- ...
+
+Skill needed:
+- Caveman
+- [one specialist only if needed]
+
+Not changing:
+- ...
+```
+
+---
+
+# 4. PRESERVATION RULES
+
+Unless explicitly requested, do NOT change:
+
+- framework;
+- routing;
+- page content;
+- dark mode;
+- header behavior;
+- footer behavior;
+- existing animation concepts;
+- existing breakpoints;
+- public asset paths;
+- dependency versions;
+- unrelated components.
+
+Do not rewrite an entire component when a local fix is enough.
+
+---
+
+# 5. FILE EDITING RULES
+
+Prefer editing existing files.
+
+Create new files only when:
+- a reusable component is actually needed;
+- a clear architectural boundary exists;
+- the user requested it.
+
+Do not create:
+- speculative utilities;
+- generic wrappers;
+- unnecessary hooks;
+- abstraction layers for one use.
+
+---
+
+# 6. REACT / NEXT.JS
+
+Use Server Components by default.
+
+Use `"use client"` only when required by:
+- state;
+- effects;
+- browser APIs;
+- event handlers;
+- animation libraries;
+- gestures.
+
+Do not convert components between server/client boundaries casually.
+
+Avoid unnecessary rerenders.
+
+When using effects:
+- keep dependencies correct;
+- clean up listeners;
+- clean up timers;
+- clean up observers;
+- clean up animation instances.
+
+---
+
+# 7. GSAP RULES
+
+When GSAP is used:
+
+## Prefer scoped contexts
+
+```tsx
+const root = useRef<HTMLDivElement>(null);
+
+useLayoutEffect(() => {
+  const ctx = gsap.context(() => {
+    // animation
+  }, root);
+
+  return () => ctx.revert();
+}, []);
+```
+
+## Responsive animation
+
+Prefer:
+
+```tsx
+const mm = gsap.matchMedia();
+```
+
+instead of manually managing many resize listeners.
+
+## Avoid
+
+- global `document.querySelector()` when a ref can scope the animation;
+- creating timelines on every render;
+- leaving timelines alive after unmount;
+- animating layout properties unnecessarily;
+- continuous animation with no purpose;
+- duplicated event listeners.
+
+Prefer:
+- `transform`;
+- `opacity`;
+- CSS variables;
+- timeline/stagger;
+- `will-change` only where justified.
+
+---
+
+# 8. ANIMATION PERFORMANCE
+
+Before adding an animation, ask:
+
+1. Does it communicate something?
+2. Can CSS handle it?
+3. Can existing GSAP handle it?
+4. Is continuous JS actually necessary?
+5. Does mobile need the same animation?
+6. What happens with reduced motion?
+
+Prefer the cheapest implementation that achieves the requested visual result.
+
+---
+
+# 9. REDUCED MOTION
+
+Respect:
+
+```text
+prefers-reduced-motion: reduce
+```
+
+For non-essential animation:
+- disable;
+- simplify;
+- or immediately show the final state.
+
+Do not leave users with invisible content because an animation was disabled.
+
+---
+
+# 10. RESPONSIVE DESIGN
+
+Minimum mental test:
+
+```text
+375
+640
+768
+1024
+1280
+1440
+1920
+```
+
+For layout changes check:
+- overflow;
+- typography;
+- spacing;
+- image aspect ratio;
+- navigation;
+- touch;
+- fixed elements;
+- animation;
+- viewport height.
+
+Do not assume desktop CSS scales correctly to mobile.
+
+Avoid JavaScript width detection when CSS can solve the problem.
+
+---
+
+# 11. UI / UX
+
+When changing UI:
+- preserve hierarchy;
+- preserve content;
+- preserve existing identity;
+- maintain readable contrast;
+- maintain keyboard focus;
+- do not make hover the only interaction;
+- keep touch targets practical.
+
+Do not blindly apply a design-system skill's recommendation if it conflicts with the existing portfolio identity or the user's explicit request.
+
+---
+
+# 12. BROWSER / QA
+
+For UI changes, verify the actual rendered result when browser tooling is available.
+
+Targeted QA:
+
+### Visual
+- light mode;
+- dark mode;
+- requested route;
+- 375px;
+- desktop.
+
+### Interaction
+- click;
+- hover;
+- touch/swipe where relevant;
+- navigation;
+- keyboard focus.
+
+### Runtime
+- console errors;
+- animation cleanup;
+- broken assets;
+- layout overflow.
+
+Do not spend tokens testing unrelated pages unless the change affects global components.
+
+If Header, Footer, globals.css, or layout.tsx changes:
+- test multiple routes because these are global.
+
+---
+
+# 13. BUILD / TYPE CHECK
+
+When implementation is complete, run the smallest useful verification.
+
+Prefer:
+
+```bash
+npm run build
+```
+
+for build-sensitive changes.
+
+For UI-only work:
+- browser verification first;
+- build when practical.
+
+If the repository's lint command is unavailable or incompatible with the current Next.js version, do not invent a replacement as if it were equivalent. Report the limitation and use available checks.
+
+---
+
+# 14. DEPENDENCY RULE
+
+Before adding a package:
+
+1. check existing dependencies;
+2. check whether CSS/native browser APIs can solve it;
+3. check whether GSAP/React Spring/Matter.js already solves it;
+4. only then add a package.
+
+No dependency should be added for convenience alone.
+
+---
+
+# 15. CODE STYLE
+
+Match the existing repository style unless the touched code clearly requires cleanup.
+
+Avoid unrelated formatting changes.
+
+Do not reformat entire files.
+
+Do not rename public components or routes unless required.
+
+---
+
+# 16. COMMENT POLICY
+
+Do not add comments that merely restate obvious code.
+
+Add comments only for:
+- non-obvious animation math;
+- browser quirks;
+- architectural constraints;
+- intentional performance tradeoffs.
+
+---
+
+# 17. GIT SAFETY
+
+Never:
+- delete files without explicit need;
+- reset unrelated changes;
+- overwrite unrelated user work;
+- modify generated/config files without reason.
+
+If the working tree contains user changes, preserve them.
+
+---
+
+# 18. TASK EXECUTION TEMPLATE
+
+Use this internal flow:
+
+```text
+[1] CAVEMAN
+Reconnaissance only.
+
+[2] SCOPE
+Identify exact files and smallest change.
+
+[3] SPECIALIST
+Invoke only if the task genuinely needs:
+- ECC
+- UI/UX Pro Max
+- Frontend Design
+- GSAP/Animation
+- Responsive Design
+
+[4] IMPLEMENT
+Smallest safe patch.
+
+[5] QA
+Browser test if UI/interaction changed.
+
+[6] VERIFY
+Build/type/runtime checks as appropriate.
+
+[7] REPORT
+What changed + what was tested + remaining issue.
+```
+
+---
+
+# 19. EXAMPLE ROUTING
+
+## "Fix mobile overflow"
+
+```text
+Caveman
+→ inspect layout
+→ Responsive Design if needed
+→ patch
+→ browser at 375px
+```
+
+## "Make hero animation smoother"
+
+```text
+Caveman
+→ inspect TextPressure/hero
+→ GSAP/Animation
+→ patch only hero
+→ browser test
+```
+
+## "Redesign About page"
+
+```text
+Caveman
+→ inspect About
+→ UI/UX Pro Max OR Frontend Design
+→ implement
+→ Responsive QA
+```
+
+Do not automatically invoke both design skills unless the task genuinely requires both.
+
+## "Fix TypeScript error"
+
+```text
+Caveman
+→ locate error
+→ ECC if debugging is non-trivial
+→ patch
+→ type/build verification
+```
+
+---
+
+# 20. FINAL RESPONSE FORMAT
+
+After a task, respond concisely:
+
+```text
+Implemented:
+- ...
+
+Files changed:
+- ...
+
+Skills used:
+- Caveman
+- [specialist]
+
+Verified:
+- ...
+
+Not changed:
+- ...
+```
+
+If browser verification was not possible, say so plainly.
+
+# 21. PRIMARY PRINCIPLE
+
+> **Use intelligence selectively.**
+
+Caveman should reduce unnecessary context and token usage.
+
+Specialists should be called for specialized problems, not as mandatory ceremony.
+
+The best implementation is the smallest change that achieves the requested result while preserving the existing portfolio.
+</file>
+
+<file path="ARCHITECTURE.md">
+# ARCHITECTURE — Portfolio AI Agent Architecture
+
+## 1. Architecture Overview
+
+This repository uses a Next.js App Router structure:
+
+```text
+app/
+├── about/
+├── blog/
+├── contact/
+├── services/
+├── components/
+├── posts/
+├── fonts/
+├── globals.css
+├── layout.tsx
+└── page.tsx
+
+public/
+└── assets/
+```
+
+The architecture is component-oriented, with page-level composition in `app/**/page.tsx` and reusable interactive UI in `app/components/**`.
+
+## 2. Architectural Layers
+
+### Layer A — App / Routing
+
+Responsible for:
+- route entry points;
+- page composition;
+- layouts;
+- metadata;
+- navigation.
+
+Examples:
+- `app/page.tsx`
+- `app/about/page.tsx`
+- `app/contact/page.tsx`
+- `app/blog/page.tsx`
+- `app/blog/[slug]/page.tsx`
+- `app/layout.tsx`
+
+Rule:
+> Page files compose features. Avoid putting large reusable interactive systems directly into page files.
+
+### Layer B — UI Components
+
+Reusable visual/interactive components live under:
+
+```text
+app/components/
+```
+
+Current notable components:
+- Header
+- Footer
+- Contact
+- WorkCard
+- BlurText
+- FallingText
+- PixelTransition
+- TextPressure
+- MarkdownContent
+
+### Layer C — Styling
+
+Primary styling:
+- Tailwind CSS
+- `app/globals.css`
+- responsive utility classes
+- dark-mode classes
+
+Existing breakpoints include:
+- xs: 375px
+- sm: 640px
+- md: 768px
+- lg: 1024px
+- xl: 1440px
+- 2xl: 1920px
+
+Do not change breakpoint definitions globally without a concrete reason.
+
+### Layer D — Animation
+
+Animation technologies currently present:
+- GSAP
+- React Spring
+- Matter.js
+- browser APIs such as IntersectionObserver and requestAnimationFrame
+
+Animation ownership should remain local to the component that owns the interaction.
+
+### Layer E — Content / Data
+
+Blog content currently exists in:
+
+```text
+app/posts/data.ts
+```
+
+Do not introduce a CMS or external API unless explicitly requested.
+
+### Layer F — Static Assets
+
+Static assets live under:
+
+```text
+public/assets/
+```
+
+Preserve existing asset paths when possible.
+
+## 3. Client vs Server Components
+
+Default:
+- keep pages/components server-side where interactivity is not required;
+- use `"use client"` only when browser APIs, state, effects, gestures, or interactive animation require it.
+
+Client components should not be converted to server components blindly if they depend on:
+- `window`;
+- `document`;
+- localStorage;
+- event listeners;
+- animation libraries;
+- browser observers.
+
+## 4. Animation Architecture
+
+### GSAP
+
+Use GSAP for:
+- coordinated timelines;
+- advanced transitions;
+- scroll-linked sequences;
+- complex staggered animation;
+- interaction-driven animation.
+
+Recommended pattern:
+
+```tsx
+const root = useRef<HTMLDivElement>(null);
+
+useLayoutEffect(() => {
+  const ctx = gsap.context(() => {
+    // animation
+  }, root);
+
+  return () => ctx.revert();
+}, []);
+```
+
+Use `gsap.matchMedia()` when animation behavior differs across breakpoints.
+
+### React Spring
+
+Use React Spring where the existing component already owns spring-based stateful animation.
+
+Do not migrate React Spring → GSAP simply for stylistic consistency.
+
+### Matter.js
+
+Use Matter.js only for physics-driven interactions such as the existing FallingText effect.
+
+Avoid adding physics where CSS/GSAP is sufficient.
+
+### requestAnimationFrame
+
+Use only where continuous frame-by-frame updates are truly required.
+
+Every loop must:
+- have a cleanup mechanism;
+- stop on unmount;
+- avoid unnecessary DOM writes;
+- avoid running when the animation is not visible where practical.
+
+## 5. Animation Performance
+
+Prefer:
+- transform;
+- opacity;
+- CSS variables;
+- GPU-friendly properties.
+
+Be careful with:
+- width/height animation;
+- top/left animation;
+- filters;
+- large DOM node counts;
+- continuous canvas/physics loops.
+
+For GSAP:
+- kill/revert owned animations on cleanup;
+- avoid global selectors where scoped refs are available;
+- avoid creating duplicate timelines on every render.
+
+## 6. Responsive Architecture
+
+Responsive behavior should primarily use Tailwind breakpoints.
+
+Do not create JavaScript breakpoint state when CSS can solve the problem.
+
+JavaScript media queries are appropriate when:
+- animation logic genuinely differs;
+- interaction model changes;
+- a library requires runtime dimensions.
+
+For animations, prefer `gsap.matchMedia()` over manually maintaining multiple resize listeners where GSAP is already being used.
+
+## 7. Dark Mode
+
+Dark mode currently relies on:
+- `.dark` class;
+- localStorage;
+- system preference;
+- Tailwind dark variants.
+
+Do not replace this mechanism unless explicitly requested.
+
+When touching global theme behavior:
+- preserve first-paint behavior;
+- preserve system preference;
+- preserve manual preference;
+- test both modes.
+
+## 8. Navigation
+
+Header owns:
+- route navigation;
+- active route state;
+- mobile menu state;
+- dark mode toggle;
+- hide-on-scroll behavior.
+
+Do not duplicate these concerns in individual pages.
+
+## 9. Component Boundaries
+
+Create a new component when:
+- UI is reused;
+- interaction has meaningful internal state;
+- animation has independent lifecycle;
+- page logic becomes difficult to read.
+
+Do not create components solely to reduce line count.
+
+## 10. Data Boundaries
+
+Static content should remain static unless dynamic behavior is required.
+
+Do not introduce:
+- state management libraries;
+- API layers;
+- databases;
+- CMS;
+- abstraction frameworks
+
+without an explicit requirement.
+
+## 11. Dependency Policy
+
+Existing major dependencies:
+
+```text
+next
+react
+react-dom
+tailwindcss
+gsap
+@react-spring/web
+matter-js
+marked
+dompurify
+tailwind-scrollbar
+typescript
+```
+
+Before adding a dependency:
+1. check whether existing tools already solve the problem;
+2. prefer native CSS/DOM when appropriate;
+3. prefer existing libraries already used by the project;
+4. add a dependency only when the benefit is concrete.
+
+## 12. AI Agent Architecture
+
+The AI workflow itself follows:
+
+```text
+User Request
+    ↓
+Caveman reconnaissance
+    ↓
+Identify exact files / risks
+    ↓
+Choose ONE specialist if needed
+    ├── UI/UX Pro Max
+    ├── Frontend Design
+    ├── GSAP / Animation
+    ├── Responsive Design
+    ├── ECC
+    └── Browser / QA
+    ↓
+Minimal implementation
+    ↓
+Browser / QA when applicable
+    ↓
+Final verification
+```
+
+Caveman is the default entry point.
+
+Specialist skills are invoked only when their domain is materially involved.
+
+## 13. Architecture Invariants
+
+Unless explicitly requested, preserve:
+- route structure;
+- page purpose;
+- dark/light mode;
+- existing navigation;
+- existing animation intent;
+- component responsibilities;
+- responsive breakpoints;
+- public asset paths;
+- current framework;
+- current package ecosystem.
+</file>
+
+<file path="DESIGN.md">
+# DESIGN SYSTEM — Portfolio
+
+## 1. Design Intent
+
+This portfolio should feel like a personal developer portfolio rather than a generic SaaS template.
+
+Core qualities:
+- expressive typography;
+- minimal structure;
+- strong black/white contrast;
+- restrained accent usage;
+- editorial composition;
+- interactive motion;
+- experimental but usable;
+- responsive first.
+
+The design should communicate craft through details, not through excessive decoration.
+
+## 2. Existing Visual Foundation
+
+Current visual foundation includes:
+- white/light background;
+- black/dark background;
+- gray text hierarchy;
+- orange/coral accent around `#FA6B48`;
+- typography driven by large responsive sizes;
+- JetBrains Mono currently applied at the root body;
+- Montserrat Alternates is available in the root layout;
+- peacock logo assets;
+- animated typography and transition components.
+
+Treat these as the current design language.
+
+Do not introduce a new visual identity unless explicitly requested.
+
+## 3. Color Rules
+
+Primary foundation:
+
+```text
+Light background: #FFFFFF
+Light foreground: #000000
+
+Dark background: #000000 / zinc-950 family
+Dark foreground: #FFFFFF
+
+Existing accent:
+#FA6B48
+```
+
+Use the accent intentionally:
+- active navigation;
+- interaction feedback;
+- important highlights;
+- selected states;
+- visual details.
+
+Avoid turning every component into an accent-colored component.
+
+## 4. Typography
+
+Typography should prioritize:
+1. hierarchy;
+2. readability;
+3. responsive scaling;
+4. expressive hero treatment.
+
+Hero typography may be oversized and animated.
+
+Body typography must remain readable on:
+- 375px;
+- 640px;
+- 768px;
+- 1024px+.
+
+Avoid arbitrary font sizes that create overflow.
+
+Prefer responsive utilities or `clamp()` for newly introduced type scales where appropriate.
+
+## 5. Layout
+
+Use:
+- strong whitespace;
+- clear two-column compositions on larger screens;
+- stacked compositions on smaller screens;
+- consistent horizontal padding;
+- viewport-aware hero sections.
+
+Do not force desktop layouts onto mobile.
+
+When a section uses `h-screen`, verify that content does not become inaccessible on short mobile viewports.
+
+Prefer `min-h-dvh` where viewport-height behavior genuinely requires dynamic viewport handling.
+
+## 6. Responsive Rules
+
+### Mobile — 375px+
+
+Priority:
+- readability;
+- touch usability;
+- no horizontal scroll;
+- simplified animation;
+- stacked layout;
+- accessible navigation.
+
+### Tablet — 768px+
+
+Priority:
+- transition from stacked to split layouts;
+- controlled typography growth;
+- preserve spacing.
+
+### Desktop — 1024px+
+
+Priority:
+- expressive composition;
+- large type;
+- richer hover/mouse interactions;
+- larger visual rhythm.
+
+### Large Desktop — 1440px+
+
+Do not simply enlarge everything.
+
+Use the additional width for:
+- whitespace;
+- composition;
+- controlled max-widths;
+- larger hero typography where intentional.
+
+## 7. Motion Design
+
+Motion should communicate hierarchy.
+
+### Motion hierarchy
+
+1. Page/section entrance
+2. Hero typography
+3. Interactive feedback
+4. Navigation transitions
+5. Decorative effects
+
+Do not let decorative animation compete with primary content.
+
+### GSAP rules
+
+Prefer:
+- timelines;
+- stagger;
+- transform;
+- opacity;
+- scoped selectors;
+- lifecycle cleanup.
+
+Use `gsap.matchMedia()` for responsive animation variants.
+
+### Reduced Motion
+
+Every substantial animation system must have a reduced-motion strategy.
+
+At minimum:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* remove or simplify non-essential motion */
+}
+```
+
+For JS/GSAP:
+- detect reduced motion;
+- skip heavy timelines;
+- show the final visual state where appropriate.
+
+## 8. Interaction
+
+Interactive elements should have:
+- visible hover state on pointer devices;
+- usable touch state;
+- keyboard focus;
+- sufficient target size;
+- clear active state.
+
+Do not make critical information available only through hover.
+
+## 9. Cards / Work Showcase
+
+Work cards should prioritize:
+- project identity;
+- visual preview;
+- concise description;
+- clear interaction.
+
+Existing WorkCard carousel behavior should be preserved unless the task explicitly changes it.
+
+When modifying the carousel:
+- test touch swipe;
+- test desktop interaction;
+- test infinite-loop behavior;
+- test resize behavior;
+- verify no layout shift.
+
+## 10. Header
+
+Header is a global interaction.
+
+Preserve:
+- fixed positioning;
+- hide-on-scroll behavior;
+- mobile menu;
+- active route indication;
+- dark mode.
+
+When changing it, verify every route.
+
+## 11. Animation Component Guidelines
+
+### TextPressure
+
+Treat as a hero-level expressive component.
+
+Avoid putting many additional continuous effects around it.
+
+### BlurText
+
+Good for:
+- entrance animation;
+- section headings;
+- controlled text reveals.
+
+Avoid using it on long paragraphs.
+
+### FallingText
+
+Physics-based and comparatively expensive.
+
+Use selectively.
+
+Never duplicate large Matter.js simulations without a concrete visual reason.
+
+### PixelTransition
+
+Good for:
+- image/content transitions;
+- hover/click reveal effects.
+
+Verify touch-device behavior before changing its interaction model.
+
+## 12. Visual QA Checklist
+
+For every visual change:
+
+- [ ] Light mode
+- [ ] Dark mode
+- [ ] 375px
+- [ ] 768px
+- [ ] 1024px
+- [ ] 1440px
+- [ ] Keyboard navigation
+- [ ] Hover states
+- [ ] Touch behavior
+- [ ] Reduced motion
+- [ ] No horizontal overflow
+- [ ] No obvious layout shift
+- [ ] No animation stuck after unmount
+- [ ] No console errors
+
+## 13. Design Decision Rule
+
+When two implementations look equivalent:
+
+Choose the one that:
+1. uses fewer dependencies;
+2. has less runtime work;
+3. is easier to maintain;
+4. is more accessible;
+5. preserves the existing architecture.
+
+Do not optimize for novelty.
+</file>
+
+<file path="global.d.ts">
+declare module "*.css";
+</file>
+
+<file path="PRD.md">
+# PRD — Portfolio AI-Assisted Development
+
+## 1. Project Context
+
+This repository is a personal portfolio built with Next.js App Router, React, TypeScript, and Tailwind CSS.
+
+Current repository characteristics:
+- Next.js 15 + React 19
+- Tailwind CSS 4
+- TypeScript
+- GSAP
+- React Spring
+- Matter.js
+- Marked + DOMPurify
+- Existing pages: Home, About, Team, Services, Contact, Blog
+- Existing interactive components include `TextPressure`, `BlurText`, `FallingText`, `PixelTransition`, `WorkCard`, Header, Footer, and Markdown rendering.
+- Dark/light mode and responsive behavior are already part of the site.
+
+The repository already contains substantial visual/interaction work. The AI agent must therefore behave primarily as a **preservation-first maintainer and improver**, not as a greenfield designer.
+
+## 2. Product Goal
+
+Maintain and evolve the portfolio into a polished, responsive, animation-rich developer portfolio while preserving existing visual identity, content, routes, interactions, and working behavior unless a change is explicitly requested.
+
+Primary quality areas:
+1. UI/UX quality
+2. Responsive design
+3. GSAP / animation quality
+4. Accessibility and reduced-motion behavior
+5. Browser compatibility
+6. Visual regression prevention
+7. Code quality and maintainability
+
+## 3. Core Principle
+
+> **Do not redesign what was not requested.**
+
+Before changing UI:
+- inspect the current implementation;
+- understand existing behavior;
+- identify the smallest change that satisfies the request;
+- preserve existing appearance outside the requested scope.
+
+Do not replace existing animation libraries or component architecture merely because another approach is available.
+
+## 4. AI Agent Strategy — Caveman First
+
+The most important operating constraint is **token and API efficiency**.
+
+### Default workflow
+
+Use the Caveman skill/workflow first for:
+- repository reconnaissance;
+- locating relevant files;
+- understanding existing components;
+- identifying dependencies;
+- planning a small change;
+- determining which other skill is actually necessary.
+
+Caveman should act as the **cheap coordinator / scout**.
+
+Do not automatically invoke every available skill.
+
+### Skill escalation
+
+Use other skills only when their specialization is needed:
+
+| Skill | Use when |
+|---|---|
+| Caveman | Always first for non-trivial code tasks |
+| ECC | Code quality, refactoring, debugging, architecture review, safe implementation |
+| UI/UX Pro Max | UI system, layout, hierarchy, typography, component UX, design decisions |
+| Frontend Design | High-level visual direction or substantial frontend composition |
+| Browser / QA | Real browser verification, interaction testing, responsive checks, visual regressions |
+| GSAP / Animation | GSAP timelines, scroll animation, micro-interactions, performance |
+| Responsive Design | Breakpoint behavior, mobile/tablet/desktop layout problems |
+
+### Cost rule
+
+Prefer:
+
+`Caveman → targeted specialist → implementation → Browser/QA`
+
+Avoid:
+
+`Caveman → every skill → broad analysis → rewrite`
+
+The agent must not call expensive/deep workflows when a simple repository inspection or targeted edit is sufficient.
+
+## 5. Goals
+
+### P0 — Required
+
+- Preserve existing routes and page functionality.
+- Preserve dark/light mode behavior.
+- Preserve existing header/footer behavior.
+- Preserve existing animation intent.
+- Avoid horizontal overflow at mobile widths.
+- Keep TypeScript/build/lint healthy.
+- Ensure animations do not block interaction or cause obvious jank.
+- Respect `prefers-reduced-motion`.
+- Verify important changes in a real browser when possible.
+
+### P1 — Important
+
+- Improve animation implementation quality where requested.
+- Reduce unnecessary client-side work.
+- Improve responsive behavior.
+- Improve accessibility and keyboard interaction.
+- Remove obvious dead/commented code when it is in the touched area.
+- Improve component consistency without changing the visual result unnecessarily.
+
+### P2 — Optional
+
+- Broader component refactoring.
+- Design-token cleanup.
+- Animation abstraction.
+- Content/data architecture improvements.
+- Performance optimizations outside the requested scope.
+
+## 6. Non-Goals
+
+Do not:
+- rewrite the whole project;
+- migrate frameworks;
+- replace Next.js;
+- replace Tailwind;
+- replace GSAP with another animation library without explicit approval;
+- redesign the visual identity without a design request;
+- modify unrelated pages merely for consistency;
+- remove existing components because they look unfinished;
+- introduce unnecessary dependencies;
+- create speculative features.
+
+## 7. Design Requirements
+
+The design system should remain coherent with the existing portfolio:
+- strong typography;
+- minimal editorial portfolio feel;
+- black/white foundation;
+- existing accent color usage should be preserved unless a new palette is explicitly requested;
+- responsive typography;
+- generous spacing;
+- purposeful motion;
+- interaction should feel intentional rather than decorative.
+
+The existing repository uses responsive Tailwind breakpoints and multiple animated components. Treat these as existing design decisions, not problems to automatically replace.
+
+## 8. Animation Requirements
+
+Animation must have a purpose:
+- guide attention;
+- communicate state;
+- establish hierarchy;
+- improve transition continuity;
+- provide feedback.
+
+Prefer:
+- `transform` and `opacity`;
+- GSAP timelines for coordinated motion;
+- scoped animation cleanup;
+- `gsap.context()` where appropriate;
+- `gsap.matchMedia()` for responsive animation rules;
+- reduced-motion fallbacks.
+
+Avoid:
+- unnecessary layout-triggering animation;
+- uncontrolled requestAnimationFrame loops;
+- duplicated event listeners;
+- animations that continue after unmount;
+- heavy effects on mobile without testing.
+
+Existing Matter.js and React Spring animations must be treated as existing dependencies and not casually rewritten.
+
+## 9. Responsive Requirements
+
+Minimum verification targets:
+- 375px mobile
+- 640px
+- 768px tablet
+- 1024px desktop transition
+- 1280px
+- 1440px+
+- 1920px where relevant
+
+Check:
+- no unintended horizontal scroll;
+- readable typography;
+- navigation usability;
+- touch targets;
+- image/media cropping;
+- animation behavior;
+- section height;
+- overflow;
+- fixed/sticky elements;
+- dark mode;
+- reduced motion.
+
+## 10. QA / Definition of Done
+
+A task is complete only when:
+- requested behavior works;
+- unrelated behavior is preserved;
+- TypeScript/build checks pass when applicable;
+- browser verification is performed for UI/interaction changes when browser tooling is available;
+- mobile behavior is checked for responsive changes;
+- no obvious console/runtime errors were introduced;
+- animations clean up correctly;
+- reduced-motion behavior is respected.
+
+## 11. Change Size
+
+Prefer small, reviewable changes.
+
+For a large task:
+1. reconnaissance;
+2. plan;
+3. implement one logical slice;
+4. verify;
+5. continue.
+
+Do not mix unrelated refactors with feature work.
+
+## 12. Agent Output
+
+Before implementation:
+- summarize what was found;
+- state which files will be touched;
+- state which skills are actually needed;
+- state what will intentionally NOT be changed.
+
+After implementation:
+- summarize changes;
+- list verification performed;
+- mention remaining risks only when real.
+</file>
+
 <file path="README.md">
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
@@ -255,6 +1957,20 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+</file>
+
+<file path="skills-lock.json">
+{
+  "version": 1,
+  "skills": {
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576"
+    }
+  }
+}
 </file>
 
 <file path="app/components/FallingText/FallingText.tsx">
@@ -726,7 +2442,7 @@ export const posts: Post[] = [
     title: "Getting Started Crafting a Website",
     author: "Aria Aji",
     date: "2025-07-10",
-    content: "# Embrace the Journey \n\n The path to becoming a web developer is equal parts exciting and overwhelming, especially at the beginning. You’ll face moments of frustration, but every challenge is a chance to grow your problem-solving muscles. Start by acknowledging that confusion is normal—even seasoned developers Google daily questions! What matters most is your curiosity and willingness to experiment. Welcome to a field where lifelong learning isn’t optional; it’s the core of the craft. \n\n Build Your Foundation \n\n Begin with the absolute basics: HTML for structure, CSS for styling, and JavaScript for interactivity. Free resources like freeCodeCamp, MDN Web Docs, or Codecademy offer structured, hands-on tutorials to solidify these skills. Don’t rush—master positioning elements with CSS before jumping into frameworks like React. Use tools like VS Code and Chrome DevTools early; they’ll become your daily companions. Consistency beats intensity: code for 30 minutes daily rather than 8 hours once a week. \n\n Create, Don’t Just Consume \n\n Tutorials are helpful, but real growth happens when you build projects you design. Start tiny: a personal bio page, a recipe card, or a calculator. When stuck, break problems into micro-tasks (e.g., “How do I center this button?” instead of “How do I build a full app?”). Share your work on GitHub—it’s your developer resume. Embrace ugly first drafts; refactoring is where magic happens.\n\n Join the Community \n\n Web development thrives on collaboration, so engage with others from day one. Ask questions on Stack Overflow, join Discord groups like The Odin Project, or follow devs on Twitter/X. Attend local meetups or online events; hearing others’ struggles normalizes your own. Remember, every developer’s journey looks different—avoid comparing your Chapter 1 to someone’s Chapter 20. Your unique voice and perspective belong here."
+    content: "# Embrace the Journey \n\n The path to becoming a web developer is equal parts exciting and overwhelming, especially at the beginning. You’ll face moments of frustration, but every challenge is a chance to grow your problem-solving muscles. Start by acknowledging that confusion is normal—even seasoned developers Google daily questions! What matters most is your curiosity and willingness to experiment. Welcome to a field where lifelong learning isn’t optional; it’s the core of the craft. \n\n Build Your Foundation \n\n Begin with the absolute basics: HTML for structure, CSS for styling, and JavaScript for interactivity. Free resources like freeCodeCamp, MDN Web Docs, or Codecademy offer structured, hands-on tutorials to solidify these skills. Don’t rush—master positioning elements with CSS before jumping into frameworks like React. Use tools like VS Code and Chrome DevTools early; they’ll become your daily companions. Consistency beats intensity: code for 30 minutes daily rather than 8 hours once a week. \n\n Create, Don’t Just Consume \n\n Tutorials are helpful, but real growth happens when you build projects you design. Start tiny: a personal bio page, a recipe card, or a calculator. When stuck, break problems into micro-tasks (e.g., “How do I center this button?” instead of “How do I build a full app?”). Share your work on GitHub—it’s your developer resume. Embrace ugly first drafts; refactoring is where magic happens.\n\n Join the Community \n\n Website development thrives on collaboration, so engage with others from day one. Ask questions on Stack Overflow, join Discord groups like The Odin Project, or follow devs on Twitter/X. Attend local meetups or online events; hearing others’ struggles normalizes your own. Remember, every developer’s journey looks different—avoid comparing your Chapter 1 to someone’s Chapter 20. Your unique voice and perspective belong here."
   },
   {
     id: "2",
@@ -948,66 +2664,6 @@ const Contact: React.FC = () => {
 export default Contact;
 </file>
 
-<file path="app/contact/page.tsx">
-import ContactSection from "../components/Contact/contact"
-
-export default function About() {
-  return (
-    <main>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] h-screen">
-
-      {/* <div className="col-span-1 sm:col-span-2  mt-[30px] flex w-full flex-col space-y-2.5 leading-[130%] font-normal">
-        <div>Hero Image</div>
-      </div> */}
-
-      <div className="flex col-span-1 h-full items-start sm:items-center">
-        <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-4xl lg:text-5xl xl:max-w-[971px] 2xl:max-w-[1290px]">
-            Lorem, ipsum dolor. <span className="font-bold">Lorem ipsum dolor sit amet.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum..</span>
-        </p>
-      </div>
-
-      <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
-        <div className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] content-center">Contact</div>
-      </div>
-      </div>
-
-
-      <div className="container flex mx-auto my-20 w-fit content-center place-self-center">
-        < ContactSection />
-      </div>
-    </main>
-
-  )
-}
-</file>
-
-<file path="app/services/page.tsx">
-// export default function About() {
-//   return (
-//     <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] h-screen">
-
-//       {/* <div className="col-span-1 sm:col-span-2  mt-[30px] flex w-full flex-col space-y-2.5 leading-[130%] font-normal">
-//         <div>Hero Image</div>
-//       </div> */}
-
-//       <div className="flex col-span-1 h-full items-start sm:items-center">
-//         <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-4xl lg:text-5xl xl:max-w-[971px] 2xl:max-w-[1290px]">
-//           Lorem, ipsum dolor. <span className="font-bold">Lorem ipsum dolor sit amet.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum.</span> Lorem, ipsum. <span className="font-bold">Lorem, ipsum..</span>
-//         </p>
-//       </div>
-
-//       <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
-//         <div className="font-bold text-7xl lg:text-9xl xl:text-[140px] 2xl:text-[180px] content-center">Services</div>
-//       </div>
-      
-      
-
-//     </main>
-//   )
-// }
-</file>
-
 <file path="app/globals.css">
 @import 'tailwindcss';
 
@@ -1081,108 +2737,49 @@ export default function About() {
 }
 </file>
 
-<file path="app/components/Footer/footer.tsx">
-'use client'
+<file path="app/contact/page.tsx">
+import ContactSection from "../components/Contact/contact"
 
-import Link from "next/link";
-
-const socials = [
-  { id: 1, name: "GitHub", url: "https://github.com/ariaajipw" },
-  { id: 2, name: "LinkedIn", url: "https://linkedin.com/in/aria-aji" },
-  { id: 3, name: "X", url: "https://x.com/ariaajipw" },
-  { id: 4, name: "Instagram", url: "https://instagram.com/ariaaji" }
-];
-
-const Footer = () => {
+export default function About() {
   return (
-    <footer className="bg-white dark:bg-[#0a0a0a] mt-auto">
-      <div className="container mx-auto py-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-[20px]">
-          {/* Bagian 1: Tentang Kami */}
-          <div>
+    <main>
 
-          <div className="group">
-            {/* <h3 className="text-[16px] sm:text-lg font-semibold text-gray-800 dark:text-white underline underline-offset-2">
-              Lorem, ipsum dolor.
-            </h3>
-            <img src="/assets/img/peacock-black.png" alt="" className="w-[40px]"/> */}
-            <a href="/" className='flex'><span className='hover:text-[#FA6B48] underline underline-offset-5 text-3xl font-bold'>Perkasa Wibowo</span><img src="/assets/img/peacock-black.png" alt="" className='w-[60px] hidden group-hover:block dark:hidden dark:group-hover:hidden'/><img src="/assets/img/peacock-white.png" alt="" className='w-[60px] hidden group-hover:block dark:hidden'/></a>
-          </div>
-            <p className="text-sm mt-4 text-gray-600 dark:text-gray-300">
-            Bandung,<br></br>Jl. Terusan Prof. DR. Sutami No. 23, <br></br>Sarijadi, Kec. Sukasari,<br></br>Jawa Barat 40151<br></br>Indonesia.
-            </p>
-          </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px]">
 
-          {/* Bagian 2: Quick Links */}
-          <div>
-            {/* <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-              Tautan Cepat
-            </h3> */}
-            <ul className="mt-4 space-y-2 flex gap-9 text-sm">
-              <li>
-                <Link
-                  href="/about"
-                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
-                >
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
-                >
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
-                >
-                  Blog
-                </Link>
-              </li>
-            </ul>
-
-            {/* Bagian 3: Social Media */}
-            <ul className="mt-4 space-y-2 flex gap-9 text-sm">
-              {socials.map((social) => (
-                <Link
-                  key={social.id}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
-                    >
-                    {social.name}
-                </Link>
-              ))}
-            </ul>
-          </div>
-
-        </div>
-
-        {/* Hak Cipta */}
-        <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center">
-          <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-[16px]">
-            © {new Date().getFullYear()} All rights reserved.
-          </p>
-        </div>
+      <div className="flex col-span-1 h-full items-start sm:items-center">
+        <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-3xl lg:text-4xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+            <span className="font-black">Building thoughtful, interactive, and accessible web experiences.</span>  
+            Turn static ideas into fluid interfaces. 
+            <span className="font-bold">Tell me what you’re working on.</span>.
+        </p>
       </div>
-    </footer>
-  );
-};
 
-export default Footer;
+      <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
+        <div className="font-bold text-5xl md:text-4xl lg:text-7xl xl:text-7xl 2xl:text-9xl content-center">Contact</div>
+      </div>
+      </div>
+
+
+      <div className="container flex mx-auto my-40 w-fit content-center place-self-center">
+        < ContactSection />
+      </div>
+    </main>
+
+  )
+}
+</file>
+
+<file path="app/services/page.tsx">
+export default function ServicesPage() {
+    return (
+      <main className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold">Services</h1>
+          <p className="text-gray-500 mt-2">On Going Development</p>
+        </div>
+      </main>
+    );
+  }
 </file>
 
 <file path="app/layout.tsx">
@@ -1293,8 +2890,8 @@ export default function About() {
       <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
         <h3 className="font-bold mb-2">Career Experience</h3>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Frontend Developer Intern <br /> <span className="opacity opacity-50">at Hubton Indonesia </span><br />  <span className="opacity opacity-50">(2024-2025)</span></li>
-          <li>Freelance Web Projects <br /> <span className="opacity opacity-50">(2023-present)</span></li>
+          <li>Front-end Developer Intern <br /> <span className="opacity opacity-50">at Hubton Indonesia </span><br />  <span className="opacity opacity-50">(2024-2025)</span></li>
+          <li>Freelance Website Projects <br /> <span className="opacity opacity-50">(2023-2024)</span></li>
           <br />
           <br />
           <br />
@@ -1305,7 +2902,7 @@ export default function About() {
       <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
         <h3 className="font-bold mb-2">Education</h3>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Web Development Bootcamp <br /> <span className="opacity opacity-50">Udemy</span></li>
+          <li>Website Development Bootcamp <br /> <span className="opacity opacity-50">Udemy</span></li>
           <br />
           <br />
           <br />
@@ -1405,6 +3002,110 @@ export default function About() {
     </main>
   );
 }
+</file>
+
+<file path="app/components/Footer/footer.tsx">
+'use client'
+
+import Link from "next/link";
+
+const socials = [
+  { id: 1, name: "GitHub", url: "https://github.com/ariaajipw" },
+  { id: 2, name: "LinkedIn", url: "https://linkedin.com/in/aria-aji" },
+  { id: 3, name: "X", url: "https://x.com/ariaajipw" },
+  // { id: 4, name: "Instagram", url: "https://instagram.com/ariaaji" }
+];
+
+const Footer = () => {
+  return (
+    <footer className="bg-white dark:bg-[#0a0a0a] mt-auto">
+      <div className="container mx-auto py-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-[20px]">
+          {/* Bagian 1: Tentang Kami */}
+          <div>
+
+          <div className="group">
+            {/* <h3 className="text-[16px] sm:text-lg font-semibold text-gray-800 dark:text-white underline underline-offset-2">
+              Lorem, ipsum dolor.
+            </h3>
+            <img src="/assets/img/peacock-black.png" alt="" className="w-[40px]"/> */}
+            <a href="/" className='flex'><span className='hover:text-[#FA6B48] underline underline-offset-5 text-3xl font-bold'>Perkasa Wibowo</span><img src="/assets/img/peacock-black.png" alt="" className='w-[60px] hidden group-hover:block dark:hidden dark:group-hover:hidden'/><img src="/assets/img/peacock-white.png" alt="" className='w-[60px] hidden group-hover:block dark:hidden'/></a>
+          </div>
+            <p className="text-sm mt-4 text-gray-600 dark:text-gray-300">
+            Bandung,<br></br>Jl. Terusan Prof. DR. Sutami No. 23, <br></br>Sarijadi, Kec. Sukasari,<br></br>Jawa Barat 40151<br></br>Indonesia.
+            </p>
+          </div>
+
+          {/* Bagian 2: Quick Links */}
+          <div>
+            {/* <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+              Tautan Cepat
+            </h3> */}
+            <ul className="mt-4 space-y-2 flex gap-9 text-sm">
+              <li>
+                <Link
+                  href="/about"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  About
+                </Link>
+              </li>
+              {/* <li>
+                <Link
+                  href="/services"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  Services
+                </Link>
+              </li> */}
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  Blog
+                </Link>
+              </li>
+            </ul>
+
+            {/* Bagian 3: Social Media */}
+            <ul className="mt-4 space-y-2 flex gap-9 text-sm">
+              {socials.map((social) => (
+                <Link
+                  key={social.id}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                    >
+                    {social.name}
+                </Link>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Hak Cipta */}
+        <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center">
+          <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-[16px]">
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
 </file>
 
 <file path="app/components/PixelTransition/PixelTransition.tsx">
@@ -1580,304 +3281,6 @@ const PixelTransition: React.FC<PixelTransitionProps> = ({
 export default PixelTransition;
 </file>
 
-<file path="app/components/TextPressure/TextPressure.tsx">
-"use client";
-
-import { useEffect, useRef, useState } from 'react';
-
-interface TextPressureProps {
-    text?: string;
-    fontFamily?: string;
-    fontUrl?: string;
-    width?: boolean;
-    weight?: boolean;
-    italic?: boolean;
-    alpha?: boolean;
-    flex?: boolean;
-    stroke?: boolean;
-    scale?: boolean;
-    textColor?: string;
-    strokeColor?: string;
-    strokeWidth?: number;
-    className?: string;
-    minFontSize?: number;
-    darkMode?: boolean;
-    darkTextColor?: string;
-    darkStrokeColor?: string;
-    darkBackground?: string;
-    colorCycle?: string[];
-    colorCycleDuration?: number; 
-}
-
-const TextPressure: React.FC<TextPressureProps> = ({
-    text = 'Compressa',
-    fontFamily = 'Compressa VF',
-    fontUrl = 'https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2',
-    width = true,
-    weight = true,
-    italic = true,
-    alpha = false,
-    flex = true,
-    stroke = false,
-    scale = false,
-    textColor = '#000000',
-    strokeColor = '#FF0000',
-    strokeWidth = 2,
-    className = '',
-    minFontSize = 300,
-    darkMode = false,
-    darkTextColor = '#FFFFFF',
-    darkStrokeColor = '#00FFFF',
-    darkBackground = 'transparent',
-    colorCycle = [], // Default: array kosong (tidak ada animasi)
-    colorCycleDuration = 2000, // Default: 2 detik
-}) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const titleRef = useRef<HTMLHeadingElement>(null);
-    const spansRef = useRef<(HTMLSpanElement | null)[]>([]);
-
-    const mouseRef = useRef({ x: 0, y: 0 });
-    const cursorRef = useRef({ x: 0, y: 0 });
-
-    const [fontSize, setFontSize] = useState(minFontSize);
-    const [scaleY, setScaleY] = useState(1);
-    const [lineHeight, setLineHeight] = useState(1);
-    const [responsiveMinFontSize, setResponsiveMinFontSize] = useState(minFontSize);
-
-    const chars = text.split('');
-
-    const dist = (a: { x: number; y: number }, b: { x: number; y: number }) => {
-        const dx = b.x - a.x;
-        const dy = b.y - a.y;
-        return Math.sqrt(dx * dx + dy * dy);
-    };
-
-    const updateResponsiveMinFontSize = () => {
-        const width = window.innerWidth;
-
-        if (width >= 1536) {
-            setResponsiveMinFontSize(400);
-        } else if (width >= 1280) {
-            setResponsiveMinFontSize(350);
-        } else if (width >= 1024) {
-            setResponsiveMinFontSize(280);
-        } else if (width >= 768) {
-            setResponsiveMinFontSize(200);
-        } else if (width >= 640) {
-            setResponsiveMinFontSize(150);
-        } else {
-            setResponsiveMinFontSize(130);
-        }
-    };
-
-    useEffect(() => {
-        updateResponsiveMinFontSize();
-        window.addEventListener('resize', updateResponsiveMinFontSize);
-        return () => window.removeEventListener('resize', updateResponsiveMinFontSize);
-    }, []);
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            cursorRef.current.x = e.clientX;
-            cursorRef.current.y = e.clientY;
-        };
-        const handleTouchMove = (e: TouchEvent) => {
-            const t = e.touches[0];
-            cursorRef.current.x = t.clientX;
-            cursorRef.current.y = t.clientY;
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('touchmove', handleTouchMove, { passive: false });
-
-        if (containerRef.current) {
-            const rect = containerRef.current.getBoundingClientRect();
-            mouseRef.current.x = rect.left + rect.width / 1;
-            mouseRef.current.y = rect.top + rect.height / 1;
-            cursorRef.current.x = mouseRef.current.x;
-            cursorRef.current.y = mouseRef.current.y;
-        }
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('touchmove', handleTouchMove);
-        };
-    }, []);
-
-    const setSize = () => {
-        if (!containerRef.current || !titleRef.current) return;
-
-        const containerRect = containerRef.current.getBoundingClientRect();
-        let newFontSize = containerRect.width / (chars.length / 1.5);
-        newFontSize = Math.max(newFontSize, responsiveMinFontSize);
-
-        setFontSize(newFontSize);
-        setScaleY(1);
-        setLineHeight(1);
-
-        requestAnimationFrame(() => {
-            if (!titleRef.current) return;
-            const textRect = titleRef.current.getBoundingClientRect();
-
-            if (scale && textRect.height > 0) {
-                const yRatio = containerRect.height / textRect.height;
-                setScaleY(yRatio);
-                setLineHeight(yRatio);
-            }
-        });
-    };
-
-    useEffect(() => {
-        setSize();
-        window.addEventListener('resize', setSize);
-        return () => window.removeEventListener('resize', setSize);
-    }, [scale, text, responsiveMinFontSize]);
-
-    useEffect(() => {
-        let rafId: number;
-        const animate = () => {
-            mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
-            mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
-
-            if (titleRef.current) {
-                const titleRect = titleRef.current.getBoundingClientRect();
-                const maxDist = titleRect.width / 2;
-
-                spansRef.current.forEach((span) => {
-                    if (!span) return;
-
-                    const rect = span.getBoundingClientRect();
-                    const charCenter = {
-                        x: rect.x + rect.width / 2,
-                        y: rect.y + rect.height / 2,
-                    };
-
-                    const d = dist(mouseRef.current, charCenter);
-
-                    const getAttr = (distance: number, minVal: number, maxVal: number) => {
-                        const val = maxVal - Math.abs((maxVal * distance) / (maxDist * 0.5));
-                        return Math.max(minVal, val + minVal / 2);
-                    };
-
-                    const wdth = width ? Math.floor(getAttr(d, 5, 200)) : 100;
-                    const wght = weight ? Math.floor(getAttr(d, 100, 900)) : 400;
-                    const italVal = italic ? getAttr(d, 0, 1).toFixed(2) : '0';
-                    const alphaVal = alpha ? getAttr(d, 0, 1).toFixed(2) : '1';
-
-                    span.style.opacity = alphaVal;
-                    span.style.fontVariationSettings = `'wght' ${wght}, 'wdth' ${wdth}, 'ital' ${italVal}`;
-                });
-            }
-
-            rafId = requestAnimationFrame(animate);
-        };
-
-        animate();
-        return () => cancelAnimationFrame(rafId);
-    }, [width, weight, italic, alpha, chars.length]);
-
-        const [currentColorIndex, setCurrentColorIndex] = useState(0);
-
-    useEffect(() => {
-        if (!Array.isArray(colorCycle) || colorCycle.length <= 1) return; // Tidak perlu animasi jika hanya 1 warna
-        
-        const interval = setInterval(() => {
-            setCurrentColorIndex(prev => (prev + 1) % colorCycle.length);
-        }, colorCycleDuration);
-        
-        return () => clearInterval(interval);
-    }, [colorCycle, colorCycleDuration]);
-
-    // Determine colors based on dark mode
-    const currentTextColor = darkMode ? darkTextColor : textColor;
-    const currentStrokeColor = darkMode ? darkStrokeColor : strokeColor;
-    const currentBackground = darkMode ? darkBackground : 'transparent';
-    const baseTextColor = darkMode ? darkTextColor : textColor;
-    const dynamicTextColor = colorCycle.length > 0 
-        ? colorCycle[currentColorIndex]
-        : baseTextColor;
-    const transitionDuration = colorCycleDuration / 1000 * 0.1;
-
-    return (
-        <div
-            ref={containerRef}
-            className="relative w-full h-full overflow-hidden"
-            style={{ backgroundColor: currentBackground }}
-        >
-            <style>{`
-                @font-face {
-                    font-family: '${fontFamily}';
-                    src: url('${fontUrl}');
-                    font-style: normal;
-                }
-
-                 .text-pressure-title span {
-                transition: color ${transitionDuration}s ease-in-out !important;
-                }
-                .stroke span {
-                    position: relative;
-                    color: ${dynamicTextColor};
-                }
-                .stroke span::after {
-                    content: attr(data-char);
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    color: transparent;
-                    z-index: -99;
-                    -webkit-text-stroke-width: ${strokeWidth}px;
-                    -webkit-text-stroke-color: ${currentStrokeColor};
-                    transition: -webkit-text-stroke-color 0.3s ease;
-                }
-            `}</style>
-            <h1
-                ref={titleRef}
-                className={`text-pressure-title ${className} ${flex ? 'flex justify-between' : ''} ${
-                    stroke ? 'stroke' : ''
-                } text-center`}
-                style={{
-                    fontFamily,
-                    fontSize: `${fontSize}px`,
-                    lineHeight,
-                    transform: `scale(1, ${scaleY})`,
-                    transformOrigin: 'center top',
-                    margin: 0,
-                    fontWeight: 100,
-                    color: stroke ? undefined : dynamicTextColor,
-                    gap: '5px',
-                    transition: 'color 0.3s ease',
-                }}
-            >
-                {chars.map((char, i) => (
-                <span
-                    key={i}
-                    ref={(el) => {
-                    if (el) {
-                        spansRef.current[i] = el;
-                    }
-                    return () => {
-                        // Cleanup function
-                        spansRef.current[i] = null;
-                    };
-                    }}
-                    data-char={char}
-                    className="inline-block"
-                    style={{
-                            color: dynamicTextColor, // Tambahkan juga di sini untuk jaga-jaga
-                            transition: `color ${transitionDuration}s ease-in-out`
-                        }}
-                >
-                    {char}
-                </span>
-                ))}
-            </h1>
-        </div>
-    );
-};
-
-export default TextPressure;
-</file>
-
 <file path="app/blog/[slug]/page.tsx">
 import { notFound } from 'next/navigation';
 import { posts } from '../../posts/data';
@@ -1952,7 +3355,7 @@ export default function BlogPostPage({ params }: any) {
 <file path="app/components/Header/header.tsx">
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
@@ -1964,6 +3367,7 @@ const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   // Initialize dark mode from localStorage or system preference
   useEffect(() => {
@@ -2029,6 +3433,25 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+  
+    if (isMobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+  
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
+
   // Function to check if link is active
   const isActive = (href: string) => {
     return pathname === href || 
@@ -2038,6 +3461,7 @@ const Header = () => {
 
   return (
     <header
+      ref={headerRef}
       className={`bg-white dark:bg-zinc-950 fixed top-0 right-0 left-0 z-50 py-2 transition-transform duration-300 ${
         isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
@@ -2220,6 +3644,464 @@ const Header = () => {
 export default Header;
 </file>
 
+<file path="app/components/TextPressure/TextPressure.tsx">
+"use client";
+
+import { useCallback, useEffect, useId, useRef, useState } from "react";
+
+interface TextPressureProps {
+  text?: string;
+  fontFamily?: string;
+  fontUrl?: string;
+  width?: boolean;
+  weight?: boolean;
+  italic?: boolean;
+  alpha?: boolean;
+  flex?: boolean;
+  stroke?: boolean;
+  scale?: boolean;
+  textColor?: string;
+  strokeColor?: string;
+  strokeWidth?: number;
+  className?: string;
+  minFontSize?: number;
+  darkMode?: boolean;
+  darkTextColor?: string;
+  darkStrokeColor?: string;
+  darkBackground?: string;
+  colorCycle?: string[];
+  colorCycleDuration?: number;
+}
+
+const RESIZE_DEBOUNCE_MS = 120;
+
+const dist = (
+  a: { x: number; y: number },
+  b: { x: number; y: number }
+) => {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+
+  return Math.sqrt(dx * dx + dy * dy);
+};
+
+const getResponsiveMinFontSize = () => {
+  const width = window.innerWidth;
+
+  if (width >= 1536) return 64;
+  if (width >= 1280) return 56;
+  if (width >= 1024) return 48;
+  if (width >= 768) return 40;
+  if (width >= 640) return 36;
+
+  return 32;
+};
+
+const TextPressure: React.FC<TextPressureProps> = ({
+  text = "Compressa",
+  fontFamily = "Roboto Flex",
+  fontUrl =
+    "https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,wdth@8..144,100..1000,25..151&display=swap",
+
+  width = true,
+  weight = true,
+  italic = true,
+  alpha = false,
+  flex = true,
+  stroke = false,
+  scale = false,
+
+  textColor = "#000000",
+  strokeColor = "#FF0000",
+  strokeWidth = 6,
+
+  className = "",
+  minFontSize = 48,
+
+  darkMode = false,
+  darkTextColor = "#FFFFFF",
+  darkStrokeColor = "#00FFFF",
+  darkBackground = "transparent",
+
+  colorCycle = [],
+  colorCycleDuration = 2000,
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const spansRef = useRef<(HTMLSpanElement | null)[]>([]);
+
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const cursorRef = useRef({ x: 0, y: 0 });
+
+  /*
+   * SCROLL INTEGRATION — single source of truth untuk siapa yang
+   * "memegang" cursorRef di frame saat ini: 'pointer' (mouse/touch asli)
+   * atau 'scroll' (virtual cursor yang disapu mengikuti progress title
+   * melintasi viewport). Cuma satu writer aktif per frame, jadi nggak
+   * ada rebutan nilai antara hover dan scroll.
+   */
+  const pointerModeRef = useRef<"pointer" | "scroll">("pointer");
+
+  const scopeClass = `tp-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
+
+  const [fontSize, setFontSize] = useState(minFontSize);
+  const [scaleY, setScaleY] = useState(1);
+  const [lineHeight, setLineHeight] = useState(1);
+
+  const [systemDarkMode, setSystemDarkMode] = useState(false);
+
+  const chars = text.split("");
+
+  /*
+   * Detect dark mode dari <html class="dark">.
+   * MutationObserver dipakai supaya begitu user toggle
+   * dark/light mode, TextPressure langsung ikut berubah.
+   */
+  useEffect(() => {
+    const checkDarkMode = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      setSystemDarkMode(isDark);
+    };
+
+    checkDarkMode();
+
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const isDarkMode = darkMode || systemDarkMode;
+
+  /*
+   * Mouse / Touch / Scroll tracking.
+   * mousemove & touchmove tetap seperti semula: langsung isi cursorRef
+   * dan klaim ulang pointerModeRef = 'pointer'.
+   * scroll cuma flip flag — nol kerja layout di sini, semua
+   * getBoundingClientRect() tetap di dalam rAF loop di bawah.
+   */
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      cursorRef.current.x = e.clientX;
+      cursorRef.current.y = e.clientY;
+      pointerModeRef.current = "pointer";
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const t = e.touches[0];
+
+      if (!t) return;
+
+      cursorRef.current.x = t.clientX;
+      cursorRef.current.y = t.clientY;
+      pointerModeRef.current = "pointer";
+    };
+
+    const handleScroll = () => {
+      pointerModeRef.current = "scroll";
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    window.addEventListener("touchmove", handleTouchMove, {
+      passive: true,
+    });
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+
+      mouseRef.current.x = rect.left + rect.width / 2;
+      mouseRef.current.y = rect.top + rect.height / 2;
+
+      cursorRef.current.x = mouseRef.current.x;
+      cursorRef.current.y = mouseRef.current.y;
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  /*
+   * Responsive font size — semakin lebar container, semakin besar font,
+   * tetap punya minimum berdasarkan ukuran layar.
+   */
+  const setSize = useCallback(() => {
+    if (!containerRef.current || !titleRef.current) return;
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+
+    let newFontSize = (containerRect.width / chars.length) * 4.0;
+
+    newFontSize = Math.max(newFontSize, getResponsiveMinFontSize());
+
+    setFontSize(newFontSize);
+    setScaleY(1);
+    setLineHeight(1);
+
+    requestAnimationFrame(() => {
+      if (!titleRef.current) return;
+
+      const textRect = titleRef.current.getBoundingClientRect();
+
+      if (scale && textRect.height > 0) {
+        const yRatio = containerRect.height / textRect.height;
+
+        setScaleY(yRatio);
+        setLineHeight(yRatio);
+      }
+    });
+  }, [chars.length, scale]);
+
+  useEffect(() => {
+    setSize();
+
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(setSize, RESIZE_DEBOUNCE_MS);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setSize]);
+
+  /*
+   * TextPressure animation loop.
+   */
+  useEffect(() => {
+    let rafId: number;
+
+    const animate = () => {
+      if (titleRef.current) {
+        const titleRect = titleRef.current.getBoundingClientRect();
+
+        /*
+         * Selama scroll yang pegang kendali, sapu virtual cursor
+         * melintasi title mengikuti progress scroll: 0 saat title
+         * masuk dari bawah viewport, 1 saat keluar dari atas.
+         * Begitu mousemove/touchmove asli terjadi, pointerModeRef
+         * langsung balik ke 'pointer' dan blok ini di-skip di frame
+         * berikutnya — hover langsung ambil alih, tanpa rebutan.
+         */
+        if (pointerModeRef.current === "scroll") {
+          const viewportH = window.innerHeight;
+          const progress = Math.min(
+            Math.max(
+              (viewportH - titleRect.top) / (viewportH + titleRect.height),
+              0
+            ),
+            1
+          );
+
+          cursorRef.current.x = titleRect.left + progress * titleRect.width;
+          cursorRef.current.y = titleRect.top + titleRect.height / 2;
+        }
+
+        mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
+        mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
+
+        const maxDist = titleRect.width / 2;
+
+        spansRef.current.forEach((span) => {
+          if (!span) return;
+
+          const rect = span.getBoundingClientRect();
+
+          const charCenter = {
+            x: rect.x + rect.width / 2,
+            y: rect.y + rect.height / 2,
+          };
+
+          const d = dist(mouseRef.current, charCenter);
+
+          const getAttr = (
+            distance: number,
+            minVal: number,
+            maxVal: number
+          ) => {
+            const val =
+              maxVal - Math.abs((maxVal * distance) / (maxDist * 0.5));
+
+            return Math.max(minVal, val + minVal / 2);
+          };
+
+          const wdth = width ? Math.floor(getAttr(d, 40, 200)) : 100;
+          const wght = weight ? Math.floor(getAttr(d, 200, 900)) : 400;
+          const italVal = italic ? getAttr(d, 0, 1).toFixed(2) : "0";
+          const alphaVal = alpha ? getAttr(d, 0, 1).toFixed(2) : "1";
+
+          const next =
+            `'wght' ${wght}, ` + `'wdth' ${wdth}, ` + `'ital' ${italVal}`;
+
+          if (span.style.fontVariationSettings !== next) {
+            span.style.fontVariationSettings = next;
+          }
+
+          if (alpha && span.style.opacity !== alphaVal) {
+            span.style.opacity = alphaVal;
+          }
+        });
+      }
+
+      rafId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => cancelAnimationFrame(rafId);
+  }, [width, weight, italic, alpha, chars.length]);
+
+  /*
+   * Color cycle
+   */
+  const [currentColorIndex, setCurrentColorIndex] = useState(0);
+
+  useEffect(() => {
+    if (!Array.isArray(colorCycle) || colorCycle.length <= 1) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setCurrentColorIndex((prev) => (prev + 1) % colorCycle.length);
+    }, colorCycleDuration);
+
+    return () => clearInterval(interval);
+  }, [colorCycle, colorCycleDuration]);
+
+  /*
+   * Dark / Light colors
+   */
+  const currentStrokeColor = isDarkMode ? darkStrokeColor : strokeColor;
+  const currentBackground = isDarkMode ? darkBackground : "transparent";
+  const baseTextColor = isDarkMode ? darkTextColor : textColor;
+
+  const dynamicTextColor =
+    colorCycle.length > 0 ? colorCycle[currentColorIndex] : baseTextColor;
+
+  const transitionDuration = (colorCycleDuration / 1000) * 0.1;
+
+  return (
+    <div
+      ref={containerRef}
+      className={`${scopeClass} relative w-full h-full overflow-hidden`}
+      style={{
+        backgroundColor: currentBackground,
+      }}
+    >
+      <style id={scopeClass}>
+        {`
+          @import url('${fontUrl}');
+
+          .${scopeClass} .text-pressure-title span {
+            transition:
+              color ${transitionDuration}s ease-in-out;
+          }
+
+          .${scopeClass} .stroke span {
+            position: relative;
+            color: ${dynamicTextColor};
+          }
+
+          .${scopeClass} .stroke span::after {
+            content: attr(data-char);
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: transparent;
+            z-index: -99;
+
+            -webkit-text-stroke-width:
+              ${strokeWidth}px;
+
+            -webkit-text-stroke-color:
+              ${currentStrokeColor};
+
+            transition:
+              -webkit-text-stroke-color
+              0.3s ease;
+          }
+        `}
+      </style>
+
+      <h1
+        ref={titleRef}
+        className={`
+          text-pressure-title
+          ${className}
+          ${flex ? "flex justify-between" : ""}
+          ${stroke ? "stroke" : ""}
+          text-center
+        `}
+        style={{
+          fontFamily: `${fontFamily}, sans-serif`,
+
+          fontSize: `${fontSize}px`,
+
+          lineHeight,
+
+          transform: `scale(1, ${scaleY})`,
+
+          transformOrigin: "center top",
+
+          margin: 0,
+
+          fontWeight: 200,
+
+          color: stroke ? undefined : dynamicTextColor,
+
+          gap: "5px",
+
+          transition: "color 0.3s ease",
+        }}
+      >
+        {chars.map((char, i) => (
+          <span
+            key={i}
+            ref={(el) => {
+              if (el) {
+                spansRef.current[i] = el;
+              }
+
+              return () => {
+                spansRef.current[i] = null;
+              };
+            }}
+            data-char={char}
+            className="inline-block"
+            style={{
+              color: dynamicTextColor,
+
+              transition: `color ${transitionDuration}s ease-in-out`,
+            }}
+          >
+            {char}
+          </span>
+        ))}
+      </h1>
+    </div>
+  );
+};
+
+export default TextPressure;
+</file>
+
 <file path="package.json">
 {
   "name": "portofolio",
@@ -2233,14 +4115,14 @@ export default Header;
     "debug": "NODE_OPTIONS='--inspect' next dev"
   },
   "dependencies": {
-    "@react-spring/web": "^9.7.5",
+    "@react-spring/web": "^10.1.2",
     "@types/dompurify": "^3.0.5",
     "@types/matter-js": "^0.19.8",
     "dompurify": "^3.2.5",
     "gsap": "^3.12.7",
     "marked": "^15.0.11",
     "matter-js": "^0.20.0",
-    "next": "^15.3.3",
+    "next": "^15.5.24",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwind-scrollbar": "^4.0.2"
@@ -2266,39 +4148,39 @@ import Link from "next/link";
 const works = [
   {
     id: 1,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    thumbnail: "",
     title: "Hubton",
-    subtitle: "Intern as web developer at Hubton Indonesia, focused on front-end side.",
+    subtitle: "Intern as front-end developer at Hubton Indonesia, focused on learning front-end side.",
   },
   {
     id: 2,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
+    thumbnail: "",
     title: "Sajua Brewery",
-    subtitle: "Build e-commerce website.",
+    subtitle: "Build e-commerce website with Shopify.",
   },
   {
     id: 3,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    thumbnail: "",
+    title: "Kovsen",
+    subtitle: "Designed and developed an interactive analytics dashboard with Shopify.",
   },
   {
     id: 4,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    thumbnail: "",
+    title: "Titis",
+    subtitle: "Crafted a high-performance agency site featuring smooth GSAP motion and clean layout.",
   },
-   {
+  {
     id: 5,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    thumbnail: "",
+    title: "Lumina Goods",
+    subtitle: "Built a minimalist headless e-commerce storefront integrated with Shopify API.",
   },
   {
     id: 6,
-    thumbnail: "https://api.apiflash.com/v1/urltoimage?access_key=80c0ea0b1d364ab98cf8b26d35a0c9b6&url=https%3A%2F%2Fdev.hubton.com%2F&format=jpeg&width=1620&height=1080",
-    title: "Lorem, ipsum.",
-    subtitle: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    thumbnail: "",
+    title: "Rajipo System",
+    subtitle: "Created a scalable UI component library and design system for web applications.",
   },
 ];
 
@@ -2534,126 +4416,133 @@ import Link from "next/link";
 
 export default function Home() {
 
-   const colorCycle = ["#212121", "#EAE4D5", "#217147", "#212121", "#EAE4D5","#DB7F8E", "#212121", "#EAE4D5","#FA6B48",  ];
+   const colorCycle = ["#212121", "#C9A227", "#217147", "#212121", "#C9A227","#DB7F8E", "#212121", "#C9A227","#FA6B48",  ];
   
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="hero-section container flex mx-auto min-h-dvh w-fit content-center place-self-center pt-2">
+      <div className="hero-section container flex flex-col mx-auto min-h-dvh w-full content-center place-self-center pt-15">
         {/* mobile for vertical */}
-        <div className="relative h-fit content-center place-self-center w-fit sm:hidden">
-             <TextPressure
-          text="Combine"
-          flex={false}
-          scale={false}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="#00000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-300 md:minFontSize-400 lg:minFontSize-500 text-#000000'
-          colorCycle={colorCycle}
-          colorCycleDuration={2000} // Ubah durasi sesuai kebutuhan
-        />
-        {/* <div className="h-0.5 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
-         <TextPressure
-          text="Ideas,"
-          flex={false}
-          scale={false}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="000000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
-          colorCycle={colorCycle}
-          colorCycleDuration={2100}
-        />
-        {/* <div className="h-0.5 w-[150px] animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48] ml-[40px]"></div> */}
-           <TextPressure
-          text="Craft,"
-          flex={false}
-          scale={false}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="#00000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
-          colorCycle={colorCycle}
-          colorCycleDuration={2200}
-        />
-        {/* <div className="h-0.5 w-[130px] animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400 ml-[45px]"></div> */}
-         <TextPressure
-          text="__&__"
-          flex={false}
-          scale={false}
-          alpha={false}
-          stroke={false}
-          width={false}
-          weight={true}
-          italic={false}
-          textColor="#00000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
-          colorCycle={colorCycle}
-          colorCycleDuration={2300}
-        />
-        {/* <div className="h-0.5 w-[80px] animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48] ml-[70px]"></div> */}
-         <TextPressure
-          text="Innovate."
-          flex={false}
-          scale={false}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="000000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000'
-          colorCycle={colorCycle}
-          colorCycleDuration={2400}
-        />
-           {/* <div className="h-0.5 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
+        <div
+             className="sm:block sm:hidden"
+             style={{
+               position: 'relative',
+               height: 'fit-content',
+               width: '100%',
+               alignContent: 'center',
+               placeSelf: 'center',
+             }}
+>           
+            <TextPressure
+              text="   Combine   "
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="   Ideas   "
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="   Craft   "
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="   -   &   -   "
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="   Innovate   "
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
         </div>
         
         {/* Desktop */}
-        <div className="relative h-fit content-center place-self-center w-fit hidden sm:block">
-             <TextPressure
-          text="_Combine_Ideas,_"
-          flex={true}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="#00000"
-          strokeColor="#ff0000"
-          className='sm:minFontSize-200 md:minFontSize-300 lg:minFontSize-400 text-#000000 underline-offset-auto'
-          colorCycle={colorCycle}
-          colorCycleDuration={2000}
-        />
-        {/* <div className="h-1 w-full animated-gradient bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400"></div> */}
-         <TextPressure
-          text="_Craft_&_Innovate._"
-          flex={true}
-          alpha={false}
-          stroke={false}
-          width={true}
-          weight={true}
-          italic={false}
-          textColor="000000"
-          strokeColor="#ff0000"
-          colorCycle={colorCycle}
-          colorCycleDuration={2800}
-        />
-        {/* <div className="h-1 w-full animated-gradient bg-gradient-to-r from-yellow-400 via-pink-500 to-[#FA6B48]"></div> */}
+        <div
+             className="hidden sm:block pt-15"
+             style={{
+               position: 'relative',
+               height: 'fit-content',
+               width: '100%',
+               alignContent: 'center',
+               placeSelf: 'center',
+             }}
+>           
+            <TextPressure
+              text="Combine Ideas,"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="Craft & Innovate"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
         </div>
       </div>
 
@@ -2666,11 +4555,11 @@ export default function Home() {
              delay={300}
              animateBy="letters"
              direction="top"
-             className="text-[clamp(30px,7vw,100px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5"
+             className="text-[clamp(30px,7vw,100px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5 mx-10 px-16"
           />
           <div className="text-center mt-4 mb-5 text-[#EA6B48] h-20">
             <FallingText
-              text={`Website Developer`}
+              text={`Front-end Developer`}
               highlightWords={[]}
               // highlightClass="highlighted"
               trigger="hover"
