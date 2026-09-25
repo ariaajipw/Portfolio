@@ -3,11 +3,20 @@ import BlurText from "./components/BlurText/BlurText";
 import TextPressure from './components/TextPressure/TextPressure';
 import WorkCards from "./components/WorkCard/workcard";
 import FallingText from './components/FallingText/FallingText';
-import Link from "next/link";
+import Magnet from './components/Magnet/Magnet';
+import Link from "next/link";import MorphSlider from './components/MorphSlider/MorphSlider'
+
 
 export default function Home() {
 
    const colorCycle = ["#212121", "#C9A227", "#217147", "#212121", "#C9A227","#DB7F8E", "#212121", "#C9A227","#FA6B48",  ];
+
+   const items = [
+    { image: '/assets/img/BKAIG.webp',caption: 'hai'},
+    { image: '/assets/img/CPSIG.webp',caption: 'hai'},
+    { image: '/assets/img/KGPIG.webp',caption: 'hai'},
+  ]
+  
   
   return (
     <main className="min-h-screen overflow-hidden">
@@ -137,9 +146,28 @@ export default function Home() {
         </div>
       </div>
 
-      {/* <div className="img-section flex flex-col w-full my-60">
-      <img src="assets/img/BKAIG.jpg" alt="gp" className="size-full"/>
-      </div> */}
+      <div className="img-section flex flex-col my-60">
+        <div style={{ height: '750px', position: 'relative' }}>
+            <MorphSlider
+              items={items}
+              transition="melt"
+              intensity={1}
+              aberration={0.15}
+              drift={0.9}
+              autoplay
+              overlayColor="#000000"
+              duration={0.6}
+              ease="power3.out"
+              scale={0.9}
+              autoplayDelay={6}
+              loop
+              radius={16}
+              showCaptions={false}
+              showControls
+              showIndicators={false}
+          />
+          </div>
+      </div>
 
       <div className="second-section container mx-auto h-fit my-25 md:mt-0 lg:mt-50 lg:mb-70">
         <div className="grid lg:grid-cols-12 h-fit">
@@ -167,12 +195,17 @@ export default function Home() {
           </div>
             {/* <h2 className="text-xl lg:text-5xl py-8 place-self-center text-[#EA6B48]">Website Developer</h2> */}
             <p className="text-sm lg:text-lg content-center place-self-center px-auto ml-[30px] mr-[20px] mb-12">Enhance skills through hands-on projects & professional experiences. Combining creativity to build engaging experiences.</p>
-            <Link 
-              href="/contact"
-              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[90px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
-            >
-              Let's Collaborate
-            </Link>
+            
+
+              <Magnet padding={50} disabled={false} magnetStrength={2}>
+                  <Link 
+                  href="/contact"
+                  className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[90px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
+                >
+                  Let's Collaborate
+                </Link>
+              </Magnet>
+
           </div>
           <div className="lg:col-span-6 content-center place-self-center order-first lg:order-last pl-0 lg:pl-[100px]">
             <PixelTransition 
