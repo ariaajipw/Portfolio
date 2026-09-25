@@ -15,6 +15,7 @@ export default function Home() {
     { image: '/assets/img/BKAIG.webp',caption: 'hai'},
     { image: '/assets/img/CPSIG.webp',caption: 'hai'},
     { image: '/assets/img/KGPIG.webp',caption: 'hai'},
+    { image: '/assets/img/BTLK.webp',caption: 'hai'},
   ]
   
   
@@ -146,8 +147,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="img-section flex flex-col my-60">
-        <div style={{ height: '750px', position: 'relative' }}>
+      <div className="img-section flex flex-col my-10">
+        <div style={{ height: '800px', position: 'relative' }}>
             <MorphSlider
               items={items}
               transition="melt"
@@ -164,7 +165,7 @@ export default function Home() {
               radius={16}
               showCaptions={false}
               showControls
-              showIndicators={false}
+              showIndicators
           />
           </div>
       </div>
