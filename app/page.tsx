@@ -97,7 +97,7 @@ export default function Home() {
         
         {/* Desktop */}
         <div
-             className="hidden sm:block pt-15"
+             className="hidden sm:block"
              style={{
                position: 'relative',
                height: 'fit-content',
@@ -150,7 +150,7 @@ export default function Home() {
              delay={300}
              animateBy="letters"
              direction="top"
-             className="text-[clamp(30px,7vw,100px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5 mx-10 px-16"
+             className="text-[clamp(30px,7vw,83px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5 mx-10 px-17 xl:px-20 2xl:px-35"
           />
           <div className="text-center mt-4 mb-5 text-[#EA6B48] h-20">
             <FallingText

@@ -1,0 +1,4640 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.claude/
+  skills/
+    frontend-design/
+      LICENSE.txt
+      SKILL.md
+app/
+  about/
+    team/
+      page.tsx
+    page.tsx
+  blog/
+    [slug]/
+      page.tsx
+    layout.tsx
+    page.tsx
+  components/
+    BlurText/
+      BlurText.tsx
+    Contact/
+      contact.tsx
+    FallingText/
+      FallingText.tsx
+    Footer/
+      footer.tsx
+    Header/
+      header.tsx
+    MarkdownContent/
+      MarkdownContent.tsx
+    PixelTransition/
+      PixelTransition.tsx
+    TextPressure/
+      TextPressure.tsx
+    WorkCard/
+      workcard.tsx
+  contact/
+    page.tsx
+  fonts/
+    GeistMonoVF.woff
+    GeistVF.woff
+  posts/
+    data.ts
+  services/
+    page.tsx
+  favicon.ico
+  globals.css
+  layout.tsx
+  page.tsx
+public/
+  assets/
+    img/
+      ariaaji.jpg
+      BKAIG.jpg
+      CPSIG.png
+      day-and-night.png
+      dev.hubton.png
+      IMG-20220112-WA0009 (1).jpg:Zone.Identifier
+      KGPIG.jpg
+      name.png
+      name.png:Zone.Identifier
+      night-and-day.png
+      peacock-black.png
+      peacock-logo.png
+      peacock-white.png
+      peacock.png
+      sun.png
+.gitignore
+AGENTS.md
+ARCHITECTURE.md
+DESIGN.md
+global.d.ts
+next.config.mjs
+package.json
+postcss.config.mjs
+PRD.md
+README.md
+skills-lock.json
+tailwind.config.js
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".claude/skills/frontend-design/LICENSE.txt">
+Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+</file>
+
+<file path=".claude/skills/frontend-design/SKILL.md">
+---
+name: frontend-design
+description: Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.
+license: Complete terms in LICENSE.txt
+---
+
+# Frontend Design
+
+Approach this as the design lead at a design studio known for giving every client a distinct visual identity that is not mistaken for anyone else's. This client has already rejected proposals that felt cliché or templated, and is paying for a distinctive point of view: make deliberate, opinionated choices about palette, typography, and layout that are specific to this brief, and take aesthetic risk if justified.
+
+## Ground your designs in the subject matter
+
+If the brief does not identify what the product or subject matter is, identify it yourself before designing, and confirm with the client. You can come up with one concrete subject, the design's audience, and the design's primary job, as a proposal. If there's any information in your memory about the client's preferences or context about what they're building, use that as a hint. The subject's industry, subject matter, materials, and vernacular are where distinctive visual choices come from — a design for a toy for girls aged 8–11 will be very aesthetically different from a dashboard for financial analysts. Build with the brief's real content and subject matter throughout.
+
+## Design principles
+
+For web designs, the hero is the first thing viewers will see. Open with the most characteristic thing in the subject's world, in the form that is most appropriate: a headline, an image, an animation, a live demo, an interactive moment, or other treatments. Be deliberate with your choice: a big number with a small label, supporting stats, and a gradient accent is the default treatment, so only use it if that's truly the best option.
+
+Typography carries the personality of the page. You don't need a different typeface for display or headline text and body content: use one family or two, and if two, make them clearly distinct.
+
+Choose your typefaces deliberately, not the default families you would reach for on any other project, and set a clear type scale following the default guidance of The Elements of Typographic Style with intentional weights, widths, and spacing. When type is used as a headline or visual element, use the type treatment itself as an active part of the design, not a neutral delivery vehicle for the content.
+
+Default to line lengths of less than 80 characters. Serif typefaces can have slightly longer line lengths; give serif body text slightly more line-height than a sans-serif.
+
+Avoid these default typographic treatments; they are the commonest tells of a generated page:
+- Accenting just a single word or phrase in a headline, like putting one word in italic/bold or a different color.
+- Using all caps for labels.
+- Adding unnecessary typographic labels above content.
+
+Visual structure is information. Structural devices like outlines, borders, numbering, eyebrows, dividers, labels, etc., encode useful information about the content rather than decorate it. Many generic designs use numbered markers (01 / 02 / 03), but that's only appropriate if the content actually is a sequence — like a stepped process or a timeline. Before adding numbered markers, check the content really is a sequence.
+
+Use non-user-triggered motion sparingly and deliberately, only to draw attention. A single orchestrated moment — one page-load sequence or one reveal — lands better than scattered effects; fade-and-slide-up entrances on each section and hover transitions on every card are the generic default and read as AI-generated. Motion that answers a person's action (opening, expanding, confirming) is welcome when it shows what changed.
+
+Consider written content carefully. Often a design brief may not contain real content, and it's up to you to come up with copy and placeholder content. Copy can make a design feel as templated as the design itself. See the below section on writing for more guidance.
+
+## Process: plan, review against the brief, build, critique
+
+For calibration, AI-generated design right now clusters around some traits:
+1. a warm cream background (near #F4F1EA) with a high-contrast serif display and a terracotta or warm-clay accent (often near #D97757 — Anthropic's own Claude-interaction accent, so on a user's brief it reads as a tell);
+2. a near-black background with a single bright acid-green or vermilion accent;
+3. a broadsheet-style layout with hairline rules, zero border-radius, and dense newspaper-like columns;
+4. the SaaS-card kit: content chopped into identical rounded cards, one border-radius on everything regardless of hierarchy, the same soft grey shadow (rgba(0,0,0,.1)) under each, and gradient washes as decoration;
+5. template chrome that appears whatever the subject: a tracked-out ALL-CAPS eyebrow label above every heading; meta strings joined with middle dots ('A · B · C'); labels built as 'WORD — fragment' with a spaced em dash; tinted near-black (#0B0B0B, #111) standing in for black; a monospace face for small data labels; a '→' appended to link and button text.
+
+All traits are legitimate for some briefs, but they are defaults rather than choices, and they appear regardless of subject. Where the brief pins down a visual direction, follow it exactly — the brief's own words always win, including when it asks for one of these looks. Where it leaves an axis free, don't spend that freedom on one of these defaults. As with a hired human designer, there's often a careful balance between doing what you're good at and taking each project as a chance to experiment and learn.
+
+Work in two passes. First, brainstorm a short design plan based on the client's design brief: create a compact token system with color, type, layout, and principles.
+- Color: describe the core base palette as 4–6 named hex values.
+- Type: the typefaces and their roles.
+- Layout: a layout concept, using one-sentence prose descriptions and ASCII wireframes to ideate and compare. Include alignment guidance; should the content be left aligned, center aligned, justified?
+- Principles: the high-level guidance for what makes this page unique.
+
+Then review that plan against the brief before building: if any part of it reads like the generic default you would produce for any similar page (work through a similar prompt to see if you arrive somewhere similar) rather than a choice made for this specific brief — revise that part, say what you changed and why. Only after you've confirmed the relative uniqueness of your design plan should you start to write the code, following the revised plan.
+
+When writing the code, be careful of structuring your CSS selector specificities. It's easy to generate CSS classes that cancel each other out (especially with a type-based selector like .section and an element-based selector like .cta). This can happen often with padding/margin between sections.
+
+## Restraint and self-critique
+
+Spend your boldness in one place. Let one element be the memorable thing, keep everything around it quiet and disciplined, and cut any decoration that does not serve the brief. Build to a quality floor without announcing it: responsive down to mobile, visible keyboard focus, reduced motion respected, visually accessible, harmonious color palettes. Critique your own work as you build, taking screenshots to review if your environment supports it — a picture is worth 1000 tokens. Consider Chanel's advice: before leaving the house, take a look in the mirror and remove one accessory. Human creatives have memory and always try to do something new, so if you have a space to quickly jot down notes about what you've tried, it can help you in future passes.
+
+## More on writing in design
+
+Words appear in a design for one reason: to make it easier to understand and use. They are design content, not decoration. Bring the same intentionality and minimalism to copywriting that you would bring to spacing and color. Before writing anything, ask what the design needs to say, and how it can best be said to help the person navigate the experience.
+
+Write from the end user's perspective. Name things by what users will understand in simple language, not by how the system is built. A user manages notifications, not webhook config. Describe what something is or does in plain terms rather than selling it. Being specific and legible to new users is always better than being clever.
+
+Use active voice as default. A CTA says exactly what happens when it is used: "Save changes," not "Submit." An action keeps the same name through the whole flow, so the button that says "Publish" produces a toast that says "Published." The vocabulary of an interface is the signposting for someone navigating the product. Cohesion and consistency are how people learn their way around.
+
+Treat failure and emptiness as moments for direction, not mood. Explain what went wrong and how to fix it, in the interface's voice rather than a person's. Errors don't apologize, and they are never vague about what happened. An empty screen is an invitation to act.
+
+Keep the tone conversational: plain verbs, sentence case, no filler, with tone matched to the brand and the audience. Let each written element do exactly one job.
+</file>
+
+<file path="app/about/team/page.tsx">
+export default function About() {
+  return (<main className="min-h-screen overflow-x-hidden">
+    <div className="hero-section container flex mx-auto h-screen w-fit content-center place-self-center">
+    </div>
+    <div className="second-section container mx-auto h-screen">
+      <div className="grid lg:grid-cols-12 h-screen">
+      </div>
+    </div>
+  </main>)
+}
+</file>
+
+<file path="app/blog/layout.tsx">
+import React from "react";
+
+export default function AdminLayout ({ children,}:{
+  children: React.ReactNode;
+}) {
+  return (
+    <main>
+      <header>
+        Admin Layout
+      </header>
+      {children}
+    </main>
+  )
+}
+</file>
+
+<file path="app/components/MarkdownContent/MarkdownContent.tsx">
+'use client';
+import { marked } from 'marked';
+import { useEffect, useState } from 'react';
+
+export default function MarkdownContent({ content }: { content: string }) {
+  const [html, setHtml] = useState('');
+
+  useEffect(() => {
+    // Versi paling kompatibel
+    const parseMarkdown = async () => {
+      const parsed = await marked.parse(content);
+      setHtml(parsed);
+    };
+    
+    parseMarkdown();
+  }, [content]);
+
+  return (
+    <div 
+      className="prose max-w-none" 
+      dangerouslySetInnerHTML={{ __html: html }} 
+    />
+  );
+}
+</file>
+
+<file path="public/assets/img/IMG-20220112-WA0009 (1).jpg:Zone.Identifier">
+[ZoneTransfer]
+ZoneId=3
+HostUrl=https://drive.usercontent.google.com/download?id=1HoVPJRkBMbNK0QC15OZPePD9S4Pdr3dA&export=download&authuser=0&confirm=t&uuid=b32443b8-e476-4e0b-b87a-53ff726dd662&at=APvzH3rBbj9JlmBzCUNNtdiZQide:1733626517405
+</file>
+
+<file path="public/assets/img/name.png:Zone.Identifier">
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://www.flaticon.com/search?word=internship&shape=fill
+HostUrl=about:internet
+</file>
+
+<file path=".gitignore">
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+</file>
+
+<file path="AGENTS.md">
+# AGENTS.md — Claude Code Operating Manual
+
+## 0. Mission
+
+You are the coding agent for this portfolio repository.
+
+Your job is to make **small, safe, visually accurate improvements** while preserving existing behavior.
+
+You are not authorized to redesign or rewrite unrelated parts of the project.
+
+---
+
+# 1. GOLDEN RULE
+
+> **Caveman first. Specialist only when necessary. Minimal change always.**
+
+For non-trivial tasks, start with the Caveman skill/workflow.
+
+Caveman is the reconnaissance layer:
+- inspect;
+- locate;
+- understand;
+- plan;
+- identify risks.
+
+Do not immediately perform a broad codebase analysis.
+
+---
+
+# 2. COST / TOKEN CONTROL
+
+The user explicitly wants an efficient Claude Code workflow.
+
+## Default skill routing
+
+```text
+Task
+ ↓
+Caveman
+ ↓
+Is a specialist actually needed?
+ ├─ No → implement
+ └─ Yes
+     ↓
+  ONE targeted specialist
+     ↓
+  implement
+     ↓
+  Browser/QA if UI changed
+```
+
+## Never do this by default
+
+```text
+Caveman
++ ECC
++ UI/UX Pro Max
++ Frontend Design
++ GSAP
++ Responsive
++ Browser
+```
+
+Do not activate every skill for every task.
+
+## Specialist selection
+
+### `/caveman`
+
+Use first for:
+- repo exploration;
+- finding files;
+- dependency discovery;
+- tracing component usage;
+- understanding existing behavior;
+- small implementation planning.
+
+### `/ecc`
+
+Use for:
+- debugging;
+- code quality;
+- refactoring;
+- TypeScript issues;
+- architecture problems;
+- regression-sensitive changes.
+
+Do not use ECC as a generic prerequisite for every edit.
+
+### `/ui-ux-pro-max`
+
+Use when the request concerns:
+- layout;
+- visual hierarchy;
+- typography;
+- spacing;
+- component UX;
+- interaction patterns;
+- accessibility-oriented UI decisions.
+
+### `/frontend-design`
+
+Use when the request asks for:
+- new visual direction;
+- substantial page composition;
+- new section design;
+- a high-level visual redesign.
+
+Do not invoke it for a one-line spacing fix.
+
+### `/gsap` / animation skill
+
+Use when:
+- adding GSAP;
+- debugging GSAP;
+- building timelines;
+- scroll-triggered animation;
+- staggered animation;
+- animation lifecycle/performance;
+- responsive animation behavior.
+
+If the existing component already uses React Spring or Matter.js and the request does not require GSAP, do not migrate it.
+
+### Browser / QA
+
+Use when:
+- UI behavior changed;
+- animation changed;
+- responsive layout changed;
+- navigation changed;
+- a bug is visual or interaction-based;
+- the user explicitly asks for browser testing.
+
+Prefer targeted checks over broad exploratory testing.
+
+### Responsive Design
+
+Use when:
+- mobile/tablet/desktop layout is the actual problem;
+- breakpoint behavior changes;
+- overflow/cropping/viewport issues are involved.
+
+Do not use it merely because the component has Tailwind classes.
+
+---
+
+# 3. BEFORE EDITING
+
+For a non-trivial task:
+
+1. Run/activate Caveman.
+2. Identify the exact relevant files.
+3. Read only the necessary surrounding code.
+4. Determine current behavior.
+5. Decide whether one specialist is needed.
+6. Make a small plan.
+7. Implement the smallest change.
+
+Before editing, report internally or briefly:
+
+```text
+Relevant files:
+- ...
+
+Existing behavior:
+- ...
+
+Requested change:
+- ...
+
+Skill needed:
+- Caveman
+- [one specialist only if needed]
+
+Not changing:
+- ...
+```
+
+---
+
+# 4. PRESERVATION RULES
+
+Unless explicitly requested, do NOT change:
+
+- framework;
+- routing;
+- page content;
+- dark mode;
+- header behavior;
+- footer behavior;
+- existing animation concepts;
+- existing breakpoints;
+- public asset paths;
+- dependency versions;
+- unrelated components.
+
+Do not rewrite an entire component when a local fix is enough.
+
+---
+
+# 5. FILE EDITING RULES
+
+Prefer editing existing files.
+
+Create new files only when:
+- a reusable component is actually needed;
+- a clear architectural boundary exists;
+- the user requested it.
+
+Do not create:
+- speculative utilities;
+- generic wrappers;
+- unnecessary hooks;
+- abstraction layers for one use.
+
+---
+
+# 6. REACT / NEXT.JS
+
+Use Server Components by default.
+
+Use `"use client"` only when required by:
+- state;
+- effects;
+- browser APIs;
+- event handlers;
+- animation libraries;
+- gestures.
+
+Do not convert components between server/client boundaries casually.
+
+Avoid unnecessary rerenders.
+
+When using effects:
+- keep dependencies correct;
+- clean up listeners;
+- clean up timers;
+- clean up observers;
+- clean up animation instances.
+
+---
+
+# 7. GSAP RULES
+
+When GSAP is used:
+
+## Prefer scoped contexts
+
+```tsx
+const root = useRef<HTMLDivElement>(null);
+
+useLayoutEffect(() => {
+  const ctx = gsap.context(() => {
+    // animation
+  }, root);
+
+  return () => ctx.revert();
+}, []);
+```
+
+## Responsive animation
+
+Prefer:
+
+```tsx
+const mm = gsap.matchMedia();
+```
+
+instead of manually managing many resize listeners.
+
+## Avoid
+
+- global `document.querySelector()` when a ref can scope the animation;
+- creating timelines on every render;
+- leaving timelines alive after unmount;
+- animating layout properties unnecessarily;
+- continuous animation with no purpose;
+- duplicated event listeners.
+
+Prefer:
+- `transform`;
+- `opacity`;
+- CSS variables;
+- timeline/stagger;
+- `will-change` only where justified.
+
+---
+
+# 8. ANIMATION PERFORMANCE
+
+Before adding an animation, ask:
+
+1. Does it communicate something?
+2. Can CSS handle it?
+3. Can existing GSAP handle it?
+4. Is continuous JS actually necessary?
+5. Does mobile need the same animation?
+6. What happens with reduced motion?
+
+Prefer the cheapest implementation that achieves the requested visual result.
+
+---
+
+# 9. REDUCED MOTION
+
+Respect:
+
+```text
+prefers-reduced-motion: reduce
+```
+
+For non-essential animation:
+- disable;
+- simplify;
+- or immediately show the final state.
+
+Do not leave users with invisible content because an animation was disabled.
+
+---
+
+# 10. RESPONSIVE DESIGN
+
+Minimum mental test:
+
+```text
+375
+640
+768
+1024
+1280
+1440
+1920
+```
+
+For layout changes check:
+- overflow;
+- typography;
+- spacing;
+- image aspect ratio;
+- navigation;
+- touch;
+- fixed elements;
+- animation;
+- viewport height.
+
+Do not assume desktop CSS scales correctly to mobile.
+
+Avoid JavaScript width detection when CSS can solve the problem.
+
+---
+
+# 11. UI / UX
+
+When changing UI:
+- preserve hierarchy;
+- preserve content;
+- preserve existing identity;
+- maintain readable contrast;
+- maintain keyboard focus;
+- do not make hover the only interaction;
+- keep touch targets practical.
+
+Do not blindly apply a design-system skill's recommendation if it conflicts with the existing portfolio identity or the user's explicit request.
+
+---
+
+# 12. BROWSER / QA
+
+For UI changes, verify the actual rendered result when browser tooling is available.
+
+Targeted QA:
+
+### Visual
+- light mode;
+- dark mode;
+- requested route;
+- 375px;
+- desktop.
+
+### Interaction
+- click;
+- hover;
+- touch/swipe where relevant;
+- navigation;
+- keyboard focus.
+
+### Runtime
+- console errors;
+- animation cleanup;
+- broken assets;
+- layout overflow.
+
+Do not spend tokens testing unrelated pages unless the change affects global components.
+
+If Header, Footer, globals.css, or layout.tsx changes:
+- test multiple routes because these are global.
+
+---
+
+# 13. BUILD / TYPE CHECK
+
+When implementation is complete, run the smallest useful verification.
+
+Prefer:
+
+```bash
+npm run build
+```
+
+for build-sensitive changes.
+
+For UI-only work:
+- browser verification first;
+- build when practical.
+
+If the repository's lint command is unavailable or incompatible with the current Next.js version, do not invent a replacement as if it were equivalent. Report the limitation and use available checks.
+
+---
+
+# 14. DEPENDENCY RULE
+
+Before adding a package:
+
+1. check existing dependencies;
+2. check whether CSS/native browser APIs can solve it;
+3. check whether GSAP/React Spring/Matter.js already solves it;
+4. only then add a package.
+
+No dependency should be added for convenience alone.
+
+---
+
+# 15. CODE STYLE
+
+Match the existing repository style unless the touched code clearly requires cleanup.
+
+Avoid unrelated formatting changes.
+
+Do not reformat entire files.
+
+Do not rename public components or routes unless required.
+
+---
+
+# 16. COMMENT POLICY
+
+Do not add comments that merely restate obvious code.
+
+Add comments only for:
+- non-obvious animation math;
+- browser quirks;
+- architectural constraints;
+- intentional performance tradeoffs.
+
+---
+
+# 17. GIT SAFETY
+
+Never:
+- delete files without explicit need;
+- reset unrelated changes;
+- overwrite unrelated user work;
+- modify generated/config files without reason.
+
+If the working tree contains user changes, preserve them.
+
+---
+
+# 18. TASK EXECUTION TEMPLATE
+
+Use this internal flow:
+
+```text
+[1] CAVEMAN
+Reconnaissance only.
+
+[2] SCOPE
+Identify exact files and smallest change.
+
+[3] SPECIALIST
+Invoke only if the task genuinely needs:
+- ECC
+- UI/UX Pro Max
+- Frontend Design
+- GSAP/Animation
+- Responsive Design
+
+[4] IMPLEMENT
+Smallest safe patch.
+
+[5] QA
+Browser test if UI/interaction changed.
+
+[6] VERIFY
+Build/type/runtime checks as appropriate.
+
+[7] REPORT
+What changed + what was tested + remaining issue.
+```
+
+---
+
+# 19. EXAMPLE ROUTING
+
+## "Fix mobile overflow"
+
+```text
+Caveman
+→ inspect layout
+→ Responsive Design if needed
+→ patch
+→ browser at 375px
+```
+
+## "Make hero animation smoother"
+
+```text
+Caveman
+→ inspect TextPressure/hero
+→ GSAP/Animation
+→ patch only hero
+→ browser test
+```
+
+## "Redesign About page"
+
+```text
+Caveman
+→ inspect About
+→ UI/UX Pro Max OR Frontend Design
+→ implement
+→ Responsive QA
+```
+
+Do not automatically invoke both design skills unless the task genuinely requires both.
+
+## "Fix TypeScript error"
+
+```text
+Caveman
+→ locate error
+→ ECC if debugging is non-trivial
+→ patch
+→ type/build verification
+```
+
+---
+
+# 20. FINAL RESPONSE FORMAT
+
+After a task, respond concisely:
+
+```text
+Implemented:
+- ...
+
+Files changed:
+- ...
+
+Skills used:
+- Caveman
+- [specialist]
+
+Verified:
+- ...
+
+Not changed:
+- ...
+```
+
+If browser verification was not possible, say so plainly.
+
+# 21. PRIMARY PRINCIPLE
+
+> **Use intelligence selectively.**
+
+Caveman should reduce unnecessary context and token usage.
+
+Specialists should be called for specialized problems, not as mandatory ceremony.
+
+The best implementation is the smallest change that achieves the requested result while preserving the existing portfolio.
+</file>
+
+<file path="ARCHITECTURE.md">
+# ARCHITECTURE — Portfolio AI Agent Architecture
+
+## 1. Architecture Overview
+
+This repository uses a Next.js App Router structure:
+
+```text
+app/
+├── about/
+├── blog/
+├── contact/
+├── services/
+├── components/
+├── posts/
+├── fonts/
+├── globals.css
+├── layout.tsx
+└── page.tsx
+
+public/
+└── assets/
+```
+
+The architecture is component-oriented, with page-level composition in `app/**/page.tsx` and reusable interactive UI in `app/components/**`.
+
+## 2. Architectural Layers
+
+### Layer A — App / Routing
+
+Responsible for:
+- route entry points;
+- page composition;
+- layouts;
+- metadata;
+- navigation.
+
+Examples:
+- `app/page.tsx`
+- `app/about/page.tsx`
+- `app/contact/page.tsx`
+- `app/blog/page.tsx`
+- `app/blog/[slug]/page.tsx`
+- `app/layout.tsx`
+
+Rule:
+> Page files compose features. Avoid putting large reusable interactive systems directly into page files.
+
+### Layer B — UI Components
+
+Reusable visual/interactive components live under:
+
+```text
+app/components/
+```
+
+Current notable components:
+- Header
+- Footer
+- Contact
+- WorkCard
+- BlurText
+- FallingText
+- PixelTransition
+- TextPressure
+- MarkdownContent
+
+### Layer C — Styling
+
+Primary styling:
+- Tailwind CSS
+- `app/globals.css`
+- responsive utility classes
+- dark-mode classes
+
+Existing breakpoints include:
+- xs: 375px
+- sm: 640px
+- md: 768px
+- lg: 1024px
+- xl: 1440px
+- 2xl: 1920px
+
+Do not change breakpoint definitions globally without a concrete reason.
+
+### Layer D — Animation
+
+Animation technologies currently present:
+- GSAP
+- React Spring
+- Matter.js
+- browser APIs such as IntersectionObserver and requestAnimationFrame
+
+Animation ownership should remain local to the component that owns the interaction.
+
+### Layer E — Content / Data
+
+Blog content currently exists in:
+
+```text
+app/posts/data.ts
+```
+
+Do not introduce a CMS or external API unless explicitly requested.
+
+### Layer F — Static Assets
+
+Static assets live under:
+
+```text
+public/assets/
+```
+
+Preserve existing asset paths when possible.
+
+## 3. Client vs Server Components
+
+Default:
+- keep pages/components server-side where interactivity is not required;
+- use `"use client"` only when browser APIs, state, effects, gestures, or interactive animation require it.
+
+Client components should not be converted to server components blindly if they depend on:
+- `window`;
+- `document`;
+- localStorage;
+- event listeners;
+- animation libraries;
+- browser observers.
+
+## 4. Animation Architecture
+
+### GSAP
+
+Use GSAP for:
+- coordinated timelines;
+- advanced transitions;
+- scroll-linked sequences;
+- complex staggered animation;
+- interaction-driven animation.
+
+Recommended pattern:
+
+```tsx
+const root = useRef<HTMLDivElement>(null);
+
+useLayoutEffect(() => {
+  const ctx = gsap.context(() => {
+    // animation
+  }, root);
+
+  return () => ctx.revert();
+}, []);
+```
+
+Use `gsap.matchMedia()` when animation behavior differs across breakpoints.
+
+### React Spring
+
+Use React Spring where the existing component already owns spring-based stateful animation.
+
+Do not migrate React Spring → GSAP simply for stylistic consistency.
+
+### Matter.js
+
+Use Matter.js only for physics-driven interactions such as the existing FallingText effect.
+
+Avoid adding physics where CSS/GSAP is sufficient.
+
+### requestAnimationFrame
+
+Use only where continuous frame-by-frame updates are truly required.
+
+Every loop must:
+- have a cleanup mechanism;
+- stop on unmount;
+- avoid unnecessary DOM writes;
+- avoid running when the animation is not visible where practical.
+
+## 5. Animation Performance
+
+Prefer:
+- transform;
+- opacity;
+- CSS variables;
+- GPU-friendly properties.
+
+Be careful with:
+- width/height animation;
+- top/left animation;
+- filters;
+- large DOM node counts;
+- continuous canvas/physics loops.
+
+For GSAP:
+- kill/revert owned animations on cleanup;
+- avoid global selectors where scoped refs are available;
+- avoid creating duplicate timelines on every render.
+
+## 6. Responsive Architecture
+
+Responsive behavior should primarily use Tailwind breakpoints.
+
+Do not create JavaScript breakpoint state when CSS can solve the problem.
+
+JavaScript media queries are appropriate when:
+- animation logic genuinely differs;
+- interaction model changes;
+- a library requires runtime dimensions.
+
+For animations, prefer `gsap.matchMedia()` over manually maintaining multiple resize listeners where GSAP is already being used.
+
+## 7. Dark Mode
+
+Dark mode currently relies on:
+- `.dark` class;
+- localStorage;
+- system preference;
+- Tailwind dark variants.
+
+Do not replace this mechanism unless explicitly requested.
+
+When touching global theme behavior:
+- preserve first-paint behavior;
+- preserve system preference;
+- preserve manual preference;
+- test both modes.
+
+## 8. Navigation
+
+Header owns:
+- route navigation;
+- active route state;
+- mobile menu state;
+- dark mode toggle;
+- hide-on-scroll behavior.
+
+Do not duplicate these concerns in individual pages.
+
+## 9. Component Boundaries
+
+Create a new component when:
+- UI is reused;
+- interaction has meaningful internal state;
+- animation has independent lifecycle;
+- page logic becomes difficult to read.
+
+Do not create components solely to reduce line count.
+
+## 10. Data Boundaries
+
+Static content should remain static unless dynamic behavior is required.
+
+Do not introduce:
+- state management libraries;
+- API layers;
+- databases;
+- CMS;
+- abstraction frameworks
+
+without an explicit requirement.
+
+## 11. Dependency Policy
+
+Existing major dependencies:
+
+```text
+next
+react
+react-dom
+tailwindcss
+gsap
+@react-spring/web
+matter-js
+marked
+dompurify
+tailwind-scrollbar
+typescript
+```
+
+Before adding a dependency:
+1. check whether existing tools already solve the problem;
+2. prefer native CSS/DOM when appropriate;
+3. prefer existing libraries already used by the project;
+4. add a dependency only when the benefit is concrete.
+
+## 12. AI Agent Architecture
+
+The AI workflow itself follows:
+
+```text
+User Request
+    ↓
+Caveman reconnaissance
+    ↓
+Identify exact files / risks
+    ↓
+Choose ONE specialist if needed
+    ├── UI/UX Pro Max
+    ├── Frontend Design
+    ├── GSAP / Animation
+    ├── Responsive Design
+    ├── ECC
+    └── Browser / QA
+    ↓
+Minimal implementation
+    ↓
+Browser / QA when applicable
+    ↓
+Final verification
+```
+
+Caveman is the default entry point.
+
+Specialist skills are invoked only when their domain is materially involved.
+
+## 13. Architecture Invariants
+
+Unless explicitly requested, preserve:
+- route structure;
+- page purpose;
+- dark/light mode;
+- existing navigation;
+- existing animation intent;
+- component responsibilities;
+- responsive breakpoints;
+- public asset paths;
+- current framework;
+- current package ecosystem.
+</file>
+
+<file path="DESIGN.md">
+# DESIGN SYSTEM — Portfolio
+
+## 1. Design Intent
+
+This portfolio should feel like a personal developer portfolio rather than a generic SaaS template.
+
+Core qualities:
+- expressive typography;
+- minimal structure;
+- strong black/white contrast;
+- restrained accent usage;
+- editorial composition;
+- interactive motion;
+- experimental but usable;
+- responsive first.
+
+The design should communicate craft through details, not through excessive decoration.
+
+## 2. Existing Visual Foundation
+
+Current visual foundation includes:
+- white/light background;
+- black/dark background;
+- gray text hierarchy;
+- orange/coral accent around `#FA6B48`;
+- typography driven by large responsive sizes;
+- JetBrains Mono currently applied at the root body;
+- Montserrat Alternates is available in the root layout;
+- peacock logo assets;
+- animated typography and transition components.
+
+Treat these as the current design language.
+
+Do not introduce a new visual identity unless explicitly requested.
+
+## 3. Color Rules
+
+Primary foundation:
+
+```text
+Light background: #FFFFFF
+Light foreground: #000000
+
+Dark background: #000000 / zinc-950 family
+Dark foreground: #FFFFFF
+
+Existing accent:
+#FA6B48
+```
+
+Use the accent intentionally:
+- active navigation;
+- interaction feedback;
+- important highlights;
+- selected states;
+- visual details.
+
+Avoid turning every component into an accent-colored component.
+
+## 4. Typography
+
+Typography should prioritize:
+1. hierarchy;
+2. readability;
+3. responsive scaling;
+4. expressive hero treatment.
+
+Hero typography may be oversized and animated.
+
+Body typography must remain readable on:
+- 375px;
+- 640px;
+- 768px;
+- 1024px+.
+
+Avoid arbitrary font sizes that create overflow.
+
+Prefer responsive utilities or `clamp()` for newly introduced type scales where appropriate.
+
+## 5. Layout
+
+Use:
+- strong whitespace;
+- clear two-column compositions on larger screens;
+- stacked compositions on smaller screens;
+- consistent horizontal padding;
+- viewport-aware hero sections.
+
+Do not force desktop layouts onto mobile.
+
+When a section uses `h-screen`, verify that content does not become inaccessible on short mobile viewports.
+
+Prefer `min-h-dvh` where viewport-height behavior genuinely requires dynamic viewport handling.
+
+## 6. Responsive Rules
+
+### Mobile — 375px+
+
+Priority:
+- readability;
+- touch usability;
+- no horizontal scroll;
+- simplified animation;
+- stacked layout;
+- accessible navigation.
+
+### Tablet — 768px+
+
+Priority:
+- transition from stacked to split layouts;
+- controlled typography growth;
+- preserve spacing.
+
+### Desktop — 1024px+
+
+Priority:
+- expressive composition;
+- large type;
+- richer hover/mouse interactions;
+- larger visual rhythm.
+
+### Large Desktop — 1440px+
+
+Do not simply enlarge everything.
+
+Use the additional width for:
+- whitespace;
+- composition;
+- controlled max-widths;
+- larger hero typography where intentional.
+
+## 7. Motion Design
+
+Motion should communicate hierarchy.
+
+### Motion hierarchy
+
+1. Page/section entrance
+2. Hero typography
+3. Interactive feedback
+4. Navigation transitions
+5. Decorative effects
+
+Do not let decorative animation compete with primary content.
+
+### GSAP rules
+
+Prefer:
+- timelines;
+- stagger;
+- transform;
+- opacity;
+- scoped selectors;
+- lifecycle cleanup.
+
+Use `gsap.matchMedia()` for responsive animation variants.
+
+### Reduced Motion
+
+Every substantial animation system must have a reduced-motion strategy.
+
+At minimum:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* remove or simplify non-essential motion */
+}
+```
+
+For JS/GSAP:
+- detect reduced motion;
+- skip heavy timelines;
+- show the final visual state where appropriate.
+
+## 8. Interaction
+
+Interactive elements should have:
+- visible hover state on pointer devices;
+- usable touch state;
+- keyboard focus;
+- sufficient target size;
+- clear active state.
+
+Do not make critical information available only through hover.
+
+## 9. Cards / Work Showcase
+
+Work cards should prioritize:
+- project identity;
+- visual preview;
+- concise description;
+- clear interaction.
+
+Existing WorkCard carousel behavior should be preserved unless the task explicitly changes it.
+
+When modifying the carousel:
+- test touch swipe;
+- test desktop interaction;
+- test infinite-loop behavior;
+- test resize behavior;
+- verify no layout shift.
+
+## 10. Header
+
+Header is a global interaction.
+
+Preserve:
+- fixed positioning;
+- hide-on-scroll behavior;
+- mobile menu;
+- active route indication;
+- dark mode.
+
+When changing it, verify every route.
+
+## 11. Animation Component Guidelines
+
+### TextPressure
+
+Treat as a hero-level expressive component.
+
+Avoid putting many additional continuous effects around it.
+
+### BlurText
+
+Good for:
+- entrance animation;
+- section headings;
+- controlled text reveals.
+
+Avoid using it on long paragraphs.
+
+### FallingText
+
+Physics-based and comparatively expensive.
+
+Use selectively.
+
+Never duplicate large Matter.js simulations without a concrete visual reason.
+
+### PixelTransition
+
+Good for:
+- image/content transitions;
+- hover/click reveal effects.
+
+Verify touch-device behavior before changing its interaction model.
+
+## 12. Visual QA Checklist
+
+For every visual change:
+
+- [ ] Light mode
+- [ ] Dark mode
+- [ ] 375px
+- [ ] 768px
+- [ ] 1024px
+- [ ] 1440px
+- [ ] Keyboard navigation
+- [ ] Hover states
+- [ ] Touch behavior
+- [ ] Reduced motion
+- [ ] No horizontal overflow
+- [ ] No obvious layout shift
+- [ ] No animation stuck after unmount
+- [ ] No console errors
+
+## 13. Design Decision Rule
+
+When two implementations look equivalent:
+
+Choose the one that:
+1. uses fewer dependencies;
+2. has less runtime work;
+3. is easier to maintain;
+4. is more accessible;
+5. preserves the existing architecture.
+
+Do not optimize for novelty.
+</file>
+
+<file path="global.d.ts">
+declare module "*.css";
+</file>
+
+<file path="PRD.md">
+# PRD — Portfolio AI-Assisted Development
+
+## 1. Project Context
+
+This repository is a personal portfolio built with Next.js App Router, React, TypeScript, and Tailwind CSS.
+
+Current repository characteristics:
+- Next.js 15 + React 19
+- Tailwind CSS 4
+- TypeScript
+- GSAP
+- React Spring
+- Matter.js
+- Marked + DOMPurify
+- Existing pages: Home, About, Team, Services, Contact, Blog
+- Existing interactive components include `TextPressure`, `BlurText`, `FallingText`, `PixelTransition`, `WorkCard`, Header, Footer, and Markdown rendering.
+- Dark/light mode and responsive behavior are already part of the site.
+
+The repository already contains substantial visual/interaction work. The AI agent must therefore behave primarily as a **preservation-first maintainer and improver**, not as a greenfield designer.
+
+## 2. Product Goal
+
+Maintain and evolve the portfolio into a polished, responsive, animation-rich developer portfolio while preserving existing visual identity, content, routes, interactions, and working behavior unless a change is explicitly requested.
+
+Primary quality areas:
+1. UI/UX quality
+2. Responsive design
+3. GSAP / animation quality
+4. Accessibility and reduced-motion behavior
+5. Browser compatibility
+6. Visual regression prevention
+7. Code quality and maintainability
+
+## 3. Core Principle
+
+> **Do not redesign what was not requested.**
+
+Before changing UI:
+- inspect the current implementation;
+- understand existing behavior;
+- identify the smallest change that satisfies the request;
+- preserve existing appearance outside the requested scope.
+
+Do not replace existing animation libraries or component architecture merely because another approach is available.
+
+## 4. AI Agent Strategy — Caveman First
+
+The most important operating constraint is **token and API efficiency**.
+
+### Default workflow
+
+Use the Caveman skill/workflow first for:
+- repository reconnaissance;
+- locating relevant files;
+- understanding existing components;
+- identifying dependencies;
+- planning a small change;
+- determining which other skill is actually necessary.
+
+Caveman should act as the **cheap coordinator / scout**.
+
+Do not automatically invoke every available skill.
+
+### Skill escalation
+
+Use other skills only when their specialization is needed:
+
+| Skill | Use when |
+|---|---|
+| Caveman | Always first for non-trivial code tasks |
+| ECC | Code quality, refactoring, debugging, architecture review, safe implementation |
+| UI/UX Pro Max | UI system, layout, hierarchy, typography, component UX, design decisions |
+| Frontend Design | High-level visual direction or substantial frontend composition |
+| Browser / QA | Real browser verification, interaction testing, responsive checks, visual regressions |
+| GSAP / Animation | GSAP timelines, scroll animation, micro-interactions, performance |
+| Responsive Design | Breakpoint behavior, mobile/tablet/desktop layout problems |
+
+### Cost rule
+
+Prefer:
+
+`Caveman → targeted specialist → implementation → Browser/QA`
+
+Avoid:
+
+`Caveman → every skill → broad analysis → rewrite`
+
+The agent must not call expensive/deep workflows when a simple repository inspection or targeted edit is sufficient.
+
+## 5. Goals
+
+### P0 — Required
+
+- Preserve existing routes and page functionality.
+- Preserve dark/light mode behavior.
+- Preserve existing header/footer behavior.
+- Preserve existing animation intent.
+- Avoid horizontal overflow at mobile widths.
+- Keep TypeScript/build/lint healthy.
+- Ensure animations do not block interaction or cause obvious jank.
+- Respect `prefers-reduced-motion`.
+- Verify important changes in a real browser when possible.
+
+### P1 — Important
+
+- Improve animation implementation quality where requested.
+- Reduce unnecessary client-side work.
+- Improve responsive behavior.
+- Improve accessibility and keyboard interaction.
+- Remove obvious dead/commented code when it is in the touched area.
+- Improve component consistency without changing the visual result unnecessarily.
+
+### P2 — Optional
+
+- Broader component refactoring.
+- Design-token cleanup.
+- Animation abstraction.
+- Content/data architecture improvements.
+- Performance optimizations outside the requested scope.
+
+## 6. Non-Goals
+
+Do not:
+- rewrite the whole project;
+- migrate frameworks;
+- replace Next.js;
+- replace Tailwind;
+- replace GSAP with another animation library without explicit approval;
+- redesign the visual identity without a design request;
+- modify unrelated pages merely for consistency;
+- remove existing components because they look unfinished;
+- introduce unnecessary dependencies;
+- create speculative features.
+
+## 7. Design Requirements
+
+The design system should remain coherent with the existing portfolio:
+- strong typography;
+- minimal editorial portfolio feel;
+- black/white foundation;
+- existing accent color usage should be preserved unless a new palette is explicitly requested;
+- responsive typography;
+- generous spacing;
+- purposeful motion;
+- interaction should feel intentional rather than decorative.
+
+The existing repository uses responsive Tailwind breakpoints and multiple animated components. Treat these as existing design decisions, not problems to automatically replace.
+
+## 8. Animation Requirements
+
+Animation must have a purpose:
+- guide attention;
+- communicate state;
+- establish hierarchy;
+- improve transition continuity;
+- provide feedback.
+
+Prefer:
+- `transform` and `opacity`;
+- GSAP timelines for coordinated motion;
+- scoped animation cleanup;
+- `gsap.context()` where appropriate;
+- `gsap.matchMedia()` for responsive animation rules;
+- reduced-motion fallbacks.
+
+Avoid:
+- unnecessary layout-triggering animation;
+- uncontrolled requestAnimationFrame loops;
+- duplicated event listeners;
+- animations that continue after unmount;
+- heavy effects on mobile without testing.
+
+Existing Matter.js and React Spring animations must be treated as existing dependencies and not casually rewritten.
+
+## 9. Responsive Requirements
+
+Minimum verification targets:
+- 375px mobile
+- 640px
+- 768px tablet
+- 1024px desktop transition
+- 1280px
+- 1440px+
+- 1920px where relevant
+
+Check:
+- no unintended horizontal scroll;
+- readable typography;
+- navigation usability;
+- touch targets;
+- image/media cropping;
+- animation behavior;
+- section height;
+- overflow;
+- fixed/sticky elements;
+- dark mode;
+- reduced motion.
+
+## 10. QA / Definition of Done
+
+A task is complete only when:
+- requested behavior works;
+- unrelated behavior is preserved;
+- TypeScript/build checks pass when applicable;
+- browser verification is performed for UI/interaction changes when browser tooling is available;
+- mobile behavior is checked for responsive changes;
+- no obvious console/runtime errors were introduced;
+- animations clean up correctly;
+- reduced-motion behavior is respected.
+
+## 11. Change Size
+
+Prefer small, reviewable changes.
+
+For a large task:
+1. reconnaissance;
+2. plan;
+3. implement one logical slice;
+4. verify;
+5. continue.
+
+Do not mix unrelated refactors with feature work.
+
+## 12. Agent Output
+
+Before implementation:
+- summarize what was found;
+- state which files will be touched;
+- state which skills are actually needed;
+- state what will intentionally NOT be changed.
+
+After implementation:
+- summarize changes;
+- list verification performed;
+- mention remaining risks only when real.
+</file>
+
+<file path="README.md">
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+</file>
+
+<file path="skills-lock.json">
+{
+  "version": 1,
+  "skills": {
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576"
+    }
+  }
+}
+</file>
+
+<file path="app/components/FallingText/FallingText.tsx">
+'use client'
+
+import { useRef, useState, useEffect } from "react";
+import Matter from "matter-js";
+
+interface FallingTextProps {
+  text?: string;
+  highlightWords?: string[];
+  trigger?: "auto" | "scroll" | "click" | "hover";
+  backgroundColor?: string;
+  wireframes?: boolean;
+  gravity?: number;
+  mouseConstraintStiffness?: number;
+  fontSize?: string;
+}
+
+const FallingText: React.FC<FallingTextProps> = ({
+  text = "",
+  highlightWords = [],
+  trigger = "auto",
+  backgroundColor = "transparent",
+  wireframes = false,
+  gravity = 1,
+  mouseConstraintStiffness = 0.2,
+  fontSize = "1rem",
+}) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const textRef = useRef<HTMLDivElement | null>(null);
+  const canvasContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const [effectStarted, setEffectStarted] = useState(false);
+
+  useEffect(() => {
+    if (!textRef.current) return;
+    const words = text.split(" ");
+
+    const newHTML = words
+      .map((word) => {
+        const isHighlighted = highlightWords.some((hw) => word.startsWith(hw));
+        return `<span
+          class="inline-block mx-[2px] select-none ${
+            isHighlighted ? "text-cyan-500 font-bold" : ""
+          }"
+        >
+          ${word}
+        </span>`;
+      })
+      .join(" ");
+
+    textRef.current.innerHTML = newHTML;
+  }, [text, highlightWords]);
+
+  useEffect(() => {
+    if (trigger === "auto") {
+      setEffectStarted(true);
+      return;
+    }
+    if (trigger === "scroll" && containerRef.current) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setEffectStarted(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.1 },
+      );
+      observer.observe(containerRef.current);
+      return () => observer.disconnect();
+    }
+  }, [trigger]);
+
+  useEffect(() => {
+    if (!effectStarted) return;
+
+    const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } =
+      Matter;
+
+    if (!containerRef.current || !canvasContainerRef.current) return;
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const width = containerRect.width;
+    const height = containerRect.height;
+
+    if (width <= 0 || height <= 0) return;
+
+    const engine = Engine.create();
+    engine.world.gravity.y = gravity;
+
+    const render = Render.create({
+      element: canvasContainerRef.current,
+      engine,
+      options: {
+        width,
+        height,
+        background: backgroundColor,
+        wireframes,
+      },
+    });
+
+    const boundaryOptions = {
+      isStatic: true,
+      render: { fillStyle: "transparent" },
+    };
+    const floor = Bodies.rectangle(
+      width / 2,
+      height + 25,
+      width,
+      50,
+      boundaryOptions,
+    );
+    const leftWall = Bodies.rectangle(
+      -25,
+      height / 2,
+      50,
+      height,
+      boundaryOptions,
+    );
+    const rightWall = Bodies.rectangle(
+      width + 25,
+      height / 2,
+      50,
+      height,
+      boundaryOptions,
+    );
+    const ceiling = Bodies.rectangle(
+      width / 2,
+      -25,
+      width,
+      50,
+      boundaryOptions,
+    );
+
+    if (!textRef.current) return;
+    const wordSpans = textRef.current.querySelectorAll("span");
+    const wordBodies = [...wordSpans].map((elem) => {
+      const rect = elem.getBoundingClientRect();
+
+      const x = rect.left - containerRect.left + rect.width / 2;
+      const y = rect.top - containerRect.top + rect.height / 2;
+
+      const body = Bodies.rectangle(x, y, rect.width, rect.height, {
+        render: { fillStyle: "transparent" },
+        restitution: 0.8,
+        frictionAir: 0.01,
+        friction: 0.2,
+      });
+      Matter.Body.setVelocity(body, {
+        x: (Math.random() - 0.5) * 5,
+        y: 0,
+      });
+      Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.05);
+
+      return { elem, body };
+    });
+
+    wordBodies.forEach(({ elem, body }) => {
+      elem.style.position = "absolute";
+      elem.style.left = `${
+        body.position.x - body.bounds.max.x + body.bounds.min.x / 2
+      }px`;
+      elem.style.top = `${
+        body.position.y - body.bounds.max.y + body.bounds.min.y / 2
+      }px`;
+      elem.style.transform = "none";
+    });
+
+    const mouse = Mouse.create(containerRef.current);
+    const mouseConstraint = MouseConstraint.create(engine, {
+      mouse,
+      constraint: {
+        stiffness: mouseConstraintStiffness,
+        render: { visible: false },
+      },
+    });
+    render.mouse = mouse;
+
+    World.add(engine.world, [
+      floor,
+      leftWall,
+      rightWall,
+      ceiling,
+      mouseConstraint,
+      ...wordBodies.map((wb) => wb.body),
+    ]);
+
+    const runner = Runner.create();
+    Runner.run(runner, engine);
+    Render.run(render);
+
+    const updateLoop = () => {
+      wordBodies.forEach(({ body, elem }) => {
+        const { x, y } = body.position;
+        elem.style.left = `${x}px`;
+        elem.style.top = `${y}px`;
+        elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
+      });
+      Matter.Engine.update(engine);
+      requestAnimationFrame(updateLoop);
+    };
+    updateLoop();
+
+    return () => {
+      Render.stop(render);
+      Runner.stop(runner);
+      if (render.canvas && canvasContainerRef.current) {
+        canvasContainerRef.current.removeChild(render.canvas);
+      }
+      World.clear(engine.world, false);
+      Engine.clear(engine);
+    };
+  }, [
+    effectStarted,
+    gravity,
+    wireframes,
+    backgroundColor,
+    mouseConstraintStiffness,
+  ]);
+
+  const handleTrigger = () => {
+    if (!effectStarted && (trigger === "click" || trigger === "hover")) {
+      setEffectStarted(true);
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative z-[1] w-full h-full cursor-pointer text-center pt-5 overflow-hidden"
+      onClick={trigger === "click" ? handleTrigger : undefined}
+      onMouseEnter={trigger === "hover" ? handleTrigger : undefined}
+    >
+      <div
+        ref={textRef}
+        className="inline-block"
+        style={{
+          fontSize,
+          lineHeight: 1.4,
+        }}
+      />
+
+      <div className="absolute top-0 left-0 z-0" ref={canvasContainerRef} />
+    </div>
+  );
+};
+
+export default FallingText;
+</file>
+
+<file path="next.config.mjs">
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+};
+
+export default nextConfig;
+</file>
+
+<file path="postcss.config.mjs">
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+};
+
+export default config;
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "target": "ES2017"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+</file>
+
+<file path="app/components/BlurText/BlurText.tsx">
+"use client"
+
+import { useRef, useEffect, useState, ReactNode } from 'react';
+import { useSprings, animated, SpringValue } from '@react-spring/web';
+import type { AnimatedComponent } from '@react-spring/web';
+
+interface BlurTextProps {
+  text?: string;
+  delay?: number;
+  className?: string;
+  animateBy?: 'words' | 'letters';
+  direction?: 'top' | 'bottom';
+  threshold?: number;
+  rootMargin?: string;
+  animationFrom?: Record<string, any>;
+  animationTo?: Record<string, any>[];
+  easing?: (t: number) => number | string;
+  onAnimationComplete?: () => void;
+  children?: ReactNode; // TAMBAHAN
+}
+
+const BlurText: React.FC<BlurTextProps> = ({
+  text = '',
+  delay = 200,
+  className = '',
+  animateBy = 'words',
+  direction = 'top',
+  threshold = 0.1,
+  rootMargin = '0px',
+  animationFrom,
+  animationTo,
+  easing = 'easeOutCubic',
+  onAnimationComplete,
+  children,
+}) => {
+  const content = text || (typeof children === 'string' ? children : '');
+  const elements = animateBy === 'words' ? content.split(' ') : content.split('');
+  const [inView, setInView] = useState(false);
+  const ref = useRef<HTMLParagraphElement>(null);
+  const animatedCount = useRef(0);
+
+  // Default animations based on direction
+  const defaultFrom: Record<string, any> = direction === 'top'
+    ? { filter: 'blur(10px)', opacity: 0, transform: 'translate3d(0,-50px,0)' }
+    : { filter: 'blur(10px)', opacity: 0, transform: 'translate3d(0,50px,0)' };
+  
+  const defaultTo: Record<string, any>[] = [
+    {
+      filter: 'blur(5px)',
+      opacity: 0.5,
+      transform: direction === 'top' ? 'translate3d(0,5px,0)' : 'translate3d(0,-5px,0)',
+    },
+    { filter: 'blur(0px)', opacity: 1, transform: 'translate3d(0,0,0)' },
+  ];
+
+  const AnimatedSpan = animated('span') as AnimatedComponent<'span'>;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          if (ref.current) {
+            observer.unobserve(ref.current);
+          }
+        }
+      },
+      { threshold, rootMargin }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [threshold, rootMargin]);
+
+  const springs = useSprings(
+    elements.length,
+    elements.map((_, i) => ({
+      from: animationFrom || defaultFrom,
+      to: inView
+        ? async (next: (arg: Record<string, SpringValue<any>>) => Promise<void>) => {
+          for (const step of animationTo || defaultTo) {
+            await next(step);
+          }
+          animatedCount.current += 1;
+          if (animatedCount.current === elements.length && onAnimationComplete) {
+            onAnimationComplete();
+          }
+        }
+        : animationFrom || defaultFrom,
+      delay: i * delay,
+      config: { easing: easing as any },
+    }))
+  );
+
+  return (
+    <p ref={ref} className={`blur-text ${className} flex flex-wrap`}>
+      {springs.map((props, index) => (
+        <AnimatedSpan
+          key={index}
+          style={props}
+          className="inline-block transition-transform will-change-[transform,filter,opacity]"
+        >
+          {elements[index] === ' ' ? '\u00A0' : elements[index]}
+          {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
+        </AnimatedSpan>
+      ))}
+    </p>
+  );
+};
+
+export default BlurText;
+</file>
+
+<file path="tailwind.config.js">
+module.exports = {
+  darkMode: 'class',
+  purge: [],
+  theme: {
+    screens: {
+      xs: "375px",
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1440px",
+      "2xl": "1920px",
+    },
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
+}
+</file>
+
+<file path="app/blog/page.tsx">
+import Link from 'next/link';
+import { posts } from '../posts/data';
+
+export default function BlogPage() {
+  return (
+    // <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] h-screen">
+    // <div className="max-w-3xl mx-auto p-4">
+    //   <h1 className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[180px] mb-8">Blog</h1>
+      
+    //   <div className="space-y-9 mt-[100px]">
+    //     {posts.map((post) => (
+    //       <Link 
+    //       key={post.id} 
+    //       href={`/blog/${post.id}`}
+    //       className="block p-2 border-4 border-gray-400 rounded-lg hover:bg-orange-800 transition">
+    //         <div className="p-4 border-2 border-gray-600 rounded-lg hover:bg-[#FA6B48]">
+    //           <h2 className="text-xl font-semibold">{post.title}</h2>
+    //           <p className="text-gray-500 text-sm">{post.date}</p>
+    //         </div>
+    //       </Link>
+    //     ))}
+    //   </div>
+    // </div>
+    // </main>
+    // test
+    <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] lg:gap-x-[30px] h-screen">
+
+      <div className="flex col-span-1 h-full lg:px-10 justify-center">
+        <div className="font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl leading-[150%] mb-8 content-center items-center">This is a platform for living story of ideas and experiences, & space for thoughtful reflection.</div>
+      </div>
+
+      <div className="col-span-1 h-full content-center overflow-hidden">
+        <div className="h-full overflow-y-auto space-y-8 pr-2 scroll-custom content-start sm:content-center">
+            {posts.map((post) => (
+              <Link 
+              key={post.id} 
+              href={`/blog/${post.id}`}
+              className="block p-2 border-4 border-gray-600 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition">
+                <div className="p-4 border-2 border-gray-400 rounded-lg hover:bg-[#FA6B48]">
+                  <h2 className=" text-xl font-semibold">{post.title}</h2>
+                  <p className="text-gray-500 text-sm">{post.date}</p>
+                </div>
+              </Link>
+            ))}
+        </div>
+      </div>
+
+    </main> 
+  );
+}
+
+{/* <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px] h-screen">
+
+<div className="flex col-span-1 h-full lg:px-10 justify-center align-middle">
+  <h1 className="font-bold text-7xl md:text-8xl lg:text-9xl xl:text-[180px] mb-8">Blog</h1>
+</div>
+
+<div className="flex col-span-1 h-full items-center">
+  <<div className="space-y-9 mt-[100px]">
+        {posts.map((post) => (
+          <Link 
+          key={post.id} 
+          href={`/blog/${post.id}`}
+          className="block p-2 border-4 border-gray-400 rounded-lg hover:bg-orange-800 transition">
+            <div className="p-4 border-2 border-gray-600 rounded-lg hover:bg-[#FA6B48]">
+              <h2 className="text-xl font-semibold">{post.title}</h2>
+              <p className="text-gray-500 text-sm">{post.date}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+</div>
+
+</main>  */}
+</file>
+
+<file path="app/components/Contact/contact.tsx">
+'use client'
+
+import React from "react";
+
+const Contact: React.FC = () => {
+  const contacts = {
+    address: "Jl. Terusan Prof. DR. Sutami No.23, Sarijadi, Kec. Sukasari, Bandung, Jawa Barat 40151 Indonesia",
+    phone: "+6282120623351",
+    email: "ariaajipw@gmail.com"
+  };
+
+  // Functions to handle clicks
+  const openGoogleMaps = () => {
+    const encodedAddress = encodeURIComponent(contacts.address);
+    window.open(`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`, '_blank');
+  };
+
+  const openWhatsApp = () => {
+    const cleanPhone = contacts.phone.replace(/\D/g, '');
+    const message = encodeURIComponent("Halo, I would like to ask about...");
+    window.open(`https://wa.me/${cleanPhone}?text=${message}`, '_blank');
+  };
+
+  const openEmail = () => {
+    const subject = encodeURIComponent("Pertanyaan atau Pesan");
+    const body = encodeURIComponent(
+      "Halo,\n\nI would like to ask about...\n\nThank You,\n[Your Name]"
+    );
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=${contacts.email}&su=${subject}&body=${body}`,
+      '_blank'
+    );
+  };
+  
+  return (
+    <div className="container mx-auto px-4 py-8 w-full">
+      {/* <h1 className="text-3xl lg:text-5xl font-bold text-center mt-10 mb-18">Contact</h1> */}
+      <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          {/* Alamat */}
+          <div onClick={openGoogleMaps} className="p-6 rounded-lg text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
+            <div className="flex justify-center items-center mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 text-[#FA6B48]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Address</h3>
+            <p className="text-xs">
+              Jl. Terusan Prof. DR. Sutami No.23, <br></br>Sarijadi, Kec. Sukasari, 40151, <br></br>Bandung, West Java, Indonesia
+            </p>
+          </div>
+
+          {/* Nomor Telepon */}
+          <div onClick={openWhatsApp} className="p-6 rounded-lg text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
+            <div className="flex justify-center items-center mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 text-[#FA6B48]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d=""
+                  // d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Phone Number</h3>
+            <p className="text-xs">
+            +62 8212 062 3351
+            </p>
+          </div>
+
+          {/* Email */}
+          <div onClick={openEmail} className="p-6 rounded-lg text-center bg-black dark:bg-white text-white dark:text-gray-950 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white">
+            <div className="flex justify-center items-center mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 text-[#FA6B48]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Email</h3>
+            <p className="text-xs">ariaajipw@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  );
+};
+
+export default Contact;
+</file>
+
+<file path="app/posts/data.ts">
+export interface Post {
+  id: string;
+  title: string;
+  author: string;
+  date: string;
+  content: string;
+}
+
+export const posts: Post[] = [
+  {
+    id: "1",
+    title: "Getting Started Crafting a Website",
+    author: "Aria Aji",
+    date: "2025-07-10",
+    content: "# Embrace the Journey \n\n The path to becoming a web developer is equal parts exciting and overwhelming, especially at the beginning. You’ll face moments of frustration, but every challenge is a chance to grow your problem-solving muscles. Start by acknowledging that confusion is normal—even seasoned developers Google daily questions! What matters most is your curiosity and willingness to experiment. Welcome to a field where lifelong learning isn’t optional; it’s the core of the craft. \n\n Build Your Foundation \n\n Begin with the absolute basics: HTML for structure, CSS for styling, and JavaScript for interactivity. Free resources like freeCodeCamp, MDN Web Docs, or Codecademy offer structured, hands-on tutorials to solidify these skills. Don’t rush—master positioning elements with CSS before jumping into frameworks like React. Use tools like VS Code and Chrome DevTools early; they’ll become your daily companions. Consistency beats intensity: code for 30 minutes daily rather than 8 hours once a week. \n\n Create, Don’t Just Consume \n\n Tutorials are helpful, but real growth happens when you build projects you design. Start tiny: a personal bio page, a recipe card, or a calculator. When stuck, break problems into micro-tasks (e.g., “How do I center this button?” instead of “How do I build a full app?”). Share your work on GitHub—it’s your developer resume. Embrace ugly first drafts; refactoring is where magic happens.\n\n Join the Community \n\n Website development thrives on collaboration, so engage with others from day one. Ask questions on Stack Overflow, join Discord groups like The Odin Project, or follow devs on Twitter/X. Attend local meetups or online events; hearing others’ struggles normalizes your own. Remember, every developer’s journey looks different—avoid comparing your Chapter 1 to someone’s Chapter 20. Your unique voice and perspective belong here."
+  },
+  {
+    id: "2",
+    title: "TypeScript Best Practices",
+    author: "John Smith",
+    date: "2023-06-20",
+    content: "# TypeScript Tips\n\nHere are some useful TypeScript patterns..."
+  }
+];
+</file>
+
+<file path="app/globals.css">
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@layer utilities {
+  :root {
+    --background: #ffffff;
+    --foreground: #000000;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #000000;
+      --foreground: #ffffff;
+    }
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    display: block;
+  }
+  .scroll-custom::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .scroll-custom::-webkit-scrollbar-track {
+    @apply bg-gray-200 dark:bg-gray-700;
+  }
+  
+  .scroll-custom::-webkit-scrollbar-thumb {
+    @apply bg-[#FA6B48] rounded-full;
+  }
+  
+  .scroll-custom::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#FA6B48]/90;
+  }
+}
+</file>
+
+<file path="app/contact/page.tsx">
+import ContactSection from "../components/Contact/contact"
+
+export default function About() {
+  return (
+    <main>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start py-[50px] px-[20px] md:pt[49px] lg:pt-[100px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:pt-[120px] xl:px-[100px] 2xl:px-[220px] gap-y-[30px] lg:gap-x-[30px]">
+
+      <div className="flex col-span-1 h-full items-start sm:items-center">
+        <p className="align-middle w-full leading-[130%] lg:leading-[130%] text-2xl md:text-3xl lg:text-4xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+            <span className="font-black">Building thoughtful, interactive, and accessible web experiences.</span>  
+            Turn static ideas into fluid interfaces. 
+            <span className="font-bold">Tell me what you’re working on.</span>.
+        </p>
+      </div>
+
+      <div className="flex col-span-1 h-full lg:px-10 justify-center order-first lg:order-last">
+        <div className="font-bold text-5xl md:text-4xl lg:text-7xl xl:text-7xl 2xl:text-9xl content-center">Contact</div>
+      </div>
+      </div>
+
+
+      <div className="container flex mx-auto my-40 w-fit content-center place-self-center">
+        < ContactSection />
+      </div>
+    </main>
+
+  )
+}
+</file>
+
+<file path="app/components/Footer/footer.tsx">
+'use client'
+
+import Link from "next/link";
+
+const socials = [
+  { id: 1, name: "GitHub", url: "https://github.com/ariaajipw" },
+  { id: 2, name: "LinkedIn", url: "https://linkedin.com/in/aria-aji" },
+  { id: 3, name: "X", url: "https://x.com/ariaajipw" },
+  // { id: 4, name: "Instagram", url: "https://instagram.com/ariaaji" }
+];
+
+const Footer = () => {
+  return (
+    <footer className="bg-white dark:bg-[#0a0a0a] mt-auto">
+      <div className="container mx-auto py-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-[20px]">
+          {/* Bagian 1: Tentang Kami */}
+          <div>
+
+          <div className="group">
+            {/* <h3 className="text-[16px] sm:text-lg font-semibold text-gray-800 dark:text-white underline underline-offset-2">
+              Lorem, ipsum dolor.
+            </h3>
+            <img src="/assets/img/peacock-black.png" alt="" className="w-[40px]"/> */}
+            <a href="/" className='flex'><span className='hover:text-[#FA6B48] underline underline-offset-5 text-3xl font-bold'>Perkasa Wibowo</span><img src="/assets/img/peacock-black.png" alt="" className='w-[60px] hidden group-hover:block dark:hidden dark:group-hover:hidden'/><img src="/assets/img/peacock-white.png" alt="" className='w-[60px] hidden group-hover:block dark:hidden'/></a>
+          </div>
+            <p className="text-sm mt-4 text-gray-600 dark:text-gray-300">
+            Bandung,<br></br>Jl. Terusan Prof. DR. Sutami No. 23, <br></br>Sarijadi, Kec. Sukasari,<br></br>Jawa Barat 40151<br></br>Indonesia.
+            </p>
+          </div>
+
+          {/* Bagian 2: Quick Links */}
+          <div>
+            {/* <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+              Tautan Cepat
+            </h3> */}
+            <ul className="mt-4 space-y-2 flex gap-9 text-sm">
+              <li>
+                <Link
+                  href="/about"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  About
+                </Link>
+              </li>
+              {/* <li>
+                <Link
+                  href="/services"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  Services
+                </Link>
+              </li> */}
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                >
+                  Blog
+                </Link>
+              </li>
+            </ul>
+
+            {/* Bagian 3: Social Media */}
+            <ul className="mt-4 space-y-2 flex gap-9 text-sm">
+              {socials.map((social) => (
+                <Link
+                  key={social.id}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#FA6B48]"
+                    >
+                    {social.name}
+                </Link>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Hak Cipta */}
+        <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center">
+          <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-[16px]">
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+</file>
+
+<file path="app/components/PixelTransition/PixelTransition.tsx">
+"use client";
+
+import React, { useRef, useEffect, useState, CSSProperties } from "react";
+import { gsap } from "gsap";
+
+interface PixelTransitionProps {
+  firstContent: React.ReactNode;
+  secondContent: React.ReactNode;
+  gridSize?: number;
+  pixelColor?: string;
+  animationStepDuration?: number;
+  className?: string;
+  style?: CSSProperties;
+  aspectRatio?: string;
+}
+
+const PixelTransition: React.FC<PixelTransitionProps> = ({
+  firstContent,
+  secondContent,
+  gridSize = 7,
+  pixelColor = "currentColor",
+  animationStepDuration = 0.3,
+  className = "",
+  style = {},
+  aspectRatio = "100%",
+}) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const pixelGridRef = useRef<HTMLDivElement | null>(null);
+  const activeRef = useRef<HTMLDivElement | null>(null);
+  const delayedCallRef = useRef<gsap.core.Tween | null>(null);
+
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isTouchDevice, setIsTouchDevice] = useState<boolean>(false);
+
+  // Check for touch device on the client side
+  useEffect(() => {
+    const checkTouchDevice = () => {
+      return (
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia("(pointer: coarse)").matches
+      );
+    };
+    setIsTouchDevice(checkTouchDevice());
+  }, []);
+
+  useEffect(() => {
+    const pixelGridEl = pixelGridRef.current;
+    if (!pixelGridEl) return;
+
+    pixelGridEl.innerHTML = "";
+
+    for (let row = 0; row < gridSize; row++) {
+      for (let col = 0; col < gridSize; col++) {
+        const pixel = document.createElement("div");
+        pixel.classList.add("pixelated-image-card__pixel");
+        pixel.classList.add("absolute", "hidden");
+        pixel.style.backgroundColor = pixelColor;
+
+        const size = 100 / gridSize;
+        pixel.style.width = `${size}%`;
+        pixel.style.height = `${size}%`;
+        pixel.style.left = `${col * size}%`;
+        pixel.style.top = `${row * size}%`;
+
+        pixelGridEl.appendChild(pixel);
+      }
+    }
+  }, [gridSize, pixelColor]);
+
+  const animatePixels = (activate: boolean): void => {
+    setIsActive(activate);
+
+    const pixelGridEl = pixelGridRef.current;
+    const activeEl = activeRef.current;
+    if (!pixelGridEl || !activeEl) return;
+
+    const pixels = pixelGridEl.querySelectorAll<HTMLDivElement>(
+      ".pixelated-image-card__pixel"
+    );
+    if (!pixels.length) return;
+
+    gsap.killTweensOf(pixels);
+    if (delayedCallRef.current) {
+      delayedCallRef.current.kill();
+    }
+
+    gsap.set(pixels, { display: "none" });
+
+    const totalPixels = pixels.length;
+    const staggerDuration = animationStepDuration / totalPixels;
+
+    gsap.to(pixels, {
+      display: "block",
+      duration: 0,
+      stagger: {
+        each: staggerDuration,
+        from: "random",
+      },
+    });
+
+    delayedCallRef.current = gsap.delayedCall(animationStepDuration, () => {
+      activeEl.style.display = activate ? "block" : "none";
+      activeEl.style.pointerEvents = activate ? "none" : "";
+    });
+
+    gsap.to(pixels, {
+      display: "none",
+      duration: 0,
+      delay: animationStepDuration,
+      stagger: {
+        each: staggerDuration,
+        from: "random",
+      },
+    });
+  };
+
+  const handleMouseEnter = (): void => {
+    if (!isActive) animatePixels(true);
+  };
+  const handleMouseLeave = (): void => {
+    if (isActive) animatePixels(false);
+  };
+  const handleClick = (): void => {
+    animatePixels(!isActive);
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={`
+        ${className}
+        bg-[#0a0a0a]
+        text-white
+        rounded-[360px]
+        border-1
+        border-black
+        w-[200px]
+        md:w-[300px]
+        xl:w-[400px]
+        max-w-full
+        relative
+        overflow-hidden
+      `}
+      style={style}
+      onMouseEnter={!isTouchDevice ? handleMouseEnter : undefined}
+      onMouseLeave={!isTouchDevice ? handleMouseLeave : undefined}
+      onClick={isTouchDevice ? handleClick : undefined}
+    >
+      <div style={{ paddingTop: aspectRatio }} />
+
+      <div className="absolute inset-0 w-full h-full">{firstContent}</div>
+
+      <div
+        ref={activeRef}
+        className="absolute inset-0 w-full h-full z-2"
+        style={{ display: "none" }}
+      >
+        {secondContent}
+      </div>
+
+      <div
+        ref={pixelGridRef}
+        className="absolute inset-0 w-full h-full pointer-events-none z-3"
+      />
+    </div>
+  );
+};
+
+export default PixelTransition;
+</file>
+
+<file path="app/services/page.tsx">
+export default function ServicesPage() {
+    return (
+      <main className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold">Services</h1>
+          <p className="text-gray-500 mt-2">On Going Development</p>
+        </div>
+      </main>
+    );
+  }
+</file>
+
+<file path="app/layout.tsx">
+import type { Metadata } from "next";
+// import localFont from "next/font/local";
+import { Montserrat_Alternates, JetBrains_Mono } from "next/font/google";
+import "./globals.css";
+import Header from "./components/Header/header";
+import Footer from "./components/Footer/footer";
+
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
+
+const montserrat_alternates = Montserrat_Alternates({
+  weight: '400',
+  subsets: ['latin'],
+});
+
+const jetbrains_mono = JetBrains_Mono({
+  weight: '400',
+  subsets: ['latin'],
+});
+
+export const metadata: Metadata = {
+  title: "Aria Aji",
+  description: "Portfolio",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning className={jetbrainsMono.variable}>
+      <head>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            try {
+              const isDark = localStorage.theme === 'dark' || 
+                            (!('theme' in localStorage) && 
+                            window.matchMedia('(prefers-color-scheme: dark)').matches);
+              document.documentElement.classList.toggle('dark', isDark);
+            } catch (e) {}
+          `
+        }} />
+      </head>
+      {/* <body
+        className={`${montserrat_alternates.className} antialiased`}
+      > */}
+      <body className={`${jetbrains_mono.className} bg-[#EDDBB5] text-[#488067] dark:bg-[#1B3E5C] dark:text-[#F2B138]`}
+        suppressHydrationWarning>
+        <Header />
+        {children}
+        <Footer/>
+      </body>
+    </html>
+  );
+}
+</file>
+
+<file path="app/about/page.tsx">
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
+
+// Definisikan tipe untuk panel contents
+type PanelContent = {
+  [key: number]: React.ReactNode;
+};
+
+export default function About() {
+  const [activePanel, setActivePanel] = useState<number>(0);
+
+  // Data untuk tombol toggle
+  const toggleButtons = [
+    { id: 0, title: "Bio" },
+    { id: 1, title: "Career" },
+    { id: 2, title: "Academy" },
+    { id: 3, title: "Open Source" },
+  ];
+
+  // Konten untuk setiap panel dengan tipe yang didefinisikan
+  const panelContents: PanelContent = {
+    0: (
+      <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+        <h3 className="font-bold mb-2"></h3>
+        <span className="font-bold">
+              {" "}
+              A front-end developer obsessed with creating digital experiences
+              that truly 'click'.
+            </span>{" "}
+            <span className="">
+              My experience is still growing, but my mission is clear: turn code
+              into solutions.
+            </span>{" "}
+            <span className="font-bold">
+              Currently geeking out in React, Next.js, Tailwind CSS, & Shopify – learning hands-on through daily projects. 
+            </span>{" "}   
+            <span className="">
+              I'm here to grow, make an impact, and create work that resonates.
+            </span>       
+            <span className="font-bold"> Give me creative challenges, and I'll pour my energy into building
+            genuinely useful and enjoyable things.</span>{" "}
+            
+      </div>
+    ),
+    1: (
+      <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+        <h3 className="font-bold mb-2">Career Experience</h3>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>Front-end Developer Intern <br /> <span className="opacity opacity-50">at Hubton Indonesia </span><br />  <span className="opacity opacity-50">(2024-2025)</span></li>
+          <li>Freelance Website Projects <br /> <span className="opacity opacity-50">(2023-2024)</span></li>
+          <br />
+          <br />
+          <br />
+        </ul>
+      </div>
+    ),
+    2: (
+      <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+        <h3 className="font-bold mb-2">Education</h3>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>Website Development Bootcamp <br /> <span className="opacity opacity-50">Udemy</span></li>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </ul>
+      </div>
+    ),
+    3: (
+      <div className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-2xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+        <h3 className="font-bold mb-2">Open Source Contributions</h3>
+        <ul className="list-disc pl-5 space-y-2">
+          <li><Link 
+              href="https://github.com/ariaajipw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70"
+            >
+              https://github.com/ariaajipw
+            </Link></li>
+            <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </ul>
+      </div>
+    ),
+  };
+
+  return (
+            <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start px-[20px] md:pt[49px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:px-[100px] 2xl:px-[220px] lg:gap-x-[30px] min-h-dvh mb-18">
+      <div className="flex col-span-1 h-full justify-center">
+        <div className="content-center">
+          <img
+            src="assets/img/ariaaji.jpg"
+            alt="ariaaji"
+            className="w-full h-full object-cover"
+            style={{ width: "200%", height: "50%", objectPosition: '50% 30%', transform: 'scale(1)',
+      transformOrigin: 'center',}}
+          />
+        </div>
+      </div>
+
+      <div className="flex col-span-1 h-full items-start sm:items-center">
+        <div className="w-full">
+          {/* <p className="leading-[170%] lg:leading-[200%] text-md md:text-lg lg:text-xl xl:max-w-[971px] 2xl:max-w-[1290px]">
+            <span className="font-bold">Bio</span> <br />{" "}
+            <span className="">
+              {" "}
+              A front-end developer obsessed with creating digital experiences
+              that truly 'click'.
+            </span>{" "}
+            <span className="font-bold">
+              Currently geeking out over React, Next.js, Tailwind CSS, and
+              Shopify – learning hands-on through daily projects.
+            </span>{" "}
+            <span className="">
+              My experience is still growing, but my mission is clear: turn code
+              into solutions.
+            </span>{" "}
+            Give me creative challenges, and I'll pour my energy into building
+            genuinely useful and enjoyable things.{" "}
+            <span className="font-bold">
+              I'm here to grow, make an impact, and create work that resonates.
+            </span>
+          </p> */}
+
+          {/* Bagian Toggle */}
+          <div className="">
+            <div className="flex space-x-4 mb-4">
+              {toggleButtons.map((button) => (
+                <button
+                  key={button.id}
+                  className={`px-2 py-2 rounded-lg transition-all duration-200 text-md md:text-lg lg:text-2xl ${
+                    activePanel === button.id
+                      ? "text-gray-700 dark:text-white font-bold underline underline-offset-4"
+                      : "text-gray-700 hover:bg-gray-300 dark:text-gray-200 dark:hover:bg-gray-600 opacity-30 hover:opacity-100"
+                  }`}
+                  onClick={() => setActivePanel(button.id)}
+                >
+                  {button.title}
+                </button>
+              ))}
+            </div>
+
+            {/* Konten yang Berubah berdasarkan Toggle */}
+            <div className="toggle-content transition-opacity duration-300">
+              {panelContents[activePanel]}
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+</file>
+
+<file path="app/blog/[slug]/page.tsx">
+import { notFound } from 'next/navigation';
+import { posts } from '../../posts/data';
+import MarkdownContent from '@/app/components/MarkdownContent/MarkdownContent';
+import Link from 'next/link';
+import type { Metadata } from 'next';
+
+interface Post {
+  id: string;
+  title: string;
+  author: string;
+  date: string;
+  content: string;
+}
+
+export async function generateStaticParams() {
+  return posts.map((post: Post) => ({
+    slug: post.id,
+  }));
+}
+
+export async function generateMetadata({ params }: any): Promise<Metadata> {
+  const post = posts.find((post) => post.id === params.slug);
+  return {
+    title: post?.title || 'Post Not Found',
+  };
+}
+
+export default function BlogPostPage({ params }: any) {
+  const post = posts.find((post: Post) => post.id === params.slug);
+
+  if (!post) {
+    notFound();
+    return null;
+  }
+
+  return (
+    <article className="max-w-4xl mx-auto p-4 my-[50px] max-screen">
+      <header className="mb-8">
+        <h1 className="text-4xl font-bold mb-2 dark:text-white">{post.title}</h1>
+        <p className="text-gray-700 mb-2 dark:text-gray-300">
+          by{' '}
+          <Link 
+            href="/" 
+            className="hover:underline hover:font-bold hover:text-[#FA6B48] transition-colors"
+          >
+            {post.author}
+          </Link>
+        </p>
+        <time dateTime={post.date} className="text-gray-500 dark:text-gray-400">
+          {post.date}
+        </time>
+      </header>
+
+      <section className="prose dark:prose-invert max-w-none">
+        <MarkdownContent content={post.content} />
+      </section>
+
+      <footer className="mt-12">
+        <Link 
+          href="/blog" 
+          className="inline-flex items-center text-[#FA6B48] hover:underline gap-1 transition-colors"
+        >
+          <span>←</span> Back to Blog
+        </Link>
+      </footer>
+    </article>
+  );
+}
+</file>
+
+<file path="package.json">
+{
+  "name": "portofolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "debug": "NODE_OPTIONS='--inspect' next dev"
+  },
+  "dependencies": {
+    "@react-spring/web": "^10.1.2",
+    "@types/dompurify": "^3.0.5",
+    "@types/matter-js": "^0.19.8",
+    "dompurify": "^3.2.5",
+    "gsap": "^3.12.7",
+    "marked": "^15.0.11",
+    "matter-js": "^0.20.0",
+    "next": "^15.5.24",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwind-scrollbar": "^4.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.12",
+    "@types/node": "^20",
+    "@types/react": "^19.0.11",
+    "@types/react-dom": "^19.0.4",
+    "postcss": "^8",
+    "tailwindcss": "^4.0.12",
+    "typescript": "^5.8.3"
+  }
+}
+</file>
+
+<file path="app/components/Header/header.tsx">
+'use client'
+
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+
+const Header = () => {
+  const pathname = usePathname();
+  console.log('Current path:', pathname);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
+  const [lastScrollY, setLastScrollY] = useState<number>(0);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Initialize dark mode from localStorage or system preference
+  useEffect(() => {
+    const isDark = localStorage.theme === 'dark' || 
+                  (!('theme' in localStorage) && 
+                   window.matchMedia('(prefers-color-scheme: dark)').matches);
+    
+    setIsDarkMode(isDark);
+    document.documentElement.classList.toggle('dark', isDark);
+  }, []);
+
+  const toggleDarkMode = (): void => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    
+    if (newMode) {
+      localStorage.theme = 'dark';
+    } else {
+      localStorage.theme = 'light';
+    }   
+      document.documentElement.classList.toggle('dark', newMode);
+  };
+
+  const resetToSystemPreference = (): void => {
+    localStorage.removeItem('theme');
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setIsDarkMode(isDark);
+    document.documentElement.classList.toggle('dark', isDark);
+  };
+
+  // Scroll behavior
+  useEffect(() => {
+    const handleScroll = (): void => {
+      const currentScrollY = window.scrollY;
+    
+      // Background navbar
+      setIsScrolled(currentScrollY > 0);
+    
+      // Show / hide navbar
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsHeaderVisible(false);
+      } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
+        setIsHeaderVisible(true);
+      }
+    
+      setLastScrollY(currentScrollY);
+    };
+
+    let timeoutId: NodeJS.Timeout | null = null;
+    const throttledHandleScroll = (): void => {
+      if (!timeoutId) {
+        timeoutId = setTimeout(() => {
+          handleScroll();
+          timeoutId = null;
+        }, 100);
+      }
+    };
+
+    window.addEventListener('scroll', throttledHandleScroll);
+    return () => {
+      window.removeEventListener('scroll', throttledHandleScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [lastScrollY]);
+
+  const toggleMobileMenu = (): void => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+  
+    if (isMobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+  
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
+
+  // Function to check if link is active
+  const isActive = (href: string) => {
+    return pathname === href || 
+           pathname.startsWith(href + '/') || 
+           (href !== '/' && pathname.startsWith(href));
+  };
+
+  return (
+      <header
+        ref={headerRef}
+        className={`fixed top-0 right-0 left-0 z-50 py-2 transition-all duration-300 ${
+          pathname === '/' && !isScrolled
+            ? 'bg-transparent'
+            : 'bg-white dark:bg-zinc-950'
+        } ${
+          isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        {/* Logo */}
+        <div className="text-2xl font-bold text-gray-800 dark:text-white align-middle justify-items-center group relative">
+          <a href="/" className='flex'><img src="/assets/img/peacock-black.png" alt="" className='w-[45px] h-[30px] dark:hidden'/><img src="/assets/img/peacock-white.png" alt="" className='w-[45px] h-[30px] hidden dark:block'/><span className='hidden group-hover:block hover:text-[#FA6B48]'>Aria Aji</span></a>
+        </div>
+
+        {/* Desktop Navigation Menu */}
+        <nav className="hidden md:flex space-x-12 items-center">
+          {/* <Link 
+            href="/" 
+            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1`}
+          >
+            Home
+          </Link> */}
+          <Link 
+            href="/about" 
+            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+              pathname === '/about' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
+            }`}
+          >
+            About
+          </Link>
+          {/* <Link 
+            href="/services" 
+            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+              pathname === '/services' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
+            }`}
+          >
+            Services
+          </Link> */}
+          <Link 
+            href="/contact" 
+            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+              pathname === '/contact' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
+            }`}
+          >
+            Contact
+          </Link>
+          <Link 
+            href="/blog" 
+            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+              pathname === '/blog' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
+            }`}
+          >
+            Blog
+          </Link>
+
+          {/* Dark Mode Toggle */}
+          <div className="relative group">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-gray-800 dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] to-yellow-400 border border-[#FA6B48] rounded-xl"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDarkMode ? (
+                <Image 
+                  src= "/assets/img/day-and-night.png"
+                  alt="Light Mode" 
+                  width={20} 
+                  height={20} 
+                  className="w-5 h-5"
+                  priority
+                />
+              ) : (
+                <Image 
+                  src= "/assets/img/night-and-day.png" 
+                  alt="Dark Mode" 
+                  width={20} 
+                  height={20} 
+                  className="w-5 h-5"
+                  priority
+              />)}
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <div className="flex items-center gap-4 md:hidden">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-gray-800 dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400 border border-[#FA6B48] rounded-xl"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDarkMode ? (
+                <Image 
+                  src="/assets/img/day-and-night.png"
+                  alt="Light Mode" 
+                  width={24} 
+                  height={24} 
+                  className="w-6 h-6"
+                  priority
+                />
+              ) : (
+                <Image 
+                  src="/assets/img/night-and-day.png" 
+                  alt="Dark Mode" 
+                  width={24} 
+                  height={24} 
+                  className="w-6 h-6"
+                  priority
+              />)}
+            </button>
+          
+          <button 
+            onClick={toggleMobileMenu}
+            className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Menu */}
+      <div 
+        className={`md:hidden bg-white dark:bg-zinc-950 overflow-hidden transition-all duration-300 ${
+          isMobileMenuOpen ? 'max-h-96' : 'max-h-0'
+        }`}
+        aria-hidden={!isMobileMenuOpen}
+      >
+        <Link 
+          href="/about" 
+          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+            isActive('/about') ? 'text-[#FA6B48] font-medium underline underline-offset-1' : ''
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          About
+        </Link>
+        <Link 
+          href="/services" 
+          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+            isActive('/services') ? 'text-[#FA6B48] font-medium underline underline-offset-1' : ''
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          Services
+        </Link>
+        <Link 
+          href="/contact" 
+          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+            isActive('/contact') ? 'text-[#FA6B48] font-medium underline underline-offset-1' : ''
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          Contact
+        </Link>
+        <Link 
+          href="/blog" 
+          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+            isActive('/blog') ? 'text-[#FA6B48] font-medium' : ''
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          Blog
+        </Link>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
+</file>
+
+<file path="app/components/TextPressure/TextPressure.tsx">
+"use client";
+
+import { useCallback, useEffect, useId, useRef, useState } from "react";
+
+interface TextPressureProps {
+  text?: string;
+  fontFamily?: string;
+  fontUrl?: string;
+  width?: boolean;
+  weight?: boolean;
+  italic?: boolean;
+  alpha?: boolean;
+  flex?: boolean;
+  stroke?: boolean;
+  scale?: boolean;
+  textColor?: string;
+  strokeColor?: string;
+  strokeWidth?: number;
+  className?: string;
+  minFontSize?: number;
+  darkMode?: boolean;
+  darkTextColor?: string;
+  darkStrokeColor?: string;
+  darkBackground?: string;
+  colorCycle?: string[];
+  colorCycleDuration?: number;
+}
+
+const RESIZE_DEBOUNCE_MS = 120;
+
+const dist = (
+  a: { x: number; y: number },
+  b: { x: number; y: number }
+) => {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+
+  return Math.sqrt(dx * dx + dy * dy);
+};
+
+const getResponsiveMinFontSize = () => {
+  const width = window.innerWidth;
+
+  if (width >= 1536) return 64;
+  if (width >= 1280) return 56;
+  if (width >= 1024) return 48;
+  if (width >= 768) return 40;
+  if (width >= 640) return 36;
+
+  return 32;
+};
+
+const TextPressure: React.FC<TextPressureProps> = ({
+  text = "Compressa",
+  fontFamily = "Roboto Flex",
+  fontUrl =
+    "https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,wdth@8..144,100..1000,25..151&display=swap",
+
+  width = true,
+  weight = true,
+  italic = true,
+  alpha = false,
+  flex = true,
+  stroke = false,
+  scale = false,
+
+  textColor = "#488067",
+  strokeColor = "#FF0000",
+  strokeWidth = 6,
+
+  className = "",
+  minFontSize = 48,
+
+  darkMode = false,
+  darkTextColor = "#F2B138",
+  darkStrokeColor = "#00FFFF",
+  darkBackground = "transparent",
+
+  colorCycle = [],
+  colorCycleDuration = 2000,
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const spansRef = useRef<(HTMLSpanElement | null)[]>([]);
+
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const cursorRef = useRef({ x: 0, y: 0 });
+
+  /*
+   * SCROLL INTEGRATION — single source of truth untuk siapa yang
+   * "memegang" cursorRef di frame saat ini: 'pointer' (mouse/touch asli)
+   * atau 'scroll' (virtual cursor yang disapu mengikuti progress title
+   * melintasi viewport). Cuma satu writer aktif per frame, jadi nggak
+   * ada rebutan nilai antara hover dan scroll.
+   */
+  const pointerModeRef = useRef<"pointer" | "scroll">("pointer");
+
+  const scopeClass = `tp-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
+
+  const [fontSize, setFontSize] = useState(minFontSize);
+  const [scaleY, setScaleY] = useState(1);
+  const [lineHeight, setLineHeight] = useState(1);
+
+  const [systemDarkMode, setSystemDarkMode] = useState(false);
+
+  const chars = text.split("");
+
+  /*
+   * Detect dark mode dari <html class="dark">.
+   * MutationObserver dipakai supaya begitu user toggle
+   * dark/light mode, TextPressure langsung ikut berubah.
+   */
+  useEffect(() => {
+    const checkDarkMode = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      setSystemDarkMode(isDark);
+    };
+
+    checkDarkMode();
+
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const isDarkMode = darkMode || systemDarkMode;
+
+  /*
+   * Mouse / Touch / Scroll tracking.
+   * mousemove & touchmove tetap seperti semula: langsung isi cursorRef
+   * dan klaim ulang pointerModeRef = 'pointer'.
+   * scroll cuma flip flag — nol kerja layout di sini, semua
+   * getBoundingClientRect() tetap di dalam rAF loop di bawah.
+   */
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      cursorRef.current.x = e.clientX;
+      cursorRef.current.y = e.clientY;
+      pointerModeRef.current = "pointer";
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const t = e.touches[0];
+
+      if (!t) return;
+
+      cursorRef.current.x = t.clientX;
+      cursorRef.current.y = t.clientY;
+      pointerModeRef.current = "pointer";
+    };
+
+    const handleScroll = () => {
+      pointerModeRef.current = "scroll";
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    window.addEventListener("touchmove", handleTouchMove, {
+      passive: true,
+    });
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+
+      mouseRef.current.x = rect.left + rect.width / 2;
+      mouseRef.current.y = rect.top + rect.height / 2;
+
+      cursorRef.current.x = mouseRef.current.x;
+      cursorRef.current.y = mouseRef.current.y;
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  /*
+   * Responsive font size — semakin lebar container, semakin besar font,
+   * tetap punya minimum berdasarkan ukuran layar.
+   */
+  const setSize = useCallback(() => {
+    if (!containerRef.current || !titleRef.current) return;
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+
+    let newFontSize = (containerRect.width / chars.length) * 4.0;
+
+    newFontSize = Math.max(newFontSize, getResponsiveMinFontSize());
+
+    setFontSize(newFontSize);
+    setScaleY(1);
+    setLineHeight(1);
+
+    requestAnimationFrame(() => {
+      if (!titleRef.current) return;
+
+      const textRect = titleRef.current.getBoundingClientRect();
+
+      if (scale && textRect.height > 0) {
+        const yRatio = containerRect.height / textRect.height;
+
+        setScaleY(yRatio);
+        setLineHeight(yRatio);
+      }
+    });
+  }, [chars.length, scale]);
+
+  useEffect(() => {
+    setSize();
+
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(setSize, RESIZE_DEBOUNCE_MS);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setSize]);
+
+  /*
+   * TextPressure animation loop.
+   */
+  useEffect(() => {
+    let rafId: number;
+
+    const animate = () => {
+      if (titleRef.current) {
+        const titleRect = titleRef.current.getBoundingClientRect();
+
+        /*
+         * Selama scroll yang pegang kendali, sapu virtual cursor
+         * melintasi title mengikuti progress scroll: 0 saat title
+         * masuk dari bawah viewport, 1 saat keluar dari atas.
+         * Begitu mousemove/touchmove asli terjadi, pointerModeRef
+         * langsung balik ke 'pointer' dan blok ini di-skip di frame
+         * berikutnya — hover langsung ambil alih, tanpa rebutan.
+         */
+        if (pointerModeRef.current === "scroll") {
+          const viewportH = window.innerHeight;
+          const progress = Math.min(
+            Math.max(
+              (viewportH - titleRect.top) / (viewportH + titleRect.height),
+              0
+            ),
+            1
+          );
+
+          cursorRef.current.x = titleRect.left + progress * titleRect.width;
+          cursorRef.current.y = titleRect.top + titleRect.height / 2;
+        }
+
+        mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
+        mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
+
+        const maxDist = titleRect.width / 2;
+
+        spansRef.current.forEach((span) => {
+          if (!span) return;
+
+          const rect = span.getBoundingClientRect();
+
+          const charCenter = {
+            x: rect.x + rect.width / 2,
+            y: rect.y + rect.height / 2,
+          };
+
+          const d = dist(mouseRef.current, charCenter);
+
+          const getAttr = (
+            distance: number,
+            minVal: number,
+            maxVal: number
+          ) => {
+            const val =
+              maxVal - Math.abs((maxVal * distance) / (maxDist * 0.5));
+
+            return Math.max(minVal, val + minVal / 2);
+          };
+
+          const wdth = width ? Math.floor(getAttr(d, 40, 200)) : 100;
+          const wght = weight ? Math.floor(getAttr(d, 200, 900)) : 400;
+          const italVal = italic ? getAttr(d, 0, 1).toFixed(2) : "0";
+          const alphaVal = alpha ? getAttr(d, 0, 1).toFixed(2) : "1";
+
+          const next =
+            `'wght' ${wght}, ` + `'wdth' ${wdth}, ` + `'ital' ${italVal}`;
+
+          if (span.style.fontVariationSettings !== next) {
+            span.style.fontVariationSettings = next;
+          }
+
+          if (alpha && span.style.opacity !== alphaVal) {
+            span.style.opacity = alphaVal;
+          }
+        });
+      }
+
+      rafId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => cancelAnimationFrame(rafId);
+  }, [width, weight, italic, alpha, chars.length]);
+
+  /*
+   * Color cycle
+   */
+  const [currentColorIndex, setCurrentColorIndex] = useState(0);
+
+  useEffect(() => {
+    if (!Array.isArray(colorCycle) || colorCycle.length <= 1) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setCurrentColorIndex((prev) => (prev + 1) % colorCycle.length);
+    }, colorCycleDuration);
+
+    return () => clearInterval(interval);
+  }, [colorCycle, colorCycleDuration]);
+
+  /*
+   * Dark / Light colors
+   */
+  const currentStrokeColor = isDarkMode ? darkStrokeColor : strokeColor;
+  const currentBackground = isDarkMode ? darkBackground : "transparent";
+  const baseTextColor = isDarkMode ? darkTextColor : textColor;
+
+  const dynamicTextColor =
+    colorCycle.length > 0 ? colorCycle[currentColorIndex] : baseTextColor;
+
+  const transitionDuration = (colorCycleDuration / 1000) * 0.1;
+
+  return (
+    <div
+      ref={containerRef}
+      className={`${scopeClass} relative w-full h-full overflow-hidden`}
+      style={{
+        backgroundColor: currentBackground,
+      }}
+    >
+      <style id={scopeClass}>
+        {`
+          @import url('${fontUrl}');
+
+          .${scopeClass} .text-pressure-title span {
+            transition:
+              color ${transitionDuration}s ease-in-out;
+          }
+
+          .${scopeClass} .stroke span {
+            position: relative;
+            color: ${dynamicTextColor};
+          }
+
+          .${scopeClass} .stroke span::after {
+            content: attr(data-char);
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: transparent;
+            z-index: -99;
+
+            -webkit-text-stroke-width:
+              ${strokeWidth}px;
+
+            -webkit-text-stroke-color:
+              ${currentStrokeColor};
+
+            transition:
+              -webkit-text-stroke-color
+              0.3s ease;
+          }
+        `}
+      </style>
+
+      <h1
+        ref={titleRef}
+        className={`
+          text-pressure-title
+          ${className}
+          ${flex ? "flex justify-between" : ""}
+          ${stroke ? "stroke" : ""}
+          text-center
+        `}
+        style={{
+          fontFamily: `${fontFamily}, sans-serif`,
+
+          fontSize: `${fontSize}px`,
+
+          lineHeight,
+
+          transform: `scale(1, ${scaleY})`,
+
+          transformOrigin: "center top",
+
+          margin: 0,
+
+          fontWeight: 200,
+
+          color: stroke ? undefined : dynamicTextColor,
+
+          gap: "5px",
+
+          transition: "color 0.3s ease",
+        }}
+      >
+        {chars.map((char, i) => (
+          <span
+            key={i}
+            ref={(el) => {
+              if (el) {
+                spansRef.current[i] = el;
+              }
+
+              return () => {
+                spansRef.current[i] = null;
+              };
+            }}
+            data-char={char}
+            className="inline-block"
+            style={{
+              color: dynamicTextColor,
+
+              transition: `color ${transitionDuration}s ease-in-out`,
+            }}
+          >
+            {char}
+          </span>
+        ))}
+      </h1>
+    </div>
+  );
+};
+
+export default TextPressure;
+</file>
+
+<file path="app/components/WorkCard/workcard.tsx">
+'use client'
+
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+
+const works = [
+  {
+    id: 1,
+    thumbnail: "",
+    title: "Hubton",
+    subtitle: "Intern as front-end developer at Hubton Indonesia, focused on learning front-end side.",
+  },
+  {
+    id: 2,
+    thumbnail: "",
+    title: "Sajua Brewery",
+    subtitle: "Build e-commerce website with Shopify.",
+  },
+  {
+    id: 3,
+    thumbnail: "",
+    title: "Kovsen",
+    subtitle: "Designed and developed an interactive analytics dashboard with Shopify.",
+  },
+  {
+    id: 4,
+    thumbnail: "",
+    title: "Titis",
+    subtitle: "Crafted a high-performance agency site featuring smooth GSAP motion and clean layout.",
+  },
+  {
+    id: 5,
+    thumbnail: "",
+    title: "Lumina Goods",
+    subtitle: "Built a minimalist headless e-commerce storefront integrated with Shopify API.",
+  },
+  {
+    id: 6,
+    thumbnail: "",
+    title: "Rajipo System",
+    subtitle: "Created a scalable UI component library and design system for web applications.",
+  },
+];
+
+const WorkCards: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const startXRef = useRef(0);
+  const isSwipingRef = useRef(false);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
+  const slideCount = works.length;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Fungsi untuk menangani perpindahan slide dengan infinite yang smooth
+  const goToSlide = (index: number, withAnimation = true) => {
+    if (!withAnimation) {
+      setTransitionEnabled(false);
+      setCurrentIndex(index);
+      
+      // Re-enable transition after a short delay
+      setTimeout(() => {
+        setTransitionEnabled(true);
+      }, 50);
+    } else {
+      setCurrentIndex(index);
+    }
+  };
+
+  const nextSlide = () => {
+    if (currentIndex === slideCount - 1) {
+      // Pindah ke slide pertama tanpa animasi
+      goToSlide(0, false);
+    } else {
+      goToSlide(currentIndex + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentIndex === 0) {
+      // Pindah ke slide terakhir tanpa animasi
+      goToSlide(slideCount - 1, false);
+    } else {
+      goToSlide(currentIndex - 1);
+    }
+  };
+
+  // Swipe gesture yang lebih smooth
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startXRef.current = e.touches[0].clientX;
+    isSwipingRef.current = true;
+    
+    // Nonaktifkan transisi selama swipe
+    setTransitionEnabled(false);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isSwipingRef.current) return;
+    
+    const touchX = e.touches[0].clientX;
+    const diff = touchX - startXRef.current;
+    
+    // Update posisi slide secara real-time
+    if (containerRef.current) {
+      containerRef.current.style.transform = `translateX(calc(-${currentIndex * 100}% + ${diff}px)`;
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!isSwipingRef.current) return;
+    isSwipingRef.current = false;
+    
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startXRef.current;
+    const absDiff = Math.abs(diff);
+    
+    // Threshold 20% lebar layar
+    const swipeThreshold = window.innerWidth * 0.2;
+    
+    // Aktifkan kembali transisi
+    setTransitionEnabled(true);
+    
+    if (absDiff > swipeThreshold) {
+      if (diff > 0) {
+        prevSlide();
+      } else {
+        nextSlide();
+      }
+    } else {
+      // Kembali ke posisi semula jika tidak mencapai threshold
+      setCurrentIndex(currentIndex);
+    }
+  };
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [isMobile, currentIndex]);
+
+  return (
+    <div className="container mx-auto px-4 pt-15 md:pt-6 w-auto min-h-screen">
+      <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center my-0 lg:mb-20">Projects & Works</h1>
+      
+      {/* Desktop View */}
+     <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-4 w-fit lg:w-fit">
+      {works.slice(0, 4).map((work) => (
+      <div
+        key={work.id}
+        className="rounded-sm overflow-hidden duration-300 grid grid-cols-1 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] mx-[15px] sm:mx-[100px] md:mx-[150px] lg:mx-[0px] bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all hover:scale-[1.02]"
+      > 
+        {/* Bagian Gambar */}
+        <div className="relative w-full aspect-video overflow-hidden"> {/* Tambahkan aspect-video */}
+          <img
+            src={work.thumbnail}
+            alt={work.title}
+            className="w-full h-fit object-cover"
+          />
+        </div>
+        
+        {/* Bagian Teks */}
+        <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black max-w-[280px]">
+          <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
+          <p className="text-white dark:text-gray-900 text-xs sm:text-sm xl:text-base">{work.subtitle}</p>
+        </div>
+      </div>
+      ))}
+    </div>
+
+      {/* Mobile/Tablet View - Carousel */}
+      <div className="lg:hidden relative overflow-hidden"> 
+        <div 
+          ref={containerRef}
+          className="flex transition-transform duration-300 ease-out touch-pan-y"
+          style={{ 
+            transform: `translateX(-${currentIndex * 100}%)`,
+            transition: transitionEnabled ? 'transform 0.3s ease-out' : 'none'
+          }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+        >
+          {works.map((work) => (
+            <div key={work.id} className="min-w-full px-4 mt-[100px] landscape:mt-7">
+              <div className="rounded-lg overflow-hidden bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black transition-all">
+                <div className="grid grid-cols-1 sm:grid-cols-2 relative">
+                  <div className="w-full aspect-video overflow-hidden ">
+                    <img
+                      src={work.thumbnail}
+                      alt={work.title}
+                      className="w-full object-cover"
+                    />
+                  </div>
+                  <div className="p-4 bg-black dark:bg-white hover:bg-gray-400 hover:text-white dark:hover:text-black relative">
+                    <h2 className="text-[#FA6B48] text-xl font-bold mb-4">{work.title}</h2>
+                    <p className="text-white dark:text-gray-900 text-xs sm:text-sm lg:text-base">{work.subtitle}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Navigation Arrows */}
+        <button 
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10"
+          aria-label="Previous slide"
+        >
+          &lt;
+        </button>
+        <button 
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10"
+          aria-label="Next slide"
+        >
+          &gt;
+        </button>
+
+        {/* Indicators */}
+        <div className="flex justify-center mt-6 space-x-2">
+          {works.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`h-3 w-3 rounded-full transition-all ${currentIndex === index ? 'bg-[#FA6B48] w-6' : 'bg-gray-400'}`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+      {/* Tombol See All jika ada lebih dari 4 works */}
+        {works.length > 4 && (
+          <div className="text-center mt-10">
+            <Link 
+              href="https://github.com/ariaajipw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[80px] sm:mx-[205px] md:mx-[278px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
+            >
+              See All Projects
+            </Link>
+          </div>
+        )}
+    </div>
+  );
+};
+
+export default WorkCards;
+</file>
+
+<file path="app/page.tsx">
+import PixelTransition from "./components/PixelTransition/PixelTransition";
+import BlurText from "./components/BlurText/BlurText";
+import TextPressure from './components/TextPressure/TextPressure';
+import WorkCards from "./components/WorkCard/workcard";
+import FallingText from './components/FallingText/FallingText';
+import Link from "next/link";
+
+export default function Home() {
+
+   const colorCycle = ["#212121", "#C9A227", "#217147", "#212121", "#C9A227","#DB7F8E", "#212121", "#C9A227","#FA6B48",  ];
+  
+  return (
+    <main className="min-h-screen overflow-hidden">
+      <div className="hero-section container flex flex-col mx-auto min-h-dvh w-full content-center place-self-center pt-15">
+        {/* mobile for vertical */}
+        <div
+             className="sm:block sm:hidden"
+             style={{
+               position: 'relative',
+               height: 'fit-content',
+               width: '100%',
+               alignContent: 'center',
+               placeSelf: 'center',
+             }}
+>           
+            <TextPressure
+              text="   Combine   "
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="   Ideas   "
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="   Craft   "
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="   -   &   -   "
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="   Innovate   "
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor="#000000"
+              strokeColor="#5227FF"
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+        </div>
+        
+        {/* Desktop */}
+        <div
+             className="hidden sm:block"
+             style={{
+               position: 'relative',
+               height: 'fit-content',
+               width: '100%',
+               alignContent: 'center',
+               placeSelf: 'center',
+             }}
+>           
+            <TextPressure
+              text="Combine Ideas,"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor=""
+              strokeColor=""
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+            <TextPressure
+              text="Craft & Innovate"
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor=""
+              strokeColor=""
+              minFontSize={36}
+              // colorCycle={colorCycle}
+              // colorCycleDuration={2000}
+            />
+        </div>
+      </div>
+
+      {/* <div className="img-section flex flex-col w-full my-60">
+      <img src="assets/img/BKAIG.jpg" alt="gp" className="size-full"/>
+      </div> */}
+
+      <div className="second-section container mx-auto h-fit my-25 md:mt-0 lg:mt-50 lg:mb-70">
+        <div className="grid lg:grid-cols-12 h-fit">
+          <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
+          <p className="text-sm lg:text-lg content-center place-self-center px-auto mt-10 ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, geeking out over current best practices and technologies for developing websites.</p>
+            < BlurText 
+             text="Aria Aji"
+             delay={300}
+             animateBy="letters"
+             direction="top"
+             className="text-[clamp(30px,7vw,83px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5 mx-10 lg:px-20"
+          />
+          <div className="text-center mt-4 mb-5 text-[#EA6B48] h-20">
+            <FallingText
+              text={`Front-end Developer`}
+              highlightWords={[]}
+              // highlightClass="highlighted"
+              trigger="hover"
+              backgroundColor="transparent"
+              wireframes={false}
+              gravity={0.1}
+              fontSize="clamp(20px,4vw,32px)"
+              mouseConstraintStiffness={0.9}
+            />           
+          </div>
+            {/* <h2 className="text-xl lg:text-5xl py-8 place-self-center text-[#EA6B48]">Website Developer</h2> */}
+            <p className="text-sm lg:text-lg content-center place-self-center px-auto ml-[30px] mr-[20px] mb-12">Enhance skills through hands-on projects & professional experiences. Combining creativity to build engaging experiences.</p>
+            <Link 
+              href="/contact"
+              className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[90px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
+            >
+              Let's Collaborate
+            </Link>
+          </div>
+          <div className="lg:col-span-6 content-center place-self-center order-first lg:order-last pl-0 lg:pl-[100px]">
+            <PixelTransition 
+              firstContent={
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "grid",
+                    placeItems: "center",
+                    backgroundColor: "#09090b"
+                  }}
+                >
+                  <p style={{ fontWeight: 900, fontSize: "1rem", color: "#ffffff" }}>
+                    <img src="assets/img/peacock.png" alt="peacock" className="size-30 md:size-40 lg:size-60"/>
+                  </p>
+                </div>
+              }
+              secondContent={
+                 <img
+                  src="assets/img/ariaaji.jpg"
+                  alt="ariaaji"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              }
+              gridSize={27}
+              pixelColor='#d2d2d4'
+              animationStepDuration={0.4}
+              className="custom-pixel-card"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="third-section container flex mx-auto h-fit w-fit content-center place-self-center landscape:mt-80 landscape:mb-120 sm:landscape:my-0 lg:mt-60">
+       < WorkCards />
+      </div>
+    </main>
+  );
+}
+</file>
+
+</files>
