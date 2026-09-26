@@ -41,8 +41,8 @@ export default function Home() {
               width
               weight
               italic
-              textColor="#000000"
-              strokeColor="#5227FF"
+              textColor=""
+              strokeColor=""
               minFontSize={36}
               // colorCycle={colorCycle}
               // colorCycleDuration={2000}
@@ -55,8 +55,8 @@ export default function Home() {
               width
               weight
               italic
-              textColor="#000000"
-              strokeColor="#5227FF"
+              textColor=""
+              strokeColor=""
               minFontSize={36}
               // colorCycle={colorCycle}
               // colorCycleDuration={2000}
@@ -69,8 +69,8 @@ export default function Home() {
               width
               weight
               italic
-              textColor="#000000"
-              strokeColor="#5227FF"
+              textColor=""
+              strokeColor=""
               minFontSize={36}
               // colorCycle={colorCycle}
               // colorCycleDuration={2000}
@@ -83,8 +83,8 @@ export default function Home() {
               width
               weight
               italic
-              textColor="#000000"
-              strokeColor="#5227FF"
+              textColor=""
+              strokeColor=""
               minFontSize={36}
               // colorCycle={colorCycle}
               // colorCycleDuration={2000}
@@ -97,8 +97,8 @@ export default function Home() {
               width
               weight
               italic
-              textColor="#000000"
-              strokeColor="#5227FF"
+              textColor=""
+              strokeColor=""
               minFontSize={36}
               // colorCycle={colorCycle}
               // colorCycleDuration={2000}
