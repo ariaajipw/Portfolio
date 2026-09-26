@@ -12,10 +12,11 @@ export default function Home() {
    const colorCycle = ["#212121", "#C9A227", "#217147", "#212121", "#C9A227","#DB7F8E", "#212121", "#C9A227","#FA6B48",  ];
 
    const items = [
-    { image: '/assets/img/BKAIG.webp',caption: 'hai'},
-    { image: '/assets/img/CPSIG.webp',caption: 'hai'},
-    { image: '/assets/img/KGPIG.webp',caption: 'hai'},
-    { image: '/assets/img/BTLK.webp',caption: 'hai'},
+    { image: '/assets/img/BKAIG.jpeg',caption: 'hai'},
+    { image: '/assets/img/CPSIG.jpeg',caption: 'hai'},
+    { image: '/assets/img/KGPIG.jpeg',caption: 'hai'},
+    { image: '/assets/img/BTLK.jpeg',caption: 'hai'},
+    { image: '/assets/img/AAPW.jpeg',caption: 'hai'},
   ]
   
   
@@ -148,13 +149,13 @@ export default function Home() {
       </div>
 
       <div className="img-section flex flex-col my-10">
-        <div style={{ height: '800px', position: 'relative' }}>
+        <div className="relative w-full h-[550px] md:h-[800px] [&_canvas]:object-contain [&_img]:object-contain">
             <MorphSlider
               items={items}
               transition="melt"
               intensity={1}
               aberration={0.15}
-              drift={0.9}
+              drift={2.5}
               autoplay
               overlayColor="#000000"
               duration={0.6}
