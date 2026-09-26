@@ -155,7 +155,7 @@ export default function Home() {
               transition="melt"
               intensity={1}
               aberration={0.15}
-              drift={2.5}
+              drift={2}
               autoplay
               overlayColor="#000000"
               duration={0.6}
