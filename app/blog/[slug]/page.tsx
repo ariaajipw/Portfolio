@@ -37,7 +37,7 @@ export default function BlogPostPage({ params }: any) {
     <article className="max-w-4xl mx-auto p-4 my-[50px] max-screen">
       <header className="mb-8">
         <h1 className="text-4xl font-bold mb-2 dark:text-white">{post.title}</h1>
-        <p className="text-gray-700 mb-2 dark:text-gray-300">
+        <p className="text-black/70 mb-2 dark:text-gray-300">
           by{' '}
           <Link 
             href="/" 
@@ -46,7 +46,7 @@ export default function BlogPostPage({ params }: any) {
             {post.author}
           </Link>
         </p>
-        <time dateTime={post.date} className="text-gray-500 dark:text-gray-400">
+        <time dateTime={post.date} className="text-black/60 dark:text-gray-400">
           {post.date}
         </time>
       </header>

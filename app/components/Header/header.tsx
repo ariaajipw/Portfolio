@@ -7,7 +7,6 @@ import Image from 'next/image';
 
 const Header = () => {
   const pathname = usePathname();
-  console.log('Current path:', pathname);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
@@ -115,14 +114,14 @@ const Header = () => {
         className={`fixed top-0 right-0 left-0 z-50 py-2 transition-all duration-300 ${
           pathname === '/' && !isScrolled
             ? 'bg-transparent'
-            : 'bg-white dark:bg-zinc-950'
+            : 'bg-[#FDFBF7] dark:bg-[#0a0a0a]'
         } ${
           isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-2xl font-bold text-gray-800 dark:text-white align-middle justify-items-center group relative">
+        <div className="text-2xl font-bold text-black dark:text-white align-middle justify-items-center group relative">
           <a href="/" className='flex'><img src="/assets/img/peacock-black.png" alt="" className='w-[45px] h-[30px] dark:hidden'/><img src="/assets/img/peacock-white.png" alt="" className='w-[45px] h-[30px] hidden dark:block'/><span className='hidden group-hover:block hover:text-[#FA6B48]'>Aria Aji</span></a>
         </div>
 
@@ -130,13 +129,13 @@ const Header = () => {
         <nav className="hidden md:flex space-x-12 items-center">
           {/* <Link 
             href="/" 
-            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1`}
+            className={`text-black dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1`}
           >
             Home
           </Link> */}
           <Link 
             href="/about" 
-            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+            className={`text-black dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
               pathname === '/about' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
             }`}
           >
@@ -144,7 +143,7 @@ const Header = () => {
           </Link>
           <Link 
             href="/services" 
-            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+            className={`text-black dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
               pathname === '/services' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
             }`}
           >
@@ -152,7 +151,7 @@ const Header = () => {
           </Link>
           <Link 
             href="/contact" 
-            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+            className={`text-black dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
               pathname === '/contact' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
             }`}
           >
@@ -160,7 +159,7 @@ const Header = () => {
           </Link>
           <Link 
             href="/blog" 
-            className={`text-gray-800 dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+            className={`text-black dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
               pathname === '/blog' ? '!text-[#FA6B48] font-medium underline underline-offset-1' : ''
             }`}
           >
@@ -171,7 +170,7 @@ const Header = () => {
           <div className="relative group">
             <button
               onClick={toggleDarkMode}
-              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-gray-800 dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] to-yellow-400 border border-[#FA6B48] rounded-xl"
+              className="p-2 text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-black dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] to-yellow-400 border border-[#FA6B48] rounded-xl"
               aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDarkMode ? (
@@ -200,7 +199,7 @@ const Header = () => {
         <div className="flex items-center gap-4 md:hidden">
             <button
               onClick={toggleDarkMode}
-              className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-gray-800 dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400 border border-[#FA6B48] rounded-xl"
+              className="p-2 text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-black dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400 border border-[#FA6B48] rounded-xl"
               aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDarkMode ? (
@@ -225,7 +224,7 @@ const Header = () => {
           
           <button 
             onClick={toggleMobileMenu}
-            className="p-2 text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
+            className="p-2 text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
@@ -249,14 +248,14 @@ const Header = () => {
 
       {/* Mobile Navigation Menu */}
       <div 
-        className={`md:hidden bg-white dark:bg-zinc-950 overflow-hidden transition-all duration-300 ${
+        className={`md:hidden bg-[#FDFBF7] dark:bg-zinc-950 overflow-hidden transition-all duration-300 ${
           isMobileMenuOpen ? 'max-h-96' : 'max-h-0'
         }`}
         aria-hidden={!isMobileMenuOpen}
       >
         <Link 
           href="/about" 
-          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+          className={`block py-3 px-4 text-black dark:text-white hover:text-[#FA6B48] transition ${
             isActive('/about') ? 'text-[#FA6B48] font-medium underline underline-offset-1' : ''
           }`}
           onClick={() => setIsMobileMenuOpen(false)}
@@ -265,7 +264,7 @@ const Header = () => {
         </Link>
         <Link 
           href="/services" 
-          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+          className={`block py-3 px-4 text-black dark:text-white hover:text-[#FA6B48] transition ${
             isActive('/services') ? 'text-[#FA6B48] font-medium underline underline-offset-1' : ''
           }`}
           onClick={() => setIsMobileMenuOpen(false)}
@@ -274,7 +273,7 @@ const Header = () => {
         </Link>
         <Link 
           href="/contact" 
-          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+          className={`block py-3 px-4 text-black dark:text-white hover:text-[#FA6B48] transition ${
             isActive('/contact') ? 'text-[#FA6B48] font-medium underline underline-offset-1' : ''
           }`}
           onClick={() => setIsMobileMenuOpen(false)}
@@ -283,7 +282,7 @@ const Header = () => {
         </Link>
         <Link 
           href="/blog" 
-          className={`block py-3 px-4 text-gray-800 dark:text-white hover:text-[#FA6B48] transition ${
+          className={`block py-3 px-4 text-black dark:text-white hover:text-[#FA6B48] transition ${
             isActive('/blog') ? 'text-[#FA6B48] font-medium' : ''
           }`}
           onClick={() => setIsMobileMenuOpen(false)}

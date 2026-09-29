@@ -38,16 +38,16 @@
 }
 
 @layer utilities {
+  /* Theme = class-based (.dark on <html>), same palette as <body> in layout.tsx.
+     Removed the prefers-color-scheme block: it fought the manual toggle. */
   :root {
-    --background: #ffffff;
-    --foreground: #000000;
+    --background: #EDDBB5;
+    --foreground: #488067;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #000000;
-      --foreground: #ffffff;
-    }
+  .dark {
+    --background: #1B3E5C;
+    --foreground: #F2B138;
   }
 
   body {
@@ -65,7 +65,7 @@
   }
   
   .scroll-custom::-webkit-scrollbar-track {
-    @apply bg-gray-200 dark:bg-gray-700;
+    @apply bg-black/10 dark:bg-gray-700;
   }
   
   .scroll-custom::-webkit-scrollbar-thumb {

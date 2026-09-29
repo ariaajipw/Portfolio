@@ -35,10 +35,10 @@ export default function BlogPage() {
               <Link 
               key={post.id} 
               href={`/blog/${post.id}`}
-              className="block p-2 border-4 border-gray-600 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition">
-                <div className="p-4 border-2 border-gray-400 rounded-lg hover:bg-[#FA6B48]">
+              className="block p-2 border-4 border-black dark:border-gray-600 rounded-lg hover:bg-black dark:hover:bg-gray-200 transition">
+                <div className="group/inner p-4 border-2 border-black/40 dark:border-gray-400 rounded-lg hover:bg-[#FA6B48] hover:text-black">
                   <h2 className=" text-xl font-semibold">{post.title}</h2>
-                  <p className="text-gray-500 text-sm">{post.date}</p>
+                  <p className="text-black/60 dark:text-gray-500 group-hover/inner:text-black text-sm">{post.date}</p>
                 </div>
               </Link>
             ))}
