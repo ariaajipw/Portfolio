@@ -163,7 +163,7 @@ export default function Home() {
               scale={0.9}
               autoplayDelay={6}
               loop
-              radius={16}
+              radius={0}
               showCaptions={false}
               showControls
               showIndicators
@@ -175,14 +175,37 @@ export default function Home() {
         <div className="grid lg:grid-cols-12 h-fit">
           <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
           <p className="text-sm lg:text-lg content-center place-self-center px-auto mt-10 ml-[30px] mr-[20px] mb-7">A developer focuses on front-end side, crafting web experiences, geeking out over current best practices and technologies for developing websites.</p>
-            < BlurText 
+          <div className="w-full flex justify-center text-center mt-5">
+            <BlurText
+              text="Aria Aji"
+              delay={300}
+              animateBy="letters"
+              direction="top"
+              className="text-[clamp(30px,7vw,83px)] font-bold leading-none text-[#CA6B48]"
+            />
+          </div>
+            {/* < BlurText 
              text="Aria Aji"
              delay={300}
              animateBy="letters"
              direction="top"
              className="text-[clamp(30px,7vw,83px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5 mx-10 px-17 xl:px-20 2xl:px-35"
-          />
-          <div className="text-center mt-4 mb-5 text-[#EA6B48] h-20">
+          /> */}
+          <div className="w-full flex justify-center text-center mt-4 mb-5 text-[#EA6B48] h-20">
+            <div className="w-full max-w-full">
+              <FallingText
+                text="Front-end Developer"
+                highlightWords={[]}
+                trigger="hover"
+                backgroundColor="transparent"
+                wireframes={false}
+                gravity={0.1}
+                fontSize="clamp(20px, 4vw, 32px)"
+                mouseConstraintStiffness={0.9}
+              />
+            </div>
+          </div>
+          {/* <div className="text-center mt-4 mb-5 text-[#EA6B48] h-20">
             <FallingText
               text={`Front-end Developer`}
               highlightWords={[]}
@@ -194,19 +217,31 @@ export default function Home() {
               fontSize="clamp(20px,4vw,32px)"
               mouseConstraintStiffness={0.9}
             />           
-          </div>
+          </div> */}
             {/* <h2 className="text-xl lg:text-5xl py-8 place-self-center text-[#EA6B48]">Website Developer</h2> */}
             <p className="text-sm lg:text-lg content-center place-self-center px-auto ml-[30px] mr-[20px] mb-12">Enhance skills through hands-on projects & professional experiences. Combining creativity to build engaging experiences.</p>
-            
-
+            <div className="w-full flex justify-center">
+              <div className="w-fit">
+                <Magnet padding={50} disabled={false} magnetStrength={2}>
+                  <Link
+                    href="/contact"
+                    className="button inline-flex items-center justify-center border border-black dark:border-black p-3 rounded-full text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48]"
+                  >
+                    Let's Collaborate
+                  </Link>
+                </Magnet>
+              </div>
+            </div>
+            {/* <div className="mx-[85px] xs:mx-[150px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]">
               <Magnet padding={50} disabled={false} magnetStrength={2}>
                   <Link 
                   href="/contact"
-                  className="button border-black dark:border-black p-3 rounded-full content-center place-self-center w-[130px] text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] mx-[90px] sm:mx-[225px] md:mx-[280px] lg:mx-[100px] xl:mx-[227px] 2xl:mx-[280px]"
+                  className="button border-black dark:border-black p-3 rounded-full content-center place-self-center text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48]"
                 >
                   Let's Collaborate
                 </Link>
-              </Magnet>
+              </Magnet></div> */}
+              
 
           </div>
           <div className="lg:col-span-6 content-center place-self-center order-first lg:order-last pl-0 lg:pl-[100px]">

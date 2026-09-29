@@ -195,17 +195,17 @@ export default function ServicesPage() {
   return (
     <div ref={rootRef} className="min-h-screen">
       {/* Hero */}
-      <section className="container mx-auto px-4 pt-28 pb-14">
-        <p className="text-sm opacity-70">
+      <section className="container mx-auto px-4 pt-20 pb-5">
+        <p className="text-sm opacity-50">
           Aria Aji — Front-end Developer, Bandung
         </p>
 
-        <h1 className="my-20 max-w-8xl text-4xl font-bold leading-tight sm:text-6xl lg:text-7xl">
+        <h1 className="my-10 max-w-8xl text-4xl font-bold leading-tight sm:text-6xl lg:text-7xl">
           Websites and Online Stores That Are Built to Generate Results, Not
           Just Look Good.
         </h1>
 
-        <p className="mt-5 max-w-md text-xl opacity-80">
+        <p className="mt-5 max-w-md text-xl opacity-85">
           Specializing in high-performance landing pages and Shopify setup for
           brands that want to start selling right away. Built in days, not
           months.

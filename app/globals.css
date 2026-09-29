@@ -5,7 +5,15 @@
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
+  --breakpoint-2xl: 1920px;
 }
+
+@plugin 'tailwind-scrollbar';
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -66,5 +74,5 @@
   
   .scroll-custom::-webkit-scrollbar-thumb:hover {
     @apply bg-[#FA6B48]/90;
-  }
+  } 
 }

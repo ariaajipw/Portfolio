@@ -95,7 +95,7 @@ export default function About() {
   };
 
   return (
-            <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start px-[20px] md:pt[49px] text-black dark:text-white lg:flex-1-reverse xl:pb-[50px] xl:px-[100px] 2xl:px-[220px] lg:gap-x-[30px] min-h-dvh mb-18">
+            <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 items-start px-[20px] md:pt[49px]  lg:flex-1-reverse xl:pb-[50px] xl:px-[100px] 2xl:px-[150px] min-h-dvh mb-18">
       <div className="flex col-span-1 h-full justify-center">
         <div className="content-center">
           <img
@@ -134,13 +134,13 @@ export default function About() {
 
           {/* Bagian Toggle */}
           <div className="">
-            <div className="flex space-x-4 mb-4">
+            <div className="flex space-x-4 md:space-x-6 mb-4">
               {toggleButtons.map((button) => (
                 <button
                   key={button.id}
                   className={`px-2 py-2 rounded-lg transition-all duration-200 text-md md:text-lg lg:text-2xl ${
                     activePanel === button.id
-                      ? "text-gray-700 dark:text-white font-bold underline underline-offset-4"
+                      ? " font-bold underline underline-offset-4"
                       : "text-gray-700 hover:bg-gray-300 dark:text-gray-200 dark:hover:bg-gray-600 opacity-30 hover:opacity-100"
                   }`}
                   onClick={() => setActivePanel(button.id)}
