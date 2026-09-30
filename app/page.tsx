@@ -5,7 +5,7 @@ import WorkCards from "./components/WorkCard/workcard";
 import FallingText from './components/FallingText/FallingText';
 import Magnet from './components/Magnet/Magnet';
 import Link from "next/link";import MorphSlider from './components/MorphSlider/MorphSlider'
-
+import TextLoop from './components/TextLoop/TextLoop';
 
 export default function Home() {
 
@@ -169,6 +169,28 @@ export default function Home() {
               showIndicators
           />
           </div>
+
+          <div className="mt-15">
+          <TextLoop
+            text="Aria ✦ Aji ✦ Perkasa ✦ Wibowo"
+            shape="wave"
+            speed={90}
+            direction="forward"
+            separator="✦"
+            curviness={20}
+            fontSize={50}
+            fontWeight={600}
+            letterSpacing={9}
+            uppercase={false}
+            // color="#FA6B48"
+            // color="#000000"
+            ribbon
+            ribbonColor="#FA6B48"
+            ribbonWidth={86}
+            pauseOnHover
+            className ="text-black dark:text-white"
+          />  
+          </div>
       </div>
 
       <div className="second-section container mx-auto h-fit my-25 md:mt-0 lg:mt-50 lg:mb-70">
@@ -184,13 +206,7 @@ export default function Home() {
               className="text-[clamp(30px,7vw,83px)] font-bold leading-none text-[#CA6B48]"
             />
           </div>
-            {/* < BlurText 
-             text="Aria Aji"
-             delay={300}
-             animateBy="letters"
-             direction="top"
-             className="text-[clamp(30px,7vw,83px)] font-bold leading-none place-self-center text-[#CA6B48] mt-5 mx-10 px-17 xl:px-20 2xl:px-35"
-          /> */}
+
           <div className="w-full flex justify-center text-center mt-4 mb-5 text-[#EA6B48] h-20">
             <div className="w-full max-w-full">
               <FallingText
