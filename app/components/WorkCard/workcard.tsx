@@ -1167,7 +1167,7 @@ export default function WorkCards() {
                 rel="noreferrer"
                 className="
                   inline-flex min-h-11 items-center justify-center rounded-full
-                  bg-[#FA6B48] px-6 py-3 text-sm text-black
+                  bg-[#FA6B48] px-6 py-3 text-sm text-black dark:text-white
                   transition-colors duration-300 motion-reduce:transition-none
                   hover:bg-black hover:text-[#FA6B48]
                   dark:hover:bg-white

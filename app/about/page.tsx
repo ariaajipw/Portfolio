@@ -493,8 +493,8 @@ export default function About() {
                 src="/assets/img/ariaaji.jpg"
                 alt="Portrait of Aria Aji"
                 decoding="async"
-                className="about-photo h-full w-full object-cover"
-                style={{ objectPosition: "50% 30%" }}
+                className="about-photo h-full w-full object-contain"
+                style={{ objectPosition: "100% 50%" }}
               />
             </div>
           </div>

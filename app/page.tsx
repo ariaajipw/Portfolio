@@ -225,7 +225,7 @@ export default function Home() {
                 <Magnet padding={50} disabled={false} magnetStrength={2}>
                   <Link
                     href="/contact"
-                    className="button inline-flex items-center justify-center border p-3 rounded-full text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48]"
+                    className="button inline-flex items-center justify-center p-3 rounded-full text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black dark:text-white hover:text-[#FA6B48]"
                   >
                     Let's Collaborate
                   </Link>

@@ -31,7 +31,7 @@ const tiers: Tier[] = [
   {
     id: "business-website",
     label: "Business Website",
-    price: "Rp 2.500.000 – Rp 5.000.000",
+    price: "Price based on project scope",
     tagline:
       "A fast solution for small and medium-sized Enterprises, F&B businesses, and Personal Brands that need a professional online presence.",
     timeline: "3–7 Business Days",
@@ -48,7 +48,7 @@ const tiers: Tier[] = [
   {
     id: "shopify-store",
     label: "Shopify Store Setup",
-    price: "Rp 8.000.000 – Rp 15.000.000",
+    price: "Price based on project scope",
     tagline:
       "A robust online store for fashion, retail, and physical product brands ready to start selling automatically.",
     timeline: "1–2 Weeks",
@@ -69,15 +69,15 @@ const tiers: Tier[] = [
 const addons = [
   {
     name: "Worry-Free Maintenance & Updates",
-    price: "Starting from Rp 500.000 / month",
+    price: "Price based on project scope",
   },
   {
     name: "Sales-Driven Copywriting",
-    price: "Starting from Rp 750.000",
+    price: "Price based on project scope",
   },
   {
     name: "Additional Page",
-    price: "Rp 350.000 / page",
+    price: "Price based on project scope",
   },
 ];
 
@@ -101,7 +101,7 @@ const steps = [
 ];
 
 const buttonClass =
-  "inline-block rounded-lg bg-[#FA6B48] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FA6B48]";
+  "inline-block rounded-lg bg-[#FA6B48] px-6 py-3 text-sm font-semibold text-black dark:text-white transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FA6B48]";
 
 export default function ServicesPage() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -194,7 +194,7 @@ export default function ServicesPage() {
           href={links.phone}
           target="_blank"
           rel="noopener noreferrer"
-          className={`mt-8 text-lg button inline-flex items-center justify-center border p-3 rounded-full text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] ${buttonClass}`}
+          className={`mt-8 text-lg button inline-flex items-center justify-center p-3 rounded-full text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black dark:text-white  hover:text-[#FA6B48] ${buttonClass}`}
         >
           Get Started
         </a>
@@ -214,7 +214,7 @@ export default function ServicesPage() {
                 {tier.price}
               </p>
 
-              <p className="mt-3 text-sm opacity-80">{tier.tagline}</p>
+              <p className="mt-3 text-sm opacity-85">{tier.tagline}</p>
 
               <div className="mt-4 flex gap-4 text-xs opacity-60">
                 <span>{tier.timeline}</span>
@@ -241,37 +241,37 @@ export default function ServicesPage() {
       </section>
 
       {/* Add-ons */}
-      <section className="container mx-auto px-8 py-10 text-gray-800 dark:text-white">
+      <section className="container mx-auto px-8 py-10 ">
         <h2 className="text-2xl font-bold">Additional Services</h2>
 
-        <div className="mt-5 divide-y divide-black/10 border-t border-black/10 dark:divide-white/10 dark:border-white/10">
+        <div className="mt-5 divide-y divide-black/10 border-t border-black/10 dark:divide-white/10 dark:border-white/10 text-gray-900 dark:text-white">
           {addons.map((addon) => (
             <div
               key={addon.name}
               className="flex items-center justify-between py-3 text-sm"
             >
               <span>{addon.name}</span>
-              <span className="opacity-70">{addon.price}</span>
+              <span className="opacity-80">{addon.price}</span>
             </div>
           ))}
         </div>
       </section>
 
       {/* Process */}
-      <section className="container mx-auto px-4 py-10 text-gray-800 dark:text-white">
+      <section className="container mx-auto px-4 py-10">
         <h2 className="text-2xl font-bold">Work Process</h2>
 
-        <div className="mt-6 space-y-6">
+        <div className="mt-6 space-y-6 text-gray-800 dark:text-white">
           {steps.map((step, index) => (
             <div key={step.title} className="step-item flex gap-4">
-              <span className="text-2xl font-bold opacity-20">
+              <span className="text-2xl font-bold opacity-50">
                 {String(index + 1).padStart(2, "0")}
               </span>
 
               <div>
                 <h3 className="font-semibold">{step.title}</h3>
 
-                <p className="mt-1 text-sm opacity-80">{step.desc}</p>
+                <p className="mt-1 text-sm opacity-90">{step.desc}</p>
               </div>
             </div>
           ))}
@@ -288,7 +288,7 @@ export default function ServicesPage() {
           href={links.phone}
           target="_blank"
           rel="noopener noreferrer"
-          className={`mt-5 text-lg button inline-flex items-center justify-center border p-3 rounded-full text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black hover:text-[#FA6B48] ${buttonClass}`}
+          className={`mt-5 text-lg button inline-flex items-center justify-center p-3 rounded-full text-center bg-[#FA6B48] hover:bg-black dark:hover:bg-white text-black dark:text-white hover:text-[#FA6B48] ${buttonClass}`}
         >
           Chat via WhatsApp
         </a>
