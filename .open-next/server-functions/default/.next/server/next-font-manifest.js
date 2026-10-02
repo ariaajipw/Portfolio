@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/home/ariaajipw/Projects/projects/P/Portfolio/app/layout":["static/media/bb3ef058b751a6ad-s.p.woff2","static/media/427e4a37d3642943-s.p.woff2","static/media/9f0a0c474f8375fe-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';

@@ -265,7 +265,7 @@ const Header = () => {
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] hover:bg-[var(--gradient-accent)] transition border border-[var(--accent)] rounded-xl"
+            className="p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] transition border border-[var(--accent)] rounded-xl"
             aria-label={
               isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'
             }
