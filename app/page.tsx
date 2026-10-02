@@ -248,7 +248,7 @@ export default function Home() {
                 >
                   <Link
                     href="/contact"
-                    className="button inline-flex items-center justify-center p-3 rounded-full text-center bg-[var(--accent)] text-black hover:bg-[var(--text-primary)] hover:text-[var(--background)] transition-colors"
+                    className="button inline-flex items-center justify-center p-3 rounded-full text-center bg-[var(--accent)] text-black dark:text-white hover:bg-[var(--text-tertiary)] hover:text-[var(--accent)] transition-colors"
                   >
                     Let's Collaborate
                   </Link>
