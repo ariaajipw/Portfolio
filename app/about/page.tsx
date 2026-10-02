@@ -461,7 +461,7 @@ export default function About() {
               href="https://github.com/ariaajipw"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block break-all underline decoration-2 decoration-transparent underline-offset-4 transition-colors duration-300 hover:decoration-[#FA6B48] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black dark:focus-visible:outline-white"
+              className="inline-block break-all underline decoration-2 decoration-transparent underline-offset-4 transition-colors duration-300 hover:decoration-[#FA6B48] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black dark:focus-visible:outline-white hover:opacity-70"
             >
               https://github.com/ariaajipw
             </Link>
@@ -493,7 +493,7 @@ export default function About() {
                 src="/assets/img/ariaaji.jpg"
                 alt="Portrait of Aria Aji"
                 decoding="async"
-                className="about-photo h-full w-full object-contain"
+                className="about-photo h-full w-full object-cover md:object-contain"
                 style={{ objectPosition: "100% 50%" }}
               />
             </div>

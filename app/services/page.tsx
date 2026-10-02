@@ -206,7 +206,7 @@ export default function ServicesPage() {
           {tiers.map((tier) => (
             <div
               key={tier.id}
-              className="pricing-card rounded-lg bg-black p-7 text-white dark:bg-white dark:text-gray-950"
+              className="pricing-card rounded-lg bg-black p-7 text-white dark:bg-[#FDFBF7] dark:text-gray-950"
             >
               <h3 className="text-2xl font-semibold">{tier.label}</h3>
 

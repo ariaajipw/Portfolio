@@ -38,41 +38,148 @@
 }
 
 @layer utilities {
-  /* Theme = class-based (.dark on <html>), same palette as <body> in layout.tsx.
-     Removed the prefers-color-scheme block: it fought the manual toggle. */
+  /*
+   * ============================================================
+   * THEME TOKENS
+   * ============================================================
+   *
+   * Light Mode:
+   * background : #EDDBB5
+   * foreground : #488067
+   *
+   * Dark Mode:
+   * background : #1B3E5C
+   * foreground : #F2B138
+   *
+   * Accent:
+   * #FA6B48
+   *
+   * IMPORTANT:
+   * Theme-dependent UI colors should use these variables instead
+   * of creating separate hardcoded colors in every component.
+   */
+
   :root {
+    color-scheme: light;
+
     --background: #EDDBB5;
     --foreground: #488067;
+
+    --surface: #EDDBB5;
+    --surface-elevated: #F4E6C7;
+
+    --text-primary: #488067;
+    --text-secondary: #5F806F;
+    --text-tertiary: #000000;
+
+    --border: rgba(72, 128, 103, 0.20);
+    --muted: rgba(72, 128, 103, 0.65);
+
+    --accent: #FA6B48;
+
+    --interactive-hover: #FA6B48;
+
+    --card-background: #EDDBB5;
+    --input-background: #F4E6C7;
+
+    --focus-ring: #FA6B48;
+
+      /* === Navbar === */
+    --nav-background: #FDFBF7;
+    --nav-text: #000000;
+    --nav-toggle-bg: #000000;
+    --nav-toggle-text: #FFFFFF;
+    --nav-toggle-hover-text: #4B5563; /* gray-600 */
+
+    --footer-background: #FDFBF7;
+    --footer-text: #000000;
+    --footer-muted: rgba(0, 0, 0, 0.70);   /* = black/70 */
+    --footer-border: rgba(0, 0, 0, 0.15);  /* = black/15 */
+
+    --gradient-accent: linear-gradient(to right, #FA6B48, #FACC15);
   }
 
-  .dark {
+  html.dark {
+    color-scheme: dark;
+
     --background: #1B3E5C;
     --foreground: #F2B138;
+
+    --surface: #1B3E5C;
+    --surface-elevated: #244C6C;
+
+    --text-primary: #F2B138;
+    --text-secondary: rgba(242, 177, 56, 0.75);
+    --text-tertiary: #FFFFFF;
+
+    --border: rgba(242, 177, 56, 0.20);
+    --muted: rgba(242, 177, 56, 0.65);
+
+    --accent: #FA6B48;
+
+    --interactive-hover: #FA6B48;
+
+    --card-background: #1B3E5C;
+    --input-background: #244C6C;
+
+    --focus-ring: #FA6B48;
+
+     /* === Navbar === */
+    --nav-background: #0a0a0a;
+    --nav-text: #FFFFFF;
+    --nav-toggle-bg: #FFFFFF;
+    --nav-toggle-text: #000000;
+    --nav-toggle-hover-text: #D1D5DB; /* gray-300 */
+    
+    --footer-background: #0a0a0a;
+    --footer-text: #FFFFFF;
+    --footer-muted: #D1D5DB;               /* = gray-300 */
+    --footer-border: #374151;              /* = gray-700 */
+
+    --gradient-accent: linear-gradient(to right, #FACC15, #FA6B48);
   }
 
   body {
-    color: var(--foreground);
-    background: var(--background);
+    color: var(--text-primary);
+    background-color: var(--background);
     font-family: Arial, Helvetica, sans-serif;
+
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+
+  /*
+   * Prevent theme transitions from leaking into media/assets.
+   */
+  img,
+  video,
+  canvas,
+  svg {
+    transition: none;
   }
 
   .scrollbar::-webkit-scrollbar {
     display: block;
   }
+
   .scroll-custom::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
-  
+
   .scroll-custom::-webkit-scrollbar-track {
-    @apply bg-black/10 dark:bg-gray-700;
+    background-color: var(--border);
   }
-  
+
   .scroll-custom::-webkit-scrollbar-thumb {
-    @apply bg-[#FA6B48] rounded-full;
+    background-color: var(--accent);
+    border-radius: 9999px;
   }
-  
+
   .scroll-custom::-webkit-scrollbar-thumb:hover {
-    @apply bg-[#FA6B48]/90;
-  } 
+    background-color: var(--accent);
+    opacity: 0.9;
+  }
 }
+ 

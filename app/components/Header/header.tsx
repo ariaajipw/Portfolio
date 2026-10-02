@@ -8,7 +8,13 @@ import Image from 'next/image';
 const Header = () => {
   const pathname = usePathname();
 
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    if (typeof document === "undefined") {
+      return false;
+    }
+  
+    return document.documentElement.classList.contains("dark");
+  });
   const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -16,40 +22,17 @@ const Header = () => {
 
   const headerRef = useRef<HTMLElement>(null);
 
-  // Initialize dark mode from localStorage or system preference
+  // Sync React state with the theme already applied to <html>
   useEffect(() => {
-    const isDark =
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
-
+    const isDark = document.documentElement.classList.contains('dark');
     setIsDarkMode(isDark);
-    document.documentElement.classList.toggle('dark', isDark);
   }, []);
 
   const toggleDarkMode = (): void => {
     const newMode = !isDarkMode;
-
     setIsDarkMode(newMode);
-
-    if (newMode) {
-      localStorage.theme = 'dark';
-    } else {
-      localStorage.theme = 'light';
-    }
-
+    localStorage.setItem('theme', newMode ? 'dark' : 'light');
     document.documentElement.classList.toggle('dark', newMode);
-  };
-
-  const resetToSystemPreference = (): void => {
-    localStorage.removeItem('theme');
-
-    const isDark = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches;
-
-    setIsDarkMode(isDark);
-    document.documentElement.classList.toggle('dark', isDark);
   };
 
   // Scroll behavior
@@ -57,16 +40,11 @@ const Header = () => {
     const handleScroll = (): void => {
       const currentScrollY = window.scrollY;
 
-      // Background navbar
       setIsScrolled(currentScrollY > 0);
 
-      // Show / hide navbar
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsHeaderVisible(false);
-      } else if (
-        currentScrollY < lastScrollY ||
-        currentScrollY <= 100
-      ) {
+      } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
         setIsHeaderVisible(true);
       }
 
@@ -88,7 +66,6 @@ const Header = () => {
 
     return () => {
       window.removeEventListener('scroll', throttledHandleScroll);
-
       if (timeoutId) clearTimeout(timeoutId);
     };
   }, [lastScrollY]);
@@ -116,7 +93,6 @@ const Header = () => {
     };
   }, [isMobileMenuOpen]);
 
-  // Function to check if link is active
   const isActive = (href: string) => {
     return (
       pathname === href ||
@@ -128,16 +104,12 @@ const Header = () => {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 right-0 left-0 z-50 py-2 transition-all duration-300 py-3 ${
-        /*
-         * Menu terbuka = navbar selalu solid.
-         * Menu tertutup di homepage paling atas = transparent.
-         */
+      className={`fixed top-0 right-0 left-0 z-50 py-2 transition-all duration-300 ${
         isMobileMenuOpen
-          ? 'bg-[#FDFBF7] dark:bg-[#0a0a0a]'
+          ? 'bg-[var(--nav-background)]'
           : pathname === '/' && !isScrolled
             ? 'bg-transparent'
-            : 'bg-[#FDFBF7] dark:bg-[#0a0a0a]'
+            : 'bg-[var(--nav-background)]'
       } ${
         isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
@@ -145,8 +117,8 @@ const Header = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
 
         {/* Logo */}
-        <div className="text-2xl font-bold text-black dark:text-white align-middle justify-items-center group relative">
-          <a href="/" className="flex">
+        <div className="text-xl font-bold text-[var(--nav-text)] align-middle justify-items-center group relative">
+        <Link href="/" className="flex items-center gap-2">
             <img
               src="/assets/img/peacock-black.png"
               alt=""
@@ -159,20 +131,63 @@ const Header = () => {
               className="w-12 h-8 hidden dark:block"
             />
 
-            <span className="hidden group-hover:block hover:text-[#FA6B48] underline">
+            {/* <span className="hidden group-hover:block text-[var(--text-primary)] dark:text-[var(--text-primary)] hover:text-[var(--accent)] group-focus-within:block underline">
+              Aria Aji
+            </span> */}
+            <span
+              className={`
+                text-[var(--text-primary)]
+                dark:text-[var(--text-primary)]
+                hover:text-[var(--accent)]
+                underline
+                overflow-hidden
+                whitespace-nowrap
+                inline-block
+                transition-all
+                duration-500
+                ease-[cubic-bezier(0.22,1,0.36,1)]
+                ${
+                  isMobileMenuOpen
+                    ? `
+                      max-w-[150px]
+                      opacity-100
+                      translate-x-0
+                      translate-y-0
+                      ml-1
+                    `
+                    : `
+                      max-w-0
+                      opacity-0
+                      translate-x-[-8px]
+                      translate-y-[2px]
+                      ml-0
+                      group-hover:max-w-[150px]
+                      group-hover:opacity-100
+                      group-hover:translate-x-0
+                      group-hover:translate-y-0
+                      group-hover:ml-1
+                      group-focus-within:max-w-[150px]
+                      group-focus-within:opacity-100
+                      group-focus-within:translate-x-0
+                      group-focus-within:translate-y-0
+                      group-focus-within:ml-1
+                    `
+                }
+              `}
+            >
               Aria Aji
             </span>
-          </a>
+          </Link>
         </div>
 
-        {/* Desktop Navigation Menu */}
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-12 items-center">
 
           <Link
             href="/about"
-            className={`text-black dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+            className={`text-[var(--nav-text)] hover:text-[var(--accent)] transition hover:underline hover:underline-offset-1 ${
               pathname === '/about'
-                ? '!text-[#FA6B48] font-medium underline underline-offset-1'
+                ? '!text-[var(--accent)] font-medium underline underline-offset-1'
                 : ''
             }`}
           >
@@ -181,9 +196,9 @@ const Header = () => {
 
           <Link
             href="/services"
-            className={`text-black dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+            className={`text-[var(--nav-text)] hover:text-[var(--accent)] transition hover:underline hover:underline-offset-1 ${
               pathname === '/services'
-                ? '!text-[#FA6B48] font-medium underline underline-offset-1'
+                ? '!text-[var(--accent)] font-medium underline underline-offset-1'
                 : ''
             }`}
           >
@@ -192,9 +207,9 @@ const Header = () => {
 
           <Link
             href="/contact"
-            className={`text-black dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+            className={`text-[var(--nav-text)] hover:text-[var(--accent)] transition hover:underline hover:underline-offset-1 ${
               pathname === '/contact'
-                ? '!text-[#FA6B48] font-medium underline underline-offset-1'
+                ? '!text-[var(--accent)] font-medium underline underline-offset-1'
                 : ''
             }`}
           >
@@ -203,9 +218,9 @@ const Header = () => {
 
           <Link
             href="/blog"
-            className={`text-black dark:text-white hover:text-[#FA6B48] transition hover:underline hover:underline-offset-1 ${
+            className={`text-[var(--nav-text)] hover:text-[var(--accent)] transition hover:underline hover:underline-offset-1 ${
               pathname === '/blog'
-                ? '!text-[#FA6B48] font-medium underline underline-offset-1'
+                ? '!text-[var(--accent)] font-medium underline underline-offset-1'
                 : ''
             }`}
           >
@@ -216,11 +231,9 @@ const Header = () => {
           <div className="relative group">
             <button
               onClick={toggleDarkMode}
-              className="p-1 text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-black dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] to-yellow-400 border border-[#FA6B48] rounded-xl"
+              className="p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] hover:bg-[var(--accent)] transition border border-[var(--accent)] rounded-xl"
               aria-label={
-                isDarkMode
-                  ? 'Switch to light mode'
-                  : 'Switch to dark mode'
+                isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'
               }
             >
               {isDarkMode ? (
@@ -246,17 +259,15 @@ const Header = () => {
           </div>
         </nav>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Controls */}
         <div className="flex items-center gap-4 md:hidden">
 
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="p-1 text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition bg-black dark:bg-white hover:bg-gradient-to-r from-[#FA6B48] via-pink-500 to-yellow-400 border border-[#FA6B48] rounded-xl"
+            className="p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] hover:bg-[var(--gradient-accent)] transition border border-[var(--accent)] rounded-xl"
             aria-label={
-              isDarkMode
-                ? 'Switch to light mode'
-                : 'Switch to dark mode'
+              isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'
             }
           >
             {isDarkMode ? (
@@ -283,22 +294,18 @@ const Header = () => {
           {/* Animated Hamburger / X */}
           <button
             onClick={toggleMobileMenu}
-            className="relative flex h-10 w-10 items-center justify-center text-black dark:text-white"
+            className="relative flex h-10 w-10 items-center justify-center text-[var(--nav-text)]"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
             <span className="relative flex h-6 w-6 flex-col items-center justify-center">
 
-              {/* Top line */}
               <span
                 className={`absolute block h-[2px] w-6 rounded-full bg-current transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                  isMobileMenuOpen
-                    ? 'rotate-45'
-                    : '-translate-y-[7px]'
+                  isMobileMenuOpen ? 'rotate-45' : '-translate-y-[7px]'
                 }`}
               />
 
-              {/* Middle line */}
               <span
                 className={`absolute block h-[2px] w-6 rounded-full bg-current transition-all duration-200 ease-in-out ${
                   isMobileMenuOpen
@@ -307,12 +314,9 @@ const Header = () => {
                 }`}
               />
 
-              {/* Bottom line */}
               <span
                 className={`absolute block h-[2px] w-6 rounded-full bg-current transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                  isMobileMenuOpen
-                    ? '-rotate-45'
-                    : 'translate-y-[7px]'
+                  isMobileMenuOpen ? '-rotate-45' : 'translate-y-[7px]'
                 }`}
               />
 
@@ -321,9 +325,9 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Navigation */}
       <div
-        className={`md:hidden overflow-hidden bg-[#FDFBF7] dark:bg-[#0a0a0a] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`md:hidden overflow-hidden bg-[var(--nav-background)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isMobileMenuOpen
             ? 'max-h-96 opacity-100 translate-y-0'
             : 'max-h-0 opacity-0 -translate-y-2'
@@ -332,17 +336,15 @@ const Header = () => {
       >
         <div
           className={`transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            isMobileMenuOpen
-              ? 'translate-y-0'
-              : '-translate-y-3'
+            isMobileMenuOpen ? 'translate-y-0' : '-translate-y-3'
           }`}
         >
 
           <Link
             href="/about"
-            className={`block py-3 px-4 text-black dark:text-white hover:text-[#FA6B48] transition ${
+            className={`block py-3 px-4 text-[var(--nav-text)] hover:text-[var(--accent)] transition ${
               isActive('/about')
-                ? 'text-[#FA6B48] font-medium underline underline-offset-1'
+                ? 'text-[var(--accent)] font-medium underline underline-offset-1'
                 : ''
             }`}
             onClick={() => setIsMobileMenuOpen(false)}
@@ -352,9 +354,9 @@ const Header = () => {
 
           <Link
             href="/services"
-            className={`block py-3 px-4 text-black dark:text-white hover:text-[#FA6B48] transition ${
+            className={`block py-3 px-4 text-[var(--nav-text)] hover:text-[var(--accent)] transition ${
               isActive('/services')
-                ? 'text-[#FA6B48] font-medium underline underline-offset-1'
+                ? 'text-[var(--accent)] font-medium underline underline-offset-1'
                 : ''
             }`}
             onClick={() => setIsMobileMenuOpen(false)}
@@ -364,9 +366,9 @@ const Header = () => {
 
           <Link
             href="/contact"
-            className={`block py-3 px-4 text-black dark:text-white hover:text-[#FA6B48] transition ${
+            className={`block py-3 px-4 text-[var(--nav-text)] hover:text-[var(--accent)] transition ${
               isActive('/contact')
-                ? 'text-[#FA6B48] font-medium underline underline-offset-1'
+                ? 'text-[var(--accent)] font-medium underline underline-offset-1'
                 : ''
             }`}
             onClick={() => setIsMobileMenuOpen(false)}
@@ -376,9 +378,9 @@ const Header = () => {
 
           <Link
             href="/blog"
-            className={`block py-3 px-4 text-black dark:text-white hover:text-[#FA6B48] transition ${
+            className={`block py-3 px-4 text-[var(--nav-text)] hover:text-[var(--accent)] transition ${
               isActive('/blog')
-                ? 'text-[#FA6B48] font-medium'
+                ? 'text-[var(--accent)] font-medium'
                 : ''
             }`}
             onClick={() => setIsMobileMenuOpen(false)}
