@@ -1,7 +1,7 @@
 {
     "$schema": "./node_modules/wrangler/config-schema.json",
   
-    "name": "portofolio",
+    "name": "portfolio",
   
     "main": ".open-next/worker.js",
   
