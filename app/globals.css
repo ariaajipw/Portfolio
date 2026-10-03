@@ -15,14 +15,6 @@
 
 @plugin 'tailwind-scrollbar';
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -31,34 +23,43 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    /* Ruang scrollbar selalu dicadangkan, jadi lebar tidak loncat antar browser/halaman */
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-width: 0;
+    overflow-x: clip;
+  }
+}
+
+/*
+ * SATU-SATUNYA aturan lebar konten untuk seluruh situs.
+ * Dipakai oleh Header, semua section di page, dan Footer.
+ */
+@utility site-container {
+  width: 100%;
+  max-width: 110rem; /* 1440px */
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
 }
 
 @utility text-balance {
   text-wrap: balance;
 }
 
-@layer utilities {
-  /*
-   * ============================================================
-   * THEME TOKENS
-   * ============================================================
-   *
-   * Light Mode:
-   * background : #EDDBB5
-   * foreground : #488067
-   *
-   * Dark Mode:
-   * background : #1B3E5C
-   * foreground : #F2B138
-   *
-   * Accent:
-   * #FA6B48
-   *
-   * IMPORTANT:
-   * Theme-dependent UI colors should use these variables instead
-   * of creating separate hardcoded colors in every component.
-   */
-
+/* ===== THEME TOKENS ===== */
+@layer base {
   :root {
     color-scheme: light;
 
@@ -76,7 +77,6 @@
     --muted: rgba(72, 128, 103, 0.65);
 
     --accent: #FA6B48;
-
     --interactive-hover: #FA6B48;
 
     --card-background: #EDDBB5;
@@ -84,17 +84,18 @@
 
     --focus-ring: #FA6B48;
 
-      /* === Navbar === */
+    /* Navbar */
     --nav-background: #FDFBF7;
     --nav-text: #000000;
     --nav-toggle-bg: #000000;
     --nav-toggle-text: #FFFFFF;
-    --nav-toggle-hover-text: #4B5563; /* gray-600 */
+    --nav-toggle-hover-text: #4B5563;
 
+    /* Footer */
     --footer-background: #FDFBF7;
     --footer-text: #000000;
-    --footer-muted: rgba(0, 0, 0, 0.70);   /* = black/70 */
-    --footer-border: rgba(0, 0, 0, 0.15);  /* = black/15 */
+    --footer-muted: rgba(0, 0, 0, 0.70);
+    --footer-border: rgba(0, 0, 0, 0.15);
 
     --gradient-accent: linear-gradient(to right, #FA6B48, #FACC15);
   }
@@ -116,7 +117,6 @@
     --muted: rgba(242, 177, 56, 0.65);
 
     --accent: #FA6B48;
-
     --interactive-hover: #FA6B48;
 
     --card-background: #1B3E5C;
@@ -124,17 +124,16 @@
 
     --focus-ring: #FA6B48;
 
-     /* === Navbar === */
     --nav-background: #0a0a0a;
     --nav-text: #FFFFFF;
     --nav-toggle-bg: #FFFFFF;
     --nav-toggle-text: #000000;
-    --nav-toggle-hover-text: #D1D5DB; /* gray-300 */
-    
+    --nav-toggle-hover-text: #D1D5DB;
+
     --footer-background: #0a0a0a;
     --footer-text: #FFFFFF;
-    --footer-muted: #D1D5DB;               /* = gray-300 */
-    --footer-border: #374151;              /* = gray-700 */
+    --footer-muted: #D1D5DB;
+    --footer-border: #374151;
 
     --gradient-accent: linear-gradient(to right, #FACC15, #FA6B48);
   }
@@ -142,16 +141,13 @@
   body {
     color: var(--text-primary);
     background-color: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
-
     transition:
       background-color 180ms ease,
       color 180ms ease;
   }
+}
 
-  /*
-   * Prevent theme transitions from leaking into media/assets.
-   */
+@layer utilities {
   img,
   video,
   canvas,
@@ -182,4 +178,3 @@
     opacity: 0.9;
   }
 }
- 

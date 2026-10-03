@@ -8,151 +8,71 @@ import Link from "next/link";
 import MorphSlider from "./components/MorphSlider/MorphSlider";
 import TextLoop from "./components/TextLoop/TextLoop";
 
+const mobileLines = [
+  "   Combine   ",
+  "   Ideas   ",
+  "   Craft   ",
+  "   -   &   -   ",
+  "   Innovate   ",
+];
+
+const desktopLines = ["Combine Ideas,", "Craft & Innovate"];
+
+const items = [
+  { image: "/assets/img/BKAIG.jpeg", caption: "hai" },
+  { image: "/assets/img/CPSIG.jpeg", caption: "hai" },
+  { image: "/assets/img/KGPIG.jpeg", caption: "hai" },
+  { image: "/assets/img/BTLK.jpeg", caption: "hai" },
+  { image: "/assets/img/AAPW.jpeg", caption: "hai" },
+];
+
 export default function Home() {
-  const colorCycle = [
-    "#212121",
-    "#C9A227",
-    "#217147",
-    "#212121",
-    "#C9A227",
-    "#DB7F8E",
-    "#212121",
-    "#C9A227",
-    "#FA6B48",
-  ];
-
-  const items = [
-    { image: "/assets/img/BKAIG.jpeg", caption: "hai" },
-    { image: "/assets/img/CPSIG.jpeg", caption: "hai" },
-    { image: "/assets/img/KGPIG.jpeg", caption: "hai" },
-    { image: "/assets/img/BTLK.jpeg", caption: "hai" },
-    { image: "/assets/img/AAPW.jpeg", caption: "hai" },
-  ];
-
   return (
-    <main className="min-h-screen overflow-hidden">
+    <>
       {/* Hero Section */}
-      <div className="hero-section container flex flex-col mx-auto min-h-dvh w-full content-center place-self-center pt-15">
-
+      <section className="hero-section site-container flex min-h-dvh flex-col justify-center pt-15">
         {/* Mobile */}
-        <div
-          className="sm:block sm:hidden"
-          style={{
-            position: "relative",
-            height: "fit-content",
-            width: "100%",
-            alignContent: "center",
-            placeSelf: "center",
-          }}
-        >
-          <TextPressure
-            text="   Combine   "
-            flex
-            alpha={false}
-            stroke={false}
-            width
-            weight
-            italic
-            textColor=""
-            strokeColor=""
-            minFontSize={36}
-          />
-
-          <TextPressure
-            text="   Ideas   "
-            flex
-            alpha={false}
-            stroke={false}
-            width
-            weight
-            italic
-            textColor=""
-            strokeColor=""
-            minFontSize={36}
-          />
-
-          <TextPressure
-            text="   Craft   "
-            flex
-            alpha={false}
-            stroke={false}
-            width
-            weight
-            italic
-            textColor=""
-            strokeColor=""
-            minFontSize={36}
-          />
-
-          <TextPressure
-            text="   -   &   -   "
-            flex
-            alpha={false}
-            stroke={false}
-            width
-            weight
-            italic
-            textColor=""
-            strokeColor=""
-            minFontSize={36}
-          />
-
-          <TextPressure
-            text="   Innovate   "
-            flex
-            alpha={false}
-            stroke={false}
-            width
-            weight
-            italic
-            textColor=""
-            strokeColor=""
-            minFontSize={36}
-          />
+        <div className="block w-full min-w-0 sm:hidden">
+          {mobileLines.map((line) => (
+            <TextPressure
+              key={line}
+              text={line}
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor=""
+              strokeColor=""
+              minFontSize={36}
+            />
+          ))}
         </div>
 
         {/* Desktop */}
-        <div
-          className="hidden sm:block"
-          style={{
-            position: "relative",
-            height: "fit-content",
-            width: "100%",
-            alignContent: "center",
-            placeSelf: "center",
-          }}
-        >
-          <TextPressure
-            text="Combine Ideas,"
-            flex
-            alpha={false}
-            stroke={false}
-            width
-            weight
-            italic
-            textColor=""
-            strokeColor=""
-            minFontSize={36}
-          />
-
-          <TextPressure
-            text="Craft & Innovate"
-            flex
-            alpha={false}
-            stroke={false}
-            width
-            weight
-            italic
-            textColor=""
-            strokeColor=""
-            minFontSize={36}
-          />
+        <div className="hidden w-full min-w-0 sm:block">
+          {desktopLines.map((line) => (
+            <TextPressure
+              key={line}
+              text={line}
+              flex
+              alpha={false}
+              stroke={false}
+              width
+              weight
+              italic
+              textColor=""
+              strokeColor=""
+              minFontSize={36}
+            />
+          ))}
         </div>
-      </div>
+      </section>
 
-      {/* Image Section */}
-      <div className="img-section flex flex-col my-10">
-        <div className="relative w-full h-[550px] md:h-[800px] [&_canvas]:object-contain [&_img]:object-contain">
+      {/* Image Section (full-bleed sengaja) */}
+      <section className="img-section my-10 flex flex-col">
+        <div className="relative h-[550px] w-full md:h-[800px] [&_canvas]:object-contain [&_img]:object-contain">
           <MorphSlider
             items={items}
             transition="melt"
@@ -193,32 +113,30 @@ export default function Home() {
             className="text-[var(--text-primary)]"
           />
         </div>
-      </div>
+      </section>
 
       {/* Second Section */}
-      <div className="second-section container mx-auto h-fit my-25 md:mt-0 lg:mt-50 lg:mb-70">
-        <div className="grid lg:grid-cols-12 h-fit">
-
+      <section className="second-section site-container my-25 h-fit md:mt-0 lg:mt-50 lg:mb-70">
+        <div className="grid h-fit lg:grid-cols-12">
           {/* Text Content */}
-          <div className="lg:col-span-6 content-center px-auto mx-auto place-self-start lg:place-self-center">
-
-            <p className="text-sm lg:text-lg content-center place-self-center px-auto mt-10 ml-[30px] mr-[20px] mb-7">
+          <div className="mx-auto content-center place-self-start lg:col-span-6 lg:place-self-center">
+            <p className="mt-10 mr-[20px] mb-7 ml-[30px] place-self-center text-sm lg:text-lg">
               A developer focuses on front-end side, crafting web experiences,
               geeking out over current best practices and technologies for
               developing websites.
             </p>
 
-            <div className="w-full flex justify-center text-center mt-5">
+            <div className="mt-5 flex w-full justify-center text-center">
               <BlurText
                 text="Aria Aji"
                 delay={300}
                 animateBy="letters"
                 direction="top"
-                className="text-[clamp(30px,7vw,83px)] font-bold leading-none text-[var(--accent)]"
+                className="text-[clamp(30px,7vw,83px)] leading-none font-bold text-[var(--accent)]"
               />
             </div>
 
-            <div className="w-full flex justify-center text-center mt-4 mb-5 text-[var(--accent)] h-20">
+            <div className="mt-4 mb-5 flex h-20 w-full justify-center text-center text-[var(--accent)]">
               <div className="w-full max-w-full">
                 <FallingText
                   text="Front-end Developer"
@@ -233,22 +151,18 @@ export default function Home() {
               </div>
             </div>
 
-            <p className="text-sm lg:text-lg content-center place-self-center px-auto ml-[30px] mr-[20px] mb-12">
+            <p className="mr-[20px] mb-12 ml-[30px] place-self-center text-sm lg:text-lg">
               Enhance skills through hands-on projects & professional
               experiences. Combining creativity to build engaging experiences.
             </p>
 
             {/* CTA */}
-            <div className="w-full flex justify-center">
+            <div className="flex w-full justify-center">
               <div className="w-fit">
-                <Magnet
-                  padding={50}
-                  disabled={false}
-                  magnetStrength={2}
-                >
+                <Magnet padding={50} disabled={false} magnetStrength={2}>
                   <Link
                     href="/contact"
-                    className="button inline-flex items-center justify-center p-3 rounded-full text-center bg-[var(--accent)] text-black dark:text-white hover:bg-[var(--text-tertiary)] hover:text-[var(--accent)] transition-colors"
+                    className="button inline-flex items-center justify-center rounded-full bg-[var(--accent)] p-3 text-center text-black transition-colors hover:bg-[var(--text-tertiary)] hover:text-[var(--accent)] dark:text-white"
                   >
                     Let's Collaborate
                   </Link>
@@ -258,7 +172,7 @@ export default function Home() {
           </div>
 
           {/* Pixel Image */}
-          <div className="lg:col-span-6 content-center place-self-center order-first lg:order-last pl-0 lg:pl-[100px]">
+          <div className="order-first content-center place-self-center pl-0 lg:order-last lg:col-span-6 lg:pl-[100px]">
             <PixelTransition
               firstContent={
                 <div
@@ -270,24 +184,16 @@ export default function Home() {
                     backgroundColor: "#09090b",
                   }}
                 >
-                  <p
-                    style={{
-                      fontWeight: 900,
-                      fontSize: "1rem",
-                      color: "#ffffff",
-                    }}
-                  >
-                    <img
-                      src="assets/img/peacock.png"
-                      alt="peacock"
-                      className="size-30 md:size-40 lg:size-60"
-                    />
-                  </p>
+                  <img
+                    src="/assets/img/peacock.png"
+                    alt="peacock"
+                    className="size-30 md:size-40 lg:size-60"
+                  />
                 </div>
               }
               secondContent={
                 <img
-                  src="assets/img/ariaaji.jpg"
+                  src="/assets/img/ariaaji.jpg"
                   alt="ariaaji"
                   style={{
                     width: "100%",
@@ -303,12 +209,12 @@ export default function Home() {
             />
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Third Section / Work */}
-      <div className="third-section container flex mx-auto h-fit w-fit content-center place-self-center landscape:mt-80 landscape:mb-120 sm:landscape:my-0 lg:mt-60">
+      <section className="third-section site-container landscape:mt-80 landscape:mb-120 sm:landscape:my-0 lg:mt-60">
         <WorkCards />
-      </div>
-    </main>
+      </section>
+    </>
   );
 }

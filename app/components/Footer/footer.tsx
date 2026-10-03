@@ -11,7 +11,7 @@ const socials = [
 const Footer = () => {
   return (
     <footer className="bg-[var(--footer-background)] border-t border-[var(--border)] mt-auto text-[var(--text-tertiary)] dark:text-[var(--text-tertiary)]">
-      <div className="container mx-auto py-6">
+      <div className="site-container mx-auto py-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-[20px]">
 
           {/* About */}
@@ -25,7 +25,7 @@ const Footer = () => {
                 <img
                   src="/assets/img/peacock-black.png"
                   alt=""
-                  className="w-[40px] h-[28px] md:w-[60px] md:h-[60px] hidden group-hover:block dark:group-hover:hidden group-focus-within:block"
+                  className="w-[40px] md:w-[60px] hidden group-hover:block dark:group-hover:hidden group-focus-within:block"
                 />
 
                 <img

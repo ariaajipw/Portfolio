@@ -5,76 +5,108 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
+const NAV_LINKS = [
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/blog', label: 'Blog' },
+];
+
+/*
+ * Ikon dipilih 100% lewat CSS (class `dark` di <html>), bukan state JS.
+ * Class `dark` sudah dipasang themeScript sebelum paint, jadi ikon
+ * langsung benar saat render awal, refresh, maupun pindah halaman.
+ *
+ * Dark mode  -> day-and-night.png  (ikon gelap di tombol putih)
+ * Light mode -> night-and-day.png  (ikon terang di tombol hitam)
+ */
+const ThemeToggle = ({ onClick }: { onClick: () => void }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    aria-label="Toggle dark mode"
+    className="p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] hover:bg-[image:var(--gradient-accent)] transition border border-[var(--accent)] rounded-xl"
+  >
+    <Image
+      src="/assets/img/night-and-day.png"
+      alt=""
+      width={24}
+      height={24}
+      className="w-6 h-6 dark:hidden"
+    />
+    <Image
+      src="/assets/img/day-and-night.png"
+      alt=""
+      width={24}
+      height={24}
+      className="hidden w-6 h-6 dark:block"
+    />
+  </button>
+);
+
 const Header = () => {
   const pathname = usePathname();
 
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    if (typeof document === "undefined") {
-      return false;
-    }
-  
-    return document.documentElement.classList.contains("dark");
-  });
   const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
-  const [lastScrollY, setLastScrollY] = useState<number>(0);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   const headerRef = useRef<HTMLElement>(null);
 
-  // Sync React state with the theme already applied to <html>
-  useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark');
-    setIsDarkMode(isDark);
-  }, []);
-
   const toggleDarkMode = (): void => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    localStorage.setItem('theme', newMode ? 'dark' : 'light');
-    document.documentElement.classList.toggle('dark', newMode);
+    const next = !document.documentElement.classList.contains('dark');
+
+    document.documentElement.classList.toggle('dark', next);
+
+    try {
+      localStorage.setItem('theme', next ? 'dark' : 'light');
+    } catch {
+      // Ignore localStorage errors.
+    }
   };
 
-  // Scroll behavior
+  // Scroll behavior (rAF throttle, state awal dihitung saat mount)
   useEffect(() => {
-    const handleScroll = (): void => {
-      const currentScrollY = window.scrollY;
+    let last = window.scrollY;
+    let ticking = false;
 
-      setIsScrolled(currentScrollY > 0);
+    const update = (): void => {
+      const y = window.scrollY;
 
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      setIsScrolled(y > 0);
+
+      if (y > last && y > 100) {
         setIsHeaderVisible(false);
-      } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
+      } else if (y < last || y <= 100) {
         setIsHeaderVisible(true);
       }
 
-      setLastScrollY(currentScrollY);
+      last = y;
+      ticking = false;
     };
 
-    let timeoutId: NodeJS.Timeout | null = null;
-
-    const throttledHandleScroll = (): void => {
-      if (!timeoutId) {
-        timeoutId = setTimeout(() => {
-          handleScroll();
-          timeoutId = null;
-        }, 100);
-      }
+    const onScroll = (): void => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
     };
 
-    window.addEventListener('scroll', throttledHandleScroll);
+    update(); // benar juga saat refresh di tengah halaman
 
-    return () => {
-      window.removeEventListener('scroll', throttledHandleScroll);
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, [lastScrollY]);
+    window.addEventListener('scroll', onScroll, { passive: true });
 
-  const toggleMobileMenu = (): void => {
-    setIsMobileMenuOpen((prev) => !prev);
-  };
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
+  // Tutup menu mobile saat pindah halaman
   useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  // Klik di luar header menutup menu mobile
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
     const handleClickOutside = (event: MouseEvent) => {
       if (
         headerRef.current &&
@@ -84,93 +116,76 @@ const Header = () => {
       }
     };
 
-    if (isMobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
+    document.addEventListener('mousedown', handleClickOutside);
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  const isActive = (href: string) => {
-    return (
-      pathname === href ||
-      pathname.startsWith(href + '/') ||
-      (href !== '/' && pathname.startsWith(href))
-    );
-  };
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + '/');
+
+  // Hanya SATU class warna yang aktif, tidak ada utility yang saling timpa
+  const desktopLinkClass = (active: boolean) =>
+    `transition hover:text-[var(--accent)] hover:underline hover:underline-offset-1 ${
+      active
+        ? 'text-[var(--accent)] font-medium underline underline-offset-1'
+        : 'text-[var(--nav-text)]'
+    }`;
+
+  const mobileLinkClass = (active: boolean) =>
+    `block py-3 px-4 transition hover:text-[var(--accent)] ${
+      active
+        ? 'text-[var(--accent)] font-medium underline underline-offset-1'
+        : 'text-[var(--nav-text)]'
+    }`;
+
+  const isSolid = isMobileMenuOpen || pathname !== '/' || isScrolled;
 
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 right-0 left-0 z-50 py-2 transition-all duration-300 ${
-        isMobileMenuOpen
-          ? 'bg-[var(--nav-background)]'
-          : pathname === '/' && !isScrolled
-            ? 'bg-transparent'
-            : 'bg-[var(--nav-background)]'
-      } ${
-        isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
-      }`}
+      className={`fixed top-0 right-0 left-0 z-50 py-2 ${
+        isSolid ? 'bg-[var(--nav-background)]' : 'bg-transparent'
+      } ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}
+      style={{
+        // Warna 180ms = sama dengan transisi body di globals.css
+        transition: 'transform 300ms ease, background-color 180ms ease',
+      }}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-
+      <div className="site-container flex items-center justify-between">
         {/* Logo */}
-        <div className="text-xl font-bold text-[var(--nav-text)] align-middle justify-items-center group relative">
-        <Link href="/" className="flex items-center gap-2">
+        <div className="group relative text-xl font-bold text-[var(--nav-text)]">
+          <Link href="/" className="flex items-center gap-2">
             <img
               src="/assets/img/peacock-black.png"
               alt=""
-              className="w-12 h-8 dark:hidden"
+              className=" w-14 dark:hidden"
             />
 
             <img
               src="/assets/img/peacock-white.png"
               alt=""
-              className="w-12 h-8 hidden dark:block"
+              className="hidden w-14 dark:block"
             />
 
-            {/* <span className="hidden group-hover:block text-[var(--text-primary)] dark:text-[var(--text-primary)] hover:text-[var(--accent)] group-focus-within:block underline">
-              Aria Aji
-            </span> */}
             <span
               className={`
-                text-[var(--text-primary)]
-                dark:text-[var(--text-primary)]
-                hover:text-[var(--accent)]
-                underline
+                inline-block
                 overflow-hidden
                 whitespace-nowrap
-                inline-block
+                text-[var(--text-primary)]
+                underline
                 transition-all
                 duration-500
                 ease-[cubic-bezier(0.22,1,0.36,1)]
+                hover:text-[var(--accent)]
                 ${
                   isMobileMenuOpen
-                    ? `
-                      max-w-[150px]
-                      opacity-100
-                      translate-x-0
-                      translate-y-0
-                      ml-1
-                    `
+                    ? 'ml-1 max-w-[150px] translate-x-0 translate-y-0 opacity-100'
                     : `
-                      max-w-0
-                      opacity-0
-                      translate-x-[-8px]
-                      translate-y-[2px]
-                      ml-0
-                      group-hover:max-w-[150px]
-                      group-hover:opacity-100
-                      group-hover:translate-x-0
-                      group-hover:translate-y-0
-                      group-hover:ml-1
-                      group-focus-within:max-w-[150px]
-                      group-focus-within:opacity-100
-                      group-focus-within:translate-x-0
-                      group-focus-within:translate-y-0
-                      group-focus-within:ml-1
+                      ml-0 max-w-0 translate-x-[-8px] translate-y-[2px] opacity-0
+                      group-hover:ml-1 group-hover:max-w-[150px] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100
+                      group-focus-within:ml-1 group-focus-within:max-w-[150px] group-focus-within:translate-x-0 group-focus-within:translate-y-0 group-focus-within:opacity-100
                     `
                 }
               `}
@@ -181,125 +196,32 @@ const Header = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-12 items-center">
-
-          <Link
-            href="/about"
-            className={`text-[var(--nav-text)] hover:text-[var(--accent)] transition hover:underline hover:underline-offset-1 ${
-              pathname === '/about'
-                ? '!text-[var(--accent)] font-medium underline underline-offset-1'
-                : ''
-            }`}
-          >
-            About
-          </Link>
-
-          <Link
-            href="/services"
-            className={`text-[var(--nav-text)] hover:text-[var(--accent)] transition hover:underline hover:underline-offset-1 ${
-              pathname === '/services'
-                ? '!text-[var(--accent)] font-medium underline underline-offset-1'
-                : ''
-            }`}
-          >
-            Services
-          </Link>
-
-          <Link
-            href="/contact"
-            className={`text-[var(--nav-text)] hover:text-[var(--accent)] transition hover:underline hover:underline-offset-1 ${
-              pathname === '/contact'
-                ? '!text-[var(--accent)] font-medium underline underline-offset-1'
-                : ''
-            }`}
-          >
-            Contact
-          </Link>
-
-          <Link
-            href="/blog"
-            className={`text-[var(--nav-text)] hover:text-[var(--accent)] transition hover:underline hover:underline-offset-1 ${
-              pathname === '/blog'
-                ? '!text-[var(--accent)] font-medium underline underline-offset-1'
-                : ''
-            }`}
-          >
-            Blog
-          </Link>
-
-          {/* Dark Mode Toggle */}
-          <div className="relative group">
-            <button
-              onClick={toggleDarkMode}
-              className="p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] hover:bg-[var(--accent)] transition border border-[var(--accent)] rounded-xl"
-              aria-label={
-                isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'
-              }
+        <nav className="hidden items-center space-x-12 md:flex">
+          {NAV_LINKS.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={desktopLinkClass(isActive(href))}
             >
-              {isDarkMode ? (
-                <Image
-                  src="/assets/img/day-and-night.png"
-                  alt="Light Mode"
-                  width={20}
-                  height={20}
-                  className="w-6 h-6"
-                  priority
-                />
-              ) : (
-                <Image
-                  src="/assets/img/night-and-day.png"
-                  alt="Dark Mode"
-                  width={20}
-                  height={20}
-                  className="w-6 h-6"
-                  priority
-                />
-              )}
-            </button>
-          </div>
+              {label}
+            </Link>
+          ))}
+
+          <ThemeToggle onClick={toggleDarkMode} />
         </nav>
 
         {/* Mobile Controls */}
         <div className="flex items-center gap-4 md:hidden">
+          <ThemeToggle onClick={toggleDarkMode} />
 
-          {/* Dark Mode Toggle */}
           <button
-            onClick={toggleDarkMode}
-            className="p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] transition border border-[var(--accent)] rounded-xl"
-            aria-label={
-              isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'
-            }
-          >
-            {isDarkMode ? (
-              <Image
-                src="/assets/img/day-and-night.png"
-                alt="Light Mode"
-                width={24}
-                height={24}
-                className="w-6 h-6"
-                priority
-              />
-            ) : (
-              <Image
-                src="/assets/img/night-and-day.png"
-                alt="Dark Mode"
-                width={24}
-                height={24}
-                className="w-6 h-6"
-                priority
-              />
-            )}
-          </button>
-
-          {/* Animated Hamburger / X */}
-          <button
-            onClick={toggleMobileMenu}
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             className="relative flex h-10 w-10 items-center justify-center text-[var(--nav-text)]"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
             <span className="relative flex h-6 w-6 flex-col items-center justify-center">
-
               <span
                 className={`absolute block h-[2px] w-6 rounded-full bg-current transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                   isMobileMenuOpen ? 'rotate-45' : '-translate-y-[7px]'
@@ -319,7 +241,6 @@ const Header = () => {
                   isMobileMenuOpen ? '-rotate-45' : 'translate-y-[7px]'
                 }`}
               />
-
             </span>
           </button>
         </div>
@@ -327,10 +248,10 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden overflow-hidden bg-[var(--nav-background)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`overflow-hidden bg-[var(--nav-background)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
           isMobileMenuOpen
-            ? 'max-h-96 opacity-100 translate-y-0'
-            : 'max-h-0 opacity-0 -translate-y-2'
+            ? 'max-h-96 translate-y-0 opacity-100'
+            : 'max-h-0 -translate-y-2 opacity-0'
         }`}
         aria-hidden={!isMobileMenuOpen}
       >
@@ -339,55 +260,16 @@ const Header = () => {
             isMobileMenuOpen ? 'translate-y-0' : '-translate-y-3'
           }`}
         >
-
-          <Link
-            href="/about"
-            className={`block py-3 px-4 text-[var(--nav-text)] hover:text-[var(--accent)] transition ${
-              isActive('/about')
-                ? 'text-[var(--accent)] font-medium underline underline-offset-1'
-                : ''
-            }`}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            About
-          </Link>
-
-          <Link
-            href="/services"
-            className={`block py-3 px-4 text-[var(--nav-text)] hover:text-[var(--accent)] transition ${
-              isActive('/services')
-                ? 'text-[var(--accent)] font-medium underline underline-offset-1'
-                : ''
-            }`}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Services
-          </Link>
-
-          <Link
-            href="/contact"
-            className={`block py-3 px-4 text-[var(--nav-text)] hover:text-[var(--accent)] transition ${
-              isActive('/contact')
-                ? 'text-[var(--accent)] font-medium underline underline-offset-1'
-                : ''
-            }`}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Contact
-          </Link>
-
-          <Link
-            href="/blog"
-            className={`block py-3 px-4 text-[var(--nav-text)] hover:text-[var(--accent)] transition ${
-              isActive('/blog')
-                ? 'text-[var(--accent)] font-medium'
-                : ''
-            }`}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Blog
-          </Link>
-
+          {NAV_LINKS.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={mobileLinkClass(isActive(href))}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
         </div>
       </div>
     </header>
