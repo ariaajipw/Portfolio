@@ -289,6 +289,10 @@ class MorphEngine {
   private sizes: [number, number][];
   private resizeObserver: ResizeObserver;
   private raf = 0;
+  private visible = true;
+  private observer: IntersectionObserver | null = null;
+  private loadTimers: number[] = [];
+  private requested = new Set<number>();
   private boundLoop: (t: number) => void;
   private boundContextLost: (e: Event) => void;
 
@@ -303,7 +307,7 @@ class MorphEngine {
 
     this.renderer = new Renderer({
       alpha: false,
-      antialias: true,
+      antialias: false,
       dpr: Math.min(window.devicePixelRatio || 1, config.dprCap)
     });
     this.gl = this.renderer.gl;
@@ -355,25 +359,64 @@ class MorphEngine {
 
     this.boundLoop = this.loop.bind(this);
     this.raf = requestAnimationFrame(this.boundLoop);
+
+    /* Berhenti merender saat slider di luar layar, lanjut lagi saat terlihat */
+    if (typeof IntersectionObserver !== 'undefined') {
+      this.observer = new IntersectionObserver(([entry]) => {
+        this.visible = entry.isIntersecting;
+        if (this.visible && !this.raf) {
+          this.raf = requestAnimationFrame(this.boundLoop);
+        } else if (!this.visible && this.raf) {
+          cancelAnimationFrame(this.raf);
+          this.raf = 0;
+        }
+      });
+      this.observer.observe(container);
+    }
   }
 
+  /*
+   * Gambar aktif dimuat langsung. Sisanya dimuat satu per satu saat browser
+   * idle, supaya 5 gambar besar tidak berebut bandwidth + main thread dengan
+   * render awal halaman.
+   */
   private loadTextures(): void {
-    this.items.forEach((item, index) => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.src = item.image;
-      img.onload = () => {
-        const texture = new Texture(this.gl, { generateMipmaps: false });
-        texture.image = img;
-        this.textures[index] = texture;
-        this.sizes[index] = [img.naturalWidth || 1, img.naturalHeight || 1];
-        if (index === this.current) {
-          this.program.uniforms.tCurrent.value = texture;
-          this.program.uniforms.uCurrentSize.value = this.sizes[index];
-        }
-      };
-      img.onerror = () => {};
-    });
+    this.loadTexture(this.current);
+
+    const rest = this.items.map((_, i) => i).filter(i => i !== this.current);
+    const start = () => {
+      rest.forEach((index, n) => {
+        this.loadTimers.push(window.setTimeout(() => this.loadTexture(index), n * 700));
+      });
+    };
+
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(start, { timeout: 3000 });
+    } else {
+      this.loadTimers.push(window.setTimeout(start, 1500));
+    }
+  }
+
+  private loadTexture(index: number): void {
+    const item = this.items[index];
+    if (!item || this.requested.has(index)) return;
+    this.requested.add(index);
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.decoding = 'async';
+    img.src = item.image;
+    img.onload = () => {
+      const texture = new Texture(this.gl, { generateMipmaps: false });
+      texture.image = img;
+      this.textures[index] = texture;
+      this.sizes[index] = [img.naturalWidth || 1, img.naturalHeight || 1];
+      if (index === this.current) {
+        this.program.uniforms.tCurrent.value = texture;
+        this.program.uniforms.uCurrentSize.value = this.sizes[index];
+      }
+    };
+    img.onerror = () => {};
   }
 
   private resize(): void {
@@ -398,7 +441,7 @@ class MorphEngine {
     this.program.uniforms.uTime.value = t * 0.001;
     if (!this.dragging && !this.animating) this.syncOptions();
     this.renderer.render({ scene: this.mesh });
-    this.raf = requestAnimationFrame(this.boundLoop);
+    this.raf = this.visible ? requestAnimationFrame(this.boundLoop) : 0;
   }
 
   private wrap(i: number): number {
@@ -408,6 +451,7 @@ class MorphEngine {
 
   private prepareNext(dir: number): number {
     const target = this.wrap(this.current + dir);
+    this.loadTexture(target); // pastikan gambar tujuan sudah diminta
     this.program.uniforms.tCurrent.value = this.textures[this.current];
     this.program.uniforms.uCurrentSize.value = this.sizes[this.current];
     this.program.uniforms.tNext.value = this.textures[target];
@@ -533,6 +577,8 @@ class MorphEngine {
 
   destroy(): void {
     cancelAnimationFrame(this.raf);
+    this.observer?.disconnect();
+    this.loadTimers.forEach(id => window.clearTimeout(id));
     if (this.tween) this.tween.kill();
     this.resizeObserver.disconnect();
     this.canvas.removeEventListener('webglcontextlost', this.boundContextLost);
@@ -593,7 +639,7 @@ export default function MorphSlider({
       items,
       startIndex,
       reducedMotion,
-      dprCap: 2,
+      dprCap: 1.5,
       getOptions: () => optsRef.current,
       onIndexChange: setIndex
     });

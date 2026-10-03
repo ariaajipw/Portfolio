@@ -11,7 +11,9 @@ import {
 
 interface TextPressureProps {
   text?: string;
+  /** Nilai CSS font-family. Default memakai variabel dari next/font (lihat app/page.tsx). */
   fontFamily?: string;
+  /** Opsional. Kalau diisi, stylesheet font eksternal dimuat manual (tidak disarankan). */
   fontUrl?: string;
   width?: boolean;
   weight?: boolean;
@@ -33,13 +35,14 @@ interface TextPressureProps {
   colorCycleDuration?: number;
 }
 
-const FONT_TIMEOUT_MS = 3000;
+const FONT_TIMEOUT_MS = 2000;
+const SETTLE_EPSILON = 0.05;
 
 /* useLayoutEffect di client (sebelum paint), useEffect di server (tanpa warning) */
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-/* ---------- Font loader (sekali per URL, di-cache) ---------- */
+/* ---------- Font loader (hanya dipakai kalau fontUrl diisi) ---------- */
 const fontCssCache = new Map<string, Promise<void>>();
 
 const loadFontCss = (url: string): Promise<void> => {
@@ -61,13 +64,22 @@ const loadFontCss = (url: string): Promise<void> => {
   return promise;
 };
 
-const waitForFont = async (family: string, url: string, text: string) => {
+/*
+ * Tunggu font siap. Family diambil dari computed style h1, jadi cocok dengan
+ * nama font hasil next/font (yang di-hash) tanpa perlu hardcode.
+ */
+const waitForFont = async (
+  title: HTMLElement | null,
+  url: string,
+  text: string
+) => {
   if (typeof document === "undefined") return;
 
   const task = (async () => {
-    await loadFontCss(url);
-    if (document.fonts?.load) {
-      await document.fonts.load(`200 1em "${family}"`, text);
+    if (url) await loadFontCss(url);
+    if (title && document.fonts?.load) {
+      const family = getComputedStyle(title).fontFamily;
+      await document.fonts.load(`200 1em ${family}`, text);
     }
   })();
 
@@ -80,12 +92,6 @@ const waitForFont = async (family: string, url: string, text: string) => {
   } catch {
     // Tetap tampilkan teks walau font gagal dimuat.
   }
-};
-
-const dist = (a: { x: number; y: number }, b: { x: number; y: number }) => {
-  const dx = b.x - a.x;
-  const dy = b.y - a.y;
-  return Math.sqrt(dx * dx + dy * dy);
 };
 
 const getResponsiveMinFontSize = () => {
@@ -102,9 +108,8 @@ const getResponsiveMinFontSize = () => {
 
 const TextPressure: React.FC<TextPressureProps> = ({
   text = "Compressa",
-  fontFamily = "Roboto Flex",
-  fontUrl =
-    "https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,wdth@8..144,100..1000,25..151&display=swap",
+  fontFamily = 'var(--font-roboto-flex), "Roboto Flex"',
+  fontUrl = "",
 
   width = true,
   weight = true,
@@ -137,6 +142,14 @@ const TextPressure: React.FC<TextPressureProps> = ({
   const cursorRef = useRef({ x: 0, y: 0 });
   const pointerModeRef = useRef<"pointer" | "scroll">("pointer");
 
+  const rafRef = useRef(0);
+  const visibleRef = useRef(true);
+  const reducedMotionRef = useRef(false);
+
+  /* Opsi terbaru disimpan di ref supaya fungsi frame() stabil (tidak dibuat ulang) */
+  const optionsRef = useRef({ width, weight, italic, alpha });
+  optionsRef.current = { width, weight, italic, alpha };
+
   const scopeClass = `tp-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
 
   const [fontSize, setFontSize] = useState(minFontSize);
@@ -146,12 +159,116 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
   const chars = text.split("");
 
-  /* ---------- Mouse / Touch / Scroll tracking ---------- */
+  /*
+   * Satu frame animasi.
+   * 1) BACA semua posisi dulu (satu kali layout)
+   * 2) baru TULIS semua style
+   * Versi lama membaca lalu menulis bergantian per huruf, sehingga browser
+   * dipaksa hitung ulang layout berkali-kali di setiap frame.
+   * Loop berhenti sendiri kalau posisi sudah diam, dan jalan lagi saat ada
+   * mouse/scroll. Loop juga mati kalau elemen tidak terlihat.
+   */
+  const frame = useCallback(() => {
+    rafRef.current = 0;
+
+    const title = titleRef.current;
+    if (!title || !visibleRef.current) return;
+
+    const titleRect = title.getBoundingClientRect();
+    if (titleRect.width === 0) return; // elemen disembunyikan (display: none)
+
+    if (pointerModeRef.current === "scroll") {
+      const viewportH = window.innerHeight;
+      const progress = Math.min(
+        Math.max((viewportH - titleRect.top) / (viewportH + titleRect.height), 0),
+        1
+      );
+
+      cursorRef.current.x = titleRect.left + progress * titleRect.width;
+      cursorRef.current.y = titleRect.top + titleRect.height / 2;
+    }
+
+    mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
+    mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
+
+    const maxDist = titleRect.width / 2;
+    const spans = spansRef.current;
+    const { width: useWidth, weight: useWeight, italic: useItalic, alpha: useAlpha } =
+      optionsRef.current;
+
+    /* --- BACA --- */
+    const centers: ({ x: number; y: number } | null)[] = new Array(spans.length);
+
+    for (let i = 0; i < spans.length; i++) {
+      const span = spans[i];
+      if (!span) {
+        centers[i] = null;
+        continue;
+      }
+      const rect = span.getBoundingClientRect();
+      centers[i] = { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
+    }
+
+    /* --- TULIS --- */
+    const getAttr = (distance: number, minVal: number, maxVal: number) => {
+      const val = maxVal - Math.abs((maxVal * distance) / (maxDist * 0.5));
+      return Math.max(minVal, val + minVal / 2);
+    };
+
+    for (let i = 0; i < spans.length; i++) {
+      const span = spans[i];
+      const c = centers[i];
+      if (!span || !c) continue;
+
+      const dx = mouseRef.current.x - c.x;
+      const dy = mouseRef.current.y - c.y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+
+      const wdth = useWidth ? Math.floor(getAttr(d, 40, 200)) : 100;
+      const wght = useWeight ? Math.floor(getAttr(d, 200, 900)) : 400;
+      const italVal = useItalic ? getAttr(d, 0, 1).toFixed(2) : "0";
+      const alphaVal = useAlpha ? getAttr(d, 0, 1).toFixed(2) : "1";
+
+      const next = `'wght' ${wght}, 'wdth' ${wdth}, 'ital' ${italVal}`;
+
+      if (span.style.fontVariationSettings !== next) {
+        span.style.fontVariationSettings = next;
+      }
+
+      if (useAlpha && span.style.opacity !== alphaVal) {
+        span.style.opacity = alphaVal;
+      }
+    }
+
+    /* Lanjut hanya kalau masih bergerak */
+    const settled =
+      Math.abs(cursorRef.current.x - mouseRef.current.x) < SETTLE_EPSILON &&
+      Math.abs(cursorRef.current.y - mouseRef.current.y) < SETTLE_EPSILON;
+
+    if (!settled) {
+      rafRef.current = requestAnimationFrame(frame);
+    }
+  }, []);
+
+  /* Jadwalkan satu frame (kalau belum dijadwalkan, terlihat, dan gerak diizinkan) */
+  const kick = useCallback(() => {
+    if (rafRef.current || !visibleRef.current || reducedMotionRef.current) {
+      return;
+    }
+    rafRef.current = requestAnimationFrame(frame);
+  }, [frame]);
+
+  /* ---------- Mouse / Touch / Scroll tracking + visibilitas ---------- */
   useEffect(() => {
+    reducedMotionRef.current = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     const handleMouseMove = (e: MouseEvent) => {
       cursorRef.current.x = e.clientX;
       cursorRef.current.y = e.clientY;
       pointerModeRef.current = "pointer";
+      kick();
     };
 
     const handleTouchMove = (e: TouchEvent) => {
@@ -161,15 +278,19 @@ const TextPressure: React.FC<TextPressureProps> = ({
       cursorRef.current.x = t.clientX;
       cursorRef.current.y = t.clientY;
       pointerModeRef.current = "pointer";
+      kick();
     };
 
     const handleScroll = () => {
       pointerModeRef.current = "scroll";
+      kick();
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    if (!reducedMotionRef.current) {
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+      window.addEventListener("touchmove", handleTouchMove, { passive: true });
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    }
 
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
@@ -180,12 +301,35 @@ const TextPressure: React.FC<TextPressureProps> = ({
       cursorRef.current.y = mouseRef.current.y;
     }
 
+    /* Matikan loop saat hero keluar layar (atau disembunyikan lewat CSS) */
+    let observer: IntersectionObserver | undefined;
+
+    if (containerRef.current && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver(([entry]) => {
+        visibleRef.current = entry.isIntersecting;
+
+        if (entry.isIntersecting) {
+          kick();
+        } else if (rafRef.current) {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = 0;
+        }
+      });
+      observer.observe(containerRef.current);
+    }
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("scroll", handleScroll);
+      observer?.disconnect();
+
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = 0;
+      }
     };
-  }, []);
+  }, [kick]);
 
   /* ---------- Ukuran font (berdasarkan lebar container) ---------- */
   const measure = useCallback(() => {
@@ -234,101 +378,39 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
       lastWidth = w;
       measure();
+      kick(); // ukuran huruf berubah, sesuaikan ulang variasi font
     });
 
     ro.observe(container);
 
     return () => ro.disconnect();
-  }, [measure]);
+  }, [measure, kick]);
 
   /* Tampilkan setelah font siap + ukuran sudah dihitung */
   useEffect(() => {
     let cancelled = false;
 
-    waitForFont(fontFamily, fontUrl, text).then(() => {
+    waitForFont(titleRef.current, fontUrl, text).then(() => {
       if (cancelled) return;
 
       measure();
       requestAnimationFrame(() => {
-        if (!cancelled) setReady(true);
+        if (cancelled) return;
+
+        setReady(true);
+
+        /* Satu frame awal supaya variasi font langsung terpasang,
+           juga untuk pengguna prefers-reduced-motion (tampilan statis). */
+        if (!rafRef.current && visibleRef.current) {
+          rafRef.current = requestAnimationFrame(frame);
+        }
       });
     });
 
     return () => {
       cancelled = true;
     };
-  }, [fontFamily, fontUrl, text, measure]);
-
-  /* ---------- Animation loop ---------- */
-  useEffect(() => {
-    let rafId: number;
-
-    const animate = () => {
-      if (titleRef.current) {
-        const titleRect = titleRef.current.getBoundingClientRect();
-
-        if (pointerModeRef.current === "scroll") {
-          const viewportH = window.innerHeight;
-          const progress = Math.min(
-            Math.max(
-              (viewportH - titleRect.top) / (viewportH + titleRect.height),
-              0
-            ),
-            1
-          );
-
-          cursorRef.current.x = titleRect.left + progress * titleRect.width;
-          cursorRef.current.y = titleRect.top + titleRect.height / 2;
-        }
-
-        mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
-        mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
-
-        const maxDist = titleRect.width / 2;
-
-        spansRef.current.forEach((span) => {
-          if (!span) return;
-
-          const rect = span.getBoundingClientRect();
-
-          const charCenter = {
-            x: rect.x + rect.width / 2,
-            y: rect.y + rect.height / 2,
-          };
-
-          const d = dist(mouseRef.current, charCenter);
-
-          const getAttr = (distance: number, minVal: number, maxVal: number) => {
-            const val =
-              maxVal - Math.abs((maxVal * distance) / (maxDist * 0.5));
-
-            return Math.max(minVal, val + minVal / 2);
-          };
-
-          const wdth = width ? Math.floor(getAttr(d, 40, 200)) : 100;
-          const wght = weight ? Math.floor(getAttr(d, 200, 900)) : 400;
-          const italVal = italic ? getAttr(d, 0, 1).toFixed(2) : "0";
-          const alphaVal = alpha ? getAttr(d, 0, 1).toFixed(2) : "1";
-
-          const next = `'wght' ${wght}, 'wdth' ${wdth}, 'ital' ${italVal}`;
-
-          if (span.style.fontVariationSettings !== next) {
-            span.style.fontVariationSettings = next;
-          }
-
-          if (alpha && span.style.opacity !== alphaVal) {
-            span.style.opacity = alphaVal;
-          }
-        });
-      }
-
-      rafId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => cancelAnimationFrame(rafId);
-  }, [width, weight, italic, alpha, chars.length]);
+  }, [fontUrl, text, measure, frame]);
 
   /* ---------- Color cycle (opsional) ---------- */
   const [currentColorIndex, setCurrentColorIndex] = useState(0);
@@ -424,7 +506,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
           text-center
         `}
         style={{
-          fontFamily: `"${fontFamily}", sans-serif`,
+          fontFamily: `${fontFamily}, sans-serif`,
           fontSize: `${fontSize}px`,
           lineHeight,
           transform: `scale(1, ${scaleY})`,

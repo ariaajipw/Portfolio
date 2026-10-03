@@ -407,7 +407,7 @@ export default function WorkCards() {
                 md:basis-[calc((100%_-_2.5rem)/3)]
               "
             >
-              <ProjectCard project={project} priority={index < 3} />
+              <ProjectCard project={project} priority={false} />
             </div>
           ))}
         </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef, type ReactNode, type HTMLAttributes } from 'react';
+import React, { useEffect, useRef, type ReactNode, type HTMLAttributes } from 'react';
 
 interface MagnetProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -13,6 +13,13 @@ interface MagnetProps extends HTMLAttributes<HTMLDivElement> {
   innerClassName?: string;
 }
 
+/*
+ * Versi lama memanggil setState di SETIAP mousemove di seluruh window, jadi
+ * React re-render terus walau kursor jauh dari tombol. Sekarang:
+ * - gerakan ditulis langsung ke style elemen (tanpa state / re-render)
+ * - dibatasi satu kali per frame lewat requestAnimationFrame
+ * - tidak menulis ulang kalau posisinya tidak berubah
+ */
 const Magnet: React.FC<MagnetProps> = ({
   children,
   padding = 100,
@@ -24,44 +31,73 @@ const Magnet: React.FC<MagnetProps> = ({
   innerClassName = '',
   ...props
 }) => {
-  const [isActive, setIsActive] = useState<boolean>(false);
-  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const magnetRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const inner = innerRef.current;
+    if (!inner) return;
+
+    let isActive = false;
+    let x = 0;
+    let y = 0;
+
+    const apply = (nextX: number, nextY: number, nextActive: boolean) => {
+      if (nextX === x && nextY === y && nextActive === isActive) return;
+
+      x = nextX;
+      y = nextY;
+      isActive = nextActive;
+
+      inner.style.transition = nextActive ? activeTransition : inactiveTransition;
+      inner.style.transform = `translate3d(${nextX}px, ${nextY}px, 0)`;
+    };
+
     if (disabled) {
-      setPosition({ x: 0, y: 0 });
+      apply(0, 0, false);
       return;
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!magnetRef.current) return;
+    let rafId = 0;
+    let clientX = 0;
+    let clientY = 0;
 
-      const { left, top, width, height } = magnetRef.current.getBoundingClientRect();
+    const update = () => {
+      rafId = 0;
+      const el = magnetRef.current;
+      if (!el) return;
+
+      const { left, top, width, height } = el.getBoundingClientRect();
       const centerX = left + width / 2;
       const centerY = top + height / 2;
 
-      const distX = Math.abs(centerX - e.clientX);
-      const distY = Math.abs(centerY - e.clientY);
+      const distX = Math.abs(centerX - clientX);
+      const distY = Math.abs(centerY - clientY);
 
       if (distX < width / 2 + padding && distY < height / 2 + padding) {
-        setIsActive(true);
-        const offsetX = (e.clientX - centerX) / magnetStrength;
-        const offsetY = (e.clientY - centerY) / magnetStrength;
-        setPosition({ x: offsetX, y: offsetY });
+        apply(
+          (clientX - centerX) / magnetStrength,
+          (clientY - centerY) / magnetStrength,
+          true
+        );
       } else {
-        setIsActive(false);
-        setPosition({ x: 0, y: 0 });
+        apply(0, 0, false);
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    const handleMouseMove = (e: MouseEvent) => {
+      clientX = e.clientX;
+      clientY = e.clientY;
+      if (!rafId) rafId = requestAnimationFrame(update);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [padding, disabled, magnetStrength]);
-
-  const transitionStyle = isActive ? activeTransition : inactiveTransition;
+  }, [padding, disabled, magnetStrength, activeTransition, inactiveTransition]);
 
   return (
     <div
@@ -71,10 +107,11 @@ const Magnet: React.FC<MagnetProps> = ({
       {...props}
     >
       <div
+        ref={innerRef}
         className={innerClassName}
         style={{
-          transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
-          transition: transitionStyle,
+          transform: 'translate3d(0px, 0px, 0)',
+          transition: inactiveTransition,
           willChange: 'transform'
         }}
       >

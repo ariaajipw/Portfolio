@@ -19,6 +19,10 @@ interface BlurTextProps {
   children?: ReactNode; // TAMBAHAN
 }
 
+/* Dibuat sekali di level modul. Kalau dibuat di dalam komponen, setiap render
+   menghasilkan tipe komponen baru sehingga semua huruf di-unmount lalu mount ulang. */
+const AnimatedSpan = animated('span') as AnimatedComponent<'span'>;
+
 const BlurText: React.FC<BlurTextProps> = ({
   text = '',
   delay = 200,
@@ -52,8 +56,6 @@ const BlurText: React.FC<BlurTextProps> = ({
     },
     { filter: 'blur(0px)', opacity: 1, transform: 'translate3d(0,0,0)' },
   ];
-
-  const AnimatedSpan = animated('span') as AnimatedComponent<'span'>;
 
   useEffect(() => {
     const observer = new IntersectionObserver(

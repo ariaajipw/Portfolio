@@ -1,3 +1,4 @@
+import { Roboto_Flex } from "next/font/google";
 import PixelTransition from "./components/PixelTransition/PixelTransition";
 import BlurText from "./components/BlurText/BlurText";
 import TextPressure from "./components/TextPressure/TextPressure";
@@ -5,8 +6,21 @@ import WorkCards from "./components/WorkCard/workcard";
 import FallingText from "./components/FallingText/FallingText";
 import Magnet from "./components/Magnet/Magnet";
 import Link from "next/link";
-import MorphSlider from "./components/MorphSlider/MorphSlider";
+import MorphSlider from "./components/MorphSlider/LazyMorphSlider";
 import TextLoop from "./components/TextLoop/TextLoop";
+
+/*
+ * Font TextPressure di-host sendiri oleh next/font (bukan lagi dari
+ * fonts.googleapis.com saat runtime) dan hanya di-preload di halaman ini.
+ * Axis opsi dipakai: wght (otomatis), wdth, opsz. Variabelnya dipakai
+ * TextPressure lewat var(--font-roboto-flex).
+ */
+const robotoFlex = Roboto_Flex({
+  subsets: ["latin"],
+  axes: ["opsz", "wdth"],
+  variable: "--font-roboto-flex",
+  display: "swap",
+});
 
 const mobileLines = [
   "   Combine   ",
@@ -19,18 +33,20 @@ const mobileLines = [
 const desktopLines = ["Combine Ideas,", "Craft & Innovate"];
 
 const items = [
-  { image: "/assets/img/BKAIG.jpeg", caption: "hai" },
-  { image: "/assets/img/CPSIG.jpeg", caption: "hai" },
   { image: "/assets/img/KGPIG.jpeg", caption: "hai" },
+  { image: "/assets/img/CPSIG.jpeg", caption: "hai" },
+  { image: "/assets/img/BKAIG.jpeg", caption: "hai" },
   { image: "/assets/img/BTLK.jpeg", caption: "hai" },
-  { image: "/assets/img/AAPW.jpeg", caption: "hai" },
+  // { image: "/assets/img/AAPW.jpeg", caption: "hai" },
 ];
 
 export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="hero-section site-container flex min-h-dvh flex-col justify-center pt-15">
+      <section
+        className={`${robotoFlex.variable} hero-section site-container flex min-h-dvh flex-col justify-center pt-15`}
+      >
         {/* Mobile */}
         <div className="block w-full min-w-0 sm:hidden">
           {mobileLines.map((line) => (
@@ -187,6 +203,8 @@ export default function Home() {
                   <img
                     src="/assets/img/peacock.png"
                     alt="peacock"
+                    loading="lazy"
+                    decoding="async"
                     className="size-30 md:size-40 lg:size-60"
                   />
                 </div>
@@ -195,6 +213,8 @@ export default function Home() {
                 <img
                   src="/assets/img/ariaaji.jpg"
                   alt="ariaaji"
+                  decoding="async"
+                  fetchPriority="low"
                   style={{
                     width: "100%",
                     height: "100%",

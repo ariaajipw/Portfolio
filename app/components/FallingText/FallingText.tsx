@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, useEffect } from "react";
-import Matter from "matter-js";
+import type MatterNamespace from "matter-js";
 
 interface FallingTextProps {
   text?: string;
@@ -73,141 +73,165 @@ const FallingText: React.FC<FallingTextProps> = ({
   useEffect(() => {
     if (!effectStarted) return;
 
-    const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } =
-      Matter;
+    let cancelled = false;
+    let cleanup: (() => void) | undefined;
 
-    if (!containerRef.current || !canvasContainerRef.current) return;
+    /*
+     * matter-js (~80KB) hanya diunduh saat efek benar-benar dimulai
+     * (hover/klik/scroll), bukan ikut di bundle awal halaman.
+     */
+    import("matter-js").then((mod) => {
+      if (cancelled) return;
 
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const width = containerRect.width;
-    const height = containerRect.height;
+      const Matter = ((mod as unknown as { default?: typeof MatterNamespace })
+        .default ?? mod) as typeof MatterNamespace;
 
-    if (width <= 0 || height <= 0) return;
+      const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } =
+        Matter;
 
-    const engine = Engine.create();
-    engine.world.gravity.y = gravity;
+      if (!containerRef.current || !canvasContainerRef.current) return;
 
-    const render = Render.create({
-      element: canvasContainerRef.current,
-      engine,
-      options: {
-        width,
-        height,
-        background: backgroundColor,
-        wireframes,
-      },
-    });
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const width = containerRect.width;
+      const height = containerRect.height;
 
-    const boundaryOptions = {
-      isStatic: true,
-      render: { fillStyle: "transparent" },
-    };
-    const floor = Bodies.rectangle(
-      width / 2,
-      height + 25,
-      width,
-      50,
-      boundaryOptions,
-    );
-    const leftWall = Bodies.rectangle(
-      -25,
-      height / 2,
-      50,
-      height,
-      boundaryOptions,
-    );
-    const rightWall = Bodies.rectangle(
-      width + 25,
-      height / 2,
-      50,
-      height,
-      boundaryOptions,
-    );
-    const ceiling = Bodies.rectangle(
-      width / 2,
-      -25,
-      width,
-      50,
-      boundaryOptions,
-    );
+      if (width <= 0 || height <= 0) return;
 
-    if (!textRef.current) return;
-    const wordSpans = textRef.current.querySelectorAll("span");
-    const wordBodies = [...wordSpans].map((elem) => {
-      const rect = elem.getBoundingClientRect();
+      const engine = Engine.create();
+      engine.world.gravity.y = gravity;
 
-      const x = rect.left - containerRect.left + rect.width / 2;
-      const y = rect.top - containerRect.top + rect.height / 2;
+      const render = Render.create({
+        element: canvasContainerRef.current,
+        engine,
+        options: {
+          width,
+          height,
+          background: backgroundColor,
+          wireframes,
+        },
+      });
 
-      const body = Bodies.rectangle(x, y, rect.width, rect.height, {
+      const boundaryOptions = {
+        isStatic: true,
         render: { fillStyle: "transparent" },
-        restitution: 0.8,
-        frictionAir: 0.01,
-        friction: 0.2,
+      };
+      const floor = Bodies.rectangle(
+        width / 2,
+        height + 25,
+        width,
+        50,
+        boundaryOptions,
+      );
+      const leftWall = Bodies.rectangle(
+        -25,
+        height / 2,
+        50,
+        height,
+        boundaryOptions,
+      );
+      const rightWall = Bodies.rectangle(
+        width + 25,
+        height / 2,
+        50,
+        height,
+        boundaryOptions,
+      );
+      const ceiling = Bodies.rectangle(
+        width / 2,
+        -25,
+        width,
+        50,
+        boundaryOptions,
+      );
+
+      if (!textRef.current) return;
+      const wordSpans = textRef.current.querySelectorAll("span");
+      const wordBodies = [...wordSpans].map((elem) => {
+        const rect = elem.getBoundingClientRect();
+
+        const x = rect.left - containerRect.left + rect.width / 2;
+        const y = rect.top - containerRect.top + rect.height / 2;
+
+        const body = Bodies.rectangle(x, y, rect.width, rect.height, {
+          render: { fillStyle: "transparent" },
+          restitution: 0.8,
+          frictionAir: 0.01,
+          friction: 0.2,
+        });
+        Matter.Body.setVelocity(body, {
+          x: (Math.random() - 0.5) * 5,
+          y: 0,
+        });
+        Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.05);
+
+        return { elem, body };
       });
-      Matter.Body.setVelocity(body, {
-        x: (Math.random() - 0.5) * 5,
-        y: 0,
+
+      wordBodies.forEach(({ elem, body }) => {
+        elem.style.position = "absolute";
+        elem.style.left = `${
+          body.position.x - body.bounds.max.x + body.bounds.min.x / 2
+        }px`;
+        elem.style.top = `${
+          body.position.y - body.bounds.max.y + body.bounds.min.y / 2
+        }px`;
+        elem.style.transform = "none";
       });
-      Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.05);
 
-      return { elem, body };
-    });
-
-    wordBodies.forEach(({ elem, body }) => {
-      elem.style.position = "absolute";
-      elem.style.left = `${
-        body.position.x - body.bounds.max.x + body.bounds.min.x / 2
-      }px`;
-      elem.style.top = `${
-        body.position.y - body.bounds.max.y + body.bounds.min.y / 2
-      }px`;
-      elem.style.transform = "none";
-    });
-
-    const mouse = Mouse.create(containerRef.current);
-    const mouseConstraint = MouseConstraint.create(engine, {
-      mouse,
-      constraint: {
-        stiffness: mouseConstraintStiffness,
-        render: { visible: false },
-      },
-    });
-    render.mouse = mouse;
-
-    World.add(engine.world, [
-      floor,
-      leftWall,
-      rightWall,
-      ceiling,
-      mouseConstraint,
-      ...wordBodies.map((wb) => wb.body),
-    ]);
-
-    const runner = Runner.create();
-    Runner.run(runner, engine);
-    Render.run(render);
-
-    const updateLoop = () => {
-      wordBodies.forEach(({ body, elem }) => {
-        const { x, y } = body.position;
-        elem.style.left = `${x}px`;
-        elem.style.top = `${y}px`;
-        elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
+      const mouse = Mouse.create(containerRef.current);
+      const mouseConstraint = MouseConstraint.create(engine, {
+        mouse,
+        constraint: {
+          stiffness: mouseConstraintStiffness,
+          render: { visible: false },
+        },
       });
-      Matter.Engine.update(engine);
-      requestAnimationFrame(updateLoop);
-    };
-    updateLoop();
+      render.mouse = mouse;
+
+      World.add(engine.world, [
+        floor,
+        leftWall,
+        rightWall,
+        ceiling,
+        mouseConstraint,
+        ...wordBodies.map((wb) => wb.body),
+      ]);
+
+      const runner = Runner.create();
+      Runner.run(runner, engine);
+      Render.run(render);
+
+      /* rAF id disimpan supaya loop benar-benar berhenti saat unmount
+         (versi lama tidak pernah membatalkannya). */
+      let rafId = 0;
+
+      const updateLoop = () => {
+        wordBodies.forEach(({ body, elem }) => {
+          const { x, y } = body.position;
+          elem.style.left = `${x}px`;
+          elem.style.top = `${y}px`;
+          elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
+        });
+        Matter.Engine.update(engine);
+        rafId = requestAnimationFrame(updateLoop);
+      };
+      updateLoop();
+
+      cleanup = () => {
+        cancelAnimationFrame(rafId);
+        Render.stop(render);
+        Runner.stop(runner);
+        if (render.canvas && canvasContainerRef.current) {
+          canvasContainerRef.current.removeChild(render.canvas);
+        }
+        World.clear(engine.world, false);
+        Engine.clear(engine);
+      };
+    });
 
     return () => {
-      Render.stop(render);
-      Runner.stop(runner);
-      if (render.canvas && canvasContainerRef.current) {
-        canvasContainerRef.current.removeChild(render.canvas);
-      }
-      World.clear(engine.world, false);
-      Engine.clear(engine);
+      cancelled = true;
+      cleanup?.();
     };
   }, [
     effectStarted,

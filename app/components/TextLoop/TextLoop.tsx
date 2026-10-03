@@ -178,16 +178,38 @@ const TextLoop = ({
     });
 
     const root = rootRef.current;
-    const pause = () => tween.pause();
-    const resume = () => tween.resume();
+
+    /* Animasi berhenti kalau di-hover ATAU berada di luar layar */
+    let hovered = false;
+    let visible = true;
+    const sync = () => (hovered || !visible ? tween.pause() : tween.resume());
+
+    const pause = () => {
+      hovered = true;
+      sync();
+    };
+    const resume = () => {
+      hovered = false;
+      sync();
+    };
 
     if (pauseOnHover && root) {
       root.addEventListener('pointerenter', pause);
       root.addEventListener('pointerleave', resume);
     }
 
+    let observer: IntersectionObserver | undefined;
+    if (root && typeof IntersectionObserver !== 'undefined') {
+      observer = new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting;
+        sync();
+      });
+      observer.observe(root);
+    }
+
     return () => {
       tween.kill();
+      observer?.disconnect();
       if (pauseOnHover && root) {
         root.removeEventListener('pointerenter', pause);
         root.removeEventListener('pointerleave', resume);
