@@ -202,7 +202,7 @@ export default function Home() {
                 >
                   <img
                     src="/assets/img/peacock.png"
-                    alt="peacock"
+                    alt=""
                     loading="lazy"
                     decoding="async"
                     className="size-30 md:size-40 lg:size-60"
