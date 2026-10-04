@@ -1,8 +1,10 @@
 # DESIGN SYSTEM — Portfolio
 
-> **Status of this document:** v2, rewritten from the actual codebase (repomix snapshot), not from intent.
-> Sections marked **As-built** describe what the code renders today. Sections marked **Rule** are constraints for future work.
+> **Status of this document:** v3, re-derived from the current codebase (repomix snapshot, Oct 2026), not from intent.
+> v2 described an earlier state of the repo. Since then the colour system moved to CSS tokens, the Home / About / Contact / WorkCards / Header / Footer were reworked, `TextLoop` and `LazyMorphSlider` were added, and breakpoints moved into `@theme`. This version describes what the code renders **today**.
+> Sections marked **As-built** describe what exists. Sections marked **Rule** are constraints for future work.
 > Where the two disagree, **As-built wins for "what exists"**, **Rule wins for "what to do next"**. Never "fix" an As-built item unless the task asks for it (see §13).
+> Contrast ratios and class names below were computed/read from the source, not measured in a browser.
 
 ---
 
@@ -15,7 +17,7 @@ Core qualities:
 - monospace body voice;
 - warm two-mode palette (cream ↔ deep navy) with **one** coral accent;
 - editorial split layouts, generous whitespace;
-- interactive motion that responds to the visitor (pointer, hover, touch), not motion that plays on its own;
+- interactive motion that responds to the visitor (pointer, hover, touch, scroll), not motion that plays on its own;
 - experimental but usable, responsive first.
 
 Craft is communicated through details, not decoration. **Spend the boldness in one place: the hero.** Everything around it stays quiet.
@@ -24,51 +26,61 @@ Craft is communicated through details, not decoration. **Spend the boldness in o
 
 ## 2. Visual Foundation (As-built)
 
-### 2.1 Palette
+### 2.1 Palette — now token-driven
 
-The palette is defined in `app/layout.tsx` on `<body>`:
+Colours are CSS custom properties in `app/globals.css` (`:root` for light, `html.dark` for dark). `<body>` in `layout.tsx` no longer carries colour classes; `globals.css` sets `body { color: var(--text-primary); background-color: var(--background); }` with a 180 ms colour transition.
 
-```text
-bg-[#EDDBB5] text-[#488067] dark:bg-[#1B3E5C] dark:text-[#F2B138]
-```
+| Role (vocabulary) | Token | Light | Dark | Where it appears |
+|---|---|---|---|---|
+| **canvas** | `--background` (also `--surface`) | `#EDDBB5` cream | `#1B3E5C` navy | page background |
+| **ink** (default text) | `--text-primary` (= `--foreground`) | `#488067` green | `#F2B138` gold | default body text, `TextPressure`, `TextLoop`, header brand label, footer brand name |
+| **hard ink** | `--text-tertiary` | `#000000` | `#FFFFFF` | footer text, hover fill of the CTA; `about/page.tsx` also forces `text-black dark:text-white` on its `<main>` |
+| **accent** | `--accent` | `#FA6B48` coral | `#FA6B48` coral | hover/active nav, CTA fill, name + role line on Home, card titles, tab pill, ribbon, scrollbar thumb, carousel dot |
+| **chrome — header** | `--nav-background` / `--nav-text` | `#FDFBF7` / `#000` | `#0a0a0a` / `#FFF` | Header, mobile menu |
+| **chrome — footer** | `--footer-background` | `#FDFBF7` | `#0a0a0a` | Footer |
+| **theme toggle** | `--nav-toggle-bg / -text / -hover-text` | `#000 / #FFF / #4B5563` | `#FFF / #000 / #D1D5DB` | square toggle button |
+| **hairline** | `--border` | ink @ 20% | gold @ 20% | footer rules, scrollbar track |
+| **muted** | `--muted` | ink @ 65% | gold @ 65% | footer copyright |
+| **accent gradient** | `--gradient-accent` | `#FA6B48 → #FACC15` | `#FACC15 → #FA6B48` | theme-toggle hover only |
+| **inverted surface** | (literal classes) | `bg-gray-900` (WorkCards) · `bg-black` (Contact, Services) | `bg-white` (WorkCards, Contact) · `bg-[#FDFBF7]` (Services) | cards; accent used for titles/pills on top of it |
+| **pixel** | (literal) | `#D2D2D4` | same | `PixelTransition` overlay; idle face `#09090b` |
+| **slider** | (literal) | `#0c0c0e` | same | `MorphSlider` / `LazyMorphSlider` background and placeholder |
 
-| Role (vocabulary) | Light | Dark | Where it appears |
-|---|---|---|---|
-| **canvas** | `#EDDBB5` cream | `#1B3E5C` navy | `<body>` background |
-| **ink** (default text) | `#488067` green | `#F2B138` gold | `<body>` text, `TextPressure` defaults, anything without an explicit text color |
-| **accent** | `#FA6B48` coral | `#FA6B48` coral | hover/active nav, CTA fill, card titles & prices, icons, indicators, scrollbar thumb, blog-card hover |
-| **hard ink** | `#000000` | `#FFFFFF` | `about`, `contact`, `blog` pages force `text-black dark:text-white` on `<main>` |
-| **chrome** (header / footer) | `white` | `zinc-950` (`#09090B`) header, `#0A0A0A` footer | Header, Footer, mobile menu |
-| **inverted surface** | `bg-black text-white` | `bg-white text-gray-950` | Contact cards, WorkCards, Services pricing cards; accent is used for titles/prices on top of it |
-| **pixel** | `#D2D2D4` | same | `PixelTransition` overlay; its idle face is `#09090B` |
+Components that sit on the canvas but are written with **literal** hex instead of tokens: WorkCards placeholder/image wells and focus-ring offsets (`#EDDBB5` / `#1B3E5C`), About portrait well, Contact/WorkCards/About accent (`#FA6B48`). Keep new work on the tokens where one exists; do not mass-convert existing literals unasked.
 
 **Important characteristics of the current system**
-1. There are **three surface systems** side by side: *canvas* (cream/navy, the page), *chrome* (pure white/near-black, header/footer), and *inverted cards* (black↔white). The chrome and cards do **not** take the canvas colors. Treat this as the current look; do not "harmonize" it unasked.
-2. Dark mode is class-based (`.dark` on `<html>`). The `--background/--foreground` variables in `globals.css` (`#fff/#000`) follow `prefers-color-scheme`, **not** the `.dark` class, and are effectively overridden by the body classes above. Do not build new work on those two variables.
-3. Near-accent strays exist and are **not** tokens: `#CA6B48` (hero name in `BlurText`), `#EA6B48` (role line wrapper), and an unused `colorCycle` array (`#212121 #C9A227 #217147 #DB7F8E #FA6B48`) on the home page. The canonical accent is `#FA6B48`. Do not copy the strays into new code; unify them only when asked.
+1. There are still **three surface systems**: *canvas* (cream/navy), *chrome* (header/footer: warm off-white `#FDFBF7` ↔ `#0a0a0a`, no longer pure white), and *inverted cards*. The inverted family is **not uniform**: WorkCards use `gray-900`, Contact and Services use `black`, and in dark mode Services uses `#FDFBF7` while the others use `white`. Treat this as the current look; do not "harmonize" it unasked.
+2. Dark mode is class-based (`.dark` on `<html>`), and the tokens now follow that class (the old `prefers-color-scheme` variables are gone; `color-scheme` is set per mode). The first-paint script in `layout.tsx` is what sets the class.
+3. The earlier near-accent strays (`#CA6B48`, `#EA6B48`) and the `colorCycle` array are gone from `app/page.tsx`. The canonical accent is `#FA6B48`. `TextPressure` still *supports* a `colorCycle` prop, but Home does not use it.
+4. **Defined but unused tokens** (no `var(--…)` reference in `app/`): `--surface`, `--surface-elevated`, `--text-secondary`, `--card-background`, `--input-background`, `--focus-ring`, `--interactive-hover`, `--footer-text`, `--footer-muted`, `--footer-border`, and the `--font-mono` variable. Do not assume they are wired up; either use them deliberately or leave them.
 
 ### 2.2 Measured contrast (WCAG 2.x, computed from the real values)
 
 | Pair | Ratio | Verdict |
 |---|---|---|
-| ink on canvas, light (`#488067` / `#EDDBB5`) | **3.38** | fails AA for small text; OK for large/bold only |
+| ink on canvas, light (`#488067` / `#EDDBB5`) | **3.38** | fails AA for small text; passes only the large-text threshold |
 | ink on canvas, dark (`#F2B138` / `#1B3E5C`) | 5.88 | AA |
 | hard ink on canvas (black / cream) | 15.4 | AAA |
 | hard ink on canvas (white / navy) | 11.1 | AAA |
 | accent on canvas, light (`#FA6B48` / `#EDDBB5`) | **2.12** | fails, even for large text |
 | accent on canvas, dark (`#FA6B48` / `#1B3E5C`) | 3.84 | large text only |
-| accent on white (header hover, light) | **2.89** | fails AA |
-| black on accent (CTA label) | 7.26 | AAA |
-| accent on black / on `#0A0A0A` (card titles, footer) | 7.26 / 6.85 | AAA |
-| `#CA6B48` on cream (hero name) | 2.70 | fails; decorative display size only |
+| accent on header, light (`#FA6B48` / `#FDFBF7`) — active/hover nav, footer hover | **2.80** | fails AA |
+| accent on header, dark (`#FA6B48` / `#0a0a0a`) | 6.85 | AA |
+| ink on header/footer, light (`#488067` / `#FDFBF7`) — brand label, footer name | 4.46 | AA for large/bold; borderline for small |
+| `--muted` on footer, light (ink @ 65% on `#FDFBF7`) — copyright line | **2.44** | fails |
+| black on accent (CTA label, light mode) | 7.26 | AAA |
+| **white on accent (CTA label in dark mode: `dark:text-white`)** | **2.89** | **fails AA** |
+| accent on black / on `gray-900` (card titles) | 7.26 / 6.13 | AAA |
+| `gray-950` on white (dark-mode card titles) | ≈19 | AAA |
+| `gray-500` on navy (blog date, dark) | **2.30** | fails |
 
-**Rule:** accent works best as a **fill or border with black text on it**, or as text **on black/near-black**. Do not introduce *new* small accent-colored text on the light canvas or on white. Long-form or small copy on the canvas should use *hard ink* (as `about`/`contact`/`blog` already do), not *ink*.
+**Rule:** accent works best as a **fill or border with black text on it**, or as text **on black/near-black**. Do not introduce *new* small accent-coloured text on the light canvas or on the light header. Do not put white text on an accent fill in new work (the existing `dark:text-white` CTAs are debt D3, not a pattern). Long-form or small copy on the canvas should use *hard ink*, not *ink*.
 
-### 2.3 Color usage rules
+### 2.3 Colour usage rules
 
-Use accent for: active/hover navigation, primary CTA fill, selected states (carousel indicator, active tab underline), titles/prices on inverted cards, small icons, scrollbar thumb.
+Use accent for: active/hover navigation, primary CTA fill, selected states (carousel dot, active tab pill), titles/pills on inverted cards, small icons, the ribbon, scrollbar thumb.
 Do not turn whole sections, backgrounds, or body text into accent.
-Do not add a second accent. Do not introduce gradients as decoration (the only existing gradient is the theme-toggle hover `#FA6B48 → yellow-400`; leave it).
+Do not add a second accent. Do not introduce gradients as decoration (the only gradient is the theme-toggle hover; leave it).
 
 ---
 
@@ -76,19 +88,23 @@ Do not add a second accent. Do not introduce gradients as decoration (the only e
 
 | Voice | Family | How it is loaded | Used for |
 |---|---|---|---|
-| **Body / UI** | JetBrains Mono | `next/font/google`, `weight: '400'` only, applied via `className` on `<body>` | everything by default |
-| **Hero display** | Roboto Flex (variable: `opsz, wght, wdth`) | runtime `@import` of a Google Fonts URL inside `TextPressure` | the "Combine Ideas, Craft & Innovate" hero only |
+| **Body / UI** | JetBrains Mono | `next/font/google` in `layout.tsx`, `weight: "400"` only, one instance; `className` on `<body>` | everything by default |
+| **Hero display** | Roboto Flex (variable: `opsz`, `wdth`; `wght` automatic) | `next/font/google` in **`app/page.tsx`**, exposed as `--font-roboto-flex` on the hero `<section>`; `TextPressure` reads `var(--font-roboto-flex), "Roboto Flex"` | the "Combine Ideas, Craft & Innovate" hero only |
 
 Facts to know before touching type:
-- Only weight **400** of JetBrains Mono is loaded, so `font-bold`/`font-semibold` render as **browser-synthesized bold**. If real bold is wanted, load a weight range (e.g. `weight: ['400','700']` or the variable font) — but that is a deliberate change, not a drive-by.
-- `layout.tsx` instantiates JetBrains Mono twice (one exposes `--font-mono` on `<html>`, one is the body class) and instantiates `Montserrat_Alternates` **without using it**. `app/fonts/Geist*.woff` are also unused (`localFont` is commented out). These are leftovers, not part of the design language. **Do not reintroduce Montserrat Alternates or Geist** unless asked.
-- The hero font only exists on the hero. Do not spread Roboto Flex into body copy.
+- The hero font is **self-hosted by `next/font`** and preloaded only on `/`. The old runtime `@import` of a Google Fonts URL inside `TextPressure` is no longer used (`fontUrl` defaults to `""`). Do not bring it back.
+- Only weight **400** of JetBrains Mono is loaded, so `font-bold` / `font-semibold` render as **browser-synthesized bold** (used heavily: About, Contact, Blog, WorkCards titles). Real bold means loading a weight range — a deliberate change, not a drive-by.
+- `layout.tsx` still instantiates `Montserrat_Alternates` **without using it** (its variable is on `<html>`), and `--font-mono` is exposed but unreferenced. `app/fonts/Geist*.woff` are unused. Do not reintroduce Montserrat Alternates or Geist.
+- Roboto Flex only exists on the hero. Do not spread it into body copy.
 
 Scale in use:
-- Hero: driven by `TextPressure` (`minFontSize={36}` in JS; component also has a width-based fallback table 32→64px).
+- Hero: driven by `TextPressure` (`minFontSize={36}`; component also has a width-based fallback table).
+- Name ribbon: `TextLoop` `fontSize={50}` in a 1200×150 SVG viewBox (scales with container width), weight 600, letter-spacing 9.
 - Name: `text-[clamp(30px,7vw,83px)]`. Role line: `clamp(20px,4vw,32px)`.
 - Page statement (contact/blog): `text-xl → md:2xl → lg:3xl → xl:4xl → 2xl:5xl`, `leading-[150%]`.
-- Body: `text-sm lg:text-lg` (home); `md:text-lg lg:text-2xl` at `leading-[170%] lg:leading-[200%]` (about).
+- About body: `clamp(15px, 0.9vw + 11px, 24px)` at `leading-[170%] lg:leading-[200%]`, `max-w-[65ch]`; tabs `clamp(14px, 0.5vw + 11px, 20px)`.
+- WorkCards: section title `text-3xl sm:4xl lg:5xl` with `tracking-[-0.05em]`; card title `text-xl`; card body `text-xs sm:text-sm`.
+- Home body: `text-sm lg:text-lg`.
 
 **Rule:** new type scales use `clamp()` or the existing responsive steps; no fixed pixel sizes that can overflow at 375px. Keep line lengths under ~80 characters for body copy. Sentence case for UI copy; do not add ALL-CAPS eyebrow labels or numbered markers unless the content is truly a sequence (Services "Proses Kerja" is; nothing else is).
 
@@ -96,54 +112,69 @@ Scale in use:
 
 ## 4. Layout (As-built + Rule)
 
-### 4.1 Shared page pattern — "split editorial"
-`about`, `contact`, `blog` use the same shell:
-
+### 4.1 Global shell
 ```text
-<main grid grid-cols-1 sm:grid-cols-2 items-start
-      px-[20px] xl:px-[100px] 2xl:px-[220px] lg:gap-x-[30px]
-      text-black dark:text-white>
-  left  → statement / portrait
-  right → interactive content (tabs, contact cards, post list)
+<html class="dark?"  scrollbar-gutter: stable>
+  <body class="font-mono flex min-h-dvh flex-col"  overflow-x: clip>
+    <Header/>                       fixed
+    <main class="w-full min-w-0 flex-1 overflow-x-clip">  {children}  </main>
+    <Footer/>                       mt-auto
 ```
-
-Note the split begins at **`sm` (640px)**, earlier than "tablet". Horizontal padding steps 20 → 100 → 220px. Vertical offset for the fixed header is hard-coded per page (`py-[100px]`, `xl:pt-[120px]`, etc.).
+- **`site-container`** (`@utility` in `globals.css`): `width:100%; max-width:110rem; margin-inline:auto; padding-inline: clamp(1rem, 4vw, 2rem)`. Used by Header, Footer, the Home sections and the blog post article. Its comment says "1440px" but `110rem` is **1760px**; the real cap is 1760px.
+- Pages that do **not** use it and keep their own horizontal padding: About (`px-[20px] xl:px-[100px] 2xl:px-[150px]`), Contact and Blog (`px-[20px] xl:px-[100px] 2xl:px-[220px]`), Services (`container mx-auto px-4`), WorkCards (`px-5 sm:px-8 lg:px-12 xl:px-20` inside `max-w-[1500px]`). So two width systems coexist. Do not "unify" unasked.
+- Because the layout already wraps `{children}` in `<main>`, About, Contact, Blog (and `blog/layout.tsx`) render a **nested `<main>`** (D9).
 
 ### 4.2 Home composition
 ```text
-hero-section   min-h-dvh   TextPressure (5-line stacked on <sm, 2-line on ≥sm)
-img-section    h-[550px] md:h-[800px]   MorphSlider (WebGL, "melt", autoplay 6s)
-second-section 12-col grid  intro copy + BlurText name + FallingText role + Magnet CTA  |  PixelTransition portrait
-third-section  WorkCards ("Projects & Works")
+hero-section   site-container  min-h-dvh  pt-15   TextPressure (5 lines stacked <sm, 2 lines ≥sm)
+img-section    my-10  full-bleed
+                 MorphSlider via LazyMorphSlider  h-[550px] md:h-[800px]  (WebGL "melt", autoplay 6s)
+                 Name ribbon: TextLoop (wave, reverse, speed 90, ribbon #FA6B48, pause on hover)
+second-section site-container  12-col grid at lg
+                 copy + BlurText "Aria Aji" + FallingText "Front-end Developer" + Magnet CTA  |  PixelTransition portrait (order-first on mobile)
+third-section  site-container  WorkCards ("Projects & Works")
 ```
-The portrait is a **circular** `PixelTransition` (`rounded-[360px]`, 200 → 300 → 400px), peacock mark ↔ photo.
+- `LazyMorphSlider`: `next/dynamic` (`ssr:false`) and mounted only when within 400px of the viewport (IntersectionObserver). The wrapper has the slider's own colour (`#0c0c0e`) so there is no layout shift. Keep it lazy; the slider is below the fold.
+- Hero uses Tailwind v4 numeric spacing (`pt-15`, `my-25`, `lg:mt-50`, `lg:mb-70`); these are valid in v4 and not typos.
+- The Home CTA is centred with `flex justify-center` + `w-fit` around `Magnet` — no more per-breakpoint hard-coded margins.
+- The portrait is a **circular** `PixelTransition` (peacock mark ↔ photo).
+- `landscape:` variants on the third section exist to keep short landscape phones from clipping; leave them.
 
-### 4.3 Other routes
-- **About** — 4 text tabs (Bio / Career / Academy / Open Source); active tab = bold + underline, inactive = 30% opacity.
-- **Contact** — statement + three inverted cards (Address → Google Maps, Phone → WhatsApp, Email → Gmail compose).
-- **Blog** — post list as double-bordered cards, accent fill on hover, inside a `scroll-custom` scroll area. Post page: `max-w-4xl` article with `prose`.
-- **Services** — the most recent page: pricing cards (inverted), add-ons as divided rows, numbered process, WhatsApp CTA. Indonesian copy. Reachable from the **mobile menu only** (commented out of desktop nav and footer).
-- **About/Team** — empty scaffold, not linked.
+### 4.3 WorkCards (reworked)
+- Section `id="works"`: header row (title + one-line blurb), a **native scroll-snap carousel** (`snap-x snap-mandatory`, 85% basis on mobile with a peek of the next card, 2-up at `sm`, 3-up at `md`), a controls row, then a footer row ("More experiments and projects" + **"View GitHub"** pill in a `Magnet`).
+- The carousel is a `role="region"` with `aria-roledescription="carousel"`, `tabIndex=0` and ←/→ key handling; slides are `role="group"`. No autoplay. Dots + arrows only render when there is more than one "page"; dots have a 44px hit height. Wrap-around: next at the end jumps to the first, prev at the start jumps to the last.
+- Card: inverted surface, thumbnail well (`aspect-[1.35/1]`), accent category pill, year, title, description. Real thumbnails exist for Kovsen, Hubton, Chain Peek; **Titis has none** and, like any broken image, falls back to `ProjectPlaceholder` (cream/navy well with grid, two circles, accent dot, category + title). Cards with an `href` open in a new tab; Titis has no link and renders as a non-interactive `<article>`.
 
-### 4.4 Rules
+### 4.4 Other routes
+- **About** — split layout: **portrait on the left** (sticky from `sm`, clip-path reveal on load, hover/pointer + scroll parallax on photo and an accent offset frame), **tabs on the right**. Four tabs (Bio / Career / Academy / Open Source) with a **sliding accent pill** as the active indicator (active tab text is black on accent; inactive is 70% opacity). Panels share one grid cell so height is stable; items rise in sequence; bio sentences get an accent underline sweep, hover fills them. Full ARIA tablist with ←/→/↑/↓/Home/End. Page `<main>` uses `min-h-dvh`.
+- **Contact** — statement + three inverted cards (**Phone → WhatsApp, Email → Gmail compose, Address → Google Maps**), now real `<a target="_blank" rel="noopener noreferrer">` links in a `<ul>`. Cards stagger in once when scrolled into view; hover/focus fills with accent and black text; visible `focus-visible` outline. Still `md:h-screen`.
+- **Blog** — post list as double-bordered cards inside a `scroll-custom` scroll area (`h-full overflow-y-auto`), accent fill on hover with black text. Still `h-screen`. Post page: `site-container max-w-4xl`, `prose dark:prose-invert` (see D13: the `prose` classes have no plugin behind them).
+- **Services** — pricing cards (inverted, GSAP + ScrollTrigger entrance), add-ons as divided rows, numbered process, WhatsApp CTAs. Indonesian copy. Now reachable from the **desktop nav, mobile nav and footer**.
+- **About/Team** — empty scaffold, not linked, not in the sitemap.
+
+### 4.5 Rules
 - Stacked on small screens, split on larger ones; never force a desktop grid onto 375px.
-- Prefer `min-h-dvh` over `h-screen` when the section must fit the visible mobile viewport. Existing `h-screen`/`md:h-screen` usages (contact, team) can clip on short landscape phones — verify if touched.
+- Prefer `min-h-dvh` over `h-screen`. About already does; Contact (`md:h-screen`), Blog (`h-screen`) and Team still use the old form and can clip or double-scroll on short or 16:10 screens — verify if touched.
 - Large screens (1440+): use extra width for whitespace and controlled max-widths, not bigger everything.
+- New page-level sections should use `site-container` unless the page is deliberately on the older padding steps.
 
 ---
 
 ## 5. Responsive Rules
 
-Intended breakpoints (`tailwind.config.js`): `xs 375 · sm 640 · md 768 · lg 1024 · xl 1440 · 2xl 1920`.
+Breakpoints (defined in `globals.css` `@theme`): `xs 375 · sm 640 · md 768 · lg 1024 · xl 1440 · 2xl 1920`.
 
-> ⚠️ **Verify before relying on this.** The project is Tailwind **v4** (`@import 'tailwindcss'` + `@tailwindcss/postcss`). v4 does **not** read `tailwind.config.js` unless the CSS contains `@config`, and `globals.css` has none. If so, the custom `screens` (and the `tailwind-scrollbar` plugin) are inactive and the real breakpoints are Tailwind defaults (`xl` = 1280, `2xl` = 1536, and `xs:` classes such as `xs:text-4xl` in WorkCard do nothing). A one-minute check in the browser (does an `xl:` style switch at 1280 or 1440?) settles it. If confirmed, the fix is a deliberate task (`@theme { --breakpoint-xs: 375px; … }`), not a side effect of another change.
+- **This is how they are defined today.** Tailwind v4 reads them from `--breakpoint-*` inside `@theme`; `tailwind.config.js` is **not loaded** (no `@config` in the CSS) and is effectively a dead file. Its `screens` match the `@theme` values, and its `purge` / `variants` keys are Tailwind v2 leftovers that v4 ignores. So `xl:` switches at 1440, `2xl:` at 1920, and `xs:` classes work.
+- `tailwind-scrollbar` is loaded through `@plugin 'tailwind-scrollbar'` in the CSS, not through the config file.
+- Do **not** add `@config` back "to be safe": it would define the same screens twice and load the scrollbar plugin twice. If the dead file is removed, that is its own cleanup task.
+- v4 default-theme utilities still apply where no override exists (spacing scale, `landscape:` variant, etc.).
 
-Mobile (375+): readability, touch targets, **no horizontal scroll**, simplified motion, stacked layout, accessible nav.
-Tablet (640–1023): the split layouts appear; controlled type growth.
-Desktop (1024+): expressive composition, pointer effects (TextPressure, Magnet, FallingText hover, PixelTransition hover).
+Mobile (375+): readability, touch targets (WorkCards dots/arrows and About tabs are ≥44px), **no horizontal scroll**, simplified motion, stacked layout, accessible nav.
+Tablet (640–1023): split layouts appear; controlled type growth; WorkCards 2-up.
+Desktop (1024+): expressive composition, pointer effects (TextPressure, Magnet, FallingText hover, PixelTransition hover, About portrait parallax).
 Large (1440+): whitespace and max-widths.
 
-Prefer CSS/Tailwind for responsiveness. JS width checks currently exist in `WorkCards` (`innerWidth < 1024`) and `TextPressure`; do not add more.
+Prefer CSS/Tailwind for responsiveness. JS width checks that remain: `WorkCards` (`matchMedia("(max-width: 639px)")`, only to disable `Magnet`) and `TextPressure` (`innerWidth` font-size fallback). Do not add more.
 
 ---
 
@@ -153,61 +184,71 @@ Motion hierarchy: **1** page/section entrance → **2** hero typography → **3*
 
 | Component | Tech | Trigger | Cleanup | Reduced motion | Notes |
 |---|---|---|---|---|---|
-| `TextPressure` | rAF loop, mouse/touch/scroll listeners, `MutationObserver` on `<html class>` | pointer proximity | ✅ rAF, listeners, observer, resize debounce | ❌ none | Hero-level. Home mounts **both** the mobile (5 instances) and desktop (2 instances) variants and hides one with CSS. |
-| `BlurText` | `@react-spring/web` + `IntersectionObserver` | enters viewport | ✅ observer | ❌ none | Used for the letter-by-letter name. Short text only. |
-| `FallingText` | Matter.js engine + own rAF loop | `hover` (one-shot) | ⚠️ engine/render/runner stopped, but the manual `requestAnimationFrame(updateLoop)` is **never cancelled** | ❌ none | Expensive. One instance only. |
-| `PixelTransition` | GSAP (`killTweensOf`, delayed call) | hover (pointer) / click (coarse pointer) | ⚠️ tweens killed at the start of each run; unmount cleanup not verified | ❌ none | Touch detection is by `ontouchstart`/`maxTouchPoints`/`pointer: coarse`. |
-| `MorphSlider` | `ogl` WebGL shader + GSAP | autoplay 6s (paused on hover), pointer drag, arrows/dots | ✅ engine destroyed, pointer listeners removed | ✅ `prefers-reduced-motion` shortens/limits transitions | Best-behaved animation component. |
-| `Magnet` | window `mousemove` → React state | pointer near element | ✅ listener | ❌ none | `setState` on every mouse move, page-wide. |
-| `WorkCards` (mobile) | CSS transform + touch handlers + 10s `setInterval` | swipe / arrows / dots / autoplay | ✅ interval | ❌ autoplay ignores it | Loop "jumps" without cloned slides. |
-| Services page | GSAP + `ScrollTrigger` in `gsap.context` | scroll | ✅ | ✅ shows final state | **Reference implementation** for scoped context + reduced-motion. |
+| `TextPressure` | rAF loop, mouse/touch/scroll listeners | pointer or scroll "kick" | ✅ rAF, listeners, observer | ✅ listeners not attached; one static frame | Loop runs **only while visible** (IntersectionObserver). Home mounts both hero variants (5 + 2 instances) and hides one with CSS, so the hidden set is idle. Colour is pure CSS (`var(--text-primary)` / `html.dark`), no MutationObserver. |
+| `TextLoop` | GSAP tween on SVG `textPath` offsets | continuous | ✅ `tween.kill()`, observer, listeners | ✅ static, no tween | Pauses on hover and when off-screen. Intentional exception to "no new looping effects"; do not add a second one. |
+| `BlurText` | `@react-spring/web` + `IntersectionObserver` | enters viewport | ✅ observer | ❌ none | Letter-by-letter name. Short text only. |
+| `FallingText` | Matter.js engine + own rAF | `hover` (one-shot) | ✅ rAF now cancelled; render/runner stopped; world/engine cleared | ❌ none | Expensive. One instance only. |
+| `PixelTransition` | GSAP (`killTweensOf`, delayed call) | hover (pointer) / click (coarse pointer) | ⚠️ tweens killed at start of each run; unmount cleanup not verified | ❌ none | Touch detection: `ontouchstart` / `maxTouchPoints` / `pointer: coarse`. |
+| `MorphSlider` | `ogl` WebGL shader + GSAP | autoplay 6s (pauses off-screen / on hover), pointer drag, arrows/dots | ✅ engine destroyed, listeners removed | ✅ | DPR capped at 1.5. Lazy-loaded by `LazyMorphSlider`. Best-behaved animation component. |
+| `Magnet` | window `mousemove` → rAF-throttled direct style writes | pointer near element | ✅ listener + rAF | ❌ none | **No React state per mouse move any more.** Disabled in WorkCards on mobile. |
+| `WorkCards` carousel | native scroll-snap; scroll + `ResizeObserver` for dot state | swipe / arrows / dots / keys | ✅ | ✅ `scrollTo` uses `auto`; hover lift has `motion-reduce` | No autoplay, no timers. |
+| `Contact` cards | CSS transition + IntersectionObserver | scroll into view (once) | ✅ observer | ✅ `motion-reduce` classes | Staggered 120ms steps. |
+| About page | CSS keyframes/transitions; pointer + scroll parallax via CSS variables | tab click, hover, pointer, scroll | ✅ | ✅ CSS media query + JS guard | Only `transform` / `opacity` / `background-size` / `clip-path`. |
+| Services page | GSAP + `ScrollTrigger` in `gsap.context` | scroll | ✅ | ✅ shows final state | **Reference implementation** for scoped context + reduced motion. |
+| Header | CSS transform/background transitions | scroll direction | ✅ | ❌ none | rAF-throttled scroll handler, single stable subscription. |
 
 **Rules**
-- Every substantial animation system needs a reduced-motion strategy: skip heavy timelines, show the final state, never leave content invisible. Copy the Services pattern (`matchMedia('(prefers-reduced-motion: reduce)')` → `gsap.set(..., {opacity:1, y:0})`).
+- Every substantial animation system needs a reduced-motion strategy: skip heavy timelines, show the final state, never leave content invisible. Copy the Services / About pattern.
 - Prefer `transform` and `opacity`; scope GSAP with `gsap.context()` and `ctx.revert()`; use `gsap.matchMedia()` for breakpoint variants.
+- Loops must stop when off-screen (see `TextPressure`, `TextLoop`, `MorphSlider`).
 - Do not add new continuous/looping effects. Do not add fade-and-slide-up to every section — one orchestrated moment beats scattered reveals.
-- Do not duplicate a Matter.js simulation. Do not put additional continuous effects around `TextPressure`.
+- Do not duplicate a Matter.js simulation.
 - Do not migrate React Spring (`BlurText`) or Matter.js (`FallingText`) to GSAP for consistency.
 
 ---
 
 ## 7. Component Patterns (As-built)
 
-**Primary CTA (pill)** — `rounded-full p-3 w-[130px] bg-[#FA6B48] text-black`, hover inverts to `bg-black` (dark: `bg-white`) with accent text, wrapped in `Magnet`. Centering is done with per-breakpoint hard-coded horizontal margins — fragile; rework only if the CTA is in scope.
+**Primary CTA (pill)** — `rounded-full bg-[var(--accent)] text-black dark:text-white`, hover inverts to `bg-[var(--text-tertiary)]` with accent text; wrapped in `Magnet`; centred by a `flex justify-center` parent with a `w-fit` child. WorkCards' "View GitHub" is the same pill with `min-h-11 px-6 py-3` and explicit focus rings. (The `dark:text-white` label is debt D3.)
 
-**Inverted card** — `bg-black dark:bg-white text-white dark:text-gray-950`, accent for title/price, small type. Used by Contact, WorkCards, Services. Hover: Contact/WorkCards swap toward gray or the opposite color.
+**Inverted card** — `bg-gray-900|black dark:bg-white|#FDFBF7`, text flips, accent for title and category pill. Contact: hover/focus **fills accent with black text**. WorkCards: lifts 4px on hover. Services: no hover fill.
 
-**Nav link** — `text-gray-800 dark:text-white`, hover accent + underline; active route = accent + underline + medium weight.
+**Nav link** — `text-[var(--nav-text)]`, hover accent + underline; active route = accent + underline + medium weight. Services is now a normal nav item.
 
-**Theme toggle** — square inverted button, accent border, sun/moon PNG (`day-and-night.png`, `night-and-day.png`), gradient on hover.
+**Theme toggle** — square (`rounded-xl`) button using the `--nav-toggle-*` tokens, accent border, `--gradient-accent` on hover. The sun/moon icon is swapped purely with `dark:hidden` / `hidden dark:block`; no JS state, so it is correct on first paint.
 
-**Carousel controls (WorkCards)** — translucent black round arrows (`<` `>` text), dot indicators; active dot = accent and elongated.
+**Carousel controls (WorkCards)** — 44px outlined round arrows with SVG chevrons (accent fill on hover), dot buttons 44px tall with an 8px dot; active dot = accent and elongated (`w-6`).
 
-**Scrollbar** — `.scroll-custom`: 8px, accent thumb, gray track.
+**Tabs (About)** — pill buttons (`min-h-[44px]`, `rounded-full`), sliding accent indicator measured from the active button (ResizeObserver + `document.fonts.ready`), inactive at 70% opacity.
 
-**Blog card** — outer `border-4 border-gray-600`, inner `border-2 border-gray-400` that fills with accent on hover.
+**Scrollbar** — `.scroll-custom`: 8px, thumb `var(--accent)`, track `var(--border)`.
 
-**Logo** — `peacock-black.png` / `peacock-white.png` (mode-swapped); brand name revealed on hover. Name shown in header is "Aria Aji"; the footer shows "Perkasa Wibowo". Do not "correct" either.
+**Blog card** — outer `border-4 border-black dark:border-gray-600` (hover fills black / `gray-200`), inner `border-2 border-black/40 dark:border-gray-400` that fills accent on hover with black text.
+
+**Logo** — `peacock-black.png` / `peacock-white.png` swapped by `dark:` classes (plain `<img>`); brand label "Aria Aji" reveals on hover, focus-within, or when the mobile menu is open. The footer shows "Perkasa Wibowo" with the logo revealed on hover. Do not "correct" either name.
+
+**Focus** — WorkCards, Contact, About tabs/links and Services CTAs have explicit `focus-visible` rings or outlines (black in light, white in dark, offset to the canvas colour where needed). Reuse that pattern for new interactive elements.
 
 ---
 
 ## 8. Interaction & Accessibility Baseline
 
-Every interactive element needs: visible hover on pointer devices, usable touch behavior, keyboard focus, adequate target size (≥44px where practical), a clear active state. Never make critical information hover-only.
+Every interactive element needs: visible hover on pointer devices, usable touch behaviour, keyboard focus, adequate target size (≥44px where practical), a clear active state. Never make critical information hover-only.
 
 Known gaps (do not silently fix unrelated ones; fix in the area you are already touching):
-- No explicit `:focus-visible` styling anywhere; rely on browser default.
-- Contact cards are clickable `div`s (no keyboard/`role`); should be links/buttons if touched.
-- `WorkCards` thumbnails are all `""` → `<img src="">` with real `alt`; the cards have no visual preview yet.
-- Header nav uses `gray-800`/`white` while the canvas uses cream/navy; the hero must stay legible under a transparent header on `/`.
+- No explicit `:focus-visible` styling on Header links/toggle/hamburger, Footer links, Blog cards, or the Home CTA; they rely on browser defaults.
+- Header mobile menu: the collapsed panel is `aria-hidden` while its links are still tabbable, and there is no Escape-to-close.
+- Footer lists put `<Link>` directly inside `<ul>` (socials) without `<li>`.
+- `PixelTransition` hover/click and `FallingText` hover are pointer-first; the info they carry is decorative, so keep it that way.
 - Hero is pointer-driven; on touch it relies on `touchmove`. Keep the text readable at rest.
+- Header nav uses `--nav-text`; the hero must stay legible under the transparent header on `/` (the header turns solid after scroll, on other routes, or when the menu opens).
 
 ---
 
 ## 9. Header, Footer (Global)
 
-**Header** — fixed; transparent on `/` until scrolled, otherwise chrome; hides on scroll down after 100px (100ms throttle); mobile menu (`max-h-96` slide) closes on outside click / navigation; dark-mode toggle (localStorage `theme`, falls back to system). Desktop nav: About, Contact, Blog. Mobile nav: About, **Services**, Contact, Blog.
-**Footer** — chrome surface; name + logo reveal on hover, address, quick links, socials (GitHub, LinkedIn, X), copyright.
+**Header** — fixed; transparent on `/` until scrolled, otherwise `--nav-background`; hides on scroll down after 100px (rAF-throttled, one stable listener; initial state computed on mount); mobile menu (`max-h-96` slide) closes on outside `mousedown` and on route change; dark-mode toggle writes `localStorage.theme`. **Nav on every breakpoint: About, Services, Contact, Blog.** Uses `site-container`. Logo images are plain `<img>`; the toggle icons use `next/image`.
+**Footer** — `--footer-background`, `border-t var(--border)`, `mt-auto`; brand name + logo reveal, address, quick links (**About, Services, Contact, Blog**), socials (GitHub, LinkedIn, X), copyright with the current year. It is marked `'use client'` although it has no state or effects.
 
 Header/Footer/`globals.css`/`layout.tsx` are **global**: any change requires checking every route (`/`, `/about`, `/services`, `/contact`, `/blog`, `/blog/[slug]`).
 
@@ -219,8 +260,8 @@ The repo ships Anthropic's `frontend-design` skill (`.claude/skills/frontend-des
 
 Therefore:
 1. This file **is the brief**. The palette in §2 and the type voices in §3 are fixed inputs, not proposals for the skill to improve on.
-2. Use `frontend-design` for **new** sections/pages or a requested redesign — never for small fixes, and never to re-pick colors or fonts.
-3. When the skill proposes a token plan, it must be expressed *in* the existing palette and type voices; if a proposal contradicts §2/§3, drop the proposal.
+2. Use `frontend-design` for **new** sections/pages or a requested redesign — never for small fixes, and never to re-pick colours or fonts.
+3. When the skill proposes a token plan, it must be expressed *in* the existing tokens and type voices; if a proposal contradicts §2/§3, drop the proposal.
 4. The skill's own guidance that *is* compatible and should be followed: one memorable moment, restrained everything else, no template chrome (eyebrow labels, `A · B · C` meta strings, `→` on every link), sentence-case active-voice copy, quality floor (responsive to 375px, visible focus, reduced motion).
 
 ---
@@ -228,40 +269,48 @@ Therefore:
 ## 11. Visual QA Checklist
 
 For every visual change:
-- [ ] Light mode · [ ] Dark mode
-- [ ] 375 · 768 · 1024 · 1440 (and 1920 for hero/global changes)
+- [ ] Light mode · [ ] Dark mode (toggle, then hard refresh: no colour flash)
+- [ ] 375 · 768 · 1024 · 1440 (and 1920 for hero/global changes); also a 16:10 viewport (e.g. 1440×900) and a short landscape phone for anything using `h-screen` / `min-h-dvh`
 - [ ] Keyboard navigation and visible focus
-- [ ] Hover states (pointer) and touch behavior (coarse pointer)
+- [ ] Hover states (pointer) and touch behaviour (coarse pointer)
 - [ ] Reduced motion (DevTools → Rendering → Emulate `prefers-reduced-motion`)
 - [ ] No horizontal overflow
-- [ ] No obvious layout shift
+- [ ] No obvious layout shift (MorphSlider placeholder, carousel, fonts)
 - [ ] No animation stuck after unmount / route change
-- [ ] Console clean (note: `Header` currently logs `Current path:` on every render)
+- [ ] Console clean
 - [ ] Contrast: new text/background pairs computed, not eyeballed (§2.2)
 
 Route matrix for global changes: `/`, `/about`, `/services`, `/contact`, `/blog`, `/blog/<slug>`.
 
 ---
 
-## 12. Known Design Debt (report; do **not** fix unasked)
+## 12. Design Debt
+
+### Resolved since v2 (do not re-open or "fix again")
+Tailwind breakpoints now come from `@theme` · colours are tokens and follow `.dark` · stray accent hexes and unused `colorCycle` removed from Home · duplicate JetBrains Mono instance removed · hero font self-hosted via `next/font` · `TextPressure` loop is visibility-gated with reduced-motion support and no MutationObserver · `FallingText` rAF is cancelled · `Magnet` no longer sets React state per mouse move · `WorkCards` rebuilt (CSS carousel, real thumbnails for 3 of 4, placeholder fallback, no timers, focus rings) · Contact cards are real links with focus styles · Services is in the desktop nav and footer · Header no longer logs to the console or re-subscribes its scroll listener · Home hero typo (`sm:block sm:hidden`) fixed to `block sm:hidden` · CTA hard-coded margins replaced by flex centring · About moved to `min-h-dvh` and gained ARIA tabs.
+
+### Open (report; do **not** fix unasked)
 
 | # | Item | Where |
 |---|---|---|
-| D1 | Light-mode ink (`#488067`) and accent-on-cream fail contrast for small text | `layout.tsx`, home section 2 |
-| D2 | Chrome/cards don't use canvas colors (three surface systems) | Header, Footer, cards |
-| D3 | Stray accent variants `#CA6B48`, `#EA6B48`; unused `colorCycle` | `app/page.tsx` |
-| D4 | Only JetBrains Mono 400 loaded → synthesized bold; duplicate font instances; unused Montserrat/Geist | `layout.tsx`, `app/fonts` |
-| D5 | Tailwind v4 ignores `tailwind.config.js` → documented breakpoints/plugin possibly inactive | `globals.css`, `tailwind.config.js` |
-| D6 | `globals.css` variables follow system preference, not `.dark` | `globals.css` |
-| D7 | Home mounts two hero variants at once (7 `TextPressure` instances) | `app/page.tsx` |
-| D8 | `FallingText` rAF never cancelled; no reduced motion on most animation | `FallingText`, `TextPressure`, `Magnet`, `WorkCards`, `BlurText`, `PixelTransition` |
-| D9 | `app/blog/layout.tsx` renders a literal **"Admin Layout"** `<header>` on every blog page | `app/blog/layout.tsx` |
-| D10 | WorkCard thumbnails empty; Services hidden from desktop nav/footer but in mobile nav | `workcard.tsx`, `header.tsx`, `footer.tsx` |
-| D11 | Invalid/no-op classes: `text-md`, `md:pt[49px]`, `lg:flex-1-reverse`, `opacity opacity-50` | `about`, `contact`, `blog` pages |
+| D1 | Light-mode ink (3.38) and accent on cream (2.12) fail contrast for small text; accent on `#FDFBF7` header (2.80) and `--muted` footer copyright (2.44) fail too; Home name and role line are accent on the canvas | `globals.css` tokens, `app/page.tsx`, `header.tsx`, `footer.tsx` |
+| D2 | Three surface systems; inverted-card family not uniform (`gray-900` / `black` / `#FDFBF7`) | WorkCards, Contact, Services, chrome |
+| D3 | `dark:text-white` on accent-filled CTAs = 2.89:1 | Home CTA, Services CTAs, WorkCards "View GitHub" |
+| D4 | Only JetBrains Mono 400 loaded → synthesized bold; `Montserrat_Alternates` instantiated and unused; `--font-mono` unused; `app/fonts` Geist unused | `layout.tsx`, `app/fonts` |
+| D5 | `tailwind.config.js` is not loaded (dead file with v2 keys); breakpoints and scrollbar plugin live in `globals.css` | `tailwind.config.js` |
+| D6 | Unused tokens (`--surface*`, `--text-secondary`, `--card-background`, `--input-background`, `--focus-ring`, `--interactive-hover`, `--footer-text/-muted/-border`) and literal hex duplicating tokens | `globals.css`, WorkCards, About, Contact |
+| D7 | Home mounts both hero variants (7 `TextPressure` instances, one set idle) | `app/page.tsx` |
+| D8 | No reduced-motion handling in `BlurText`, `FallingText`, `PixelTransition`, `Magnet`, Header | those components |
+| D9 | `blog/layout.tsx` is a placeholder that renders a literal **"Admin Layout"** `<header>` on every blog page; About/Contact/Blog (+ `blog/layout.tsx`) render a `<main>` inside the layout's `<main>` | `blog/layout.tsx`, `about`, `contact`, `blog` |
+| D10 | `md:h-screen` (Contact) and `h-screen` (Blog, Team) can clip or double-scroll across 16:9 vs 16:10 and short phones | `contact/page.tsx`, `blog/page.tsx`, `about/team/page.tsx` |
+| D11 | Invalid/no-op classes: `md:pt[49px]` (missing `-`), `lg:flex-1-reverse` (Contact, Blog), `mt-4]` (Footer), `text-md` (Services) | those files |
 | D12 | Junk assets: `*:Zone.Identifier` files, duplicate jpeg/webp pairs | `public/assets/img` |
-| D13 | Clickable `div` cards, no focus styles, hover-only CTA feedback | Contact, global |
+| D13 | `prose` / `dark:prose-invert` used on blog posts but no typography plugin is installed, so post bodies render with reset (unstyled) headings and lists; blog dates are `gray-500` on navy (2.30) | `blog/[slug]/page.tsx`, `MarkdownContent.tsx`, `blog/page.tsx` |
+| D14 | Missing `focus-visible` on Header/Footer/Blog cards/Home CTA; collapsed mobile menu still tabbable; footer `<ul>` without `<li>` | Header, Footer, Blog |
+| D15 | `site-container` comment says 1440px but the value is `110rem` (1760px); About/Contact/Blog/Services/WorkCards use their own widths | `globals.css` and pages |
+| D16 | Large blocks of commented-out code | `blog/page.tsx`, `contact/page.tsx`, `Contact/contact.tsx`, `about/page.tsx`, `services/page.tsx`, `WorkCard/workcard.tsx` |
 
-D9 is a visible bug rather than a taste issue; surface it whenever the blog is touched.
+D9 is a visible bug rather than a taste issue; surface it whenever the blog is touched. SEO/metadata items are tracked in `ARCHITECTURE.md` §14.
 
 ---
 

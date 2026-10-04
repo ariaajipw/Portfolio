@@ -2,19 +2,22 @@
 
 ## 1. Project Context
 
-This repository is a personal portfolio built with Next.js App Router, React, TypeScript, and Tailwind CSS.
+This repository is a personal portfolio built with Next.js App Router, React, TypeScript, and Tailwind CSS, deployed to Cloudflare Workers through OpenNext.
 
 Current repository characteristics:
-- Next.js 15 + React 19
-- Tailwind CSS 4
+- Next.js 15.5 + React 19
+- Tailwind CSS 4 (breakpoints and colour tokens defined in `app/globals.css`)
 - TypeScript
-- GSAP
-- React Spring
-- Matter.js
-- Marked + DOMPurify
-- Existing pages: Home, About, Team, Services, Contact, Blog
-- Existing interactive components include `TextPressure`, `BlurText`, `FallingText`, `PixelTransition`, `WorkCard`, Header, Footer, and Markdown rendering.
-- Dark/light mode and responsive behavior are already part of the site.
+- GSAP (`PixelTransition`, `MorphSlider`, `TextLoop`, Services page)
+- React Spring (`BlurText`)
+- Matter.js (`FallingText`)
+- `ogl` WebGL (`MorphSlider`)
+- Marked for blog Markdown (DOMPurify is installed but not currently used)
+- Cloudflare deployment: `@opennextjs/cloudflare`, `wrangler.jsonc`, `open-next.config.ts`
+- Existing pages: Home, About, Team (empty scaffold), Services, Contact, Blog (list + post)
+- SEO surface: root metadata (Open Graph/Twitter), JSON-LD `Person`, `app/sitemap.ts`, `app/robots.ts`
+- Existing interactive components include `TextPressure`, `TextLoop`, `BlurText`, `FallingText`, `PixelTransition`, `MorphSlider` (lazy-loaded), `Magnet`, `WorkCards` (scroll-snap carousel), `Contact` cards, Header, Footer, and Markdown rendering.
+- Dark/light mode (class-based, token-driven) and responsive behavior are already part of the site.
 
 The repository already contains substantial visual/interaction work. The AI agent must therefore behave primarily as a **preservation-first maintainer and improver**, not as a greenfield designer.
 
@@ -30,6 +33,7 @@ Primary quality areas:
 5. Browser compatibility
 6. Visual regression prevention
 7. Code quality and maintainability
+8. Performance and discoverability (load cost of heavy components, fonts, metadata, sitemap)
 
 ## 3. Core Principle
 
@@ -100,6 +104,8 @@ The agent must not call expensive/deep workflows when a simple repository inspec
 - Ensure animations do not block interaction or cause obvious jank.
 - Respect `prefers-reduced-motion`.
 - Verify important changes in a real browser when possible.
+- Do not regress the existing load-cost work: `MorphSlider` stays lazy (`LazyMorphSlider`), fonts stay self-hosted through `next/font`, and continuous loops stay gated by visibility.
+- Preserve the SEO surface and the Cloudflare/OpenNext deployment configuration unless explicitly asked to change them.
 
 ### P1 — Important
 
@@ -124,6 +130,7 @@ Do not:
 - rewrite the whole project;
 - migrate frameworks;
 - replace Next.js;
+- change the deployment target or adapter (Cloudflare Workers / OpenNext) or run a deploy;
 - replace Tailwind;
 - replace GSAP with another animation library without explicit approval;
 - redesign the visual identity without a design request;
@@ -144,7 +151,9 @@ The design system should remain coherent with the existing portfolio:
 - purposeful motion;
 - interaction should feel intentional rather than decorative.
 
-The existing repository uses responsive Tailwind breakpoints and multiple animated components. Treat these as existing design decisions, not problems to automatically replace.
+The existing repository uses responsive Tailwind breakpoints (`xs 375 · sm 640 · md 768 · lg 1024 · xl 1440 · 2xl 1920`, declared in `@theme` in `globals.css`) and multiple animated components. Treat these as existing design decisions, not problems to automatically replace.
+
+Colours come from CSS tokens (`--background`, `--text-primary`, `--accent`, `--nav-*`, `--footer-*`, …) with a single coral accent. `DESIGN.md` is the source of truth for the exact palette, contrast limits, and component patterns.
 
 ## 8. Animation Requirements
 
@@ -180,7 +189,7 @@ Minimum verification targets:
 - 768px tablet
 - 1024px desktop transition
 - 1280px
-- 1440px+
+- 1440px+ (including a 16:10 viewport such as 1440×900)
 - 1920px where relevant
 
 Check:
@@ -190,7 +199,7 @@ Check:
 - touch targets;
 - image/media cropping;
 - animation behavior;
-- section height;
+- section height (`min-h-dvh` vs `h-screen` on 16:9, 16:10, and short landscape phones);
 - overflow;
 - fixed/sticky elements;
 - dark mode;
@@ -201,7 +210,7 @@ Check:
 A task is complete only when:
 - requested behavior works;
 - unrelated behavior is preserved;
-- TypeScript/build checks pass when applicable;
+- TypeScript/build checks pass when applicable (`npm run build`; also `npm run preview` when runtime, config, metadata routes, or deployment files changed);
 - browser verification is performed for UI/interaction changes when browser tooling is available;
 - mobile behavior is checked for responsive changes;
 - no obvious console/runtime errors were introduced;
@@ -233,4 +242,3 @@ After implementation:
 - summarize changes;
 - list verification performed;
 - mention remaining risks only when real.
-

@@ -189,9 +189,12 @@ Unless explicitly requested, do NOT change:
 - header behavior;
 - footer behavior;
 - existing animation concepts;
-- existing breakpoints;
+- existing breakpoints (declared in `@theme` in `app/globals.css`);
+- colour tokens and the single coral accent;
 - public asset paths;
 - dependency versions;
+- the SEO surface (`metadata` in `layout.tsx`, JSON-LD, `sitemap.ts`, `robots.ts`, canonical host);
+- the Cloudflare/OpenNext deployment files (`wrangler.jsonc`, `open-next.config.ts`);
 - unrelated components.
 
 Do not rewrite an entire component when a local fix is enough.
@@ -228,6 +231,10 @@ Use `"use client"` only when required by:
 - gestures.
 
 Do not convert components between server/client boundaries casually.
+
+The site runs on Cloudflare Workers through OpenNext (`nodejs_compat`). Do not introduce Node-only APIs (`fs`, `path`, native modules) in server code without checking `npm run preview`.
+
+The root layout already renders `<main>`. Do not add another `<main>` in new pages.
 
 Avoid unnecessary rerenders.
 
@@ -332,6 +339,10 @@ Minimum mental test:
 1920
 ```
 
+Also check one 16:10 viewport (e.g. 1440×900) and a short landscape phone whenever a section uses `h-screen` or `min-h-dvh`.
+
+Breakpoints are `xs 375 · sm 640 · md 768 · lg 1024 · xl 1440 · 2xl 1920` and come from `@theme` in `globals.css`. `tailwind.config.js` is not loaded; do not add `@config` and do not edit that file expecting an effect.
+
 For layout changes check:
 - overflow;
 - typography;
@@ -358,7 +369,10 @@ When changing UI:
 - maintain readable contrast;
 - maintain keyboard focus;
 - do not make hover the only interaction;
-- keep touch targets practical.
+- keep touch targets practical;
+- use the colour tokens in `globals.css` (`var(--accent)`, `var(--text-primary)`, …) where one exists;
+- never put white text on the accent fill (2.89:1); accent fills take black text;
+- add `focus-visible` styling to every new interactive element.
 
 Do not blindly apply a design-system skill's recommendation if it conflicts with the existing portfolio identity or the user's explicit request.
 
@@ -392,8 +406,9 @@ Targeted QA:
 
 Do not spend tokens testing unrelated pages unless the change affects global components.
 
-If Header, Footer, globals.css, or layout.tsx changes:
-- test multiple routes because these are global.
+If Header, Footer, globals.css (tokens, `site-container`, breakpoints), layout.tsx, or `sitemap.ts` / `robots.ts` changes:
+- test multiple routes because these are global (`/`, `/about`, `/services`, `/contact`, `/blog`, `/blog/<slug>`);
+- for metadata or sitemap changes also open `/sitemap.xml` and `/robots.txt` and check the rendered `<head>`.
 
 ---
 
@@ -408,6 +423,14 @@ npm run build
 ```
 
 for build-sensitive changes.
+
+`npm run build` checks the Next build only. When a change touches server code, `next.config.mjs`, metadata routes, `wrangler.jsonc`, or `open-next.config.ts`, also run:
+
+```bash
+npm run preview
+```
+
+which builds the Cloudflare Worker bundle and serves it locally. Never run `npm run deploy` unless the user explicitly asks.
 
 For UI-only work:
 - browser verification first;
@@ -463,6 +486,8 @@ Never:
 - modify generated/config files without reason.
 
 If the working tree contains user changes, preserve them.
+
+`.next/` and `.open-next/` are generated and gitignored. `.wrangler/` is also generated but is **not** in `.gitignore`; do not edit or delete it, and mention it in the report instead of changing `.gitignore` unasked.
 
 ---
 
@@ -546,7 +571,23 @@ Caveman
 
 ---
 
-# 20. FINAL RESPONSE FORMAT
+# 20. REPO FACTS THE AGENT MUST NOT GET WRONG
+
+Read the relevant document before assuming any of these (details in `DESIGN.md` / `ARCHITECTURE.md`):
+
+- **Tailwind v4.** Breakpoints and the scrollbar plugin are in `globals.css` (`@theme`, `@plugin`). `tailwind.config.js` is dead.
+- **Colours are CSS tokens** on `:root` / `html.dark`; `<body>` has no colour classes. Several tokens are defined but unused.
+- **Layout shell.** `layout.tsx` provides `<main>`; `site-container` is the shared width (max `110rem` = 1760px) used by Header, Footer and Home sections. About/Contact/Blog/Services/WorkCards still use their own padding.
+- **Home hero font** is declared in `app/page.tsx` (`Roboto_Flex`, `--font-roboto-flex`), not in `layout.tsx`.
+- **`MorphSlider` is imported through `LazyMorphSlider`.** Pages must not import `MorphSlider` directly.
+- **`WorkCards` is a CSS scroll-snap carousel** with no autoplay; "Titis" has no thumbnail and falls back to the placeholder.
+- **`prose` classes in the blog do nothing** (no typography plugin); `MarkdownContent` parses on the client and does not use DOMPurify.
+- **Known visible bugs, report only:** the "Admin Layout" header in `blog/layout.tsx`; nested `<main>`; `h-screen` on Blog/Contact; `md:pt[49px]` typos; white-on-accent CTAs in dark mode.
+- **SEO risks, report only:** root `canonical` is `"/"`; `/og-image.png` is missing; `<html lang="en">` on mostly Indonesian copy.
+
+---
+
+# 21. FINAL RESPONSE FORMAT
 
 After a task, respond concisely:
 
@@ -570,7 +611,7 @@ Not changed:
 
 If browser verification was not possible, say so plainly.
 
-# 21. PRIMARY PRINCIPLE
+# 22. PRIMARY PRINCIPLE
 
 > **Use intelligence selectively.**
 

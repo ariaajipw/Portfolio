@@ -24,21 +24,22 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ariaaji.com"),
 
   title: {
-    default: "Aria Aji — Frontend & Fullstack Developer",
+    default: "Aria Aji — Frontend Developer",
     template: "%s | Aria Aji",
   },
 
   description:
-    "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung. Spesialis Next.js, React, TypeScript, dan pembuatan aplikasi web performa tinggi.",
+    "Portofolio resmi Aria Aji, Frontend Developer asal Bandung. Spesialis Next.js, React, TypeScript, dan pembuatan aplikasi web performa tinggi.",
 
   keywords: [
     "Aria Aji",
     "Aria Aji Perkasa Wibowo",
     "ariaaji",
     "aria aji",
+    "Rajipo",
     "Frontend Developer Bandung",
     "Front-end Developer",
-    "Fullstack Developer Indonesia",
+    "Frontend Developer Indonesia",
     "Next.js Developer",
     "Vite Developer",
     "React Developer",
@@ -61,9 +62,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Aria Aji — Frontend & Fullstack Developer",
+    title: "Aria Aji — Frontend Developer",
     description:
-      "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung. Spesialis Next.js, React, dan web performa tinggi.",
+      "Portofolio resmi Aria Aji, Frontend Developer asal Bandung. Spesialis Next.js, React, dan web performa tinggi.",
     url: "https://ariaaji.com",
     siteName: "Aria Aji Portfolio",
     locale: "id_ID",
@@ -81,9 +82,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Aria Aji — Frontend & Fullstack Developer",
+    title: "Aria Aji — Frontend Developer",
     description:
-      "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung.",
+      "Portofolio resmi Aria Aji, Frontend Developer asal Bandung.",
     images: ["/og-image.png"],
   },
 
@@ -128,7 +129,7 @@ export default function RootLayout({
   
     url: "https://ariaaji.com",
   
-    jobTitle: "Frontend & Fullstack Developer",
+    jobTitle: "Frontend Developer",
   
     address: {
       "@type": "PostalAddress",
@@ -146,7 +147,7 @@ export default function RootLayout({
   
     knowsAbout: [
       "Frontend Development",
-      "Fullstack Development",
+      "Frontend Developer",
       "Next.js",
       "React",
       "TypeScript",
