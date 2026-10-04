@@ -21,8 +21,83 @@ const montserratAlternates = Montserrat_Alternates({
 });
 
 export const metadata: Metadata = {
-  title: "Aria Aji",
-  description: "Portfolio",
+  metadataBase: new URL("https://ariaaji.com"),
+
+  title: {
+    default: "Aria Aji — Frontend & Fullstack Developer",
+    template: "%s | Aria Aji",
+  },
+
+  description:
+    "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung. Spesialis Next.js, React, TypeScript, dan pembuatan aplikasi web performa tinggi.",
+
+  keywords: [
+    "Aria Aji",
+    "Aria Aji Perkasa Wibowo",
+    "ariaaji",
+    "aria aji",
+    "Frontend Developer Bandung",
+    "Front-end Developer",
+    "Fullstack Developer Indonesia",
+    "Next.js Developer",
+    "Vite Developer",
+    "React Developer",
+    "Web Developer Bandung",
+    "Jasa Bikin Website",
+    "Shopify Developer",
+  ],
+
+  authors: [
+    {
+      name: "Aria Aji",
+      url: "https://ariaaji.com",
+    },
+  ],
+
+  creator: "Aria Aji",
+
+  alternates: {
+    canonical: "/",
+  },
+
+  openGraph: {
+    title: "Aria Aji — Frontend & Fullstack Developer",
+    description:
+      "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung. Spesialis Next.js, React, dan web performa tinggi.",
+    url: "https://ariaaji.com",
+    siteName: "Aria Aji Portfolio",
+    locale: "id_ID",
+    type: "website",
+
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Aria Aji — Frontend Developer",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Aria Aji — Frontend & Fullstack Developer",
+    description:
+      "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung.",
+    images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 const themeScript = `
@@ -45,6 +120,40 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+  
+    name: "Aria Aji",
+  
+    url: "https://ariaaji.com",
+  
+    jobTitle: "Frontend & Fullstack Developer",
+  
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Bandung",
+      addressRegion: "Jawa Barat",
+      addressCountry: "ID",
+    },
+  
+    sameAs: [
+      "https://github.com/ariaajipw",
+      "https://www.linkedin.com/in/aria-aji-627668156/",
+      "https://x.com/ariaajipw",
+      "https://www.instagram.com/ariaaji/",
+    ],
+  
+    knowsAbout: [
+      "Frontend Development",
+      "Fullstack Development",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Web Development",
+    ],
+  };
   return (
     <html
       lang="en"
@@ -59,6 +168,13 @@ export default function RootLayout({
         className={`${jetbrainsMono.className} flex min-h-dvh flex-col`}
         suppressHydrationWarning
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
+        />
+
         <Header />
 
         <main className="w-full min-w-0 flex-1 overflow-x-clip">
