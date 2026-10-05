@@ -155,11 +155,11 @@ export default function Home() {
                 delay={300}
                 animateBy="letters"
                 direction="top"
-                className="text-[clamp(30px,7vw,83px)] leading-none font-bold text-[var(--accent)]"
+                className="text-[clamp(30px,7vw,83px)] leading-none font-bold text-[var(--accent-text)]"
               />
             </div>
 
-            <div className="mt-4 mb-5 flex h-20 w-full justify-center text-center text-[var(--accent)]">
+            <div className="mt-4 mb-5 flex h-20 w-full justify-center text-center text-[var(--accent-text)]">
               <div className="w-full max-w-full">
                 <FallingText
                   text="Front-end Developer"
@@ -183,9 +183,9 @@ export default function Home() {
             <div className="flex w-full justify-center">
               <div className="w-fit">
                 <Magnet padding={50} disabled={false} magnetStrength={2}>
-                  <Link
+                <Link
                     href="/contact"
-                    className="button inline-flex items-center justify-center rounded-full bg-[var(--accent)] p-3 text-center text-black transition-colors hover:bg-[var(--text-tertiary)] hover:text-[var(--accent)] dark:text-white"
+                    className="button inline-flex items-center justify-center rounded-full bg-[var(--cta-bg)] p-3 text-center text-[var(--cta-text)] transition-colors hover:bg-[var(--cta-hover-bg)] hover:text-[var(--cta-hover-text)]"
                   >
                     Let's Collaborate
                   </Link>

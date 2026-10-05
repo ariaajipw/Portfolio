@@ -36,7 +36,7 @@ const Footer = () => {
               </a>
             </div>
 
-            <p className="text-sm mt-4]">
+            <p className="text-sm mt-4">
               Bandung,
               <br />
               Jl. Terusan Prof. DR. Sutami No. 23,
@@ -92,15 +92,16 @@ const Footer = () => {
             {/* Social Media */}
             <ul className="mt-4 space-y-2 flex gap-9 text-sm">
               {socials.map((social) => (
-                <Link
-                  key={social.id}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[var(--accent)] transition-colors"
-                >
-                  {social.name}
-                </Link>
+                <li key={social.id}>
+                  <Link
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[var(--accent)] transition-colors"
+                  >
+                    {social.name}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>

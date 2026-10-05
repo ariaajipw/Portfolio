@@ -64,19 +64,20 @@
     color-scheme: light;
 
     --background: #EDDBB5;
-    --foreground: #488067;
+    --foreground: #2A5A44;
 
     --surface: #EDDBB5;
     --surface-elevated: #F4E6C7;
 
-    --text-primary: #488067;
-    --text-secondary: #5F806F;
+    --text-primary: #2A5A44;   /* 5.8:1 di atas background */
+    --text-secondary: #356450; /* 5.0:1 */
     --text-tertiary: #000000;
 
-    --border: rgba(72, 128, 103, 0.20);
-    --muted: rgba(72, 128, 103, 0.65);
+    --border: rgba(42, 90, 68, 0.20);
+    --muted: #386850;          /* 4.7:1 (sebelumnya 2.1:1) */
 
-    --accent: #FA6B48;
+    --accent: #FA6B48;         /* untuk background/ikon/hover */
+    --accent-text: #A8340C;    /* untuk TEKS beraksen, 4.9:1 */
     --interactive-hover: #FA6B48;
 
     --card-background: #EDDBB5;
@@ -98,6 +99,12 @@
     --footer-border: rgba(0, 0, 0, 0.15);
 
     --gradient-accent: linear-gradient(to right, #FA6B48, #FACC15);
+
+    /* Tombol CTA */
+    --cta-bg: #FA6B48;
+    --cta-text: #000000;          /* hitam di atas oranye = 7.3:1 */
+    --cta-hover-bg: #000000;
+    --cta-hover-text: #FA6B48;    /* oranye di atas hitam = 7.3:1 */
   }
 
   html.dark {
@@ -110,13 +117,14 @@
     --surface-elevated: #244C6C;
 
     --text-primary: #F2B138;
-    --text-secondary: rgba(242, 177, 56, 0.75);
+    --text-secondary: rgba(242, 177, 56, 0.90);
     --text-tertiary: #FFFFFF;
 
     --border: rgba(242, 177, 56, 0.20);
-    --muted: rgba(242, 177, 56, 0.65);
+    --muted: rgba(242, 177, 56, 0.90);
 
     --accent: #FA6B48;
+    --accent-text: #FF9A7C;    /* 5.4:1 di atas background gelap */
     --interactive-hover: #FA6B48;
 
     --card-background: #1B3E5C;
@@ -136,6 +144,12 @@
     --footer-border: #374151;
 
     --gradient-accent: linear-gradient(to right, #FACC15, #FA6B48);
+
+    /* Tombol CTA */
+    --cta-bg: #C8440F;            /* oranye lebih gelap */
+    --cta-text: #FFFFFF;          /* putih di atas --cta-bg = 4.9:1 */
+    --cta-hover-bg: #FFFFFF;
+    --cta-hover-text: #C8440F;    /* 4.9:1 di atas putih */
   }
 
   body {

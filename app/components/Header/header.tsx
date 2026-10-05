@@ -128,14 +128,14 @@ const Header = () => {
   const desktopLinkClass = (active: boolean) =>
     `transition hover:text-[var(--accent)] hover:underline hover:underline-offset-1 ${
       active
-        ? 'text-[var(--accent)] font-medium underline underline-offset-1'
+        ? 'text-[var(--accent-text)] font-medium underline underline-offset-1'
         : 'text-[var(--nav-text)]'
     }`;
 
   const mobileLinkClass = (active: boolean) =>
     `block py-3 px-4 transition hover:text-[var(--accent)] ${
       active
-        ? 'text-[var(--accent)] font-medium underline underline-offset-1'
+        ? 'text-[var(--accent-text)] font-medium underline underline-offset-1'
         : 'text-[var(--nav-text)]'
     }`;
 
@@ -250,10 +250,10 @@ const Header = () => {
       <div
         className={`overflow-hidden bg-[var(--nav-background)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
           isMobileMenuOpen
-            ? 'max-h-96 translate-y-0 opacity-100'
-            : 'max-h-0 -translate-y-2 opacity-0'
+            ? 'visible max-h-96 translate-y-0 opacity-100'
+            : 'invisible max-h-0 -translate-y-2 opacity-0'
         }`}
-        aria-hidden={!isMobileMenuOpen}
+        inert={!isMobileMenuOpen}
       >
         <div
           className={`transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${

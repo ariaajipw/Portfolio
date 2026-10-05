@@ -809,9 +809,9 @@ export default function MorphSlider({
         </div>
       )}
 
-      {showIndicators && (
+{showIndicators && (
         <div
-          className="absolute left-0 right-0 bottom-[18px] z-[3] flex gap-2 justify-center items-center"
+          className="absolute left-0 right-0 bottom-0 z-[3] flex justify-center items-center"
           role="tablist"
           aria-label="Slides"
         >
@@ -822,15 +822,19 @@ export default function MorphSlider({
               role="tab"
               aria-selected={i === index}
               aria-label={`Go to slide ${i + 1}`}
-              className={`h-2 rounded-full cursor-pointer [transition:width_var(--ms-dot)_cubic-bezier(0.16,1,0.3,1),background-color_var(--ms-dot)_ease] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80 ${
-                i === index ? 'w-[22px] bg-white/95' : 'w-2 bg-white/35'
-              }`}
+              className="flex h-11 min-w-8 cursor-pointer items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
               onClick={() => {
                 const engine = engineRef.current;
                 if (!engine || i === index) return;
                 engine.goTo(i > index ? 1 : -1);
               }}
-            />
+            >
+              <span
+                className={`block h-2 rounded-full [transition:width_var(--ms-dot)_cubic-bezier(0.16,1,0.3,1),background-color_var(--ms-dot)_ease] ${
+                  i === index ? 'w-[22px] bg-white/95' : 'w-2 bg-white/35'
+                }`}
+              />
+            </button>
           ))}
         </div>
       )}
