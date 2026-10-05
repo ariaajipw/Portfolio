@@ -29,14 +29,14 @@ const ThemeToggle = ({ onClick }: { onClick: () => void }) => (
   >
     <Image
       src="/assets/img/night-and-day.png"
-      alt=""
+      alt="darkmode"
       width={24}
       height={24}
       className="w-6 h-6 dark:hidden"
     />
     <Image
       src="/assets/img/day-and-night.png"
-      alt=""
+      alt="darkmode"
       width={24}
       height={24}
       className="hidden w-6 h-6 dark:block"
@@ -158,13 +158,13 @@ const Header = () => {
           <Link href="/" className="flex items-center gap-2">
             <img
               src="/assets/img/peacock-black.png"
-              alt=""
+              alt="peacock"
               className=" w-14 dark:hidden"
             />
 
             <img
               src="/assets/img/peacock-white.png"
-              alt=""
+              alt="peacock"
               className="hidden w-14 dark:block"
             />
 
