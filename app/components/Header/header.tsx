@@ -13,6 +13,28 @@ const NAV_LINKS = [
 ];
 
 /*
+ * SEMUA perubahan warna harus 180ms (sama dengan body di globals.css),
+ * supaya header, drawer, link, dan ikon berganti warna serentak.
+ * Animasi gerak (max-height/transform/opacity) dipisah dari warna.
+ */
+const COLOR_TRANSITION = 'transition-colors duration-[180ms] ease-[ease]';
+
+const EASE_OUT = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+// Teks logo: gerak 500ms, tapi warna tetap 180ms
+const LOGO_TEXT_STYLE = {
+  transition: [
+    `max-width 500ms ${EASE_OUT}`,
+    `margin 500ms ${EASE_OUT}`,
+    `transform 500ms ${EASE_OUT}`,
+    `translate 500ms ${EASE_OUT}`,
+    `opacity 500ms ${EASE_OUT}`,
+    'color 180ms ease',
+    'text-decoration-color 180ms ease',
+  ].join(', '),
+} as const;
+
+/*
  * Ikon dipilih 100% lewat CSS (class `dark` di <html>), bukan state JS.
  * Class `dark` sudah dipasang themeScript sebelum paint, jadi ikon
  * langsung benar saat render awal, refresh, maupun pindah halaman.
@@ -25,7 +47,7 @@ const ThemeToggle = ({ onClick }: { onClick: () => void }) => (
     type="button"
     onClick={onClick}
     aria-label="Toggle dark mode"
-    className="p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] hover:bg-[image:var(--gradient-accent)] transition border border-[var(--accent)] rounded-xl"
+    className={`p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] hover:bg-[image:var(--gradient-accent)] ${COLOR_TRANSITION} border border-[var(--accent)] rounded-xl`}
   >
     <Image
       src="/assets/img/night-and-day.webp"
@@ -126,14 +148,14 @@ const Header = () => {
 
   // Hanya SATU class warna yang aktif, tidak ada utility yang saling timpa
   const desktopLinkClass = (active: boolean) =>
-    `transition hover:text-[var(--accent)] hover:underline hover:underline-offset-1 ${
+    `${COLOR_TRANSITION} hover:text-[var(--accent)] hover:underline hover:underline-offset-1 ${
       active
         ? 'text-[var(--accent-text)] font-medium underline underline-offset-1'
         : 'text-[var(--nav-text)]'
     }`;
 
   const mobileLinkClass = (active: boolean) =>
-    `block py-3 px-4 transition hover:text-[var(--accent)] ${
+    `block py-3 px-4 ${COLOR_TRANSITION} hover:text-[var(--accent)] ${
       active
         ? 'text-[var(--accent-text)] font-medium underline underline-offset-1'
         : 'text-[var(--nav-text)]'
@@ -169,15 +191,13 @@ const Header = () => {
             />
 
             <span
+              style={LOGO_TEXT_STYLE}
               className={`
                 inline-block
                 overflow-hidden
                 whitespace-nowrap
                 text-[var(--text-primary)]
                 underline
-                transition-all
-                duration-500
-                ease-[cubic-bezier(0.22,1,0.36,1)]
                 hover:text-[var(--accent)]
                 ${
                   isMobileMenuOpen
@@ -217,19 +237,19 @@ const Header = () => {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            className="relative flex h-10 w-10 items-center justify-center text-[var(--nav-text)]"
+            className={`relative flex h-10 w-10 items-center justify-center text-[var(--nav-text)] ${COLOR_TRANSITION}`}
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
             <span className="relative flex h-6 w-6 flex-col items-center justify-center">
               <span
-                className={`absolute block h-[2px] w-6 rounded-full bg-current transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                className={`absolute block h-[2px] w-6 rounded-full bg-current transition-[transform,translate,rotate,scale] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                   isMobileMenuOpen ? 'rotate-45' : '-translate-y-[7px]'
                 }`}
               />
 
               <span
-                className={`absolute block h-[2px] w-6 rounded-full bg-current transition-all duration-200 ease-in-out ${
+                className={`absolute block h-[2px] w-6 rounded-full bg-current transition-[transform,translate,rotate,scale,opacity] duration-200 ease-in-out ${
                   isMobileMenuOpen
                     ? 'scale-x-0 opacity-0'
                     : 'scale-x-100 opacity-100'
@@ -237,7 +257,7 @@ const Header = () => {
               />
 
               <span
-                className={`absolute block h-[2px] w-6 rounded-full bg-current transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                className={`absolute block h-[2px] w-6 rounded-full bg-current transition-[transform,translate,rotate,scale] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                   isMobileMenuOpen ? '-rotate-45' : 'translate-y-[7px]'
                 }`}
               />
@@ -248,15 +268,19 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`overflow-hidden bg-[var(--nav-background)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+        className={`overflow-hidden bg-[var(--nav-background)] transition-[max-height,transform,translate,opacity,visibility,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
           isMobileMenuOpen
             ? 'visible max-h-96 translate-y-0 opacity-100'
             : 'invisible max-h-0 -translate-y-2 opacity-0'
         }`}
+        style={{
+          // background-color dipaksa 180ms supaya serempak dengan header & body
+          transitionDuration: '500ms, 500ms, 500ms, 500ms, 500ms, 180ms',
+        }}
         inert={!isMobileMenuOpen}
       >
         <div
-          className={`transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          className={`transition-[transform,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
             isMobileMenuOpen ? 'translate-y-0' : '-translate-y-3'
           }`}
         >

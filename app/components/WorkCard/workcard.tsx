@@ -363,7 +363,7 @@ export default function WorkCards() {
   return (
     <section
       id="works"
-      className="relative w-full px-5 pb-24 pt-20 sm:px-8 sm:pb-28 sm:pt-24 lg:px-12 xl:px-20"
+      className="relative w-full px-5 pb-24 pt-14 sm:px-8 sm:pb-28 sm:pt-24 lg:px-12 xl:px-20"
     >
       <div className="mx-auto w-full max-w-[1500px]">
         {/* HEADER */}
@@ -462,7 +462,7 @@ export default function WorkCards() {
         )}
 
         {/* FOOTER CTA */}
-        <div className="mt-16 border-t border-black/15 pt-6 dark:border-white/15 sm:mt-20">
+        <div className="mt-5 border-t border-black/15 pt-6 dark:border-white/15 sm:mt-5">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-black/70 dark:text-white/70 sm:text-sm">
               More experiments and projects

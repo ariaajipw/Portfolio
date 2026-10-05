@@ -8,7 +8,18 @@ import Magnet from "./components/Magnet/Magnet";
 import Link from "next/link";
 import MorphSlider from "./components/MorphSlider/LazyMorphSlider";
 import TextLoop from "./components/TextLoop/TextLoop";
-
+import LogoLoop from "./components/LogoLoop/LogoLoop";
+import type { LogoItem } from "./components/LogoLoop/LogoLoop";
+import {
+  SiReact,
+  SiTypescript,
+  SiJavascript,
+  SiVite,
+  SiTailwindcss,
+  SiShopify,
+  SiNextdotjs,
+  SiGit
+} from 'react-icons/si';
 /*
  * Font TextPressure di-host sendiri oleh next/font (bukan lagi dari
  * fonts.googleapis.com saat runtime) dan hanya di-preload di halaman ini.
@@ -37,6 +48,17 @@ const items = [
   { image: "/assets/img/CPSIG.webp", caption: "hai" },
   { image: "/assets/img/BKAIG.webp", caption: "hai" },
   { image: "/assets/img/BTLK.webp", caption: "hai" },
+];
+
+const techLogos: LogoItem[] = [
+  { node: <SiReact />, title: 'React', href: 'https://react.dev' },
+  { node: <SiTypescript />, title: 'TypeScript', href: 'https://www.typescriptlang.org' },
+  { node: <SiJavascript />, title: 'JavaScript', href: 'https://developer.mozilla.org/docs/Web/JavaScript' },
+  { node: <SiVite />, title: 'Vite', href: 'https://vite.dev' },
+  { node: <SiTailwindcss />, title: 'Tailwind CSS', href: 'https://tailwindcss.com' },
+  { node: <SiShopify />, title: 'Shopify', href: 'https://www.shopify.com' },
+  { node: <SiNextdotjs />, title: 'Next.js', href: 'https://nextjs.org' },
+  { node: <SiGit />, title: 'Git', href: 'https://git-scm.com' }
 ];
 
 export default function Home() {
@@ -121,17 +143,17 @@ export default function Home() {
           <TextLoop
             text="Aria ✦ Aji ✦ Perkasa ✦ Wibowo"
             shape="wave"
-            speed={90}
+            speed={50}
             direction="reverse"
             separator="✦"
-            curviness={20}
-            fontSize={50}
-            fontWeight={600}
-            letterSpacing={9}
-            uppercase={false}
+            curviness={10}
+            fontSize={30}
+            fontWeight={400}
+            letterSpacing={12}
+            uppercase
             ribbon
             ribbonColor="#FA6B48"
-            ribbonWidth={86}
+            ribbonWidth={40}
             pauseOnHover
             className="text-[var(--text-primary)]"
           />
@@ -139,7 +161,7 @@ export default function Home() {
       </section>
 
       {/* Second Section */}
-      <section className="second-section site-container my-25 h-fit md:mt-0 lg:mt-50 lg:mb-70">
+      <section className="second-section site-container my-14 h-fit md:mt-0 lg:mt-50 lg:mb-70">
         <div className="grid h-fit lg:grid-cols-12">
           {/* Text Content */}
           <div className="mx-auto content-center place-self-start lg:col-span-6 lg:place-self-center">
@@ -155,11 +177,11 @@ export default function Home() {
                 delay={300}
                 animateBy="letters"
                 direction="top"
-                className="text-[clamp(30px,7vw,83px)] leading-none font-bold text-[var(--accent-text)]"
+                className="text-[clamp(30px,7vw,83px)] leading-none font-bold text-[var(--accent)]"
               />
             </div>
 
-            <div className="mt-4 mb-5 flex h-20 w-full justify-center text-center text-[var(--accent-text)]">
+            <div className="mt-4 mb-5 flex h-20 w-full justify-center text-center text-[var(--accent)] opacity-80">
               <div className="w-full max-w-full">
                 <FallingText
                   text="Front-end Developer"
@@ -185,7 +207,7 @@ export default function Home() {
                 <Magnet padding={50} disabled={false} magnetStrength={2}>
                 <Link
                     href="/contact"
-                    className="button inline-flex items-center justify-center rounded-full bg-[var(--cta-bg)] p-3 text-center text-[var(--cta-text)] transition-colors hover:bg-[var(--cta-hover-bg)] hover:text-[var(--cta-hover-text)]"
+                    className="button inline-flex items-center justify-center rounded-full bg-[var(--accent)] p-3 text-center text-[var(--cta-text)] transition-colors hover:bg-[var(--cta-hover-bg)] hover:text-[var(--cta-hover-text)]"
                   >
                     Let's Collaborate
                   </Link>
@@ -237,6 +259,23 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+        {/* Tech Stack Loop */}
+        <div className="">
+          <LogoLoop
+            logos={techLogos}
+            speed={80}
+            direction="left"
+            logoHeight={50}
+            gap={60}
+            pauseOnHover
+            scaleOnHover
+            fadeOut
+            fadeOutColor="var(--bg-primary)"
+            ariaLabel="Tech stack"
+            className="text-[var(--text-primary)]"
+          />
+        </div>
 
       {/* Third Section / Work */}
       <section className="third-section site-container landscape:mt-80 landscape:mb-120 sm:landscape:my-0 lg:mt-60">
