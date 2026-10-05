@@ -583,7 +583,7 @@ Read the relevant document before assuming any of these (details in `DESIGN.md` 
 - **`WorkCards` is a CSS scroll-snap carousel** with no autoplay; "Titis" has no thumbnail and falls back to the placeholder.
 - **`prose` classes in the blog do nothing** (no typography plugin); `MarkdownContent` parses on the client and does not use DOMPurify.
 - **Known visible bugs, report only:** the "Admin Layout" header in `blog/layout.tsx`; nested `<main>`; `h-screen` on Blog/Contact; `md:pt[49px]` typos; white-on-accent CTAs in dark mode.
-- **SEO risks, report only:** root `canonical` is `"/"`; `/og-image.png` is missing; `<html lang="en">` on mostly Indonesian copy.
+- **SEO risks, report only:** root `canonical` is `"/"`; `/og-image.webp` is missing; `<html lang="en">` on mostly Indonesian copy.
 
 ---
 

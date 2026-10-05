@@ -23,7 +23,7 @@ const works: Work[] = [
       "Designed and developed an interactive analytics dashboard with Shopify.",
     category: "Dashboard",
     year: "2024",
-    thumbnail: "/assets/img/kovsen.png",
+    thumbnail: "/assets/img/kovsen.webp",
     href: "https://kovsen.myshopify.com/",
   },
   {
@@ -33,7 +33,7 @@ const works: Work[] = [
       "Intern as front-end developer at Hubton Indonesia, focused on learning front-end side.",
     category: "Development",
     year: "2024",
-    thumbnail: "/assets/img/dev.hubton.png",
+    thumbnail: "/assets/img/dev.hubton.webp",
     href: "https://hubton.com",
   },
   {
@@ -42,7 +42,7 @@ const works: Work[] = [
     description: "Lightweight Web3 analytics dashboard that enables users to inspect transactions, track wallet activity, and visualize real-time on-chain data through a clean.",
     category: "E-Commerce",
     year: "2024",
-    thumbnail: "/assets/img/chainpeek.png",
+    thumbnail: "/assets/img/chainpeek.webp",
     href:"https://chainpeek.vercel.app/",
   },
   {

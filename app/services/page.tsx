@@ -174,7 +174,7 @@ export default function ServicesPage() {
   return (
     <div ref={rootRef} className="min-h-screen">
       {/* Hero */}
-      <section className="container mx-auto px-4 pt-20 pb-5 ">
+      <section className="site-container mx-auto px-4 pt-20 pb-5 ">
         <p className="text-sm opacity-50 text-gray-800 dark:text-white">
           Aria Aji — Front-end Developer, Bandung
         </p>
@@ -201,7 +201,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Pricing */}
-      <section className="container mx-auto px-4 py-10">
+      <section className="site-container mx-auto px-4 py-10">
         <div className="grid gap-6 lg:grid-cols-2">
           {tiers.map((tier) => (
             <div
@@ -241,7 +241,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Add-ons */}
-      <section className="container mx-auto px-8 py-10 ">
+      <section className="site-container mx-auto px-8 py-10 ">
         <h2 className="text-2xl font-bold">Additional Services</h2>
 
         <div className="mt-5 divide-y divide-black/10 border-t border-black/10 dark:divide-white/10 dark:border-white/10 text-gray-900 dark:text-white">
@@ -258,7 +258,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Process */}
-      <section className="container mx-auto px-4 py-10">
+      <section className="site-container mx-auto px-4 py-10">
         <h2 className="text-2xl font-bold">Work Process</h2>
 
         <div className="mt-6 space-y-6 text-gray-800 dark:text-white">
@@ -279,7 +279,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="site-container mx-auto px-4 py-16">
         <h2 className="text-2xl font-bold">
           Interested in working together?
         </h2>

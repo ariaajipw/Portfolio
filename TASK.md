@@ -65,7 +65,7 @@ Layout ini masih placeholder: merender `<header>Admin Layout</header>` di semua 
 Rinciannya ada di `DESIGN.md` §12 dan `ARCHITECTURE.md` §14. Yang paling berpengaruh:
 
 - `alternates.canonical: "/"` di `layout.tsx` bisa diwariskan ke semua halaman (cek dengan view-source di `/blog/1`). Ini memengaruhi indeks Google, jadi sebaiknya diperbaiki sebagai tugas SEO tersendiri.
-- `/og-image.png` dirujuk di metadata tetapi file-nya tidak ada di repo.
+- `/og-image.webp` dirujuk di metadata tetapi file-nya tidak ada di repo.
 - Isi artikel blog di-render di sisi klien (`MarkdownContent` memakai `useEffect`), jadi HTML awal dari server tidak berisi teks artikel.
 - Kelas `prose` di halaman post tidak berefek karena plugin typography tidak terpasang.
 - Teks putih di atas tombol aksen (`dark:text-white`) kontrasnya 2.89:1 di dark mode.

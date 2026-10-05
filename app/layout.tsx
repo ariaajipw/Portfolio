@@ -72,7 +72,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Aria Aji — Frontend Developer",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     title: "Aria Aji — Frontend Developer",
     description:
       "Portofolio resmi Aria Aji, Frontend Developer asal Bandung.",
-    images: ["/og-image.png"],
+    images: ["/og-image.webp"],
   },
 
   robots: {

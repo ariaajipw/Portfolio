@@ -225,7 +225,7 @@ Motion hierarchy: **1** page/section entrance → **2** hero typography → **3*
 
 **Blog card** — outer `border-4 border-black dark:border-gray-600` (hover fills black / `gray-200`), inner `border-2 border-black/40 dark:border-gray-400` that fills accent on hover with black text.
 
-**Logo** — `peacock-black.png` / `peacock-white.png` swapped by `dark:` classes (plain `<img>`); brand label "Aria Aji" reveals on hover, focus-within, or when the mobile menu is open. The footer shows "Perkasa Wibowo" with the logo revealed on hover. Do not "correct" either name.
+**Logo** — `peacock-black.webp` / `peacock-white.webp` swapped by `dark:` classes (plain `<img>`); brand label "Aria Aji" reveals on hover, focus-within, or when the mobile menu is open. The footer shows "Perkasa Wibowo" with the logo revealed on hover. Do not "correct" either name.
 
 **Focus** — WorkCards, Contact, About tabs/links and Services CTAs have explicit `focus-visible` rings or outlines (black in light, white in dark, offset to the canvas colour where needed). Reuse that pattern for new interactive elements.
 

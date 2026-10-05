@@ -23,13 +23,13 @@ const Footer = () => {
                 </span>
 
                 <img
-                  src="/assets/img/peacock-black.png"
+                  src="/assets/img/peacock-black.webp"
                   alt="peacock"
                   className="w-[40px] md:w-[60px] hidden group-hover:block dark:group-hover:hidden group-focus-within:block"
                 />
 
                 <img
-                  src="/assets/img/peacock-white.png"
+                  src="/assets/img/peacock-white.webp"
                   alt="peacock"
                   className="w-[40px] md:w-[60px] hidden dark:group-hover:block group-focus-within:block"
                 />

@@ -17,8 +17,8 @@ const NAV_LINKS = [
  * Class `dark` sudah dipasang themeScript sebelum paint, jadi ikon
  * langsung benar saat render awal, refresh, maupun pindah halaman.
  *
- * Dark mode  -> day-and-night.png  (ikon gelap di tombol putih)
- * Light mode -> night-and-day.png  (ikon terang di tombol hitam)
+ * Dark mode  -> day-and-night.webp (ikon gelap di tombol putih)
+ * Light mode -> night-and-day.webp (ikon terang di tombol hitam)
  */
 const ThemeToggle = ({ onClick }: { onClick: () => void }) => (
   <button
@@ -28,14 +28,14 @@ const ThemeToggle = ({ onClick }: { onClick: () => void }) => (
     className="p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] hover:bg-[image:var(--gradient-accent)] transition border border-[var(--accent)] rounded-xl"
   >
     <Image
-      src="/assets/img/night-and-day.png"
+      src="/assets/img/night-and-day.webp"
       alt="darkmode"
       width={24}
       height={24}
       className="w-6 h-6 dark:hidden"
     />
     <Image
-      src="/assets/img/day-and-night.png"
+      src="/assets/img/day-and-night.webp"
       alt="darkmode"
       width={24}
       height={24}
@@ -157,13 +157,13 @@ const Header = () => {
         <div className="group relative text-xl font-bold text-[var(--nav-text)]">
           <Link href="/" className="flex items-center gap-2">
             <img
-              src="/assets/img/peacock-black.png"
+              src="/assets/img/peacock-black.webp"
               alt="peacock"
               className=" w-14 dark:hidden"
             />
 
             <img
-              src="/assets/img/peacock-white.png"
+              src="/assets/img/peacock-white.webp"
               alt="peacock"
               className="hidden w-14 dark:block"
             />

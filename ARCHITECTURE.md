@@ -131,7 +131,7 @@ Animation ownership stays local to the component that owns the interaction. Full
 
 ### Layer F — Static Assets
 
-`public/assets/img/`. Preserve paths (they are referenced by string). Do not delete or rename assets without an explicit request — including the apparent junk (`*:Zone.Identifier`, duplicate `.jpeg`/`.webp` pairs); report instead. Note that `layout.tsx` references `/og-image.png`, which is **not** in the repo (§14).
+`public/assets/img/`. Preserve paths (they are referenced by string). Do not delete or rename assets without an explicit request — including the apparent junk (`*:Zone.Identifier`, duplicate `.webp` pairs); report instead. Note that `layout.tsx` references `/og-image.webp`, which is **not** in the repo (§14).
 
 ## 3. Client vs Server Components
 
@@ -283,7 +283,7 @@ Caveman is the default entry point. Specialist skills are invoked only when thei
 | `blog/layout.tsx` placeholder | Named `AdminLayout`, renders a literal "Admin Layout" `<header>` inside its own `<main>` on every blog route. Visible bug. |
 | Nested `<main>` | `layout.tsx` wraps children in `<main>`; About, Contact, Blog and `blog/layout.tsx` each add another. Invalid landmark structure. |
 | Canonical URL | Root `metadata.alternates.canonical` is `"/"`. Pages that do not set their own `alternates` inherit it, so every route may declare the home page as canonical. Verify with view-source on `/blog/1`; fixing it (per-page canonical) is its own task and affects search indexing. |
-| Missing OG image | `openGraph.images` and `twitter.images` point to `/og-image.png`; no such file exists in the repo, so link previews get a 404. |
+| Missing OG image | `openGraph.images` and `twitter.images` point to `/og-image.webp`; no such file exists in the repo, so link previews get a 404. |
 | Language / locale | `<html lang="en">` while `openGraph.locale` is `id_ID`, the description is Indonesian, and Services copy is Indonesian. |
 | Inconsistent identity data | LinkedIn URL differs between `footer.tsx` and the JSON-LD; Instagram appears only in JSON-LD; the host URL is repeated in several files. |
 | Per-post metadata | `generateMetadata` in `[slug]` sets only `title` (no description, OG, or canonical per post). |

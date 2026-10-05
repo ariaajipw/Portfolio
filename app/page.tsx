@@ -33,11 +33,10 @@ const mobileLines = [
 const desktopLines = ["Combine Ideas,", "Craft & Innovate"];
 
 const items = [
-  { image: "/assets/img/KGPIG.jpeg", caption: "hai" },
-  { image: "/assets/img/CPSIG.jpeg", caption: "hai" },
-  { image: "/assets/img/BKAIG.jpeg", caption: "hai" },
-  { image: "/assets/img/BTLK.jpeg", caption: "hai" },
-  // { image: "/assets/img/AAPW.jpeg", caption: "hai" },
+  { image: "/assets/img/KGPIG.webp", caption: "hai" },
+  { image: "/assets/img/CPSIG.webp", caption: "hai" },
+  { image: "/assets/img/BKAIG.webp", caption: "hai" },
+  { image: "/assets/img/BTLK.webp", caption: "hai" },
 ];
 
 export default function Home() {
@@ -209,7 +208,7 @@ export default function Home() {
                   }}
                 >
                   <img
-                    src="/assets/img/peacock.png"
+                    src="/assets/img/peacock.webp"
                     alt="Ikon burung merak"
                     loading="lazy"
                     decoding="async"
@@ -219,7 +218,7 @@ export default function Home() {
               }
               secondContent={
                 <img
-                  src="/assets/img/ariaaji.jpg"
+                  src="/assets/img/ariaaji.webp"
                   alt="Foto Aria Aji"
                   decoding="async"
                   fetchPriority="low"
