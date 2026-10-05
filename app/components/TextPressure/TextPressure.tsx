@@ -11,6 +11,11 @@ import {
 
 interface TextPressureProps {
   text?: string;
+  /**
+   * Tag HTML untuk pembungkus huruf. Default "div" supaya komponen ini TIDAK
+   * menambah <h1> (satu halaman cukup punya satu <h1>, lihat app/page.tsx).
+   */
+  as?: React.ElementType;
   /** Nilai CSS font-family. Default memakai variabel dari next/font (lihat app/page.tsx). */
   fontFamily?: string;
   /** Opsional. Kalau diisi, stylesheet font eksternal dimuat manual (tidak disarankan). */
@@ -65,8 +70,8 @@ const loadFontCss = (url: string): Promise<void> => {
 };
 
 /*
- * Tunggu font siap. Family diambil dari computed style h1, jadi cocok dengan
- * nama font hasil next/font (yang di-hash) tanpa perlu hardcode.
+ * Tunggu font siap. Family diambil dari computed style elemen judul, jadi cocok
+ * dengan nama font hasil next/font (yang di-hash) tanpa perlu hardcode.
  */
 const waitForFont = async (
   title: HTMLElement | null,
@@ -108,6 +113,7 @@ const getResponsiveMinFontSize = () => {
 
 const TextPressure: React.FC<TextPressureProps> = ({
   text = "Compressa",
+  as: Tag = "div",
   fontFamily = 'var(--font-roboto-flex), "Roboto Flex"',
   fontUrl = "",
 
@@ -135,7 +141,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
   colorCycleDuration = 2000,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLElement>(null);
   const spansRef = useRef<(HTMLSpanElement | null)[]>([]);
 
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -496,7 +502,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
     >
       <style>{css}</style>
 
-      <h1
+      <Tag
         ref={titleRef}
         className={`
           tp-title
@@ -535,7 +541,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
             {char}
           </span>
         ))}
-      </h1>
+      </Tag>
     </div>
   );
 };

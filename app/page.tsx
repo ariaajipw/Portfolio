@@ -47,8 +47,16 @@ export default function Home() {
       <section
         className={`${robotoFlex.variable} hero-section site-container flex min-h-dvh flex-col justify-center pt-15`}
       >
+        {/*
+         * Satu-satunya <h1> di halaman. Teksnya sama persis dengan yang tampil
+         * di layar. Visual animasi TextPressure di bawah disembunyikan dari
+         * screen reader/bot (aria-hidden) supaya teks tidak terbaca dobel dan
+         * tidak ada <h1> tambahan.
+         */}
+        <h1 className="sr-only">Combine Ideas, Craft &amp; Innovate</h1>
+
         {/* Mobile */}
-        <div className="block w-full min-w-0 sm:hidden">
+        <div aria-hidden="true" className="block w-full min-w-0 sm:hidden">
           {mobileLines.map((line) => (
             <TextPressure
               key={line}
@@ -67,7 +75,7 @@ export default function Home() {
         </div>
 
         {/* Desktop */}
-        <div className="hidden w-full min-w-0 sm:block">
+        <div aria-hidden="true" className="hidden w-full min-w-0 sm:block">
           {desktopLines.map((line) => (
             <TextPressure
               key={line}
@@ -202,7 +210,7 @@ export default function Home() {
                 >
                   <img
                     src="/assets/img/peacock.png"
-                    alt="peacock"
+                    alt="Ikon burung merak"
                     loading="lazy"
                     decoding="async"
                     className="size-30 md:size-40 lg:size-60"
@@ -212,7 +220,7 @@ export default function Home() {
               secondContent={
                 <img
                   src="/assets/img/ariaaji.jpg"
-                  alt="ariaaji"
+                  alt="Foto Aria Aji"
                   decoding="async"
                   fetchPriority="low"
                   style={{
