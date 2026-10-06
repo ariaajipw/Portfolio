@@ -152,12 +152,16 @@
     --cta-hover-text: #C8440F;    /* 4.9:1 di atas putih */
   }
 
+  /*
+   * TANPA transition di sini.
+   * Kalau body punya transition permanen, setiap perubahan style yang telat
+   * (CSS / class `dark` datang setelah paint pertama) jadi animasi 180ms dan
+   * terlihat sebagai warna "pecah". Transisi warna hanya dinyalakan sesaat
+   * lewat class `theme-transition` (lihat bagian paling bawah).
+   */
   body {
     color: var(--text-primary);
     background-color: var(--background);
-    transition:
-      background-color 180ms ease,
-      color 180ms ease;
   }
 }
 
@@ -190,5 +194,35 @@
   .scroll-custom::-webkit-scrollbar-thumb:hover {
     background-color: var(--accent);
     opacity: 0.9;
+  }
+}
+
+/*
+ * Transisi tema: class `theme-transition` dipasang di <html> oleh tombol toggle
+ * (header.tsx) selama ~250ms, lalu dilepas lagi. Dengan begitu body, header,
+ * footer, dan semua elemen berganti warna serempak 180ms, tapi load awal /
+ * refresh tidak pernah beranimasi.
+ * Sengaja di luar @layer + pakai !important supaya menang atas utility
+ * `transition-*` Tailwind dan style inline selama toggle berlangsung.
+ */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    text-decoration-color 180ms ease,
+    fill 180ms ease,
+    stroke 180ms ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition: none !important;
   }
 }

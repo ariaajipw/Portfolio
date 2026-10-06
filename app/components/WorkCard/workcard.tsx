@@ -363,11 +363,11 @@ export default function WorkCards() {
   return (
     <section
       id="works"
-      className="relative w-full px-5 pb-24 pt-14 sm:px-8 sm:pb-28 sm:pt-24 lg:px-12 xl:px-20"
+      className="relative w-full px-5 pb-10 pt-14 sm:px-8 sm:pb-28 sm:pt-24 lg:px-12 xl:px-20"
     >
       <div className="mx-auto w-full max-w-[1500px]">
         {/* HEADER */}
-        <div className="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-2 lg:mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="text-3xl font-bold tracking-[-0.05em] sm:text-4xl lg:text-5xl">
             Projects & Works
           </h2>
@@ -414,7 +414,7 @@ export default function WorkCards() {
 
         {/* CONTROLS — muncul hanya kalau project lebih banyak dari yang terlihat */}
         {pages > 1 && (
-          <div className="mt-6 flex items-center justify-between gap-4">
+          <div className="mt-2 lg:mt-6 flex items-center justify-between gap-4">
             <div
               className="flex items-center"
               role="group"
@@ -462,7 +462,7 @@ export default function WorkCards() {
         )}
 
         {/* FOOTER CTA */}
-        <div className="mt-5 border-t border-black/15 pt-6 dark:border-white/15 sm:mt-5">
+        <div className="mt-1 lg:mt-5 border-t border-black/15 pt-3 lg:pt-6 dark:border-white/15 sm:mt-5">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-black/70 dark:text-white/70 sm:text-sm">
               More experiments and projects

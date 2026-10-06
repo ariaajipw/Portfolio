@@ -13,13 +13,18 @@ const NAV_LINKS = [
 ];
 
 /*
- * SEMUA perubahan warna harus 180ms (sama dengan body di globals.css),
- * supaya header, drawer, link, dan ikon berganti warna serentak.
+ * Transisi warna untuk hover link/tombol (180ms).
+ * Pergantian TEMA tidak bergantung pada class ini: saat toggle, class
+ * `theme-transition` di <html> (lihat globals.css) menyalakan transisi 180ms
+ * untuk SEMUA elemen secara serempak, dan mati lagi setelah selesai.
  * Animasi gerak (max-height/transform/opacity) dipisah dari warna.
  */
 const COLOR_TRANSITION = 'transition-colors duration-[180ms] ease-[ease]';
 
 const EASE_OUT = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+// Lama class `theme-transition` menempel di <html> (> durasi transisi 180ms)
+const THEME_TRANSITION_MS = 250;
 
 // Teks logo: gerak 500ms, tapi warna tetap 180ms
 const LOGO_TEXT_STYLE = {
@@ -73,12 +78,29 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
+  // false saat render awal -> header tidak beranimasi ketika state scroll
+  // pertama kali dihitung (mis. refresh di tengah halaman).
+  const [isReady, setIsReady] = useState<boolean>(false);
+
   const headerRef = useRef<HTMLElement>(null);
+  const themeTimerRef = useRef<number | null>(null);
 
   const toggleDarkMode = (): void => {
-    const next = !document.documentElement.classList.contains('dark');
+    const root = document.documentElement;
+    const next = !root.classList.contains('dark');
 
-    document.documentElement.classList.toggle('dark', next);
+    // Nyalakan transisi warna hanya selama pergantian tema
+    root.classList.add('theme-transition');
+    root.classList.toggle('dark', next);
+
+    if (themeTimerRef.current !== null) {
+      window.clearTimeout(themeTimerRef.current);
+    }
+
+    themeTimerRef.current = window.setTimeout(() => {
+      root.classList.remove('theme-transition');
+      themeTimerRef.current = null;
+    }, THEME_TRANSITION_MS);
 
     try {
       localStorage.setItem('theme', next ? 'dark' : 'light');
@@ -86,6 +108,16 @@ const Header = () => {
       // Ignore localStorage errors.
     }
   };
+
+  // Bersihkan timer toggle saat komponen di-unmount
+  useEffect(() => {
+    return () => {
+      if (themeTimerRef.current !== null) {
+        window.clearTimeout(themeTimerRef.current);
+        document.documentElement.classList.remove('theme-transition');
+      }
+    };
+  }, []);
 
   // Scroll behavior (rAF throttle, state awal dihitung saat mount)
   useEffect(() => {
@@ -115,9 +147,19 @@ const Header = () => {
 
     update(); // benar juga saat refresh di tengah halaman
 
+    // Aktifkan transisi header setelah state awal ter-paint (2 frame)
+    let raf2 = 0;
+    const raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => setIsReady(true));
+    });
+
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   // Tutup menu mobile saat pindah halaman
@@ -170,8 +212,11 @@ const Header = () => {
         isSolid ? 'bg-[var(--nav-background)]' : 'bg-transparent'
       } ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}
       style={{
-        // Warna 180ms = sama dengan transisi body di globals.css
-        transition: 'transform 300ms ease, background-color 180ms ease',
+        // Tanpa transisi sampai header siap (mount selesai), supaya tidak ada
+        // fade transparan -> solid saat load / refresh di tengah halaman.
+        transition: isReady
+          ? 'transform 300ms ease, background-color 180ms ease'
+          : 'none',
       }}
     >
       <div className="site-container flex items-center justify-between">

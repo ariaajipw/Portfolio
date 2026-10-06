@@ -161,11 +161,11 @@ export default function Home() {
       </section>
 
       {/* Second Section */}
-      <section className="second-section site-container my-14 h-fit md:mt-0 lg:mt-50 lg:mb-70">
+      <section className="second-section site-container my-14 h-fit md:mt-0 lg:mt-50 lg:mb-70 lg:mx-15">
         <div className="grid h-fit lg:grid-cols-12">
           {/* Text Content */}
           <div className="mx-auto content-center place-self-start lg:col-span-6 lg:place-self-center">
-            <p className="mt-10 mr-[20px] mb-7 ml-[30px] place-self-center text-sm lg:text-lg">
+            <p className="mt-5 mr-[20px] mb-3 ml-[30px] place-self-center text-sm lg:text-lg">
               A developer focuses on front-end side, crafting web experiences,
               geeking out over current best practices and technologies for
               developing websites.
@@ -181,7 +181,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="mt-4 mb-5 flex h-20 w-full justify-center text-center text-[var(--accent)] opacity-80">
+            <div className="mt-2 lg:mt-4 lg:mb-5 flex h-20 w-full justify-center text-center text-[var(--accent)] opacity-80">
               <div className="w-full max-w-full">
                 <FallingText
                   text="Front-end Developer"
@@ -196,13 +196,13 @@ export default function Home() {
               </div>
             </div>
 
-            <p className="mr-[20px] mb-12 ml-[30px] place-self-center text-sm lg:text-lg">
+            <p className="mr-[20px] mb-6 ml-[30px] place-self-center text-sm lg:text-lg">
               Enhance skills through hands-on projects & professional
               experiences. Combining creativity to build engaging experiences.
             </p>
 
             {/* CTA */}
-            <div className="flex w-full justify-center">
+            <div className="lg:mt-10 flex w-full justify-center">
               <div className="w-fit">
                 <Magnet padding={50} disabled={false} magnetStrength={2}>
                 <Link
