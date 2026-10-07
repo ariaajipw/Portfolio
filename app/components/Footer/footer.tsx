@@ -17,7 +17,7 @@ const Footer = () => {
           {/* About */}
           <div>
             <div className="group">
-              <a href="/" className="flex">
+              <Link href="/" className="flex">
                 <span className="hover:text-[var(--accent)] underline underline-offset-5 text-lg lg:text-3xl font-bold text-[var(--text-primary)]">
                   Perkasa Wibowo
                 </span>
@@ -25,25 +25,21 @@ const Footer = () => {
                 <img
                   src="/assets/img/peacock-black.webp"
                   alt="peacock"
-                  className="w-[40px] md:w-[60px] hidden group-hover:block dark:group-hover:hidden group-focus-within:block"
+                  className="w-[40px] md:w-[60px] hidden group-hover:block group-focus-within:block dark:group-hover:hidden dark:group-focus-within:hidden"
                 />
 
                 <img
                   src="/assets/img/peacock-white.webp"
                   alt="peacock"
-                  className="w-[40px] md:w-[60px] hidden dark:group-hover:block group-focus-within:block"
+                  className="w-[40px] md:w-[60px] hidden dark:group-hover:block dark:group-focus-within:block"
                 />
-              </a>
+              </Link>
             </div>
 
             <p className="text-xs lg:text-sm mt-4">
-              Bandung,
-              <br />
               Jl. Terusan Prof. DR. Sutami No. 23,
               <br />
-              Sarijadi, Kec. Sukasari,
-              <br />
-              West Java 40151, Indonesia.
+              Bandung, West Java, Indonesia.
             </p>
           </div>
 

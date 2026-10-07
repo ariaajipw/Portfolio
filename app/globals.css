@@ -61,7 +61,7 @@
 /* ===== THEME TOKENS ===== */
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: only light;
 
     --background: #EDDBB5;
     --foreground: #2A5A44;
