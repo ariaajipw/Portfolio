@@ -158,7 +158,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
   const scopeClass = `tp-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
 
-  const [fontSize, setFontSize] = useState(minFontSize);
+  const [fontSize, setFontSize] = useState<number | null>(null);
   const [scaleY, setScaleY] = useState(1);
   const [lineHeight, setLineHeight] = useState(1);
   const [ready, setReady] = useState(false);
@@ -451,6 +451,41 @@ const TextPressure: React.FC<TextPressureProps> = ({
       background-color: transparent;
     }
 
+        .${scopeClass} .tp-title {
+      font-size: ${minFontSize}px;
+      font-size: max(calc(100cqw / ${chars.length} * 4), 32px);
+    }
+
+    @media (min-width: 640px) {
+      .${scopeClass} .tp-title {
+        font-size: max(calc(100cqw / ${chars.length} * 4), 36px);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .${scopeClass} .tp-title {
+        font-size: max(calc(100cqw / ${chars.length} * 4), 40px);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .${scopeClass} .tp-title {
+        font-size: max(calc(100cqw / ${chars.length} * 4), 48px);
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .${scopeClass} .tp-title {
+        font-size: max(calc(100cqw / ${chars.length} * 4), 56px);
+      }
+    }
+
+    @media (min-width: 1536px) {
+      .${scopeClass} .tp-title {
+        font-size: max(calc(100cqw / ${chars.length} * 4), 64px);
+      }
+    }
+
     .${scopeClass} .tp-title {
       color: ${textColor || "var(--text-primary)"};
     }
@@ -498,6 +533,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
       style={{
         opacity: ready ? 1 : 0,
         transition: "opacity 200ms ease",
+        containerType: "inline-size",
       }}
     >
       <style>{css}</style>
@@ -513,7 +549,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
         `}
         style={{
           fontFamily: `${fontFamily}, sans-serif`,
-          fontSize: `${fontSize}px`,
+          fontSize: fontSize !== null ? `${fontSize}px` : undefined,
           lineHeight,
           transform: `scale(1, ${scaleY})`,
           transformOrigin: "center top",

@@ -232,6 +232,8 @@ export default function Home() {
                   <img
                     src="/assets/img/peacock.webp"
                     alt="Ikon burung merak"
+                    width={240}
+                    height={240}
                     loading="lazy"
                     decoding="async"
                     className="size-30 md:size-40 lg:size-60"

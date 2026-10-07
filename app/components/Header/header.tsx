@@ -26,6 +26,12 @@ const EASE_OUT = 'cubic-bezier(0.22, 1, 0.36, 1)';
 // Lama class `theme-transition` menempel di <html> (> durasi transisi 180ms)
 const THEME_TRANSITION_MS = 250;
 
+// Ukuran asli (intrinsic) file logo dalam piksel. WAJIB sesuaikan dengan
+// dimensi nyata peacock-black.webp / peacock-white.webp.
+// Disarankan resize ke 112x? (2x dari tampilan 56px / w-14).
+const LOGO_WIDTH = 112;
+const LOGO_HEIGHT = 112;
+
 // Teks logo: gerak 500ms, tapi warna tetap 180ms
 const LOGO_TEXT_STYLE = {
   transition: [
@@ -54,20 +60,20 @@ const ThemeToggle = ({ onClick }: { onClick: () => void }) => (
     aria-label="Toggle dark mode"
     className={`p-1 text-[var(--nav-toggle-text)] bg-[var(--nav-toggle-bg)] hover:text-[var(--nav-toggle-hover-text)] hover:bg-[image:var(--gradient-accent)] ${COLOR_TRANSITION} border border-[var(--accent)] rounded-xl`}
   >
-    <Image
-      src="/assets/img/night-and-day.webp"
-      alt="darkmode"
-      width={24}
-      height={24}
-      className="w-6 h-6 dark:hidden"
-    />
-    <Image
-      src="/assets/img/day-and-night.webp"
-      alt="darkmode"
-      width={24}
-      height={24}
-      className="hidden w-6 h-6 dark:block"
-    />
+      <Image
+        src="/assets/img/night-and-day.webp"
+        alt=""
+        width={24}
+        height={24}
+        className="w-6 h-6 dark:hidden"
+      />
+      <Image
+        src="/assets/img/day-and-night.webp"
+        alt=""
+        width={24}
+        height={24}
+        className="hidden w-6 h-6 dark:block"
+      />
   </button>
 );
 
@@ -223,18 +229,28 @@ const Header = () => {
         {/* Logo */}
         <div className="group relative text-xl font-bold text-[var(--nav-text)]">
           <Link href="/" className="flex items-center gap-2">
-            <img
-              src="/assets/img/peacock-black.webp"
-              alt="peacock"
-              className=" w-14 dark:hidden"
-            />
-
-            <img
-              src="/assets/img/peacock-white.webp"
-              alt="peacock"
-              className="hidden w-14 dark:block"
-            />
-
+              {/* LCP: logo terang dimuat dengan prioritas tinggi */}
+              <img
+                src="/assets/img/peacock-black.webp"
+                alt="peacock"
+                width={LOGO_WIDTH}
+                height={LOGO_HEIGHT}
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+                className="h-auto w-14 dark:hidden"
+              />
+                  
+              {/* Versi gelap: lazy, tidak rebutan bandwidth dengan LCP */}
+              <img
+                src="/assets/img/peacock-white.webp"
+                alt="peacock"
+                width={LOGO_WIDTH}
+                height={LOGO_HEIGHT}
+                loading="lazy"
+                decoding="async"
+                className="hidden h-auto w-14 dark:block"
+              />
             <span
               style={LOGO_TEXT_STYLE}
               className={`
