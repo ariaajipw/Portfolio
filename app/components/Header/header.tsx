@@ -30,7 +30,7 @@ const THEME_TRANSITION_MS = 250;
 // dimensi nyata peacock-black.webp / peacock-white.webp.
 // Disarankan resize ke 112x? (2x dari tampilan 56px / w-14).
 const LOGO_WIDTH = 112;
-const LOGO_HEIGHT = 112;
+const LOGO_HEIGHT = 79;
 
 // Teks logo: gerak 500ms, tapi warna tetap 180ms
 const LOGO_TEXT_STYLE = {
