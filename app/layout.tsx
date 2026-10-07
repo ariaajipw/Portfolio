@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {JetBrains_Mono } from "next/font/google";
 
 import "./globals.css";
@@ -12,6 +12,15 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   display: "swap",
 });
+
+/*
+ * Light mode situs TIDAK boleh dibalik oleh Chrome ("Darken websites" / Auto
+ * Dark Mode). Mode gelap hanya dari toggle situs (class `dark`), yang di
+ * globals.css memasang `color-scheme: dark` dan menang atas meta ini.
+ */
+export const viewport: Viewport = {
+  colorScheme: "only light",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ariaaji.com"),
@@ -94,18 +103,20 @@ export const metadata: Metadata = {
   },
 };
 
+/*
+ * Default SELALU light. Dark hanya kalau pengunjung pernah menekan toggle
+ * (tersimpan "dark" di localStorage). Pengaturan tema HP/OS sengaja tidak
+ * dipakai, supaya palet light tidak berubah sendiri.
+ */
 const themeScript = `
 (function () {
+  var isDark = false;
   try {
-    const savedTheme = localStorage.getItem("theme");
-    const isDark =
-      savedTheme === "dark" ||
-      (savedTheme === null &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-    document.documentElement.classList.toggle("dark", isDark);
+    isDark = localStorage.getItem("theme") === "dark";
   } catch (error) {
-    // Ignore localStorage errors.
+    // localStorage tidak tersedia -> tetap light.
   }
+  document.documentElement.classList.toggle("dark", isDark);
 })();
 `;
 
