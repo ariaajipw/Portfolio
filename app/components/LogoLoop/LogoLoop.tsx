@@ -317,8 +317,8 @@ export const LogoLoop = memo(function LogoLoop({
   const hoverScale =
     'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-[1.2]';
 
-  const renderLogoItem = useCallback(
-    (item: LogoItem, key: Key) => {
+   const renderLogoItem = useCallback(
+     (item: LogoItem, key: Key, isCopy = false) => {
       if (renderItem) {
         return (
           <li className={itemClasses} key={key}>
@@ -374,6 +374,7 @@ export const LogoLoop = memo(function LogoLoop({
           )}
           href={item.href}
           aria-label={itemAriaLabel || 'logo link'}
+          tabIndex={isCopy ? -1 : undefined}
           target="_blank"
           rel="noreferrer noopener"
         >
@@ -401,7 +402,9 @@ export const LogoLoop = memo(function LogoLoop({
           aria-hidden={copyIndex > 0}
           ref={copyIndex === 0 ? seqRef : undefined}
         >
-          {logos.map((item, itemIndex) => renderLogoItem(item, `${copyIndex}-${itemIndex}`))}
+          {logos.map((item, itemIndex) =>
+            renderLogoItem(item, `${copyIndex}-${itemIndex}`, copyIndex > 0)
+          )}
         </ul>
       )),
     [copyCount, logos, renderLogoItem, isVertical]
