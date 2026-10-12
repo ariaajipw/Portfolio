@@ -1,14 +1,16 @@
 import { Roboto_Flex } from "next/font/google";
 import PixelTransition from "./components/PixelTransition/PixelTransition";
-import BlurText from "./components/BlurText/BlurText";
 import TextPressure from "./components/TextPressure/TextPressure";
 import WorkCards from "./components/WorkCard/workcard";
-import FallingText from "./components/FallingText/FallingText";
 import Magnet from "./components/Magnet/Magnet";
 import Link from "next/link";
-import MorphSlider from "./components/MorphSlider/LazyMorphSlider";
 import TextLoop from "./components/TextLoop/TextLoop";
-import LogoLoop from "./components/LogoLoop/LogoLoop";
+import {
+  LazyBlurText,
+  LazyFallingText,
+  LazyLogoLoop,
+  DeferredMorphSlider,
+} from "./components/Lazy/LazySections";
 import type { LogoItem } from "./components/LogoLoop/LogoLoop";
 import {
   SiReact,
@@ -20,12 +22,7 @@ import {
   SiNextdotjs,
   SiGit
 } from 'react-icons/si';
-/*
- * Font TextPressure di-host sendiri oleh next/font (bukan lagi dari
- * fonts.googleapis.com saat runtime) dan hanya di-preload di halaman ini.
- * Axis opsi dipakai: wght (otomatis), wdth, opsz. Variabelnya dipakai
- * TextPressure lewat var(--font-roboto-flex).
- */
+
 const robotoFlex = Roboto_Flex({
   subsets: ["latin"],
   axes: ["opsz", "wdth"],
@@ -47,7 +44,7 @@ const items = [
   { image: "/assets/img/KGPIG.webp", caption: "hai" },
   { image: "/assets/img/CPSIG.webp", caption: "hai" },
   { image: "/assets/img/BKAIG.webp", caption: "hai" },
-  { image: "/assets/img/BTLK.webp", caption: "hai" },
+  // { image: "/assets/img/BTLK.webp", caption: "hai" },
 ];
 
 const techLogos: LogoItem[] = [
@@ -68,12 +65,6 @@ export default function Home() {
       <section
         className={`${robotoFlex.variable} hero-section site-container flex min-h-dvh flex-col justify-center pt-15`}
       >
-        {/*
-         * Satu-satunya <h1> di halaman. Teksnya sama persis dengan yang tampil
-         * di layar. Visual animasi TextPressure di bawah disembunyikan dari
-         * screen reader/bot (aria-hidden) supaya teks tidak terbaca dobel dan
-         * tidak ada <h1> tambahan.
-         */}
         <h1 className="sr-only">Combine Ideas, Craft &amp; Innovate</h1>
 
         {/* Mobile */}
@@ -115,10 +106,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Image Section (full-bleed sengaja) */}
+      {/* Image Section (Deferred MorphSlider) */}
       <section className="img-section my-10 flex flex-col">
         <div className="relative h-[550px] w-full md:h-[800px] [&_canvas]:object-contain [&_img]:object-contain">
-          <MorphSlider
+          <DeferredMorphSlider
             items={items}
             transition="melt"
             intensity={1}
@@ -172,7 +163,7 @@ export default function Home() {
             </p>
 
             <div className="mt-5 flex w-full justify-center text-center">
-              <BlurText
+              <LazyBlurText
                 text="Aria Aji"
                 delay={300}
                 animateBy="letters"
@@ -183,7 +174,7 @@ export default function Home() {
 
             <div className="mt-2 lg:mt-4 lg:mb-5 flex h-20 w-full justify-center text-center text-[var(--accent)] opacity-80">
               <div className="w-full max-w-full">
-                <FallingText
+                <LazyFallingText
                   text="Front-end Developer"
                   highlightWords={[]}
                   trigger="hover"
@@ -205,7 +196,7 @@ export default function Home() {
             <div className="lg:mt-10 flex w-full justify-center">
               <div className="w-fit">
                 <Magnet padding={50} disabled={false} magnetStrength={2}>
-                <Link
+                  <Link
                     href="/contact"
                     className="button inline-flex items-center justify-center rounded-full bg-[var(--accent)] p-3 text-center text-[var(--cta-text)] transition-colors hover:bg-[var(--cta-hover-bg)] hover:text-[var(--cta-hover-text)]"
                   >
@@ -262,22 +253,22 @@ export default function Home() {
         </div>
       </section>
 
-        {/* Tech Stack Loop */}
-        <div className="">
-          <LogoLoop
-            logos={techLogos}
-            speed={80}
-            direction="left"
-            logoHeight={50}
-            gap={60}
-            pauseOnHover
-            scaleOnHover
-            fadeOut
-            fadeOutColor="var(--bg-primary)"
-            ariaLabel="Tech stack"
-            className="text-[var(--text-primary)]"
-          />
-        </div>
+      {/* Tech Stack Loop */}
+      <div className="">
+        <LazyLogoLoop
+          logos={techLogos}
+          speed={80}
+          direction="left"
+          logoHeight={50}
+          gap={60}
+          pauseOnHover
+          scaleOnHover
+          fadeOut
+          fadeOutColor="var(--bg-primary)"
+          ariaLabel="Tech stack"
+          className="text-[var(--text-primary)]"
+        />
+      </div>
 
       {/* Third Section / Work */}
       <section className="third-section site-container landscape:mt-80 landscape:mb-120 sm:landscape:my-0 lg:mt-60">

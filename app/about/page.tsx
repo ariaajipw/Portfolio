@@ -330,7 +330,7 @@ export default function About() {
                 src="/assets/img/ariaaji.webp"
                 alt="Portrait of Aria Aji"
                 decoding="async"
-                className="about-photo h-full w-full object-cover md:object-contain"
+                className="about-photo h-full w-full object-cover md:object-contain lg:pr-20"
                 style={{ objectPosition: "100% 50%" }}
               />
             </div>
