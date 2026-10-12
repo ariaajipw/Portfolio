@@ -26,12 +26,12 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ariaaji.com"),
 
   title: {
-    default: "Aria Aji — Frontend & Fullstack Developer",
+    default: "Aria Aji — Frontend Developer",
     template: "%s | Aria Aji",
   },
 
   description:
-    "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung. Spesialis Next.js, React, TypeScript, dan pembuatan aplikasi web performa tinggi.",
+    "Portofolio resmi Aria Aji, Frontend Developer asal Bandung. Spesialis Next.js, React, TypeScript, dan pembuatan aplikasi web performa tinggi.",
 
   keywords: [
     "Aria Aji",
@@ -73,17 +73,17 @@ export const metadata: Metadata = {
     url: "https://ariaaji.com/",
     siteName: "Aria Aji Portfolio",
 
-    title: "Aria Aji — Frontend & Fullstack Developer",
+    title: "Aria Aji — Frontend Developer",
 
     description:
-      "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung. Spesialis Next.js, React, TypeScript, dan web performa tinggi.",
+      "Portofolio resmi Aria Aji, Frontend Developer asal Bandung. Spesialis Next.js, React, TypeScript, dan web performa tinggi.",
 
     images: [
       {
         url: "/assets/img/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "Aria Aji — Frontend & Fullstack Developer",
+        alt: "Aria Aji — Frontend Developer",
       },
     ],
   },
@@ -91,10 +91,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Aria Aji — Frontend & Fullstack Developer",
+    title: "Aria Aji — Frontend Developer",
 
     description:
-      "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung.",
+      "Portofolio resmi Aria Aji, Frontend Developer asal Bandung.",
 
     images: ["/assets/img/og-image.webp"],
   },
