@@ -1,5 +1,31 @@
 import Link from 'next/link';
 import { posts } from '../posts/data';
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Hubungi Aria Aji untuk kebutuhan pengembangan website, aplikasi web, dan kolaborasi proyek.",
+
+  alternates: {
+    canonical: "/blog",
+  },
+
+  openGraph: {
+    type: "website",
+    url: "https://ariaaji.com/contact",
+    title: "Contact | Aria Aji",
+    description:
+      "Hubungi Aria Aji untuk kebutuhan pengembangan website, aplikasi web, dan kolaborasi proyek.",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact | Aria Aji",
+    description:
+      "Hubungi Aria Aji untuk kebutuhan pengembangan website, aplikasi web, dan kolaborasi proyek.",
+  },
+};
 
 export default function BlogPage() {
   return (

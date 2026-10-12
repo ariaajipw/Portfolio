@@ -407,3 +407,122 @@ D9 is a visible bug rather than a taste issue; surface it whenever the blog is t
 | Scripts | `dev`, `build`, `start`, `lint`, `debug`, `preview`, `deploy`, `cf-typegen` | |
 
 **Rule:** a new dependency for a design effect needs the same justification as a new loop in §6: fewer dependencies wins (§13.2). `react-icons` is already present; do not add a second icon set.
+
+---
+
+## 15. New Additions Since v4 (As-built)
+
+### 15.1 LogoLoop — Tech Stack Marquee (new)
+
+A continuous horizontal marquee of technology logos added to the Home page below the hero.  
+Location: `app/components/LogoLoop/LogoLoop.tsx`, imported via `LazyLogoLoop` in `app/components/Lazy/LazySections.tsx`, composed in `app/page.tsx`.
+
+**Props used on Home:**
+- `logos`: 8 items from `react-icons/si` (React, TypeScript, JavaScript, Vite, Tailwind CSS, Shopify, Next.js, Git) with external `href`s.
+- `speed={80}`, `direction="left"`, `logoHeight={50}`, `gap={60}`
+- `pauseOnHover`, `scaleOnHover`, `fadeOut`, `fadeOutColor="var(--bg-primary)"`
+- `ariaLabel="Tech stack"`, `className="text-[var(--text-primary)]"`
+
+**Behaviour:**
+- CSS-first animation loop using `requestAnimationFrame` with exponential smoothing (`SMOOTH_TAU: 0.25`).
+- Duplicates the logo list enough times to fill the viewport plus headroom (`MIN_COPIES: 2`, `COPY_HEADROOM: 2`).
+- Pauses on hover when `pauseOnHover` is true (Home uses it).
+- Optional edge fades (`fadeOut`) using a CSS gradient whose colour comes from `fadeOutColor` (currently `var(--bg-primary)` — **this token does not exist**, see D17).
+- Respects `prefers-reduced-motion: reduce` by setting `transform: translate3d(0,0,0)` and stopping the rAF loop.
+- Images and SVG icons are loaded lazily; `ResizeObserver` + image `onload` recalculate copy count.
+- Each logo is an external link (`target="_blank" rel="noopener noreferrer"`) with `focus-visible` outline.
+
+**Caveats (do not fix unasked):**
+- `fadeOutColor="var(--bg-primary)"` references a non-existent token (canvas is `--background`).
+- Second continuous loop on the same page (after `TextLoop`); off-screen pause and reduced-motion behaviour should be verified.
+- Rendered inside a bare `<div className="">` outside any `<section>`.
+- The component is client-side only and code-split via `next/dynamic`.
+
+### 15.2 Lazy Loading Wrapper — `OnView` + `Lazy*` components (new)
+
+`app/components/Lazy/LazySections.tsx` introduces a reusable `OnView` component that defers heavy client components until they are near the viewport or the user first interacts (scroll, pointer, key, touch). It uses `IntersectionObserver` with a configurable `rootMargin` (default `400px 0px`) and an optional `loadOnFirstInput` flag.
+
+Exported lazy wrappers used on Home:
+- `LazyBlurText` — wraps `BlurText`; fallback is a static `<p>` with the text.
+- `LazyFallingText` — wraps `FallingText`; fallback is a static centred `<div>` with the text.
+- `LazyLogoLoop` — wraps `LogoLoop`; fallback is an empty `<div>` with the same height as the logo row (calculated from `logoHeight` and `scaleOnHover`).
+- `DeferredMorphSlider` — wraps `LazyMorphSlider` (which already wraps `MorphSlider`); `rootMargin="0px"`, `loadOnFirstInput`, no fallback (the page wrapper already reserves the height).
+
+This pattern keeps the initial HTML semantic for SEO, avoids layout shift (fallbacks reserve space), and defers heavy JS (Matter.js, GSAP, WebGL, React Spring) until needed.
+
+### 15.3 Updated Colour Tokens (globals.css)
+
+New tokens added in `app/globals.css` since v3, now documented in §2.1:
+- `--accent-text` — readable accent for text (light `#A8340C`, dark `#FF9A7C`); used for active nav link.
+- `--cta-bg`, `--cta-text`, `--cta-hover-bg`, `--cta-hover-text` — CTA token family. Light: `#FA6B48 / #000 / #000 / #FA6B48`; Dark: `#C8440F / #FFF / #FFF / #C8440F`. Home CTA uses `bg-[var(--accent)]` + `text-[var(--cta-text)]` + hover tokens; **resting fill is still `--accent`, not `--cta-bg`** (see D20).
+
+### 15.4 WorkCards — Rebuilt Carousel (v3, re-confirmed)
+
+- Native CSS scroll-snap (`snap-x snap-mandatory`), no autoplay.
+- Responsive basis: mobile 85% + peek, `sm` 2-up, `md` 3-up.
+- Full ARIA: `role="region" aria-roledescription="carousel"`, keyboard arrows, wrap-around next/prev.
+- Dots + arrows only when more than one page; dots have 44px hit height.
+- Placeholder fallback (`ProjectPlaceholder`) uses canvas tokens (`#EDDBB5` / `#1B3E5C`) with subtle grid and accent dot; Titis has no thumbnail and falls back to it.
+- Cards with `href` open in new tab; Titis has no link and renders as `<article>`.
+- "View GitHub" CTA uses the pill pattern (`bg-[var(--accent)] text-[var(--cta-text)] hover:bg-[var(--cta-hover-bg)] hover:text-[var(--cta-hover-text)]`) with `Magnet` (disabled on mobile via `matchMedia("(max-width: 639px)")`).
+
+### 15.5 Contact Cards — Real Links + Staggered Entrance (v3, re-confirmed)
+
+- Three cards: Phone → WhatsApp, Email → Gmail compose, Address → Google Maps.
+- Real `<a target="_blank" rel="noopener noreferrer">` links inside a `<ul>`.
+- Staggered entrance via `IntersectionObserver` (once, 120ms steps).
+- Hover/focus fills with accent (`#FA6B48`) and black text; visible `focus-visible` outline.
+- `motion-reduce` classes disable transitions/animations.
+
+### 15.6 About Page — ARIA Tabs + Portrait Parallax (v3, re-confirmed)
+
+- Four tabs (Bio / Career / Academy / Open Source) with sliding accent pill indicator.
+- Full keyboard support: ←/→/↑/↓/Home/End.
+- Panels share one grid cell for stable height; items rise in sequence.
+- Bio sentences get accent underline sweep on entrance; hover fills with accent + black text.
+- Portrait: sticky from `sm`, clip-path reveal on load, hover/pointer + scroll parallax via CSS variables (`--mx`, `--my`, `--scroll`).
+- `prefers-reduced-motion` handled via CSS media query + JS guard.
+
+### 15.7 Services Page — GSAP + ScrollTrigger (v3, re-confirmed)
+
+- Pricing cards (inverted surfaces), add-ons as divided rows, numbered process steps.
+- GSAP entrance animations scoped with `gsap.context()` and cleaned up on unmount.
+- Reduced-motion branch: `gsap.set` final state immediately.
+- WhatsApp CTAs use literal `bg-[#FA6B48] text-black dark:text-white` (not the `--cta-*` tokens; contrast 2.89 in dark — D3).
+
+### 15.8 Header — Inert Mobile Menu + Ready-Gated Transitions (v3, re-confirmed)
+
+- Mobile panel uses `inert={!isMobileMenuOpen}` so links are not tabbable when closed.
+- Transitions (`transform 300ms, background-color 180ms`) enabled only after two animation frames (`isReady`) to avoid mid-page-refresh animation.
+- Scroll hide/show: hides after 100px down, shows on any up or `y ≤ 100`; rAF-throttled.
+- Theme toggle: flips `.dark` on `<html>`, writes `localStorage.theme`, adds `html.theme-transition` for 250ms (global 180ms colour crossfade).
+- Logo images are plain `<img>` with intrinsic `width/height`; light logo eager + `fetchPriority="high"` (LCP candidate), dark logo lazy.
+
+### 15.9 Footer — `<li>` Wrapped Links + Current Year (v3, re-confirmed)
+
+- All links wrapped in `<li>` inside `<ul>`.
+- Copyright uses `new Date().getFullYear()` and `--muted` token.
+- Marked `'use client'` but has no state/effects (could drop the directive; leave unless editing).
+
+### 15.10 Blog — Client-Side Markdown + Missing Typography Plugin (v3, re-confirmed)
+
+- `MarkdownContent` parses Markdown in `useEffect` (empty server HTML for article body — SEO gap).
+- `prose` / `dark:prose-invert` classes used but `@tailwindcss/typography` not installed.
+- Blog dates use `text-gray-500` on navy (2.30 contrast — fails).
+- `[slug]` page uses `generateStaticParams` from `posts/data.ts`; `generateMetadata` sets only title.
+- `blog/layout.tsx` is a placeholder rendering "Admin Layout" header (visible bug — D9).
+
+---
+
+## 16. Updated Visual QA Checklist (extends §11)
+
+For every visual change, additionally verify:
+- [ ] `LogoLoop` tech strip: pauses on hover, stops under reduced motion, fades edges correctly (check `fadeOutColor` token), external links keyboard-reachable.
+- [ ] Lazy components: fallbacks reserve correct height, no layout shift when heavy component mounts, `IntersectionObserver` triggers at expected scroll position.
+- [ ] WorkCards carousel: scroll-snap works at all breakpoints, dots/arrows appear only when needed, wrap-around works, keyboard navigation, focus styles.
+- [ ] Contact cards: staggered entrance once, hover/focus fill + focus ring, real links open correctly.
+- [ ] About tabs: indicator slides correctly, keyboard nav, panel content stable height, portrait parallax (pointer + scroll) works.
+- [ ] Services: GSAP entrance animations, reduced-motion shows final state immediately, WhatsApp links open.
+- [ ] Header: mobile menu `inert` when closed, Escape-to-close (missing — D14), focus return to hamburger (missing), theme toggle crossfade 180ms + 250ms class, logo LCP priority.
+- [ ] Footer: links in `<li>`, social `target="_blank" rel="noopener noreferrer"`, year current.
+- [ ] Blog: "Admin Layout" not visible (D9), post metadata per post (missing), OG image exists (`/og-image.webp` missing — D14 in ARCHITECTURE.md).

@@ -1,4 +1,30 @@
 import ContactSection from "../components/Contact/contact"
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Hubungi Aria Aji untuk kebutuhan pengembangan website, aplikasi web, dan kolaborasi proyek.",
+
+  alternates: {
+    canonical: "/contact",
+  },
+
+  openGraph: {
+    type: "website",
+    url: "https://ariaaji.com/contact",
+    title: "Contact | Aria Aji",
+    description:
+      "Hubungi Aria Aji untuk kebutuhan pengembangan website, aplikasi web, dan kolaborasi proyek.",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact | Aria Aji",
+    description:
+      "Hubungi Aria Aji untuk kebutuhan pengembangan website, aplikasi web, dan kolaborasi proyek.",
+  },
+};
 
 export default function Contact() {
   return (

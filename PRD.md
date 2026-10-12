@@ -242,3 +242,79 @@ After implementation:
 - summarize changes;
 - list verification performed;
 - mention remaining risks only when real.
+
+---
+
+## 13. New Features Since v3 (As-built)
+
+### 13.1 Tech Stack Marquee — `LogoLoop` (Home page)
+A continuous horizontal marquee of 8 technology logos (React, TypeScript, JavaScript, Vite, Tailwind CSS, Shopify, Next.js, Git) from `react-icons/si`. Each logo is an external link opening in a new tab.
+- Config: `speed={80}`, `direction="left"`, `logoHeight={50}`, `gap={60}`
+- Behaviours: pauses on hover, scales on hover, edge fades (gradient), respects `prefers-reduced-motion`
+- Code-split via `next/dynamic` through `LazyLogoLoop`
+- **Issue:** `fadeOutColor="var(--bg-primary)"` references non-existent token
+
+### 13.2 Lazy Loading System — `OnView` + `Lazy*` wrappers
+New reusable pattern in `app/components/Lazy/LazySections.tsx`:
+- `OnView` — IntersectionObserver + optional first-input (scroll/pointer/key/touch) → `requestIdleCallback`/`setTimeout` fallback
+- `LazyBlurText`, `LazyFallingText`, `LazyLogoLoop` — fallbacks reserve layout space (text, centred div, empty height)
+- `DeferredMorphSlider` — `loadOnFirstInput`, no fallback (page wrapper reserves height)
+- Keeps initial HTML semantic for SEO; no layout shift; defers heavy JS (Matter.js, GSAP, WebGL, React Spring)
+
+### 13.3 New Colour Tokens (globals.css)
+- `--accent-text` — readable accent for text (active nav link)
+- `--cta-bg`, `--cta-text`, `--cta-hover-bg`, `--cta-hover-text` — CTA token family (light/dark)
+- **Home CTA still uses `bg-[var(--accent)]` not `--cta-bg` for resting state** (intentional)
+
+### 13.4 Updated Pages & Components (v3 re-confirmed)
+
+**Home (`app/page.tsx`):**
+- Hero: `TextPressure` (Roboto Flex variable font) + `PixelTransition` (portrait) + `LazyBlurText`
+- Below hero: `LazyLogoLoop` (tech stack), `LazyFallingText` (Matter.js), `DeferredMorphSlider` (WebGL)
+- CTA uses tokenised hover pattern
+
+**About (`app/about/page.tsx`):**
+- ARIA tabs (Bio/Career/Academy/Open Source) with sliding indicator, full keyboard support
+- Bio sentences: accent underline sweep on entrance, hover fill
+- Portrait: sticky from `sm`, clip-path reveal, pointer + scroll parallax via CSS vars
+- `prefers-reduced-motion` handled in CSS + JS
+
+**Contact (`app/contact/page.tsx` → `Contact/contact.tsx`):**
+- Three cards: Phone→WhatsApp, Email→Gmail, Address→Google Maps (real `<a>` links)
+- Staggered entrance via `IntersectionObserver` (120ms steps)
+- Hover/focus: accent fill + black text, `focus-visible` outline
+- `motion-reduce` disables transitions
+
+**Services (`app/services/page.tsx`):**
+- Pricing cards (inverted surfaces), add-ons (divided rows), numbered process steps
+- GSAP + ScrollTrigger entrance animations with `gsap.context()` cleanup
+- Reduced-motion: `gsap.set` final state immediately
+- WhatsApp CTAs use literal `bg-[#FA6B48]` (not `--cta-*` tokens; dark contrast 2.89)
+
+**WorkCards (`app/components/WorkCard/workcard.tsx`):**
+- CSS scroll-snap carousel, no autoplay
+- Responsive: mobile 85%+peek, `sm` 2-up, `md` 3-up
+- Full ARIA carousel: `role="region" aria-roledescription="carousel"`, keyboard arrows, wrap-around
+- Dots + arrows only when >1 page; dots 44px hit height
+- Placeholder fallback (`ProjectPlaceholder`) for missing thumbnails (Titis)
+- Cards with `href` open new tab; Titis renders as `<article>`
+- "View GitHub" CTA: pill pattern (`--accent` / `--cta-text` / `--cta-hover-*`) with `Magnet` (disabled on mobile <640px)
+
+**Header (`app/components/Header/header.tsx`):**
+- Mobile panel `inert={!isMobileMenuOpen}`; links not tabbable when closed
+- Transitions gated by `isReady` (two frames) to avoid mid-refresh animation
+- Scroll hide/show: hides after 100px down, shows on up or `y ≤ 100`
+- Theme toggle: flips `.dark` on `<html>`, writes `localStorage`, adds `html.theme-transition` (250ms crossfade)
+- Logo: light eager + `fetchPriority="high"` (LCP), dark lazy
+
+**Footer (`app/components/Footer/footer.tsx`):**
+- Links wrapped in `<li>` inside `<ul>`
+- Copyright with `new Date().getFullYear()` and `--muted`
+- Marked `'use client'` but no state/effects
+
+**Blog (`app/blog/`):**
+- `MarkdownContent` parses in `useEffect` (empty server HTML for body — SEO gap)
+- `prose`/`dark:prose-invert` classes present but `@tailwindcss/typography` not installed
+- Blog dates: `text-gray-500` on navy (2.30 contrast — fails)
+- `[slug]` page: `generateStaticParams` from `posts/data.ts`, `generateMetadata` sets only title
+- `blog/layout.tsx` placeholder renders "Admin Layout" header (visible bug)

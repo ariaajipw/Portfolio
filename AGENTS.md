@@ -585,6 +585,19 @@ Read the relevant document before assuming any of these (details in `DESIGN.md` 
 - **Known visible bugs, report only:** the "Admin Layout" header in `blog/layout.tsx`; nested `<main>`; `h-screen` on Blog/Contact; `md:pt[49px]` typos; white-on-accent CTAs in dark mode.
 - **SEO risks, report only:** root `canonical` is `"/"`; `/og-image.webp` is missing; `<html lang="en">` on mostly Indonesian copy.
 
+### 20.1 New Additions Since v3 (As-built)
+
+- **`LogoLoop`** (`app/components/LogoLoop/LogoLoop.tsx`) — continuous horizontal/vertical logo marquee, imported via `LazyLogoLoop` in `app/components/Lazy/LazySections.tsx`, composed in `app/page.tsx`. Uses pure rAF (not GSAP), pauses on hover, scales on hover, edge fades, respects `prefers-reduced-motion`. **Uses `fadeOutColor="var(--bg-primary)"` which does not exist.**
+- **`OnView` + `Lazy*` wrappers** (`app/components/Lazy/LazySections.tsx`) — reusable lazy loading pattern: `IntersectionObserver` + optional first-input (`loadOnFirstInput`) → `requestIdleCallback`/`setTimeout`. Exports: `LazyBlurText`, `LazyFallingText`, `LazyLogoLoop`, `DeferredMorphSlider`. Fallbacks reserve layout space (no shift).
+- **New colour tokens** in `globals.css`: `--accent-text`, `--cta-bg`, `--cta-text`, `--cta-hover-bg`, `--cta-hover-text`. Home CTA uses `bg-[var(--accent)]` + tokenised hover; active nav uses `--accent-text`.
+- **`contact.tsx`** — three cards with real external links (WhatsApp, Gmail, Maps), staggered entrance, hover/focus fill + `focus-visible`, `motion-reduce` classes.
+- **`about/page.tsx`** — ARIA tabs with sliding indicator, full keyboard support, portrait parallax (pointer + scroll via CSS vars), clip-path reveal.
+- **`services/page.tsx`** — GSAP + ScrollTrigger entrance with `gsap.context()` cleanup, reduced-motion branch.
+- **`workcard.tsx`** — CSS scroll-snap carousel, full ARIA, keyboard nav, wrap-around, placeholder fallback, `Magnet` on CTA (disabled <640px).
+- **`header.tsx`** — mobile panel `inert={!isMobileMenuOpen}`, transitions gated by `isReady` (2 frames), scroll hide/show (100px threshold), theme toggle with 250ms crossfade class, light logo eager + `fetchPriority="high"`.
+- **`footer.tsx`** — links in `<li>`, year from `new Date().getFullYear()`, marked `'use client'` but no state/effects.
+- **`blog/layout.tsx`** — placeholder "Admin Layout" header (visible bug); `[slug]` `generateMetadata` sets only title.
+
 ---
 
 # 21. FINAL RESPONSE FORMAT

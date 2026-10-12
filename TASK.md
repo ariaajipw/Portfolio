@@ -62,7 +62,7 @@ Layout ini masih placeholder: merender `<header>Admin Layout</header>` di semua 
 
 ### 3.5 Hal lain yang ditemukan saat memperbarui dokumen (hanya dilaporkan)
 
-Rinciannya ada di `DESIGN.md` §12 dan `ARCHITECTURE.md` §14. Yang paling berpengaruh:
+Rinciannya ada di `DESIGN.md` §12/16 dan `ARCHITECTURE.md` §14/16. Yang paling berpengaruh:
 
 - `alternates.canonical: "/"` di `layout.tsx` bisa diwariskan ke semua halaman (cek dengan view-source di `/blog/1`). Ini memengaruhi indeks Google, jadi sebaiknya diperbaiki sebagai tugas SEO tersendiri.
 - `/og-image.webp` dirujuk di metadata tetapi file-nya tidak ada di repo.
@@ -70,6 +70,11 @@ Rinciannya ada di `DESIGN.md` §12 dan `ARCHITECTURE.md` §14. Yang paling berpe
 - Kelas `prose` di halaman post tidak berefek karena plugin typography tidak terpasang.
 - Teks putih di atas tombol aksen (`dark:text-white`) kontrasnya 2.89:1 di dark mode.
 - `.wrangler/` belum masuk `.gitignore`.
+- **`LogoLoop`:** `fadeOutColor="var(--bg-primary)"` merujuk token yang tidak ada (canvas adalah `--background`).
+- **Dua loop berkelanjutan di Home:** `TextLoop` (GSAP) + `LogoLoop` (rAF) keduanya berjalan; verifikasi pause off-screen & reduced-motion bersama-sama.
+- **`LogoLoop` di luar `<section>`:** dirender dalam `<div className="">` tanpa landmark wrapper.
+- **`OnView` rootMargin defaults:** `400px` mungkin memuat terlalu awal; `LazyLogoLoop` override ke `300px`, `DeferredMorphSlider` pakai `0px`.
+- **Lapisan wrapper MorphSlider:** `DeferredMorphSlider` → `LazyMorphSlider` → `MorphSlider` (3 lapis untuk satu slider).
 
 ---
 
@@ -79,3 +84,21 @@ Rinciannya ada di `DESIGN.md` §12 dan `ARCHITECTURE.md` §14. Yang paling berpe
 - `npm run build` untuk memastikan build Next lolos.
 - `npm run preview` bila menyentuh kode server, metadata, atau file deploy. **Jangan** menjalankan `npm run deploy` kecuali diminta.
 - `npm run lint` tidak bisa dijadikan acuan (deprecated di Next 15.5 dan tidak ada konfigurasi ESLint).
+
+---
+
+## 5. New Components & Patterns (v3 Additions)
+
+The following new components/patterns are now live and should be treated as existing behaviour:
+
+| Component | File | Notes |
+|---|---|---|
+| `LogoLoop` | `app/components/LogoLoop/LogoLoop.tsx` | Tech stack marquee; pure rAF; pauses on hover; edge fades; `prefers-reduced-motion` aware. Imported via `LazyLogoLoop`. |
+| `OnView` / `Lazy*` | `app/components/Lazy/LazySections.tsx` | Reusable lazy loading: `IntersectionObserver` + optional first-input → `requestIdleCallback`/`setTimeout`. Fallbacks reserve space (no shift). Exports: `LazyBlurText`, `LazyFallingText`, `LazyLogoLoop`, `DeferredMorphSlider`. |
+| New colour tokens | `globals.css` | `--accent-text`, `--cta-bg`, `--cta-text`, `--cta-hover-bg`, `--cta-hover-text`. Used by Home CTA (hover), active nav. **Home CTA resting fill still `--accent`**. |
+| `contact.tsx` | `app/components/Contact/contact.tsx` | 3 cards → WhatsApp/Gmail/Maps; staggered entrance; hover/focus fill + `focus-visible`; `motion-reduce` classes. |
+| `about/page.tsx` | — | ARIA tabs, sliding indicator, full keyboard, portrait parallax (pointer + scroll via CSS vars), clip-path reveal. |
+| `services/page.tsx` | — | GSAP + ScrollTrigger entrance, `gsap.context()` cleanup, reduced-motion branch. WhatsApp CTAs use literal colours (not tokens). |
+| `workcard.tsx` | — | CSS scroll-snap carousel, full ARIA, keyboard nav, wrap-around, placeholder fallback, `Magnet` CTA (disabled <640px). |
+| `header.tsx` | — | Mobile `inert` panel, ready-gated transitions (2 frames), scroll hide/show (100px), theme toggle 250ms crossfade, light logo eager + `fetchPriority="high"`. |
+| `footer.tsx` | — | Links in `<li>`, `new Date().getFullYear()`, `--muted` token, `'use client'` but no state/effects. |

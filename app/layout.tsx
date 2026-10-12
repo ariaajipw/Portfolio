@@ -26,25 +26,22 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ariaaji.com"),
 
   title: {
-    default: "Aria Aji — Frontend Developer",
+    default: "Aria Aji — Frontend & Fullstack Developer",
     template: "%s | Aria Aji",
   },
 
   description:
-    "Portofolio resmi Aria Aji, Frontend Developer asal Bandung. Spesialis Next.js, React, TypeScript, dan pembuatan aplikasi web performa tinggi.",
+    "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung. Spesialis Next.js, React, TypeScript, dan pembuatan aplikasi web performa tinggi.",
 
   keywords: [
     "Aria Aji",
     "Aria Aji Perkasa Wibowo",
     "ariaaji",
-    "aria aji",
-    "Rajipo",
     "Frontend Developer Bandung",
-    "Front-end Developer",
     "Frontend Developer Indonesia",
     "Next.js Developer",
-    "Vite Developer",
     "React Developer",
+    "TypeScript Developer",
     "Web Developer Bandung",
     "Jasa Bikin Website",
     "Shopify Developer",
@@ -59,35 +56,47 @@ export const metadata: Metadata = {
 
   creator: "Aria Aji",
 
+  // Canonical root hanya untuk beranda.
+  // Halaman lain harus menentukan canonical masing-masing.
   alternates: {
     canonical: "/",
   },
 
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+
   openGraph: {
-    title: "Aria Aji — Frontend Developer",
-    description:
-      "Portofolio resmi Aria Aji, Frontend Developer asal Bandung. Spesialis Next.js, React, dan web performa tinggi.",
-    url: "https://ariaaji.com",
-    siteName: "Aria Aji Portfolio",
-    locale: "id_ID",
     type: "website",
+    locale: "id_ID",
+    url: "https://ariaaji.com/",
+    siteName: "Aria Aji Portfolio",
+
+    title: "Aria Aji — Frontend & Fullstack Developer",
+
+    description:
+      "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung. Spesialis Next.js, React, TypeScript, dan web performa tinggi.",
 
     images: [
       {
-        url: "/og-image.webp",
+        url: "/assets/img/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "Aria Aji — Frontend Developer",
+        alt: "Aria Aji — Frontend & Fullstack Developer",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Aria Aji — Frontend Developer",
+
+    title: "Aria Aji — Frontend & Fullstack Developer",
+
     description:
-      "Portofolio resmi Aria Aji, Frontend Developer asal Bandung.",
-    images: ["/og-image.webp"],
+      "Portofolio resmi Aria Aji, Frontend & Fullstack Developer asal Bandung.",
+
+    images: ["/assets/img/og-image.webp"],
   },
 
   robots: {

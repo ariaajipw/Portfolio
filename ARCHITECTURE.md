@@ -298,3 +298,90 @@ Caveman is the default entry point. Specialist skills are invoked only when thei
 ## 15. Architecture Invariants
 
 Unless explicitly requested, preserve: route structure, page purpose, dark/light mode mechanism, existing navigation, existing animation intent, component responsibilities, responsive breakpoints (as authored in `@theme`), public asset paths, current framework, current package ecosystem, **the SEO surface (metadata, `sitemap.ts`, `robots.ts`, JSON-LD, canonical host) and the Cloudflare/OpenNext deployment configuration**.
+
+---
+
+## 16. New Additions Since v3 (As-built)
+
+### 16.1 New Components (Layer B)
+
+| Component | File | Role | Boundary |
+|---|---|---|---|
+| `LogoLoop` | `app/components/LogoLoop/LogoLoop.tsx` | Continuous logo marquee (horizontal or vertical), external links, hover pause/scale, edge fades, reduced-motion aware | client (code-split via `next/dynamic`) |
+| `OnView` | `app/components/Lazy/LazySections.tsx` | Reusable viewport + first-input gate (IntersectionObserver + idle callback) | client |
+| `LazyBlurText` | `app/components/Lazy/LazySections.tsx` | `OnView` wrapper for `BlurText` with text fallback | client |
+| `LazyFallingText` | `app/components/Lazy/LazySections.tsx` | `OnView` wrapper for `FallingText` with centred text fallback | client |
+| `LazyLogoLoop` | `app/components/Lazy/LazySections.tsx` | `OnView` wrapper for `LogoLoop` with height-reserving empty fallback | client |
+| `DeferredMorphSlider` | `app/components/Lazy/LazySections.tsx` | `OnView` wrapper for `LazyMorphSlider` with `loadOnFirstInput`, no fallback | client |
+
+### 16.2 Updated File Map
+
+```
+app/
+├── components/
+│   ├── BlurText/BlurText.tsx
+│   ├── Contact/contact.tsx
+│   ├── FallingText/FallingText.tsx
+│   ├── Footer/footer.tsx
+│   ├── Header/header.tsx
+│   ├── Lazy/LazySections.tsx          # NEW: OnView + Lazy* exports
+│   ├── LogoLoop/LogoLoop.tsx          # NEW: tech stack marquee
+│   ├── Magnet/Magnet.tsx
+│   ├── MarkdownContent/MarkdownContent.tsx
+│   ├── MorphSlider/MorphSlider.tsx
+│   ├── MorphSlider/LazyMorphSlider.tsx
+│   ├── PixelTransition/PixelTransition.tsx
+│   ├── TextLoop/TextLoop.tsx
+│   ├── TextPressure/TextPressure.tsx
+│   └── WorkCard/workcard.tsx
+├── page.tsx                           # UPDATED: composes LazyLogoLoop, LazyFallingText, LazyBlurText, DeferredMorphSlider
+├── globals.css                        # UPDATED: new tokens (--accent-text, --cta-*), LogoLoop not in CSS
+...
+```
+
+### 16.3 Updated Styling Layer (Layer C)
+
+New tokens added to `globals.css` (see `DESIGN.md` §2.1):
+- `--accent-text` — readable accent text colour
+- `--cta-bg`, `--cta-text`, `--cta-hover-bg`, `--cta-hover-text` — CTA token family
+
+Used by:
+- Home CTA: `bg-[var(--accent)] text-[var(--cta-text)] hover:bg-[var(--cta-hover-bg)] hover:text-[var(--cta-hover-text)]`
+- Active nav link: `text-[var(--accent-text)]`
+- Contact cards hover: literal `bg-[#FA6B48]` (not tokenised)
+- Services WhatsApp CTA: literal `bg-[#FA6B48]` (not tokenised)
+
+**Missing token still referenced:** `LogoLoop` uses `fadeOutColor="var(--bg-primary)"` — `--bg-primary` does not exist in `globals.css` (canvas token is `--background`).
+
+### 16.4 Updated Animation Layer (Layer D)
+
+- New GSAP usage: none (LogoLoop uses pure rAF, not GSAP)
+- New rAF components: `LogoLoop` (exponential smoothing), `OnView` (idle callback for first-input)
+- New lazy loading pattern: `OnView` with `IntersectionObserver` + optional `loadOnFirstInput` (scroll/pointer/key/touch) → `requestIdleCallback` or `setTimeout` fallback
+- Reduced-motion handling in new components:
+  - `LogoLoop`: respects `(prefers-reduced-motion: reduce)` → stops rAF, resets transform
+  - `OnView` / lazy wrappers: fallbacks are static; no animation in fallback
+  - `Contact` cards: `motion-reduce:transition-none motion-reduce:hover:translate-y-0`
+
+### 16.5 Updated Client/Server Boundary (Layer 3)
+
+New client components:
+- `LogoLoop` (via `LazyLogoLoop`)
+- `OnView` and all `Lazy*` wrappers in `LazySections.tsx`
+- `DeferredMorphSlider`
+
+These are all code-split via `next/dynamic` and mounted only when the `OnView` gate opens.
+
+### 16.6 Updated Dependency Inventory (from `package.json`)
+
+No new runtime dependencies since v3. Key observation: `dompurify` is installed but still **not imported** by `MarkdownContent` (sanitisation not applied).
+
+### 16.7 Updated Known Structural Debt (extends §14)
+
+| Item | Detail |
+|---|---|
+| `LogoLoop` missing token | `fadeOutColor="var(--bg-primary)"` references non-existent token; fallback should be `var(--background)` or `var(--cta-bg)` depending on intent. |
+| Two continuous loops on Home | `TextLoop` (GSAP) + `LogoLoop` (rAF) both run on Home; verify off-screen pause and reduced-motion behaviour together. |
+| `LogoLoop` outside `<section>` | Rendered in a bare `<div className="">` in `page.tsx`; no landmark wrapper. |
+| `OnView` rootMargin defaults | `400px` may load components too early on fast connections; `LazyLogoLoop` overrides to `300px`, `DeferredMorphSlider` uses `0px`. |
+| Second `MorphSlider` wrapper layer | `DeferredMorphSlider` → `LazyMorphSlider` → `MorphSlider`; three layers for one slider. Acceptable for lazy loading, but document if adding more. |
