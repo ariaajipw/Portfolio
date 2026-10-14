@@ -113,8 +113,8 @@ export default function Home() {
       {/* Image Section (Deferred MorphSlider) */}
       <section className="img-section my-10 flex flex-col">
         <div
-          data-scroll-scale
-          className="relative h-[550px] w-full md:h-[800px] [&_canvas]:object-contain"
+          data-scroll-clip
+          className="relative h-[550px] w-full md:h-[800px] [&_canvas]:object-contain [&_img]:object-contain"
         >
           <DeferredMorphSlider
             items={items}

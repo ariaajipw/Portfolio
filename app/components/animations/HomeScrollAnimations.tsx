@@ -7,12 +7,17 @@ import { whenIdle } from "./WhenIdle";
  * Animasi scroll halaman Home, gaya "playful" yang terasa hidup di scroll jempol.
  *
  * Atribut yang dibaca (semua opsional, dipasang di page.tsx):
- *   data-scroll-hero             hero mengecil & memudar saat di-scroll keluar
- *   data-scroll-scale            blok membesar (scale-in) mengikuti scroll
+ *   data-scroll-hero             hero naik & memudar saat di-scroll keluar
+ *   data-scroll-clip             blok "membuka" lewat clip-path mengikuti scroll
  *   data-scroll-reveal[="up|tilt|pop"]  muncul sekali saat masuk layar
  *   data-scroll-parallax="px"    parallax; tambah data-scroll-tilt="deg" untuk miring
  *   data-scroll-skew             miring mengikuti KECEPATAN scroll, lalu kembali
  *   data-touch-press             mengecil saat disentuh, memantul saat dilepas
+ *
+ * ATURAN PENTING: jangan pernah scale/rotate/skew elemen yang membungkus komponen
+ * yang mengukur dirinya dengan getBoundingClientRect (slider WebGL, TextPressure,
+ * LogoLoop). Ukuran yang terukur saat ditransformasi ikut terkunci (canvas jadi
+ * lebih kecil, muncul bar hitam). Untuk elemen seperti itu pakai y/opacity/clip-path.
  *
  * Aturan performa:
  * - Hanya transform & opacity. Tidak ada animasi horizontal (x) pada elemen
@@ -111,11 +116,11 @@ export default function HomeScrollAnimations() {
             );
           }
 
-          // ── 2) Hero: mengecil & memudar saat di-scroll keluar ─────────
+          // ── 2) Hero: naik & memudar saat di-scroll keluar ─────────
           q("[data-scroll-hero]").forEach((el) => {
+            // hanya y + opacity: tidak mengubah ukuran yang diukur TextPressure
             gsap.to(el, {
               y: -dist,
-              scale: 0.94,
               opacity: 0.15,
               ease: "none",
               scrollTrigger: {
@@ -127,13 +132,20 @@ export default function HomeScrollAnimations() {
             });
           });
 
-          // ── 3) Blok yang membesar mengikuti scroll (slider) ───────────
-          q("[data-scroll-scale]").forEach((el) => {
+          // ── 3) Blok "membuka" mengikuti scroll (slider) ───────────────
+          // clip-path hanya memotong tampilan; ukuran elemen tidak berubah,
+          // jadi slider WebGL tetap mengukur dirinya dengan benar.
+          q("[data-scroll-clip]").forEach((el) => {
+            const inset = isDesktop ? 6 : 10; // %
+            const round = isDesktop ? 32 : 24; // px
             gsap.fromTo(
               el,
-              { scale: isDesktop ? 0.9 : 0.86, y: isDesktop ? 60 : 44 },
               {
-                scale: 1,
+                clipPath: `inset(${inset}% ${inset}% ${inset}% ${inset}% round ${round}px)`,
+                y: isDesktop ? 60 : 44,
+              },
+              {
+                clipPath: "inset(0% 0% 0% 0% round 0px)",
                 y: 0,
                 ease: "power1.out",
                 scrollTrigger: {
