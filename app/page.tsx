@@ -66,6 +66,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section
+        data-scroll-hero
         className={`${robotoFlex.variable} hero-section site-container flex min-h-dvh flex-col justify-center pt-15`}
       >
         <h1 className="sr-only">Combine Ideas, Craft &amp; Innovate</h1>
@@ -112,8 +113,8 @@ export default function Home() {
       {/* Image Section (Deferred MorphSlider) */}
       <section className="img-section my-10 flex flex-col">
         <div
-          data-scroll-reveal
-          className="relative h-[550px] w-full md:h-[800px] [&_canvas]:object-contain [&_img]:object-contain"
+          data-scroll-scale
+          className="relative h-[550px] w-full md:h-[800px] [&_canvas]:object-contain"
         >
           <DeferredMorphSlider
             items={items}
@@ -137,6 +138,7 @@ export default function Home() {
 
         {/* Name Ribbon */}
         <div data-scroll-reveal className="mt-15">
+          <div data-scroll-skew>
           <TextLoop
             text="Aria ✦ Aji ✦ Perkasa ✦ Wibowo"
             shape="wave"
@@ -154,6 +156,7 @@ export default function Home() {
             pauseOnHover
             className="text-[var(--text-primary)]"
           />
+          </div>
         </div>
       </section>
 
@@ -163,7 +166,7 @@ export default function Home() {
           {/* Text Content */}
           <div className="mx-auto content-center place-self-start lg:col-span-6 lg:place-self-center">
             <p
-              data-scroll-reveal
+              data-scroll-reveal="tilt"
               className="mt-5 mr-[20px] mb-3 ml-[30px] place-self-center text-sm lg:text-lg"
             >
               A developer focuses on front-end side, crafting web experiences,
@@ -181,10 +184,8 @@ export default function Home() {
               />
             </div>
 
-            <div className="mt-2 mb-3 flex w-full justify-center text-center text-[var(--accent)] opacity-90 lg:mt-4 lg:mb-5">
-
-            <div className="mt-2 mb-3 flex w-full justify-center text-center text-[var(--accent)] opacity-90 lg:mt-4 lg:mb-5">
-              <div className="w-full min-w-0">
+            <div className="mt-2 lg:mt-4 lg:mb-5 flex h-20 w-full justify-center text-center text-[var(--accent)] opacity-80">
+              <div className="w-full max-w-full">
                 <LazyFallingText
                   text="Front-end Developer"
                   highlightWords={[]}
@@ -194,14 +195,12 @@ export default function Home() {
                   gravity={0.1}
                   fontSize="clamp(20px, 4vw, 32px)"
                   mouseConstraintStiffness={0.9}
-                  className="w-full"
                 />
               </div>
             </div>
-           </div>
 
             <p
-              data-scroll-reveal
+              data-scroll-reveal="tilt"
               className="mr-[20px] mb-6 ml-[30px] place-self-center text-sm lg:text-lg"
             >
               Enhance skills through hands-on projects & professional
@@ -209,11 +208,12 @@ export default function Home() {
             </p>
 
             {/* CTA */}
-            <div data-scroll-reveal className="lg:mt-10 flex w-full justify-center">
+            <div data-scroll-reveal="pop" className="lg:mt-10 flex w-full justify-center">
               <div className="w-fit">
                 <Magnet padding={50} disabled={false} magnetStrength={2}>
                   <Link
                     href="/contact"
+                    data-touch-press
                     className="button inline-flex items-center justify-center rounded-full bg-[var(--accent)] p-3 text-center text-[var(--cta-text)] transition-colors hover:bg-[var(--cta-hover-bg)] hover:text-[var(--cta-hover-text)]"
                   >
                     Let's Collaborate
@@ -228,7 +228,7 @@ export default function Home() {
             data-scroll-reveal
             className="order-first content-center place-self-center pl-0 lg:order-last lg:col-span-6 lg:pl-[100px]"
           >
-            <div data-scroll-parallax="40">
+            <div data-scroll-parallax="40" data-scroll-tilt="5">
             <PixelTransition
               firstContent={
                 <div
