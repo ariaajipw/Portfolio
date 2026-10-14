@@ -119,10 +119,14 @@ export function LazyFallingText(
 ) {
   return (
     <OnView
+      className="min-h-[96px] w-full min-w-0 sm:min-h-[104px]"
       fallback={
         <div
-          className="w-full pt-8 text-center"
-          style={{ fontSize: props.fontSize, lineHeight: 1.4 }}
+          className="flex h-[96px] w-full items-center justify-center text-center sm:h-[104px]"
+          style={{
+            fontSize: props.fontSize,
+            lineHeight: 1.4,
+          }}
         >
           {props.text}
         </div>
@@ -132,6 +136,7 @@ export function LazyFallingText(
     </OnView>
   );
 }
+
 
 export function LazyLogoLoop(props: LogoLoopProps) {
   /* tinggi baris logo (+10% atas/bawah kalau scaleOnHover), sama dengan LogoLoop asli */

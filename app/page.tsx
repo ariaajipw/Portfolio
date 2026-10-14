@@ -5,6 +5,7 @@ import WorkCards from "./components/WorkCard/workcard";
 import Magnet from "./components/Magnet/Magnet";
 import Link from "next/link";
 import TextLoop from "./components/TextLoop/TextLoop";
+import HomeScrollAnimations from "./components/animations/HomeScrollAnimations";
 import {
   LazyBlurText,
   LazyFallingText,
@@ -61,6 +62,8 @@ const techLogos: LogoItem[] = [
 export default function Home() {
   return (
     <>
+      <HomeScrollAnimations />
+
       {/* Hero Section */}
       <section
         className={`${robotoFlex.variable} hero-section site-container flex min-h-dvh flex-col justify-center pt-15`}
@@ -108,7 +111,10 @@ export default function Home() {
 
       {/* Image Section (Deferred MorphSlider) */}
       <section className="img-section my-10 flex flex-col">
-        <div className="relative h-[550px] w-full md:h-[800px] [&_canvas]:object-contain [&_img]:object-contain">
+        <div
+          data-scroll-reveal
+          className="relative h-[550px] w-full md:h-[800px] [&_canvas]:object-contain [&_img]:object-contain"
+        >
           <DeferredMorphSlider
             items={items}
             transition="melt"
@@ -130,7 +136,7 @@ export default function Home() {
         </div>
 
         {/* Name Ribbon */}
-        <div className="mt-15">
+        <div data-scroll-reveal className="mt-15">
           <TextLoop
             text="Aria ✦ Aji ✦ Perkasa ✦ Wibowo"
             shape="wave"
@@ -156,7 +162,10 @@ export default function Home() {
         <div className="grid h-fit lg:grid-cols-12">
           {/* Text Content */}
           <div className="mx-auto content-center place-self-start lg:col-span-6 lg:place-self-center">
-            <p className="mt-5 mr-[20px] mb-3 ml-[30px] place-self-center text-sm lg:text-lg">
+            <p
+              data-scroll-reveal
+              className="mt-5 mr-[20px] mb-3 ml-[30px] place-self-center text-sm lg:text-lg"
+            >
               A developer focuses on front-end side, crafting web experiences,
               geeking out over current best practices and technologies for
               developing websites.
@@ -172,8 +181,10 @@ export default function Home() {
               />
             </div>
 
-            <div className="mt-2 lg:mt-4 lg:mb-5 flex h-20 w-full justify-center text-center text-[var(--accent)] opacity-80">
-              <div className="w-full max-w-full">
+            <div className="mt-2 mb-3 flex w-full justify-center text-center text-[var(--accent)] opacity-90 lg:mt-4 lg:mb-5">
+
+            <div className="mt-2 mb-3 flex w-full justify-center text-center text-[var(--accent)] opacity-90 lg:mt-4 lg:mb-5">
+              <div className="w-full min-w-0">
                 <LazyFallingText
                   text="Front-end Developer"
                   highlightWords={[]}
@@ -183,17 +194,22 @@ export default function Home() {
                   gravity={0.1}
                   fontSize="clamp(20px, 4vw, 32px)"
                   mouseConstraintStiffness={0.9}
+                  className="w-full"
                 />
               </div>
             </div>
+           </div>
 
-            <p className="mr-[20px] mb-6 ml-[30px] place-self-center text-sm lg:text-lg">
+            <p
+              data-scroll-reveal
+              className="mr-[20px] mb-6 ml-[30px] place-self-center text-sm lg:text-lg"
+            >
               Enhance skills through hands-on projects & professional
               experiences. Combining creativity to build engaging experiences.
             </p>
 
             {/* CTA */}
-            <div className="lg:mt-10 flex w-full justify-center">
+            <div data-scroll-reveal className="lg:mt-10 flex w-full justify-center">
               <div className="w-fit">
                 <Magnet padding={50} disabled={false} magnetStrength={2}>
                   <Link
@@ -208,7 +224,11 @@ export default function Home() {
           </div>
 
           {/* Pixel Image */}
-          <div className="order-first content-center place-self-center pl-0 lg:order-last lg:col-span-6 lg:pl-[100px]">
+          <div
+            data-scroll-reveal
+            className="order-first content-center place-self-center pl-0 lg:order-last lg:col-span-6 lg:pl-[100px]"
+          >
+            <div data-scroll-parallax="40">
             <PixelTransition
               firstContent={
                 <div
@@ -249,12 +269,13 @@ export default function Home() {
               animationStepDuration={0.4}
               className="custom-pixel-card"
             />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Tech Stack Loop */}
-      <div className="">
+      <div data-scroll-reveal>
         <LazyLogoLoop
           logos={techLogos}
           speed={80}

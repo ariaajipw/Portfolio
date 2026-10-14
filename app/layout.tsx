@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import {JetBrains_Mono } from "next/font/google";
-
+import LenisProvider from "./components/animations/LenisProvider";
 import "./globals.css";
 
 import Header from "./components/Header/header";
@@ -177,7 +177,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-
+  
       <body
         className={`${jetbrainsMono.className} flex min-h-dvh flex-col`}
         suppressHydrationWarning
@@ -188,14 +188,16 @@ export default function RootLayout({
             __html: JSON.stringify(jsonLd),
           }}
         />
-
-        <Header />
-
-        <main className="w-full min-w-0 flex-1 overflow-x-clip">
-          {children}
-        </main>
-
-        <Footer />
+  
+        <LenisProvider>
+          <Header />
+  
+          <main className="w-full min-w-0 flex-1 overflow-x-clip">
+            {children}
+          </main>
+  
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   );
